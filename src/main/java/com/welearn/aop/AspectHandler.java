@@ -63,6 +63,7 @@ public class AspectHandler {
 	public Object loginVerifyAround(ProceedingJoinPoint joinPoint) throws Throwable {
 		
         String methodName = joinPoint.getSignature().getName();
+        //joinPoint.getStaticPart();
         Object target = joinPoint.getTarget();
         Method method = this.getMethodByClassAndName(target.getClass(), methodName); //得到拦截的方法  
         Object[] args = joinPoint.getArgs();	//方法的参数
@@ -72,6 +73,9 @@ public class AspectHandler {
         for(Parameter t:s) {
         	System.out.println(t.getName());
         }
+        
+        Object o1 = method.getDefaultValue();
+        Object o2 = method.getParameterAnnotations();
         
 //        return joinPoint.proceed();
         

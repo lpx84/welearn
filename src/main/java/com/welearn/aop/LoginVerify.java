@@ -18,5 +18,9 @@ import com.welearn.util.InfoCode;
 @Target(ElementType.METHOD)
 public @interface LoginVerify {
 
+	/**
+	 * 进入系统的角色：默认是学生
+	 * @return
+	 */
 	public int role() default InfoCode.ROLE_STUDENT;
 }
