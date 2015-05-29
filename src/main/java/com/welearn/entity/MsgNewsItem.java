@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.welearn.util.TimeUtil;
+
 @Entity
 @Table(name="wx_msg_news_item")
 public class MsgNewsItem {
@@ -90,6 +92,15 @@ public class MsgNewsItem {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public String getReplyXML() {
+		String r = "<item><Title><![CDATA[";
+		r += title + "]]></Title><Description><![CDATA[";
+		r += description + "]]></Description><PicUrl>";
+		r += picUrl + "</PicUrl><Url><![CDATA[";
+		r += url + "]]></Url></item>";
+		return r;
 	}
 	
 }

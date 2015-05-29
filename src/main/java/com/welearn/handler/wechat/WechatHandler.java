@@ -44,10 +44,8 @@ public class WechatHandler {
 			return this.signature(signature, timestamp, nonce, echostr);
 		} else if(request.getMethod().equals("POST")) {
 			try {
-				MsgReceive msg = MsgReceiveAdapter.getReceiveMsg(request);
-				
-				
-				
+				MsgReceive msg = MsgReceiveFactory.getReceiveMsg(request);
+				return new MsgReplyFactory().getReplyMsg(msg);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -56,7 +54,7 @@ public class WechatHandler {
 				e.printStackTrace();
 			}
 			
-			return "";
+			return "error!";
 		} else {
 			return "wechat signate error!";
 		}

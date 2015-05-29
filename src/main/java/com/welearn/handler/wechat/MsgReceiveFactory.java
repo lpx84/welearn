@@ -18,7 +18,7 @@ import com.welearn.model.MsgReceivePicture;
 import com.welearn.model.MsgReceiveText;
 import com.welearn.model.MsgReceiveVoice;
 
-public class MsgReceiveAdapter {
+public class MsgReceiveFactory {
 	
 	/**
 	 * 把收到的消息转化成Map格式

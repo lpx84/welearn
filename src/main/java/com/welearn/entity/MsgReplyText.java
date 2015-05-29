@@ -68,7 +68,7 @@ public class MsgReplyText {
 		r += toUser + "]]></ToUserName><FromUserName><![CDATA[";
 		r += fromUser + "]]></FromUserName><CreateTime>";
 		r += TimeUtil.getAbsoluteTime() + "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[";
-		r += content + "]]></Content>";
+		r += content + "]]></Content></xml>";
 		return r;
 	} 
 }
