@@ -6,6 +6,5 @@
 *.jar
 
 *.classpath
-*.project
 
 target/*

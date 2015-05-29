@@ -13,11 +13,17 @@
     <bean id="constantsConfig" class="com.welearn.util.ConstantsConfig">
         <property name="defaultPageTitle" value="WeLean微信教学平台" />
         <property name="defaultPageItemNum" value="10" />
+        <property name="schoolShortName" value="bjtu" />
     </bean>
     
     <bean id="wechatConfig" class="com.welearn.util.WechatConfig">
         <property name="wxEmail" value="lipx84@126.com" />
         <property name="wxPwd" value="mpMiXiang" />
         <property name="wxToken" value="welearnnraelew" />
+    </bean>
+    
+    <bean id="faceppConfig" class="com.welearn.util.FacePPConfig">
+        <property name="apiKey" value="35e2b87e7d34655c76687a04a8d5158c" />
+        <property name="apiSecret" value="X2x-OPIlEcEq1dpi7ovR25mEYh8jfwsF" />
     </bean>
 </beans>

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.welearn.util.TimeUtil;
+
 @Entity
 @Table(name="wx_msg_reply_text")
 public class MsgReplyText {
@@ -55,4 +57,18 @@ public class MsgReplyText {
 		this.indexId = indexId;
 	}
 	
+	/**
+	 * 封装回复的XML字符串
+	 * @param toUser 用户的微信号OpenID
+	 * @param fromUser 开发者账号
+	 * @return
+	 */
+	public String getReplyXML(String toUser, String fromUser) {
+		String r = "<xml><ToUserName><![CDATA[";
+		r += toUser + "]]></ToUserName><FromUserName><![CDATA[";
+		r += fromUser + "]]></FromUserName><CreateTime>";
+		r += TimeUtil.getAbsoluteTime() + "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[";
+		r += content + "]]></Content>";
+		return r;
+	} 
 }

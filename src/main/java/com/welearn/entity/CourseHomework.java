@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bjtu_homework")
-public class Homework {
+@Table(name="bjtu_course_homework")
+public class CourseHomework {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -55,7 +55,7 @@ public class Homework {
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
 	private Course courseEntity;
 
-	public Homework() {
+	public CourseHomework() {
 		super();
 	}
 
