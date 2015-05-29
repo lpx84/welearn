@@ -48,10 +48,12 @@ public class WechatHandler {
 				
 				
 				
-			} catch (IOException | DocumentException e) {
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 			return "";
