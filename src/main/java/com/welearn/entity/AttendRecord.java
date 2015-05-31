@@ -1,5 +1,7 @@
 package com.welearn.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,8 +32,20 @@ public class AttendRecord {
 	@Column(name="similarity", columnDefinition="int(3)")
 	private Integer similarity; //范围0~100
 	
-	@Column(name="reference_res", columnDefinition="tinyint(1) default 1")
+	/**
+	 * 参考结果：
+	 *  0 代表未查询结果； 
+	 *  1 代表不是同一个人；
+	 *  2 代表是同一个人；
+	 */
+	@Column(name="reference_res", columnDefinition="tinyint(1) default 0", nullable=false)
 	private Integer referenceRes;
+	
+	/**
+	 * 签到时间
+	 */
+	@Column(name="log_time", columnDefinition="datetime default now()", nullable=false)
+	private Date logTime;
 	
 	@Column(name="status", columnDefinition="tinyint(1) default 1",nullable=false)
 	private Integer status;
@@ -117,6 +131,13 @@ public class AttendRecord {
 	public void setStudentEntity(Student studentEntity) {
 		this.studentEntity = studentEntity;
 	}
-	
+
+	public Date getLogTime() {
+		return logTime;
+	}
+
+	public void setLogTime(Date logTime) {
+		this.logTime = logTime;
+	}
 	
 }

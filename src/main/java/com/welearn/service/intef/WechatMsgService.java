@@ -13,5 +13,4 @@ public interface WechatMsgService {
 	public String getMsgReply(MsgReceive msg);
 	
 	
-	
 }

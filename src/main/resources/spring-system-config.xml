@@ -17,13 +17,19 @@
     </bean>
     
     <bean id="wechatConfig" class="com.welearn.util.WechatConfig">
-        <property name="wxEmail" value="lipx84@126.com" />
-        <property name="wxPwd" value="mpMiXiang" />
-        <property name="wxToken" value="welearnnraelew" />
+        <property name="email" value="lipx84@126.com" />
+        <property name="pwd" value="mpMiXiang" />
+        <property name="appId" value="wx7c049240830565c0" />
+        <property name="encodingAesKey" value="xA4shp6bZ8Y654FiAdf9CIc05afLjhpU8t77hIEze2t" />
+        <property name="token" value="welearnnraelew" />
     </bean>
     
     <bean id="faceppConfig" class="com.welearn.util.FacePPConfig">
         <property name="apiKey" value="35e2b87e7d34655c76687a04a8d5158c" />
         <property name="apiSecret" value="X2x-OPIlEcEq1dpi7ovR25mEYh8jfwsF" />
+    </bean>
+    
+    <bean id="tulingConfig" class="com.welearn.util.TulingConfig">
+        <property name="key" value="747a805e16a214668ab3fdd6f0dcb1cf" />
     </bean>
 </beans>

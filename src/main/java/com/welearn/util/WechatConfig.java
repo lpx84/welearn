@@ -7,37 +7,35 @@ package com.welearn.util;
  */
 public class WechatConfig {
 
-	private String wxEmail;
+	public static String email;
 	
-	private String wxPwd;
+	public static String pwd;
 	
-	private String wxToken;
+	public static String appId;
+	
+	public static String encodingAesKey;
+	
+	public static String token;
 
-	public WechatConfig() {
-		super();
+	
+	public void setEmail(String _email) {
+		email = _email;
 	}
 
-	public String getWxEmail() {
-		return wxEmail;
+	public void setPwd(String _pwd) {
+		pwd = _pwd;
 	}
 
-	public void setWxEmail(String wxEmail) {
-		this.wxEmail = wxEmail;
+	public void setAppId(String _appId) {
+		appId = _appId;
 	}
 
-	public String getWxPwd() {
-		return wxPwd;
+	public void setEncodingAesKey(String _encodingAesKey) {
+		encodingAesKey = _encodingAesKey;
 	}
 
-	public void setWxPwd(String wxPwd) {
-		this.wxPwd = wxPwd;
+	public void setToken(String _token) {
+		token = _token;
 	}
 
-	public String getWxToken() {
-		return wxToken;
-	}
-
-	public void setWxToken(String wxToken) {
-		this.wxToken = wxToken;
-	}
 }

@@ -2,45 +2,22 @@ package com.welearn.util;
 
 public class FacePPConfig {
 
-	private String account;
-	private String pwd;
-	private String apiKey;
-	private String apiSecret;
+	public static String account;
+	public static String pwd;
+	public static String apiKey;
+	public static String apiSecret;
 	
-	public FacePPConfig() {
-		super();
+	public static void setAccount(String account) {
+		FacePPConfig.account = account;
 	}
-
-	public String getAccount() {
-		return account;
+	public static void setPwd(String pwd) {
+		FacePPConfig.pwd = pwd;
 	}
-
-	public void setAccount(String account) {
-		this.account = account;
+	public static void setApiKey(String apiKey) {
+		FacePPConfig.apiKey = apiKey;
 	}
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
-	public String getApiKey() {
-		return apiKey;
-	}
-
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-
-	public String getApiSecret() {
-		return apiSecret;
-	}
-
-	public void setApiSecret(String apiSecret) {
-		this.apiSecret = apiSecret;
+	public static void setApiSecret(String apiSecret) {
+		FacePPConfig.apiSecret = apiSecret;
 	}
 	
 }

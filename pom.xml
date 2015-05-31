@@ -31,6 +31,13 @@
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/faceppsdk_min.jar</systemPath>  
 	</dependency>
+	<dependency>
+	    <groupId>com.qq.weixin.mp</groupId>  
+	    <artifactId>aes</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aes-jre1.6.jar</systemPath>  
+	</dependency>
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-webmvc</artifactId>
@@ -141,7 +148,22 @@
     	<artifactId>antlr</artifactId>
     	<version>2.7.5H3</version>
     </dependency>
-    
+
+    <dependency>
+    	<groupId>commons-codec</groupId>
+    	<artifactId>commons-codec</artifactId>
+    	<version>1.9</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.w3c</groupId>
+    	<artifactId>dom</artifactId>
+    	<version>2.3.0-jaxb-1.0.6</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.httpcomponents</groupId>
+    	<artifactId>httpclient</artifactId>
+    	<version>4.4.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>welearn</finalName>

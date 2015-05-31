@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -21,86 +22,61 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.xml.sax.SAXException;
 
+import com.qq.weixin.mp.aes.AesException;
+import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import com.welearn.model.MsgReceive;
 import com.welearn.util.WechatConfig;
 
 @Controller
+@RequestMapping("/wechat/*")
 public class WechatHandler {
 
-	@Resource(name="wechatConfig")
-	WechatConfig wechatConfig;
 	
-	@RequestMapping(name="/welearn/wechat/handler")
+	
+	@RequestMapping(name = "handler")
 	@ResponseBody
-	public String signature(
-			@RequestParam(value="signature")String signature,
-			@RequestParam(value="timestamp")String timestamp,
-			@RequestParam(value="nonce")String nonce,
-			@RequestParam(value="echostr")String echostr,
-			HttpServletRequest request) {
-		
-		if(request.getMethod().equals("GET")) {
-			return this.signature(signature, timestamp, nonce, echostr);
-		} else if(request.getMethod().equals("POST")) {
-			try {
-				MsgReceive msg = MsgReceiveFactory.getReceiveMsg(request);
-				return new MsgReplyFactory().getReplyMsg(msg);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public String signature(HttpServletRequest request) throws IOException,
+			DocumentException, AesException, ParserConfigurationException,
+			SAXException {
+		MsgReplyFactory reply = new MsgReplyFactory();
+		MsgReceiveFactory receive = new MsgReceiveFactory();
+
+		String timestamp = request.getParameter("timestamp");
+		String nonce = request.getParameter("nonce");
+		String encryptType = request.getParameter("encrypt_type"); // 消息加密类型
+
+		if (encryptType == null || encryptType.equals("raw")) { // 当url上无encrypt_type参数或者其值为raw时表示为不加密
+			// 不加密时的情况
+			String signature = request.getParameter("signature");
+			String echostr = request.getParameter("echostr");
+
+			if (request.getMethod().equals("GET")) {
+				if (reply.signature(signature, timestamp, nonce, echostr)) {
+					return echostr;
+				} else {
+					return "invalid!";
+				}
+			} else if (request.getMethod().equals("POST")) {
+				if (reply.signature(signature, timestamp, nonce, echostr)) {
+					MsgReceive msg = receive.getReceiveMsg(request, false,
+							null, null, null);
+					return reply.getReplyMsg(msg, false, null, null);
+				} else {
+					return "invalid!";
+				}
 			}
-			
-			return "error!";
+
 		} else {
-			return "wechat signate error!";
+			// 加密时的情况
+			String msgSignature = request.getParameter("msg_signature"); // 消息签名
+			MsgReceive msg = receive.getReceiveMsg(request, true, msgSignature,
+					timestamp, nonce);
+			return reply.getReplyMsg(msg, true, timestamp, nonce);
 		}
+		return null;
+
 	}
-	
-	
-	private String signature(String signature,String timestamp,String nonce,String echostr) {
-		if(signature == null ||
-			timestamp == null ||
-			nonce == null ||
-			echostr == null) {
-			return "null parameters";
-		}
-		String [] arr = { wechatConfig.getWxToken(), nonce, timestamp};
-		Arrays.sort(arr); //字典序排序
-		String bigStr = arr[0]+arr[1]+arr[2];
-		String digest = this.SHA1(bigStr);
-		if (digest.equals(signature)) {
-			return echostr;
-		} else {
-			return "invalid signature";
-		}
-	}
-	
-	public static String SHA1(String decript) {
-        try {
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance("SHA-1");
-            digest.update(decript.getBytes());
-            byte messageDigest[] = digest.digest();
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            // 字节数组转换为 十六进制 数
-            for (int i = 0; i < messageDigest.length; i++) {
-                String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
-                if (shaHex.length() < 2) {
-                    hexString.append(0);
-                }
-                hexString.append(shaHex);
-            }
-            return hexString.toString();
- 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-	
+
 }

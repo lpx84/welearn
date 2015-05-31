@@ -16,15 +16,15 @@ import com.welearn.view.View;
 @RequestMapping("/test/*")
 public class TestController {
 
-	@Resource(name="wechatConfig")
-	WechatConfig wechatConfig;
+//	@Resource(name="wechatConfig")
+//	WechatConfig wechatConfig;
 	
 	@RequestMapping("test")
 	@LoginVerify(role=InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String test(@RequestParam("name")String str) {
 		
-		return wechatConfig.getWxEmail();
+		return WechatConfig.token;
 	}
 	
 }

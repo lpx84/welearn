@@ -1,5 +1,8 @@
 package com.welearn.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,11 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bjtu_course")
+@Table(name="bjtu_course",catalog="Hibernate_Many2Many")
 public class Course {
 
 	@Id
@@ -34,6 +39,25 @@ public class Course {
 	@JoinColumn(name="teacher_id",insertable=false,updatable=false)
 	private Teacher teacherEntity;
 
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+            name="bjtu_student_course",
+            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="student_id", referencedColumnName="id")
+    )
+	
+//	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY) 
+//	@JoinTable(name="bjtu_student_course",
+//		joinColumns=@JoinColumn(name="course_id"),
+//		inverseJoinColumns={
+//			@JoinColumn(name="student_id",
+//			referencedColumnName="id"),
+//			@JoinColumn(name="course_id",
+//			referencedColumnName="id")
+//		}
+//	)
+	private Set<Student> studentList;
+	
 	public Course() {
 		super();
 	}
@@ -85,6 +109,13 @@ public class Course {
 	public void setTeacherEntity(Teacher teacherEntity) {
 		this.teacherEntity = teacherEntity;
 	}
-	
+
+	public Set<Student> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(Set<Student> studentList) {
+		this.studentList = studentList;
+	}
 	
 }

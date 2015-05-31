@@ -4,8 +4,14 @@ import org.hibernate.SessionFactory;
 
 public class SuperDao {
 
-protected SessionFactory sessionFactory;
+	/**
+	 * 数据访问的代理对象，通过调用它的方法来实现数据查询
+	 */
+	protected SessionFactory sessionFactory;
 	
+	/**
+	 * 存储hql语句的变量，在子类中直接用
+	 */
 	protected String hql;
 	
 	public SuperDao() {

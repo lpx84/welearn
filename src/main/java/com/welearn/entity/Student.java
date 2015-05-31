@@ -1,15 +1,19 @@
 package com.welearn.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="bjtu_student")
+@Table(name="bjtu_student",catalog="Hibernate_Many2Many")
 public class Student {
 
 	@Id
@@ -43,6 +47,8 @@ public class Student {
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 
+	@ManyToMany(mappedBy="studentList",cascade=CascadeType.ALL)
+	private Set<Course> courseList;
 	
 	public Student() {
 		super();
@@ -127,6 +133,13 @@ public class Student {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
+	public Set<Course> getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(Set<Course> courseList) {
+		this.courseList = courseList;
+	}
 	
 }
