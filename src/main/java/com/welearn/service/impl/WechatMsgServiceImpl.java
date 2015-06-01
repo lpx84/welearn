@@ -6,7 +6,7 @@ import org.apache.http.ParseException;
 
 import com.welearn.dao.MsgReplyIndexDao;
 import com.welearn.entity.MsgReplyText;
-import com.welearn.handler.wechat.TulingHandler;
+import com.welearn.handler.tuling.TulingHandler;
 import com.welearn.model.MsgReceive;
 import com.welearn.model.MsgReceiveText;
 import com.welearn.service.intef.WechatMsgService;

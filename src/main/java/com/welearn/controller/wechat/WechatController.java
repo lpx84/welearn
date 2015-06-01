@@ -1,4 +1,4 @@
-package com.welearn.handler.wechat;
+package com.welearn.controller.wechat;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,14 +26,15 @@ import org.xml.sax.SAXException;
 
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import com.welearn.handler.wechat.MsgReceiveFactory;
+import com.welearn.handler.wechat.MsgReplyFactory;
 import com.welearn.model.MsgReceive;
 import com.welearn.util.WechatConfig;
 
 @Controller
 @RequestMapping("/wechat/*")
-public class WechatHandler {
+public class WechatController {
 
-	
 	
 	@RequestMapping(name = "handler")
 	@ResponseBody
@@ -46,7 +47,7 @@ public class WechatHandler {
 		String timestamp = request.getParameter("timestamp");
 		String nonce = request.getParameter("nonce");
 		String encryptType = request.getParameter("encrypt_type"); // 消息加密类型
-
+		
 		if (encryptType == null || encryptType.equals("raw")) { // 当url上无encrypt_type参数或者其值为raw时表示为不加密
 			// 不加密时的情况
 			String signature = request.getParameter("signature");

@@ -16,7 +16,7 @@ import com.welearn.util.InfoCode;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface LoginVerify {
+public @interface Authentication {
 
 	/**
 	 * 进入系统的角色：默认是学生

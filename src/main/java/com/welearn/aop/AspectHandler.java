@@ -67,7 +67,7 @@ public class AspectHandler {
         Object target = joinPoint.getTarget();
         Method method = this.getMethodByClassAndName(target.getClass(), methodName); //得到拦截的方法  
         Object[] args = joinPoint.getArgs();	//方法的参数
-        getAnnotationByMethod(method,LoginVerify.class);
+        getAnnotationByMethod(method,Authentication.class);
         HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
         Parameter[] s = method.getParameters();
         for(Parameter t:s) {

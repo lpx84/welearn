@@ -1,7 +1,9 @@
 package com.welearn.handler.wechat;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.io.SAXReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -98,15 +101,18 @@ public class MsgReceiveFactory {
 
 		Map<String, String> map = new HashMap<String, String>();
 		InputStream inputStream = request.getInputStream();
-		//SAXReader reader = new SAXReader();
-		//Document doc = reader.read(inputStream);
-		Document doc = this.inputStreamToDocument(inputStream);
-		Element root = doc.getDocumentElement();
-		NodeList list = null;
+		SAXReader reader = new SAXReader();
+		org.dom4j.Document doc = reader.read(inputStream);
+		//System.out.println(this.inputStreamToString(inputStream));
+		//Document doc = this.stringToDocument(this.inputStreamToString(inputStream));
+		org.dom4j.Element root = doc.getRootElement();
+		
+		List<org.dom4j.Element> list = null;
 		if (isEncode) {
-			NodeList encrypt = root.getElementsByTagName("Encrypt");
+			//NodeList encrypt = root.getElementsByTagName("Encrypt");
+			org.dom4j.Element encrypt = root.element("Encrypt");
 			if (encrypt != null) {
-				String encryptMsg = encrypt.item(0).getNodeValue();
+				String encryptMsg = encrypt.getText();
 				String token = WechatConfig.token;
 				String encodingAesKey = WechatConfig.encodingAesKey;
 				String appId = WechatConfig.appId;
@@ -114,22 +120,19 @@ public class MsgReceiveFactory {
 						appId);
 				String xmlStr = pc.decryptMsg(msgSignature, timestamp, nonce,
 						encryptMsg);
-				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				DocumentBuilder db = dbf.newDocumentBuilder();
-				StringReader sr = new StringReader(xmlStr);
-				Document document = (Document) db.parse(new InputSource(sr));
-				list = document.getDocumentElement().getChildNodes();
-				//Element root = document.getDocumentElement();
+				
+		        org.dom4j.Document plainTextDoc = DocumentHelper.parseText(xmlStr);
+		        list = plainTextDoc.getRootElement().elements();
 			} else {
 				return null;
 			}
 
 		} else {
-			list = root.getChildNodes();
+			list = root.elements();
 		}
 
-		for (int i = 0; i < list.getLength(); ++i) {
-			map.put(list.item(i).getNodeName(), list.item(i).getNodeValue());
+		for (org.dom4j.Element e : list) {
+			map.put(e.getName(), e.getText());
 		}
 		inputStream.close();
 		inputStream = null;
@@ -171,25 +174,60 @@ public class MsgReceiveFactory {
 		}
 	}
 	
-	public Document inputStreamToDocument(InputStream in) {
-	    DocumentBuilderFactory factory = null;
-	    DocumentBuilder builder = null;
-	    Document ret = null;
+	public Document stringToDocument(String str) {
+		DocumentBuilderFactory factory = null;
+		DocumentBuilder builder = null;
+		Document ret = null;
 
-	    try {
-	      factory = DocumentBuilderFactory.newInstance();
-	      builder = factory.newDocumentBuilder();
-	    } catch (ParserConfigurationException e) {
-	      e.printStackTrace();
-	    }
+		try {
+			factory = DocumentBuilderFactory.newInstance();
+			builder = factory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 
-	    try {
-	      ret = builder.parse(new InputSource(in));
-	    } catch (SAXException e) {
-	      e.printStackTrace();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    }
-	    return ret;
-	  }
+		try {
+			//ret = builder.parse(new InputSource(in));
+			ret = builder.parse(str);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	public String inputStreamToString(InputStream is) {
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+
+		try {
+
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "/n");
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+//			try {
+//
+//				is.close();
+//
+//			} catch (IOException e) {
+//
+//				e.printStackTrace();
+//
+//			}
+
+		}
+
+		return sb.toString();
+
+	}
 }

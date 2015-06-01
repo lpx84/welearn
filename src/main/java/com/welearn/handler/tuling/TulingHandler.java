@@ -1,4 +1,4 @@
-package com.welearn.handler.wechat;
+package com.welearn.handler.tuling;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -14,9 +14,6 @@ import org.apache.http.util.EntityUtils;
 import com.welearn.util.TulingConfig;
 
 public class TulingHandler {
-
-//	@Resource(name="tulingConfig")
-//	TulingConfig tulingConfig;
 	
 	public String getTulingMsg(String keyword) throws ParseException, IOException {
 		String info = URLEncoder.encode(keyword, "utf-8");
