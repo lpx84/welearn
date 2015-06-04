@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.welearn.entity.AttendRecord;
 
-public class AttendRecordDao {
+public class AttendRecordDao extends SuperDao {
 
 	public Integer addAttendRecord(AttendRecord attendRecord) {
 		return null;

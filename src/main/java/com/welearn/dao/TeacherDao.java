@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.welearn.entity.Teacher;
 
-public class TeacherDao {
+public class TeacherDao  extends SuperDao {
 
 	public Integer addTeacher(Teacher teacher) {
 		return null;
@@ -28,19 +28,21 @@ public class TeacherDao {
 		
 	}
 	
+	/**
+	 * 
+	 * @param userName 这里指的是老师的工号
+	 * @return
+	 */
 	public Teacher getTeacherByUserName(String userName) {
 		return null;
-		
 	}
 	
 	/**
 	 * 通过名字查询教师
 	 * @param trueName
-	 * @param pageNo
-	 * @param pageItemNum
 	 * @return
 	 */
-	public List getTeachersByTrueName(String trueName, int pageNo, int pageItemNum) {
+	public List getTeachersByTrueName(String trueName) {
 		return null;
 	}
 	

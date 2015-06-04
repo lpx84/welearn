@@ -34,7 +34,7 @@ public class StudentDao extends SuperDao {
 		return null;
 	}
 	
-	public Student getStudentByTrueName(String trueName) {
+	public List getStudentsByTrueName(String trueName) {
 		return null;
 	}
 	

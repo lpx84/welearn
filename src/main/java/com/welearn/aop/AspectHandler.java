@@ -59,7 +59,7 @@ public class AspectHandler {
         return null;
     }
 	
-	@Around("@annotation(com.welearn.aop.LoginVerify)")
+	@Around("@annotation(com.welearn.aop.Authentication)")
 	public Object loginVerifyAround(ProceedingJoinPoint joinPoint) throws Throwable {
 		
         String methodName = joinPoint.getSignature().getName();

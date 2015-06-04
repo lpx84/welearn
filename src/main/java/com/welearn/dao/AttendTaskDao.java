@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.welearn.entity.AttendTask;
 
-public class AttendTaskDao {
+public class AttendTaskDao  extends SuperDao {
 
 	public Integer addAttendTask(AttendTask task) {
 		return null;

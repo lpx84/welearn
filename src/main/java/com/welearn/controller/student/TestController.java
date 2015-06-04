@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
 import com.welearn.util.WechatConfig;
 import com.welearn.view.View;
@@ -16,7 +17,8 @@ import com.welearn.view.View;
 @RequestMapping("/test/*")
 public class TestController {
 
-	
+	@Resource(name="wechatMsgService")
+	WechatMsgService wechatMsgService;
 	
 	@RequestMapping("test")
 	@Authentication(role=InfoCode.ROLE_STUDENT)
@@ -25,5 +27,8 @@ public class TestController {
 		
 		return WechatConfig.token;
 	}
+	
+	
+	
 	
 }

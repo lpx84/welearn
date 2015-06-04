@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.welearn.entity.Course;
 
-public class CourseDao {
+public class CourseDao  extends SuperDao {
 
 	public Integer addCourse(Course course) {
 		return null;

@@ -44,6 +44,9 @@ public class Student {
 	@Column(name="tel", columnDefinition="varchar(255)")
 	private String tel;
 	
+	@Column(name="enroll_year", columnDefinition="int(4)")
+	private Integer enrollYear;
+	
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 
@@ -140,6 +143,14 @@ public class Student {
 
 	public void setCourseList(Set<Course> courseList) {
 		this.courseList = courseList;
+	}
+
+	public Integer getEnrollYear() {
+		return enrollYear;
+	}
+
+	public void setEnrollYear(Integer enrollYear) {
+		this.enrollYear = enrollYear;
 	}
 	
 }

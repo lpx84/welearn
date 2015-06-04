@@ -23,6 +23,12 @@ public class Course {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(name="year", columnDefinition="int(4)")
+	private Integer year;
+	
+	@Column(name="semester", columnDefinition="tinyint(1)")
+	private Integer semester;
+	
 	@Column(name="name", columnDefinition="varchar(100)", nullable=false)
 	private String name; //课程名称
 	
@@ -57,6 +63,15 @@ public class Course {
 //		}
 //	)
 	private Set<Student> studentList;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+            name="bjtu_time_course",
+            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="time_id", referencedColumnName="id")
+    )
+	private Set<CourseTime> courseTimeList;
 	
 	public Course() {
 		super();
@@ -117,5 +132,29 @@ public class Course {
 	public void setStudentList(Set<Student> studentList) {
 		this.studentList = studentList;
 	}
-	
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Integer getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Integer semester) {
+		this.semester = semester;
+	}
+
+	public Set<CourseTime> getCourseTimeList() {
+		return courseTimeList;
+	}
+
+	public void setCourseTimeList(Set<CourseTime> courseTimeList) {
+		this.courseTimeList = courseTimeList;
+	}
+
 }
