@@ -43,7 +43,7 @@ public class QueryPersonalController {
 	 * @param weekday 第几天
 	 * @return
 	 */
-	@RequestMapping("course-schedule-week")
+	@RequestMapping("course-schedule-weekday")
 	@Authentication()
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo")Integer weekNo,

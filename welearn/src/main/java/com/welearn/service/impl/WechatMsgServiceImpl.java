@@ -20,7 +20,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		this.msgReplyIndexDao = msgReplyIndexDao;
 	}
 
-	@Override
+	
 	public String getMsgReply(MsgReceive msg) {
 		// TODO Auto-generated method stub
 		String keyword = ((MsgReceiveText)msg).getContent();
