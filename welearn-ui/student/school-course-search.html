@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>查询结果</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+
+<style type="text/css">
+    .tips-span {
+        padding: 10px;
+    }
+    
+    .tips-span span {
+        margin-top: 5px;
+    }
+</style>
+</head>
+<body>
+<div class="content-box bg-white">
+    <div class="button-pane button-pane-top pad10A">
+        <div class="form-row pad0B">
+            <div class="form-input col-md-12">
+                <div class="form-input-icon">
+                    <i class="glyph-icon icon-search transparent"></i>
+                    <input type="text" placeholder="输入查询课程" class="radius-all-100" name="" id="" onkeydown="javascript:enterSearch();"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tips-span">
+        <span class="label primary-bg">软件学院</span>
+        <span class="label bg-blue">电子信息学院</span>
+        <span class="label bg-green">建筑与艺术学院</span>
+        <span class="label bg-azure">计算机科学与技术学院</span>
+    </div>
+</div>
+<script type="text/javascript">
+    function enterSearch() {
+        var event = window.event || arguments.callee.caller.arguments[0];
+        if (event.keyCode == 13)
+        {
+            location.href='school-course-list.html';
+        }
+    }
+</script>
+</body>
+</html>
