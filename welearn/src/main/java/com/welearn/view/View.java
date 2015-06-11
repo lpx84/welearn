@@ -7,9 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.welearn.util.ConstantsConfig;
 
 public class View extends ModelAndView {
-
-	@Resource(name="constantsConfig")
-	ConstantsConfig constantsConfig;
 	
 	public View(String viewPath,String title) {
 		super(viewPath);
@@ -37,11 +34,11 @@ public class View extends ModelAndView {
 	 */
 	public View(String sectionName,String modelName,String fileName) {
 		super(sectionName+"/"+modelName+"/"+fileName);
-		this.addObject("title", constantsConfig.getDefaultPageTitle()); //这里传入默认title
+		this.addObject("title", ConstantsConfig.defaultPageTitle); //这里传入默认title
 		init();
 	}
 	
 	private void init() {
-		this.addObject("dftItemNum", constantsConfig.getDefaultPageItemNum());
+		this.addObject("dftItemNum", ConstantsConfig.defaultPageItemNum);
 	}
 }

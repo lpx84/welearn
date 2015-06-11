@@ -9,7 +9,7 @@ import com.welearn.aop.Authentication;
 import com.welearn.view.View;
 
 @Controller
-@RequestMapping("query/public/*")
+@RequestMapping("student/query/public/*")
 public class QueryPublicController {
 
 	
@@ -25,7 +25,7 @@ public class QueryPublicController {
 		//
 		//从教务处获取
 		//List
-		View view = new View("student","public","empty-room","空教室");
+		View view = new View("student","query-public","empty-room","空教室查询");
 		view.addObject("list", null);
 		return view;
 	}
@@ -41,7 +41,7 @@ public class QueryPublicController {
 		//
 		//从教务处获取
 		//List
-		View view = new View("student","public","empty-room","空教室");
+		View view = new View("student","query-public","empty-room","空教室");
 		view.addObject("list", null);
 		return view;
 	}
@@ -60,7 +60,7 @@ public class QueryPublicController {
 		//return new InfoView();
 		//登录
 		
-		View view = new View("student","public","empty-room","空教室");
+		View view = new View("student","query-public","empty-room","空教室");
 		return view;
 	}
 	
@@ -88,7 +88,7 @@ public class QueryPublicController {
 		//return new InfoView();
 		//登录
 		//返回页面
-		View view = new View("student","public","empty-room","空教室");
+		View view = new View("student","query-public","empty-room","空教室");
 		return view;
 	}
 	
