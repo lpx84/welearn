@@ -7,3 +7,4 @@
 *.classpath
 /welearn/target
 /welearn/.settings
+/welearn/src/test
