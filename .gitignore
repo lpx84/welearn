@@ -5,4 +5,5 @@
 *.ear
 
 *.classpath
-
+/welearn/target
+/welearn/.settings
