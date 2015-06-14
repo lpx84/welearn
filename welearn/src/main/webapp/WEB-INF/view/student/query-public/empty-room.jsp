@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -81,9 +83,9 @@
 <div class="query-div">
     <select id="select">
         <option value="_all">选择教学楼</option>
-        <option value="sy">思源楼</option>
-        <option value="yf">逸夫楼</option>
-        <option value="jj">第九教学楼</option>
+    	<c:forEach var="b" items="${buildingList }">
+    	<option value="${b.getCode() }">${b.getName() }</option>
+    	</c:forEach>
     </select>
     <table class="table-head empty-room" border="1" cellpadding="2">
         <thead>
@@ -108,7 +110,7 @@
 <div class="data">
     <table class="empty-room" border="1" cellpadding="2">
         <tbody>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -119,7 +121,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -130,7 +132,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">第十七号教学楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -141,7 +143,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -152,7 +154,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -163,7 +165,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">思源楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -174,7 +176,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">思源西楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -185,7 +187,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -196,7 +198,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -207,7 +209,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -218,7 +220,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -229,7 +231,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -240,7 +242,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -251,7 +253,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -262,7 +264,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -273,7 +275,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -284,7 +286,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -295,7 +297,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -306,7 +308,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -317,7 +319,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -328,7 +330,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -339,7 +341,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -350,7 +352,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -361,7 +363,7 @@
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
             </tr>
-            <tr id="building-yf">
+            <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -378,5 +380,8 @@
 </div>
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
+<script type="text/javascript">
+
+</script>
 </body>
 </html>
