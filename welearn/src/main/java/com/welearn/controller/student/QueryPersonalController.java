@@ -67,7 +67,7 @@ public class QueryPersonalController {
 	 * 查看当前课表
 	 * @param weekNo 第几周
 	 * @param weekday 第几天
-	 * @return
+	 * @return json格式的字符串
 	 */
 	@RequestMapping("course-schedule-weekday")
 	@Authentication()
@@ -162,7 +162,7 @@ public class QueryPersonalController {
 	}
 
 	/**
-	 * 
+	 * 一卡通自助查询 返回一卡通的基本信息
 	 * @param code
 	 * @return
 	 */
@@ -180,8 +180,15 @@ public class QueryPersonalController {
 		return view;
 	}
 
+	/**
+	 * 一卡通消费记录查询
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
 	@RequestMapping("e-card/consume-detail")
 	@Authentication()
+	@ResponseBody
 	public String ecardConsumeDetail(
 			@RequestParam(value="startTime")String startTime,
 			@RequestParam(value="endTime")String endTime) {
@@ -195,7 +202,11 @@ public class QueryPersonalController {
 		return null;
 	}
 	
-	
+	/**
+	 * 剩余流量查询
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("net-flow/detail")
 	public View netFlowDetail(@RequestParam(value="code")String code) {
 		

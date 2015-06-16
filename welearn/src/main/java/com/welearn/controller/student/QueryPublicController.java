@@ -66,6 +66,11 @@ public class QueryPublicController {
 		return view;
 	}
 	
+	/**
+	 * 校历
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("calender")
 	public View calender(@RequestParam(value="code")String code) {
 		//创建一个学生服务类，来判断学生是否登录
@@ -131,6 +136,12 @@ public class QueryPublicController {
 		return view;
 	}
 	
+	/**
+	 * 查询全校课程
+	 * @param pageNo
+	 * @param keyword
+	 * @return
+	 */
 	@RequestMapping("school-course-query")
 	@Authentication()
 	@ResponseBody
@@ -172,6 +183,11 @@ public class QueryPublicController {
 		return view;
 	}
 	
+	/**
+	 * 失物招领查询
+	 * @param pageNo
+	 * @return
+	 */
 	@RequestMapping("lost-thing/query")
 	@Authentication()
 	@ResponseBody
