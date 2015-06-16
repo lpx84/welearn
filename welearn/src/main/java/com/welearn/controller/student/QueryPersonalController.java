@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.service.impl.StudentServiceImpl;
+import com.welearn.service.impl.WechatMsgServiceImpl;
+import com.welearn.service.intef.StudentService;
+import com.welearn.service.intef.WechatMsgService;
 import com.welearn.view.View;
 
 
@@ -14,18 +18,37 @@ import com.welearn.view.View;
 public class QueryPersonalController {
 
 	/**
-	 * 
+	 * 查看当前课表
 	 * @param code
 	 * @return
 	 */
 	@RequestMapping("course-schedule")
 	public View schoolCourseQuery(@RequestParam("code")String code) {
+		//创建一个学生服务类，来判断学生是否登录
+		StudentService studentService = new StudentServiceImpl();
+		WechatMsgService wechatService = new WechatMsgServiceImpl();
+		String openid = wechatService.getOpenIdByCode(code);
+		//如果用户的openid非法，则跳转至错误显示页面
+		if(openid.equals("illegal")){
+			View view = new View("error","wechat","info","请用微信登录！");
+			view.addObject("info", "请用微信登录！");
+			return view;
+		}
+		//用户没有绑定账户，则跳转至绑定页面
+		if(!studentService.checkBindByOpenId(openid)){			
+			View view = new View("student","user-course","bind","绑定用户账户");
+			view.addObject("openid", openid);
+			return view;
+		}
+		
+		
+		
 		//默认当前周试图
 		return null;
 	}
 	
 	/**
-	 * 根据周 查询
+	 * 根据周 查询当前课表
 	 * @param weekNo
 	 * @return
 	 */
@@ -34,11 +57,14 @@ public class QueryPersonalController {
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo")Integer weekNo) {
 		
+		
+		
+		
 		return null;
 	}
 	
 	/**
-	 * 
+	 * 查看当前课表
 	 * @param weekNo 第几周
 	 * @param weekday 第几天
 	 * @return
@@ -52,6 +78,11 @@ public class QueryPersonalController {
 		return null;
 	}
 	
+	/**
+	 * 查看考试时间
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("exam-plan")
 	public View examPlan(@RequestParam(value="code")String code) {
 		
@@ -68,6 +99,11 @@ public class QueryPersonalController {
 		return view;
 	}
 	
+	/**
+	 * 查看四六级考试成绩
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("cet-grade")
 	public View cetGrade(@RequestParam(value="code")String code) {
 		
@@ -84,6 +120,11 @@ public class QueryPersonalController {
 		return view;
 	}
 	
+	/**
+	 * 查看各个学期的考试成绩
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("semester-grade")
 	public View semesterGrade(@RequestParam(value="code")String code) {
 		

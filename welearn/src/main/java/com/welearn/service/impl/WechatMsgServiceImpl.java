@@ -45,5 +45,13 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		
 	}
 
+    /**
+     * 根据code获取用户的openid，如果code不存在或者非法，则返回illegal
+     */
+	public String getOpenIdByCode(String code) {
+		
+		return "illegal";
+	}
+
 	
 }
