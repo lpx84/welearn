@@ -342,7 +342,4 @@
 </div>
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
-<script type="text/javascript">
-
-</script>
 </body>
