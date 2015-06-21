@@ -8,7 +8,7 @@
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
 <style type="text/css">
-    
+   
     .query-div {
         position: fixed;
         top: 0;
@@ -115,7 +115,7 @@
                     <td class="building-name">${r.getBuilding() }</td>
                     <td class="room-name">${r.getBuilding() }</td>
                     <c:forEach var="room" items="${r.getStatus() }">
-                        <td class="room-cell room-inclass">${room }</td>
+                        <td class="getRoomType()" >${room }</td>
     	            </c:forEach>                                   
                 </tr>
     	    </c:forEach> 
@@ -129,19 +129,7 @@
                 <td class="room-cell room-inclass">有课</td>
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
             </tr> -->
-
 
             
         </tbody>
@@ -150,8 +138,15 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
-function getRoomType(room){
-	
+function getRoomType(){
+	if(room == "有课"){
+		return "room-cell room-inclass";
+	}else if(room == "空"){
+		return "room-cell room-empty";
+	}else if(room == "借用"){
+		return "room-cell room-borrow";
+	}
+	return "room-cell room-borrow";
 }
 </script>
 </body>
