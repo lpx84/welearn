@@ -1,10 +1,8 @@
 package com.welearn.controller.student;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.welearn.aop.Authentication;
 import com.welearn.model.Building;
 import com.welearn.model.EmptyRoom;
+import com.welearn.service.impl.EmptyRoomServiceImpl;
 import com.welearn.service.impl.StudentServiceImpl;
 import com.welearn.service.impl.WechatMsgServiceImpl;
+import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
-import com.welearn.view.InfoView;
+import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
 
 @Controller
@@ -32,22 +32,22 @@ public class QueryPublicController {
 	 */
 	@RequestMapping("empty-room")
 	public View queryEmptyRoom(@RequestParam(value="code")String code) {
-		//创建一个学生服务类，来判断学生是否登录
-		StudentService studentService = new StudentServiceImpl();
-		WechatMsgService wechatService = new WechatMsgServiceImpl();
-		String openid = wechatService.getOpenIdByCode(code);
-		//如果用户的openid非法，则跳转至错误显示页面
-		if(openid.equals("illegal")){
-			View view = new View("error","wechat","info","请用微信登录！");
-			view.addObject("info", "请用微信登录！");
-			return view;
-		}
-		//用户没有绑定账户，则跳转至绑定页面
-		if(!studentService.checkBindByOpenId(openid)){			
-			View view = new View("student","user-course","bind","绑定用户账户");
-			view.addObject("openid", openid);
-			return view;
-		}
+//		//创建一个学生服务类，来判断学生是否登录
+//		StudentService studentService = new StudentServiceImpl();
+//		WechatMsgService wechatService = new WechatMsgServiceImpl();
+//		String openid = wechatService.getOpenIdByCode(code);
+//		//如果用户的openid非法，则跳转至错误显示页面
+//		if(openid.equals("illegal")){
+//			View view = new View("error","wechat","info","请用微信登录！");
+//			view.addObject("info", "请用微信登录！");
+//			return view;
+//		}
+//		//用户没有绑定账户，则跳转至绑定页面
+//		if(!studentService.checkBindByOpenId(openid)){			
+//			View view = new View("student","user-course","bind","绑定用户账户");
+//			view.addObject("openid", openid);
+//			return view;
+//		}
 		
         
 		
@@ -57,12 +57,19 @@ public class QueryPublicController {
 		//从教务处获取
 		//List
 		View view = new View("student","query-public","empty-room","空教室查询");
-		
-		List<EmptyRoom> roomList = new ArrayList<EmptyRoom>();
-		List<Building> buildingList = new ArrayList<Building>();
-		buildingList.add(new Building("yf","逸夫楼"));
-		view.addObject("roomList", roomList);
+		//获得教学楼信息
+		EmptyRoomService roomService = new EmptyRoomServiceImpl();
+		List<Building> buildingList = roomService.getBuildings();
 		view.addObject("buildingList", buildingList);
+		//获取当前的时间
+		String curDate = TimeUtil.getCurrentDateStrMD();
+		String curWeek = TimeUtil.getWeekOfDate(new Date());
+        view.addObject("curDate",curDate);
+        view.addObject("curWeek",curWeek);
+		//获取空教室列表
+		List<EmptyRoom> roomList = roomService.getEmptyRooms(new Date());		
+		view.addObject("roomList", roomList);
+
 		return view;
 	}
 	
@@ -111,28 +118,28 @@ public class QueryPublicController {
 	 */
 	@RequestMapping("school-course")
 	public View schoolCourse(@RequestParam(value="code")String code) {
-		//创建一个学生服务类，来判断学生是否登录
-		StudentService studentService = new StudentServiceImpl();
-		WechatMsgService wechatService = new WechatMsgServiceImpl();
-		String openid = wechatService.getOpenIdByCode(code);
-		//如果用户的openid非法，则跳转至错误显示页面
-		if(openid.equals("illegal")){
-			View view = new View("error","wechat","info","请用微信登录！");
-			view.addObject("info", "请用微信登录！");
-			return view;
-		}
-		//用户没有绑定账户，则跳转至绑定页面
-		if(!studentService.checkBindByOpenId(openid)){			
-			View view = new View("student","user-course","bind","绑定用户账户");
-			view.addObject("openid", openid);
-			return view;
-		}
+//		//创建一个学生服务类，来判断学生是否登录
+//		StudentService studentService = new StudentServiceImpl();
+//		WechatMsgService wechatService = new WechatMsgServiceImpl();
+//		String openid = wechatService.getOpenIdByCode(code);
+//		//如果用户的openid非法，则跳转至错误显示页面
+//		if(openid.equals("illegal")){
+//			View view = new View("error","wechat","info","请用微信登录！");
+//			view.addObject("info", "请用微信登录！");
+//			return view;
+//		}
+//		//用户没有绑定账户，则跳转至绑定页面
+//		if(!studentService.checkBindByOpenId(openid)){			
+//			View view = new View("student","user-course","bind","绑定用户账户");
+//			view.addObject("openid", openid);
+//			return view;
+//		}
 		
 		
 		
 		
 		
-		View view = new View("student","query-public","empty-room","空教室");
+		View view = new View("student","query-public","school-course-search","空教室");
 		return view;
 	}
 	
