@@ -75,10 +75,11 @@ public class QueryPublicController {
 
 		//从教务处获取
 		//List
-		view = new View("student","query-public","empty-room","空教室");
+		view = new View("student","query-public","school-schedule","校历");
 		view.addObject("list", null);
 		return view;
 	}
+	
 	
 	/**
 	 * 全校课程
