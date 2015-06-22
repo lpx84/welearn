@@ -7,11 +7,10 @@ import com.welearn.view.View;
 
 public class UserServiceImpl implements UserService {
 
-	public View checkUser(String code) {
+	public View checkUser(String openid) {
 		//创建一个学生服务类，来判断学生是否登录
 		StudentService studentService = new StudentServiceImpl();
-		WechatMsgService wechatService = new WechatMsgServiceImpl();
-		String openid = wechatService.getOpenIdByCode(code);
+
 		//如果用户的openid非法，则跳转至错误显示页面
 		if(openid.equals("illegal")){
 			View view = new View("error","wechat","info","请用微信登录！");

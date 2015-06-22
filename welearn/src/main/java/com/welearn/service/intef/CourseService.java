@@ -1,5 +1,6 @@
 package com.welearn.service.intef;
 
+import java.util.Date;
 import java.util.List;
 
 import com.welearn.entity.CourseTime;
@@ -22,4 +23,11 @@ public interface CourseService {
 	public List queryCourseScheduleByWeekDay(int id, CourseTime time);
 	
 	
+	/**
+	 * 根据用户的openid和日期查询他的考试安排
+	 * @param openid
+	 * @param date
+	 * @return
+	 */
+	public List queryExamPlan(String openid,Date date);
 }

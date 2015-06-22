@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.model.ExamPlan;
 import com.welearn.service.impl.StudentServiceImpl;
+import com.welearn.service.impl.UserServiceImpl;
 import com.welearn.service.impl.WechatMsgServiceImpl;
 import com.welearn.service.intef.StudentService;
+import com.welearn.service.intef.UserService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.view.View;
 
@@ -24,23 +27,16 @@ public class QueryPersonalController {
 	 */
 	@RequestMapping("course-schedule")
 	public View schoolCourseQuery(@RequestParam("code")String code) {
-		//创建一个学生服务类，来判断学生是否登录
-		StudentService studentService = new StudentServiceImpl();
-		WechatMsgService wechatService = new WechatMsgServiceImpl();
-		String openid = wechatService.getOpenIdByCode(code);
-		//如果用户的openid非法，则跳转至错误显示页面
-		if(openid.equals("illegal")){
-			View view = new View("error","wechat","info","请用微信登录！");
-			view.addObject("info", "请用微信登录！");
-			return view;
-		}
-		//用户没有绑定账户，则跳转至绑定页面
-		if(!studentService.checkBindByOpenId(openid)){			
-			View view = new View("student","user-course","bind","绑定用户账户");
-			view.addObject("openid", openid);
-			return view;
-		}
-		
+		View view;
+//		//创建微信服务类根据code获取openid
+//		WechatMsgService wechatService = new WechatMsgServiceImpl();
+//		String openid = wechatService.getOpenIdByCode(code);
+//		UserService userService = new UserServiceImpl() ;		
+//		view = userService.checkUser(openid);
+//		if(view != null){
+//			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+//			return view;
+//		}	
 		
 		
 		//默认当前周试图
@@ -85,16 +81,14 @@ public class QueryPersonalController {
 	 */
 	@RequestMapping("exam-plan")
 	public View examPlan(@RequestParam(value="code")String code) {
+		//用于检验用户是否登录
+		View view;
+
 		
-		//用一个类 验证呢身份
-		//如果false
+		view = new View("student","query-private","exam-plan","考试安排");
+		ExamPlan examPlan = new ExamPlan(null);
 		
-		//return new InfoView();
 		
-		//
-		//从教务处获取
-		//List
-		View view = new View("student","public","empty-room","空教室");
 		view.addObject("list", null);
 		return view;
 	}
