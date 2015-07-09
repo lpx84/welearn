@@ -20,7 +20,7 @@
         <property name="email" value="lipx84@126.com" />
         <property name="pwd" value="mpMiXiang" />
         <property name="appId" value="wx80c237b3b2300b0a" />
-        <property name="encodingAesKey" value="xA4shp6bZ8Y654FiAdf9CIc05afLjhpU8t77hIEze2t" />
+        <property name="encodingAesKey" value="f6351ec373b59401007017cf88e92b52" />
         <property name="token" value="bjtujwc" />
         <property name="appsecret" value="f6351ec373b59401007017cf88e92b52" />
     </bean>
