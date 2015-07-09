@@ -40,7 +40,7 @@
 	<bean name="emptyRoomService" class="com.welearn.service.impl.EmptyRoomServiceImpl">
 	</bean>
 
-	<!-- ===================== Student=========================== -->
+	<!-- ===================== Course =========================== -->
 	<bean id="courseDao" class="com.welearn.dao.CourseDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>

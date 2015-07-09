@@ -104,8 +104,8 @@ public class QueryPublicController {
 		String openid = wechatMsgService.getOpenIdByCode(code);
 		//检验用户是否登录
 		view = studentService.checkUser(openid);
-		if(view != null){
-			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if(view != null){			
 			return view;
 		}					
 		
