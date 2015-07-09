@@ -7,12 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
 import com.welearn.model.ExamPlan;
-import com.welearn.service.impl.StudentServiceImpl;
-import com.welearn.service.impl.UserServiceImpl;
-import com.welearn.service.impl.WechatMsgServiceImpl;
-import com.welearn.service.intef.StudentService;
-import com.welearn.service.intef.UserService;
-import com.welearn.service.intef.WechatMsgService;
 import com.welearn.view.View;
 
 
