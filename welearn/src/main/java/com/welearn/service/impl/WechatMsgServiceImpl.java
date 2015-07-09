@@ -67,7 +67,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		try {
 			openid = jsonObject.getString("openid");
 		} catch (Exception e) {
-			openid = "illegal";
+			System.err.println(e.toString());
 		}
 
 		return openid;
