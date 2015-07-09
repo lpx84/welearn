@@ -113,7 +113,7 @@
             <c:forEach var="r" items="${roomList }">
                 <tr class="_all ${r.getBuildingCode() }">
                     <td class="building-name">${r.getBuilding() }</td>
-                    <td class="room-name">${r.getBuilding() }</td>
+                    <td class="room-name">${r.getRoomName() }</td>
                     <c:forEach var="room" items="${r.getStatus() }">
                     <c:choose>
                     <c:when test="${'有课' == room }">
@@ -139,9 +139,7 @@
                 <td class="room-cell room-inclass">有课</td>
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
-            </tr> -->
-
-            
+            </tr> -->            
         </tbody>
     </table>
 </div>

@@ -12,8 +12,6 @@ public class StudentServiceImpl implements StudentService {
 		this.studentDao = studentDao;
 	}
 
-
-
 	public boolean checkBindByOpenId(String openid) {
 		// TODO Auto-generated method stub
 		return false;
@@ -22,8 +20,8 @@ public class StudentServiceImpl implements StudentService {
 	public View checkUser(String openid) {
 		//如果用户的openid非法，则跳转至错误显示页面
 		if(openid.equals("illegal")){
-			View view = new View("error","wechat","info","请用微信登录！");
-			view.addObject("info", "请用微信登录！");
+			View view = new View("error","wechat","info","用户不存在，请用公告平台访问。");
+			view.addObject("info", "用户不存在，请在公共平台访问。");
 			return view;
 		}
 		//用户没有绑定账户，则跳转至绑定页面

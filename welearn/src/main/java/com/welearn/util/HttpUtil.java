@@ -7,7 +7,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-@SuppressWarnings("deprecation")
+
 public class HttpUtil {
 	public static String getUrl(String url){
         String result = null;
@@ -15,7 +15,6 @@ public class HttpUtil {
             // 根据地址获取请求
             HttpGet request = new HttpGet(url);
             // 获取当前客户端对象
-            @SuppressWarnings("resource")
 			HttpClient httpClient = new DefaultHttpClient();
             // 通过请求对象获取响应对象
             HttpResponse response = httpClient.execute(request);

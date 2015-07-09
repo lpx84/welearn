@@ -1,14 +1,19 @@
 package com.welearn.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
+import com.welearn.dao.CourseDao;
 import com.welearn.entity.CourseTime;
 import com.welearn.model.Course;
 import com.welearn.service.intef.CourseService;
 
 public class CourseServiceImpl implements CourseService {
-
+    private CourseDao courseDao;
+ 	
+	public void setCourseDao(CourseDao courseDao) {
+		this.courseDao = courseDao;
+	}
+	
 	public String getCourseList(String keyword, int pageNo, int academyId) {
 		// TODO Auto-generated method stub
 		return null;
