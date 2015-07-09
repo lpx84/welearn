@@ -1,0 +1,16 @@
+diff a/menu.json b/menu.json	(rejected hunks)
+@@ -6,12 +6,12 @@
+                 {
+                     "type": "view", 
+                     "name": "自习教室", 
+-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fschool-course&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
++                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fempty-room&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                 }, 
+                 {
+                     "type": "view", 
+                     "name": "我要蹭课", 
+-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fschool-course&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
++                    "url": "http://bdxst.bjtu.edu.cn/welearn/student/query/public/empty-room"
+                 }, 
+                 {
+                     "type": "view", 
