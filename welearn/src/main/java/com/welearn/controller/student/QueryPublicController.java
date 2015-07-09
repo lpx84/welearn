@@ -4,6 +4,8 @@ package com.welearn.controller.student;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,9 @@ import com.welearn.view.View;
 @RequestMapping("student/query/public/*")
 public class QueryPublicController {
 
+	@Resource(name="wechatMsgService")
+	WechatMsgService wechatMsgService;
+	
 	/**
 	 * 查询学校的空教室,查询空教室不需要检验微信登录
 	 * @return
@@ -73,8 +78,7 @@ public class QueryPublicController {
 	public View schoolCourse(@RequestParam(value="code")String code) {
 		View view;
 		//创建微信服务类根据code获取openid
-		WechatMsgService wechatService = new WechatMsgServiceImpl();
-		String openid = wechatService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code);
 		//检验用户是否登录
 		UserService userService = new UserServiceImpl() ;		
 		view = userService.checkUser(openid);
