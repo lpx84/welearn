@@ -96,16 +96,16 @@ public class QueryPublicController {
 	@RequestMapping("school-course-detail")
 	public View schoolCourseDetail(@RequestParam(value="code")String code,@RequestParam(value="courseid")int courseid) {
 		View view;
-//		//创建微信服务类根据code获取openid
-//		WechatMsgService wechatService = new WechatMsgServiceImpl();
-//		String openid = wechatService.getOpenIdByCode(code);
-//		//检验用户是否登录
-//		UserService userService = new UserServiceImpl() ;		
-//		view = userService.checkUser(openid);
-//		if(view != null){
-//			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
-//			return view;
-//		}					
+		//创建微信服务类根据code获取openid
+		WechatMsgService wechatService = new WechatMsgServiceImpl();
+		String openid = wechatService.getOpenIdByCode(code);
+		//检验用户是否登录
+		UserService userService = new UserServiceImpl() ;		
+		view = userService.checkUser(openid);
+		if(view != null){
+			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+			return view;
+		}					
 		
 		//创建课程服务类查询具体的课程信息
 		CourseService courseService = new CourseServiceImpl();
@@ -127,6 +127,8 @@ public class QueryPublicController {
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam(value="code")String code,@RequestParam("pageNo")Integer pageNo,
 			@RequestParam("keyword")String keyword) {
+		
+		
 		
 		return null;
 	}
