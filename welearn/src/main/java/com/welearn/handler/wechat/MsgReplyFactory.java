@@ -65,8 +65,6 @@ public class MsgReplyFactory {
 //		}
 		replyMsg = XmlUtil.getNullReplyText(msg.getFromUserName(), msg.getToUserName());
 		
-		
-		
 		if(isEncode) {
 			replyMsg = this.encodeReplyMsg(replyMsg, timestamp, nonce);
 		}
@@ -85,8 +83,7 @@ public class MsgReplyFactory {
 	public boolean signature(String signature,String timestamp,String nonce,String echostr) {
 		if(signature == null ||
 			timestamp == null ||
-			nonce == null ||
-			echostr == null) {
+			nonce == null) {
 			return false;
 		}
 		String [] arr = { WechatConfig.token, nonce, timestamp};

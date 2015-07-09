@@ -20,6 +20,7 @@ import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xml.sax.SAXException;
@@ -35,7 +36,7 @@ import com.welearn.util.WechatConfig;
 @RequestMapping("/wechat/*")
 public class WechatController {
 
-	
+	//, method=RequestMethod.POST
 	@RequestMapping(name = "handler")
 	@ResponseBody
 	public String signature(HttpServletRequest request) throws IOException,
