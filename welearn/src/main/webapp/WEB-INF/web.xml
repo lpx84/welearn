@@ -59,51 +59,60 @@
   
   
   <servlet-mapping>
+    <servlet-name>default</servlet-name>
     <url-pattern>*.js</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
   </servlet-mapping>
   
   <!-- 图片文件 -->
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.png</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.jpg</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.gif</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
   </servlet-mapping>
   
   <!-- 字体文件   -->
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.eot</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.svg</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.ttf</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.woff</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.woff2</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.otf</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.swf</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>Hxd</servlet-name>
-  	<url-pattern>/Hxd</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
