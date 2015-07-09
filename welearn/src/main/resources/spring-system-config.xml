@@ -22,6 +22,7 @@
         <property name="appId" value="wx7c049240830565c0" />
         <property name="encodingAesKey" value="xA4shp6bZ8Y654FiAdf9CIc05afLjhpU8t77hIEze2t" />
         <property name="token" value="welearnnraelew" />
+        <property name="appsecret" value="f6351ec373b59401007017cf88e92b52" />
     </bean>
     
     <bean id="faceppConfig" class="com.welearn.util.FacePPConfig">
