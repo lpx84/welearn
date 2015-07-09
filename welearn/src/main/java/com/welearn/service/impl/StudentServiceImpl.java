@@ -1,6 +1,7 @@
 package com.welearn.service.impl;
 
 import com.welearn.dao.StudentDao;
+import com.welearn.entity.Student;
 import com.welearn.service.intef.StudentService;
 import com.welearn.view.View;
 
@@ -32,5 +33,20 @@ public class StudentServiceImpl implements StudentService {
 		}
 		//用户已经登录，返回null
 		return null;
+	}
+
+	public Student getStudentByOpenId(String openId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Student getStudentByStudentId(String studentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean updateStudent(Student student) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -36,5 +36,10 @@ public class InfoCode {
 	/***********消息状态：已读*********/
 	public static final Integer MSG_READED = 1;
 	
-	
+	/***********学生状态：未关注*********/
+	public static final Integer STUDENT_UNSUBSCRIBE = 0;
+	/***********学生状态：已经关注公众号未绑定学号*********/
+	public static final Integer STUDENT_SUBSCRIBED = 1;
+	/***********学生状态：已绑定学号*********/
+	public static final Integer STUDENT_BINDED = 2;
 }

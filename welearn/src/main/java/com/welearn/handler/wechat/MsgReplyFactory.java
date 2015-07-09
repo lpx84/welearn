@@ -6,9 +6,13 @@ import javax.annotation.Resource;
 
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import com.welearn.entity.Student;
 import com.welearn.model.MsgReceive;
+import com.welearn.model.MsgReceiveEvent;
+import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.AlgorithmUtil;
+import com.welearn.util.InfoCode;
 import com.welearn.util.WechatConfig;
 import com.welearn.util.XmlUtil;
 
@@ -16,8 +20,8 @@ public class MsgReplyFactory {
 
 	@Resource(name="wechatMsgService")
 	private WechatMsgService wechatMsgService;
-//	@Resource(name="wechatConfig")
-//	WechatConfig wechatConfig;
+	@Resource(name="studentService")
+	StudentService studentService;
 	
 	
 	/**
@@ -52,18 +56,34 @@ public class MsgReplyFactory {
 			return replyMsg;
 		}
 		
-//		if(msg.getMsgType().equals("text")) {
-//			return wechatMsgService.getMsgReply(msg);
-//		} else if(msg.getMsgType().equals("image")) {
-//			//当上传的图片时处理代码
-//			
-//			
-//		} else if(msg.getMsgType().equals("voice")) {
-//			//当上传音频时处理代码
-//			
-//			
-//		}
-		replyMsg = XmlUtil.getNullReplyText(msg.getFromUserName(), msg.getToUserName());
+		if(msg.getMsgType().equals("text")) {
+			return wechatMsgService.getMsgReply(msg);
+		} else if(msg.getMsgType().equals("image")) {
+			//当上传的图片时处理代码
+			
+			
+		} else if(msg.getMsgType().equals("voice")) {
+			//当上传音频时处理代码
+			
+			
+		} else if(msg.getMsgType().equals("event")) {
+			//当触发事件时处理代码
+			MsgReceiveEvent event = (MsgReceiveEvent)msg;
+			if("subscribe".equals(event.getEvent())) { //订阅
+				Student s = studentService.getStudentByOpenId(event.getFromUserName());
+				s.setStatus(InfoCode.STUDENT_SUBSCRIBED);
+				studentService.updateStudent(s);
+				return "subscribe";
+			} else if("unsubscribe".equals(event.getEvent())) { //取消订阅
+				return "unsubscribe";
+			} else {
+				return null;
+			}
+			
+		} else {
+			replyMsg = XmlUtil.getNullReplyText(msg.getFromUserName(), msg.getToUserName());
+		}
+		
 		
 		if(isEncode) {
 			replyMsg = this.encodeReplyMsg(replyMsg, timestamp, nonce);

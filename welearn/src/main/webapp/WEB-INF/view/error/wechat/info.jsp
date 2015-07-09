@@ -5,8 +5,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${title }</title>
+<style type="text/css">
+    body {
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .logo {
+        margin-top: 30%;
+        font-size: 7em;
+    }
+    
+    .info {
+        font-size: 1.2em;
+        color: #6E6868;
+    }
+</style>
 </head>
 <body>
-${info }
+<div class="logo">
+        <i class="glyph-icon icon-info"></i>
+    </div>
+    <div class="info">
+        <p>${info }</p>
+        <p>点击<a href="javascript:history.back();" style="color:#225FFF;">返回</a></p>
+    </div>
 </body>
 </html>
