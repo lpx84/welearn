@@ -84,13 +84,13 @@
         <div class="profile-box content-box">
             <div class="nav-list">
                 <ul>
-                    <li>
-                        <a href="javascript:;" title="">
+                    <li id="rcd342">
+                        <a href="javascript:;" class="grade-toggle" title=""  data-id="342">
                             <i class="glyph-icon font-purple icon-time"></i>
                             2014-2015学年第二学期
                             <i class="glyph-icon icon-chevron-right float-right"></i>
                         </a>
-                        <ul class="ul-inner">
+                        <ul class="ul-inner" style="display: none;">
                             <li class="row">
                                 <div class="col-xs-8">【专业课】软件系统分析与设计技术</div>
                                 <div class="col-xs-2">2学分</div>
@@ -98,7 +98,20 @@
                             </li>
                         </ul>
                     </li>
-                    
+                    <li id="rcd343">
+                        <a href="javascript:;" class="grade-toggle" title="" data-id="343">
+                            <i class="glyph-icon font-purple icon-time"></i>
+                            2014-2015学年第二学期
+                            <i class="glyph-icon icon-chevron-right float-right"></i>
+                        </a>
+                        <ul class="ul-inner" style="display: none;">
+                            <li class="row">
+                                <div class="col-xs-8">【专业课】软件系统分析与设计技术</div>
+                                <div class="col-xs-2">2学分</div>
+                                <div class="col-xs-2">A</div>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -110,6 +123,19 @@
     });
     $(".menu-toggle li").click(function(){
         $("ul.menu-float").slideToggle("fast");
+    });
+    
+    $(".grade-toggle").click(function(){
+        var id = $(this).attr("data-id");
+        $("#rcd"+id+" .ul-inner").slideToggle();
+        var ico = $("#rcd"+id+" a i.float-right");
+        if(ico.hasClass("icon-chevron-right")){
+            ico.removeClass("icon-chevron-right");
+            ico.addClass("icon-chevron-down");
+        } else {
+            ico.addClass("icon-chevron-right");
+            ico.removeClass("icon-chevron-down");
+        }
     });
 </script>
 </body>
