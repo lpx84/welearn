@@ -15,9 +15,6 @@ import com.welearn.aop.Authentication;
 import com.welearn.model.Building;
 import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
-import com.welearn.service.impl.CourseServiceImpl;
-import com.welearn.service.impl.EmptyRoomServiceImpl;
-import com.welearn.service.impl.WechatMsgServiceImpl;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.StudentService;
@@ -33,6 +30,10 @@ public class QueryPublicController {
 	WechatMsgService wechatMsgService;
 	@Resource(name="studentService")
 	StudentService studentService;
+	@Resource(name="emptyRoomService")
+	EmptyRoomService emptyRoomService;
+	@Resource(name="courseService")
+	CourseService courseService;
 	
 	/**
 	 * 查询学校的空教室,查询空教室不需要检验微信登录
@@ -43,8 +44,7 @@ public class QueryPublicController {
 		//跳转至空教室页面
 		View view = new View("student","query-public","empty-room","空教室查询");
 		//获得教学楼信息
-		EmptyRoomService roomService = new EmptyRoomServiceImpl();
-		List<Building> buildingList = roomService.getBuildings();
+		List<Building> buildingList = emptyRoomService.getBuildings();
 		view.addObject("buildingList", buildingList);
 		//获取当前的时间
 		String curDate = TimeUtil.getCurrentDateStrMD();
@@ -52,7 +52,7 @@ public class QueryPublicController {
         view.addObject("curDate",curDate);
         view.addObject("curWeek",curWeek);
 		//获取空教室列表
-		List<EmptyRoom> roomList = roomService.getEmptyRooms(new Date());		
+		List<EmptyRoom> roomList = emptyRoomService.getEmptyRooms(new Date());		
 		view.addObject("roomList", roomList);
 
 		return view;
@@ -100,9 +100,8 @@ public class QueryPublicController {
 	@RequestMapping("school-course-detail")
 	public View schoolCourseDetail(@RequestParam(value="code")String code,@RequestParam(value="courseid")int courseid) {
 		View view;
-		//创建微信服务类根据code获取openid
-		WechatMsgService wechatService = new WechatMsgServiceImpl();
-		String openid = wechatService.getOpenIdByCode(code);
+		//用微信服务类根据code获取openid
+		String openid = wechatMsgService.getOpenIdByCode(code);
 		//检验用户是否登录
 		view = studentService.checkUser(openid);
 		if(view != null){
@@ -110,8 +109,7 @@ public class QueryPublicController {
 			return view;
 		}					
 		
-		//创建课程服务类查询具体的课程信息
-		CourseService courseService = new CourseServiceImpl();
+		//用课程服务类查询具体的课程信息
 		Course course = courseService.queryCourse(courseid);
 		view = new View("student","query-public","school-course-detail",course.getName());
 		view.addObject("course",course);

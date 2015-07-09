@@ -41,7 +41,7 @@ public class WechatConfig {
 	}
 	
 	public void setAppsecret(String _appsecret){
-		
+		appsecret = _appsecret;
 	}
 
 }
