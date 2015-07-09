@@ -81,7 +81,7 @@
 </head>
 <body>
 <div class="query-div">
-    <select id="select">
+    <select id="select" onchange="javascript:changeBuilding()">
         <option value="_all">选择教学楼</option>
     	<c:forEach var="b" items="${buildingList }">
     	<option value="${b.getCode() }">${b.getName() }</option>
@@ -111,11 +111,21 @@
     <table class="empty-room" border="1" cellpadding="2">
         <tbody>
             <c:forEach var="r" items="${roomList }">
-                <tr class="${r.getBuildingCode() }">
+                <tr class="_all ${r.getBuildingCode() }">
                     <td class="building-name">${r.getBuilding() }</td>
                     <td class="room-name">${r.getBuilding() }</td>
                     <c:forEach var="room" items="${r.getStatus() }">
-                        <td class="getRoomType()" >${room }</td>
+                    <c:choose>
+                    <c:when test="${'有课' == room }">
+                    	<td class="room-cell room-inclass">${room }</td>
+                    </c:when>
+                    <c:when test="${'借用' == room }">
+                    	<td class="room-cell room-borrow">${room }</td>
+                    </c:when>
+                    <c:otherwise>
+                    	<td class="room-cell room-empty">${room }</td>
+                    </c:otherwise>
+                    </c:choose>
     	            </c:forEach>                                   
                 </tr>
     	    </c:forEach> 
@@ -138,16 +148,12 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
-function getRoomType(){
-	if(room == "有课"){
-		return "room-cell room-inclass";
-	}else if(room == "空"){
-		return "room-cell room-empty";
-	}else if(room == "借用"){
-		return "room-cell room-borrow";
-	}
-	return "room-cell room-borrow";
+function changeBuilding() {
+	$("table.empty-room tbody tr").hide();
+	var bname = $("#select").val();
+	$("table.empty-room tbody tr."+bname).slideDown();
 }
+
 </script>
 </body>
 </html>
