@@ -4,5 +4,8 @@
 *.war
 *.ear
 
+*.MF
 *.classpath
-
+/welearn/target
+/welearn/.settings
+/welearn/src/test

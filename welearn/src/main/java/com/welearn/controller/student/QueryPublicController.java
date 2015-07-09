@@ -1,11 +1,19 @@
 package com.welearn.controller.student;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.model.Building;
+import com.welearn.model.EmptyRoom;
 import com.welearn.view.View;
 
 @Controller
@@ -26,7 +34,12 @@ public class QueryPublicController {
 		//从教务处获取
 		//List
 		View view = new View("student","query-public","empty-room","空教室查询");
-		view.addObject("list", null);
+		
+		List<EmptyRoom> roomList = new ArrayList<EmptyRoom>();
+		List<Building> buildingList = new ArrayList<Building>();
+		buildingList.add(new Building("yf","逸夫楼"));
+		view.addObject("roomList", roomList);
+		view.addObject("buildingList", buildingList);
 		return view;
 	}
 	

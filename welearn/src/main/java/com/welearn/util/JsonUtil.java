@@ -43,6 +43,24 @@ public class JsonUtil {
 	}
 	
 	/**
+	 * 将一个json对象的字符串转换成一个JSONObject对象
+	 * @param jsonObjectStr json对象的字符串，形式必须是："{'data':{'a':[{'b1':'bb1','c1':'cc1'},{'b2':'bb2','c2':'cc2'}]}}"
+	 * @return
+	 */
+	public static JSONObject jsonObjectStrToObject(String jsonObjectStr) {
+		return JSONObject.fromObject(jsonObjectStr);
+	}
+	
+	/**
+	 * 将一个json list的字符串转换成一个JSONArray对象
+	 * @param jsonListStr json list的字符串形式，如："[{'name':'lpx','sex':'male'},{'name':'ronger','sex':'female'}]";
+	 * @return
+	 */
+	public static JSONArray jsonListStrToList(String jsonListStr) {
+		return JSONArray.fromObject(jsonListStr);
+	}
+	
+	/**
 	 * 返回一个操作的结果，用json串表示
 	 * @param code
 	 * @param info

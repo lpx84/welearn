@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>考试安排查询</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+
+<style type="text/css">
+    .content-box {
+        margin: 5px;
+    }
+</style>
+</head>
+<body>
+<div id="subject22" class="content-box">
+    <h3 class="content-box-header ui-state-default" data-id="22">
+        <div class="glyph-icon icon-separator transparent float-right">
+            <i class="glyph-icon icon-chevron-down"></i>
+        </div>
+        <span>软件系统分析与设计技术</span>
+    </h3>
+    <div class="content-box-wrapper">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">校区：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span>主校区</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">教学楼：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span>第九教学楼</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">教室：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span class="label bg-yellow">中101</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">准考证号：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span class="label bg-green">201050706312432</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">考试时间：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <p><span>2015-07-06 7:00</span> ——</p>
+                <p><span>2015-07-06 9:00</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<div id="subject23" class="content-box">
+    <h3 class="content-box-header ui-state-default" data-id="23">
+        <div class="glyph-icon icon-separator transparent float-right">
+            <i class="glyph-icon icon-chevron-down"></i>
+        </div>
+        <span>软件系统分析与设计技术</span>
+    </h3>
+    <div class="content-box-wrapper">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">校区：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span>主校区</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">教学楼：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span>第九教学楼</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">教室：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span class="label bg-yellow">中101</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">准考证号：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <span class="label bg-green">201050706312432</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <label class="font-gray">考试时间：</label>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-8">
+                <p><span>2015-07-06 7:00</span> ——</p>
+                <p><span>2015-07-06 9:00</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".content-box .content-box-header").click(function(event){
+        var id=$(this).attr("data-id");
+        var i = $("#subject"+id+" .glyph-icon i");
+        var content = $("#subject"+id+" .content-box-wrapper");
+        if(i.hasClass("icon-chevron-down")) {
+            i.removeClass("icon-chevron-down");
+            i.addClass("icon-chevron-right");
+            content.slideUp();
+        } else {
+            i.removeClass("icon-chevron-right");
+            i.addClass("icon-chevron-down");
+            content.slideDown();
+        }
+    });
+</script>
+</body>
+</html>
