@@ -17,11 +17,10 @@ import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
 import com.welearn.service.impl.CourseServiceImpl;
 import com.welearn.service.impl.EmptyRoomServiceImpl;
-import com.welearn.service.impl.UserServiceImpl;
 import com.welearn.service.impl.WechatMsgServiceImpl;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
-import com.welearn.service.intef.UserService;
+import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
@@ -32,6 +31,8 @@ public class QueryPublicController {
 
 	@Resource(name="wechatMsgService")
 	WechatMsgService wechatMsgService;
+	@Resource(name="studentService")
+	StudentService studentService;
 	
 	/**
 	 * 查询学校的空教室,查询空教室不需要检验微信登录
@@ -80,8 +81,7 @@ public class QueryPublicController {
 		//创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
 		//检验用户是否登录
-		UserService userService = new UserServiceImpl() ;		
-		view = userService.checkUser(openid);
+		view = studentService.checkUser(openid);
 		if(view != null){
 			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
@@ -104,8 +104,7 @@ public class QueryPublicController {
 		WechatMsgService wechatService = new WechatMsgServiceImpl();
 		String openid = wechatService.getOpenIdByCode(code);
 		//检验用户是否登录
-		UserService userService = new UserServiceImpl() ;		
-		view = userService.checkUser(openid);
+		view = studentService.checkUser(openid);
 		if(view != null){
 			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
