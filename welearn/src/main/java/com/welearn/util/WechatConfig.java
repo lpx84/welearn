@@ -16,6 +16,8 @@ public class WechatConfig {
 	public static String encodingAesKey;
 	
 	public static String token;
+	
+	public static String appsecret;
 
 	
 	public void setEmail(String _email) {
@@ -36,6 +38,10 @@ public class WechatConfig {
 
 	public void setToken(String _token) {
 		token = _token;
+	}
+	
+	public void setAppsecret(String _appsecret){
+		
 	}
 
 }
