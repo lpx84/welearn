@@ -12,6 +12,8 @@ import com.welearn.util.JsonUtil;
 
 public class EmptyRoomServiceImpl implements EmptyRoomService {
 
+	
+	
 	public List<Building> getBuildings() {
 		List<Building> buildingList = new ArrayList<Building>();
 		//Todo 未全部添加所有的教学楼
