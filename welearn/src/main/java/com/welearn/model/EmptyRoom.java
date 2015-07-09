@@ -1,18 +1,18 @@
 package com.welearn.model;
 
+
+import java.util.List;
+
 public class EmptyRoom {
 
-	private String currDate;
+
+	private String building;//教学楼名称
 	
-	private String week;
+	private String buildingCode;//教学楼代号
 	
-	private String builing;
-	
-	private String roomName;
-	
-	private String section; //节次
-	
-	private String status;
+	private String roomName;//教室名
+		
+	private List<String> status;//各个节次的状态
 
 	public EmptyRoom(String jsonObjStr) {
 		//把json串解析之后给每个属性赋值
@@ -20,28 +20,25 @@ public class EmptyRoom {
 		
 	}
 
-	public String getCurrDate() {
-		return currDate;
+	public EmptyRoom() {
+		
+	}
+	
+	
+	public String getBuilding() {
+		return building;
 	}
 
-	public void setCurrDate(String currDate) {
-		this.currDate = currDate;
+	public void setBuilding(String building) {
+		this.building = building;
 	}
 
-	public String getWeek() {
-		return week;
+	public String getBuildingCode() {
+		return buildingCode;
 	}
 
-	public void setWeek(String week) {
-		this.week = week;
-	}
-
-	public String getBuiling() {
-		return builing;
-	}
-
-	public void setBuiling(String builing) {
-		this.builing = builing;
+	public void setBuildingCode(String buildingCode) {
+		this.buildingCode = buildingCode;
 	}
 
 	public String getRoomName() {
@@ -52,19 +49,11 @@ public class EmptyRoom {
 		this.roomName = roomName;
 	}
 
-	public String getSection() {
-		return section;
-	}
-
-	public void setSection(String section) {
-		this.section = section;
-	}
-
-	public String getStatus() {
+	public List<String> getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(List<String> status) {
 		this.status = status;
 	}
 	

@@ -28,6 +28,7 @@ import org.xml.sax.SAXException;
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import com.welearn.model.MsgReceive;
+import com.welearn.model.MsgReceiveEvent;
 import com.welearn.model.MsgReceivePicture;
 import com.welearn.model.MsgReceiveText;
 import com.welearn.model.MsgReceiveVoice;
@@ -168,6 +169,12 @@ public class MsgReceiveFactory {
 			voice.setFormat(map.get("Format"));
 			voice.setMediaId(map.get("MediaId"));
 			return voice;
+		} else if (map.get("MsgType").equals("event")) { // 事件消息
+			MsgReceiveEvent event = new MsgReceiveEvent(toUserName,
+					fromUserName, createTime, "event", msgId);
+			event.setEvent(map.get("Event"));
+			event.setEventKey(map.get("EventKey"));
+			return event;
 		} else {
 			return new MsgReceive(toUserName, fromUserName, createTime,
 					"other", msgId);

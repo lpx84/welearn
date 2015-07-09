@@ -14,4 +14,13 @@ public class InfoView extends ModelAndView {
 		super("error/"+modal+"/"+fileName);
 		this.addObject("info", info);
 	}
+	
+	/**
+	 * 默认将提示信息显示到"error/wechat/info.jsp"页面
+	 * @param info
+	 */
+	public InfoView(String info) {
+		super("error/wechat/info");
+		this.addObject("info", info);
+	}
 }

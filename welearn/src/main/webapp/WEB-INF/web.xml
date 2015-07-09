@@ -44,6 +44,13 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>Hxd</display-name>
+  	<servlet-name>Hxd</servlet-name>
+  	<servlet-class>com.welearn.controller.student.Hxd</servlet-class>
+  </servlet>
   <servlet-mapping>
         <servlet-name>spring-mvc</servlet-name>
         <!-- <url-pattern>*.do</url-pattern> -->
@@ -62,49 +69,49 @@
   
   <!-- 图片文件 -->
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.png</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.jpg</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.gif</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
   </servlet-mapping>
   
   <!-- 字体文件   -->
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.eot</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.svg</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.ttf</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.woff</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.woff2</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.otf</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>default</servlet-name>
+      <servlet-name>default</servlet-name>
     <url-pattern>*.swf</url-pattern>
   </servlet-mapping>
   

@@ -8,7 +8,7 @@
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
 <style type="text/css">
-    
+   
     .query-div {
         position: fixed;
         top: 0;
@@ -81,7 +81,7 @@
 </head>
 <body>
 <div class="query-div">
-    <select id="select">
+    <select id="select" onchange="javascript:changeBuilding()">
         <option value="_all">选择教学楼</option>
     	<c:forEach var="b" items="${buildingList }">
     	<option value="${b.getCode() }">${b.getName() }</option>
@@ -90,7 +90,7 @@
     <table class="table-head empty-room" border="1" cellpadding="2">
         <thead>
             <tr>
-                <th colspan="2">6月10日<br>(星期三)</th>
+                <th colspan="2">${curDate }<br>(${curWeek })</th>
                 <th colspan="7">节次</th>
             </tr>
             <tr>
@@ -110,7 +110,26 @@
 <div class="data">
     <table class="empty-room" border="1" cellpadding="2">
         <tbody>
-            <tr class="building-yf">
+            <c:forEach var="r" items="${roomList }">
+                <tr class="_all ${r.getBuildingCode() }">
+                    <td class="building-name">${r.getBuilding() }</td>
+                    <td class="room-name">${r.getBuilding() }</td>
+                    <c:forEach var="room" items="${r.getStatus() }">
+                    <c:choose>
+                    <c:when test="${'有课' == room }">
+                    	<td class="room-cell room-inclass">${room }</td>
+                    </c:when>
+                    <c:when test="${'借用' == room }">
+                    	<td class="room-cell room-borrow">${room }</td>
+                    </c:when>
+                    <c:otherwise>
+                    	<td class="room-cell room-empty">${room }</td>
+                    </c:otherwise>
+                    </c:choose>
+    	            </c:forEach>                                   
+                </tr>
+    	    </c:forEach> 
+<!--             <tr class="building-yf">
                 <td class="building-name">逸夫楼</td>
                 <td class="room-name">YF106</td>
                 <td class="room-cell room-inclass">有课</td>
@@ -120,260 +139,8 @@
                 <td class="room-cell room-inclass">有课</td>
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">第十七号教学楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">思源楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">思源西楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
-            <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr>
+            </tr> -->
+
             
         </tbody>
     </table>
@@ -381,6 +148,11 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
+function changeBuilding() {
+	$("table.empty-room tbody tr").hide();
+	var bname = $("#select").val();
+	$("table.empty-room tbody tr."+bname).slideDown();
+}
 
 </script>
 </body>

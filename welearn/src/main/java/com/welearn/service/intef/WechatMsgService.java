@@ -12,5 +12,11 @@ public interface WechatMsgService {
 	 */
 	public String getMsgReply(MsgReceive msg);
 	
+	/**
+	 * 根据code获得对应的openid
+	 * @param code
+	 * @return
+	 */
+	public abstract String getOpenIdByCode(String code);
 	
 }

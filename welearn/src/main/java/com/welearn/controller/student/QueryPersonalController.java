@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.model.ExamPlan;
 import com.welearn.view.View;
 
 
@@ -14,18 +15,30 @@ import com.welearn.view.View;
 public class QueryPersonalController {
 
 	/**
-	 * 
+	 * 查看当前课表
 	 * @param code
 	 * @return
 	 */
 	@RequestMapping("course-schedule")
 	public View schoolCourseQuery(@RequestParam("code")String code) {
+		View view;
+//		//创建微信服务类根据code获取openid
+//		WechatMsgService wechatService = new WechatMsgServiceImpl();
+//		String openid = wechatService.getOpenIdByCode(code);
+//		UserService userService = new UserServiceImpl() ;		
+//		view = userService.checkUser(openid);
+//		if(view != null){
+//			//用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+//			return view;
+//		}	
+		
+		
 		//默认当前周试图
 		return null;
 	}
 	
 	/**
-	 * 根据周 查询
+	 * 根据周 查询当前课表
 	 * @param weekNo
 	 * @return
 	 */
@@ -34,14 +47,17 @@ public class QueryPersonalController {
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo")Integer weekNo) {
 		
+		
+		
+		
 		return null;
 	}
 	
 	/**
-	 * 
+	 * 查看当前课表
 	 * @param weekNo 第几周
 	 * @param weekday 第几天
-	 * @return
+	 * @return json格式的字符串
 	 */
 	@RequestMapping("course-schedule-weekday")
 	@Authentication()
@@ -52,22 +68,30 @@ public class QueryPersonalController {
 		return null;
 	}
 	
+	/**
+	 * 查看考试时间
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("exam-plan")
 	public View examPlan(@RequestParam(value="code")String code) {
+		//用于检验用户是否登录
+		View view;
+
 		
-		//用一个类 验证呢身份
-		//如果false
+		view = new View("student","query-private","exam-plan","考试安排");
+		ExamPlan examPlan = new ExamPlan(null);
 		
-		//return new InfoView();
 		
-		//
-		//从教务处获取
-		//List
-		View view = new View("student","public","empty-room","空教室");
 		view.addObject("list", null);
 		return view;
 	}
 	
+	/**
+	 * 查看四六级考试成绩
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("cet-grade")
 	public View cetGrade(@RequestParam(value="code")String code) {
 		
@@ -84,6 +108,11 @@ public class QueryPersonalController {
 		return view;
 	}
 	
+	/**
+	 * 查看各个学期的考试成绩
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("semester-grade")
 	public View semesterGrade(@RequestParam(value="code")String code) {
 		
@@ -121,7 +150,7 @@ public class QueryPersonalController {
 	}
 
 	/**
-	 * 
+	 * 一卡通自助查询 返回一卡通的基本信息
 	 * @param code
 	 * @return
 	 */
@@ -139,8 +168,15 @@ public class QueryPersonalController {
 		return view;
 	}
 
+	/**
+	 * 一卡通消费记录查询
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
 	@RequestMapping("e-card/consume-detail")
 	@Authentication()
+	@ResponseBody
 	public String ecardConsumeDetail(
 			@RequestParam(value="startTime")String startTime,
 			@RequestParam(value="endTime")String endTime) {
@@ -154,7 +190,11 @@ public class QueryPersonalController {
 		return null;
 	}
 	
-	
+	/**
+	 * 剩余流量查询
+	 * @param code
+	 * @return
+	 */
 	@RequestMapping("net-flow/detail")
 	public View netFlowDetail(@RequestParam(value="code")String code) {
 		
