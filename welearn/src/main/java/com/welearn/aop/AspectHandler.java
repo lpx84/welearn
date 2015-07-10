@@ -77,21 +77,21 @@ public class AspectHandler {
         Object o1 = method.getDefaultValue();
         Object o2 = method.getParameterAnnotations();
         
-//        return joinPoint.proceed();
+        return joinPoint.proceed();
         
-    	if(session.getAttribute("aid") != null) {	//当aid不为空的时候  视为已经登录
-            return joinPoint.proceed();
-    	} else {
-            Class returnType = method.getReturnType();//得到方法返回值类型  
-            if(returnType == String.class) { //如果返回值为String
-                return JsonUtil.getJsonLoginTimeOut();
-            } else if(returnType == View.class) {
-            	return new View("admin","admin","login","登录"); 
-            } else {  //当使用Ajax的时候 可能会出现这种情况  
-                
-            	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");
-            }
-    	}
+//    	if(session.getAttribute("aid") != null) {	//当aid不为空的时候  视为已经登录
+//            return joinPoint.proceed();
+//    	} else {
+//            Class returnType = method.getReturnType();//得到方法返回值类型  
+//            if(returnType == String.class) { //如果返回值为String
+//                return JsonUtil.getJsonLoginTimeOut();
+//            } else if(returnType == View.class) {
+//            	return new View("admin","admin","login","登录"); 
+//            } else {  //当使用Ajax的时候 可能会出现这种情况  
+//                
+//            	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");
+//            }
+//    	}
 	}
 	
 	
