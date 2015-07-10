@@ -126,4 +126,6 @@ public class TimeUtil {
 		long offset = curr.getTime() - pre.getTime();
 		return offset > 120*60000; //超时时限为2个小时
 	}
+	
+
 }

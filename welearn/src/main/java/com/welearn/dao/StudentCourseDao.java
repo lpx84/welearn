@@ -1,8 +1,11 @@
 package com.welearn.dao;
 
+import org.hibernate.Query;
+
+import com.welearn.entity.MsgNewsItem;
 import com.welearn.entity.StudentCourse;
 
-public class StudentCourseDao {
+public class StudentCourseDao extends SuperDao{
 
 	/**
 	 * 新增一条记录
@@ -10,7 +13,7 @@ public class StudentCourseDao {
 	 * @return
 	 */
 	public Integer addStudentCourse(StudentCourse studentCourse){
-		return null;
+		return (Integer)this.sessionFactory.getCurrentSession().save(studentCourse);
 	}
 	
 	/**
@@ -19,7 +22,13 @@ public class StudentCourseDao {
 	 * @return
 	 */
 	public boolean delStudentCourse(StudentCourse studentCourse){
-		return false;
+		int courseid = studentCourse.getCourseId();
+		int studentid = studentCourse.getStudentId();
+		this.hql = "DELETE FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		query.setInteger(1, studentid);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -29,7 +38,11 @@ public class StudentCourseDao {
 	 * @return
 	 */
 	public boolean delStudentCourse(int studentID, int courseID){
-		return false;
+		this.hql = "DELETE FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseID);
+		query.setInteger(1, studentID);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -38,7 +51,9 @@ public class StudentCourseDao {
 	 * @return
 	 */
 	public boolean updateStudentCourse(StudentCourse studentCourse){
-		return false;
+		this.sessionFactory.getCurrentSession().update(studentCourse);
+		//update的返回值为空，这里怎么判断是否成功
+		return true;
 	}
 	
 	/**
@@ -47,7 +62,13 @@ public class StudentCourseDao {
 	 * @return
 	 */
 	public boolean isExist(StudentCourse studentCourse){
-		return false;
+		int courseid = studentCourse.getCourseId();
+		int studentid = studentCourse.getStudentId();
+		this.hql = "FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		query.setInteger(1, studentid);
+		return query.uniqueResult() != null;
 	}
 	
 	/**
@@ -57,6 +78,10 @@ public class StudentCourseDao {
 	 * @return
 	 */
 	public StudentCourse getStudentCourse(int studentID, int courseID){
-		return null;
+		this.hql = "FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseID);
+		query.setInteger(1, studentID);
+		return (StudentCourse) query.uniqueResult();
 	}
 }

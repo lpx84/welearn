@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Tracy
+=======
+Built-By: SikentKim
+>>>>>>> 6ca2013120afe260ba89d51406e9f548a181c079
 Build-Jdk: 1.8.0_31
 Created-By: Maven Integration for Eclipse
 

@@ -2,9 +2,11 @@ package com.welearn.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import com.welearn.entity.MsgReplyText;
 
-public class MsgReplyTextDao {
+public class MsgReplyTextDao extends SuperDao{
 	
 	/**
 	 * 新增一条记录
@@ -12,7 +14,7 @@ public class MsgReplyTextDao {
 	 * @return
 	 */
 	public Integer addMsgReplyText(MsgReplyText msgReplyText){
-		return null;
+		return (Integer)this.sessionFactory.getCurrentSession().save(msgReplyText);
 	}
 	
 	/**
@@ -21,7 +23,10 @@ public class MsgReplyTextDao {
 	 * @return
 	 */
 	public boolean delMsgReplyText(int id){
-		return false;
+		this.hql = "DELETE FROM MsgReplyText AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -30,7 +35,10 @@ public class MsgReplyTextDao {
 	 * @return
 	 */
 	public boolean delMsgReplyTextByIndex(int indexId){
-		return false;
+		this.hql = "DELETE FROM MsgReplyText AS u WHERE u.index_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, indexId);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -39,7 +47,9 @@ public class MsgReplyTextDao {
 	 * @return
 	 */
 	public boolean updateMsgReplyText(MsgReplyText msgReplyText){
-		return false;
+		this.sessionFactory.getCurrentSession().update(msgReplyText);
+		//update的返回值为空，这里怎么判断是否成功
+		return true;
 	}
 	
 	/**
@@ -48,7 +58,10 @@ public class MsgReplyTextDao {
 	 * @return
 	 */
 	public MsgReplyText getMsgReplyTextById(int id){
-		return null;
+		this.hql = "FROM MsgReplyText AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return (MsgReplyText) query.uniqueResult();
 	}
 	
 	/**
@@ -57,6 +70,10 @@ public class MsgReplyTextDao {
 	 * @return
 	 */
 	public List<MsgReplyText> getMsgReplyTextByIndexID(int indexID){
-		return null;
+		this.hql = "from MsgReplyText as a where a.index_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, indexID);
+		List<MsgReplyText> result = query.list();
+		return result;
 	}
 }

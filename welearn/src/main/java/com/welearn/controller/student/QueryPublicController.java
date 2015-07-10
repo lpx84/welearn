@@ -158,7 +158,7 @@ public class QueryPublicController {
 	}
 	
 	/**
-	 * 查询全校课程
+	 * 查询全校课程,显示查询结果页面
 	 * 
 	 * @param keyword
 	 * @return
@@ -167,10 +167,39 @@ public class QueryPublicController {
 	@Authentication()
 	@ResponseBody
 	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
-
-		return null;
+		//创建显示页面
+		View view = new View("student", "query-public", "school-course-list",
+				"课程查询结果");
+		
+		
+		
+		return view;
 	}
 
+	/**
+	 * 查询某一门课详细情况
+	 * 
+	 * @param courseid
+	 * @return
+	 */
+	@RequestMapping("school-course-detail")
+	@Authentication()
+	@ResponseBody
+	public View schoolCourseDetail(@RequestParam("courseid") String courseid) {
+		
+		
+		
+		//创建显示页面
+		View view = new View("student", "query-public", "school-course-detail",
+				"");
+		
+		
+		
+		return view;
+	}
+	
+	
+	
 	/**
 	 * 失误招领页面
 	 * 
