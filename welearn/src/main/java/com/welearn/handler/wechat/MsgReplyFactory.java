@@ -84,7 +84,6 @@ public class MsgReplyFactory {
 			replyMsg = XmlUtil.getNullReplyText(msg.getFromUserName(), msg.getToUserName());
 		}
 		
-		
 		if(isEncode) {
 			replyMsg = this.encodeReplyMsg(replyMsg, timestamp, nonce);
 		}
