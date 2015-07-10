@@ -23,3 +23,4 @@
 
 <!-- JS -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/aui-production.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/student-global.js"></script>

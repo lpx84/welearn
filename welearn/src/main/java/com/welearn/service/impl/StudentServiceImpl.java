@@ -36,17 +36,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public Student getStudentByOpenId(String openId) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDao.getStudentByOpenID(openId);
 	}
 
-	public Student getStudentByStudentId(String studentId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student getStudentByStudentId(int studentId) {
+		return studentDao.getStudent(studentId);
 	}
 
 	public boolean updateStudent(Student student) {
-		// TODO Auto-generated method stub
-		return false;
+		return studentDao.updateStudent(student);
 	}
 }

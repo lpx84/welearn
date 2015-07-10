@@ -18,11 +18,25 @@ public interface StudentService {
      * @return
      */
 	public View checkUser(String openid);
-	
+	/**
+	 * 根据openid获取学生信息，如果不存在，就返回null
+	 * @param openId
+	 * @return
+	 */
 	public Student getStudentByOpenId(String openId);
 	
-	public Student getStudentByStudentId(String studentId);
+	/**
+	 * 根据用户学号来获取学生信息
+	 * @param studentId
+	 * @return
+	 */
+	public Student getStudentByStudentId(int studentId);
 	
+	/**
+	 * 更新学生信息
+	 * @param student
+	 * @return
+	 */
 	public boolean updateStudent(Student student);
 	
 }
