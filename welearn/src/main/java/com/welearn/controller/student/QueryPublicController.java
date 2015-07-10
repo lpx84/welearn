@@ -36,6 +36,7 @@ public class QueryPublicController {
 
 	/**
 	 * 查询学校的空教室
+	 * 
 	 * @param code
 	 * @return
 	 */
@@ -70,6 +71,7 @@ public class QueryPublicController {
 
 	/**
 	 * 查询校历
+	 * 
 	 * @param code
 	 * @return
 	 */
@@ -115,27 +117,19 @@ public class QueryPublicController {
 	/**
 	 * 某一门课的详情,为了防止爬取数据，这里需要验证微信登录
 	 * 
-	 * @param code
 	 * @param courseid
 	 *            课程id
 	 * @return
 	 */
+
 	@RequestMapping("school-course-detail")
-	public View schoolCourseDetail(@RequestParam(value = "code") String code,
+	//@Authentication()
+	public View schoolCourseDetail(
 			@RequestParam(value = "courseid") int courseid) {
-		View view;
-		// 用微信服务类根据code获取openid
-		String openid = wechatMsgService.getOpenIdByCode(code);
-		// 检验用户是否登录
-		view = studentService.checkUser(openid);
-		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
-		if (view != null) {
-			return view;
-		}
 
 		// 用课程服务类查询具体的课程信息
 		Course course = courseService.queryCourse(courseid);
-		view = new View("student", "query-public", "school-course-detail",
+		View view = new View("student", "query-public", "school-course-detail",
 				course.getName());
 		view.addObject("course", course);
 		return view;
@@ -151,12 +145,12 @@ public class QueryPublicController {
 	@RequestMapping("school-course-query-page")
 	@Authentication()
 	@ResponseBody
-	public String schoolCourseQuery(@RequestParam("pageNo") Integer pageNo,
+	public String schoolCourseQueryPage(@RequestParam("pageNo") Integer pageNo,
 			@RequestParam("keyword") String keyword) {
 
 		return null;
 	}
-	
+
 	/**
 	 * 查询全校课程,显示查询结果页面
 	 * 
@@ -164,42 +158,15 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-course-query")
-	@Authentication()
-	@ResponseBody
+	//@Authentication()
 	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
-		//创建显示页面
+		// 创建显示页面
 		View view = new View("student", "query-public", "school-course-list",
 				"课程查询结果");
-		
-		
-		
+        
 		return view;
 	}
 
-	/**
-	 * 查询某一门课详细情况
-	 * 
-	 * @param courseid
-	 * @return
-	 */
-	@RequestMapping("school-course-detail")
-	@Authentication()
-	@ResponseBody
-	public View schoolCourseDetail(@RequestParam("courseid") String courseid) {
-		
-		
-		
-		//创建显示页面
-		View view = new View("student", "query-public", "school-course-detail",
-				"");
-		
-		
-		
-		return view;
-	}
-	
-	
-	
 	/**
 	 * 失误招领页面
 	 * 
