@@ -3,7 +3,7 @@
 # Package Files
 *.war
 *.ear
-
+*.properties
 *.MF
 *.classpath
 /welearn/target
