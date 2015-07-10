@@ -1,20 +1,39 @@
 package com.welearn.model;
 
-public class Semester {
+import java.util.Calendar;
 
+public class Semester {
+	// 学年
 	private Integer year;
-	
+	// 学期
 	private Integer semesterNo;
 
-	
 	/**
 	 * 得到当前学期
+	 * 
 	 * @return
 	 */
 	public static Semester getCurrSemester() {
-		return null;
-	} 
-	
+		Calendar calendar = Calendar.getInstance();
+		// 获取当前的年月日
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int semesterNo = 1;
+		// 判断当前的学年和学期
+		if ((month > 1 && month < 7) || (month == 1 && day > 10)
+				|| (month == 7 && day < 15)) {
+			semesterNo = 2;
+		} else {
+			if(month<=1){
+				year--;
+			}
+		}
+
+		Semester semester = new Semester(year, semesterNo);
+		return semester;
+	}
+
 	public Semester(Integer year, Integer semesterNo) {
 		super();
 		this.year = year;
@@ -36,6 +55,5 @@ public class Semester {
 	public void setSemesterNo(Integer semesterNo) {
 		this.semesterNo = semesterNo;
 	}
-	
-	
+
 }

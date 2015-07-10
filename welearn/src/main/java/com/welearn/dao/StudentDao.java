@@ -41,15 +41,11 @@ public class StudentDao extends SuperDao {
 	}
 	
 	public Student getStudentByOpenID(String openID) {
-<<<<<<< HEAD
 		hql = "from Student as s where s.openId=?";
 		Query q = sessionFactory.getCurrentSession().createQuery(hql);
 		q.setString(0, openID);
 		return (Student)q.uniqueResult();
-=======
-		//openID存在返回记录，不存在返回空
-		return null;
->>>>>>> bdc83e888ab276f3fec558e9c6fadf36e7d74599
+
 	}
 	
 	public Student getStudentByFakeID(String fakeID) {
@@ -78,7 +74,7 @@ public class StudentDao extends SuperDao {
 	}
 	
 	public boolean updateStudent(Student student) {
-		
+		sessionFactory.getCurrentSession().update(student);
 		return true;
 	}
 	
@@ -86,7 +82,12 @@ public class StudentDao extends SuperDao {
 	 * 在学生表里取出这个学生所有的课程信息，这里需要确认多对多的关系是否正确
 	 * @return
 	 */
-	public List getCourseList() {
+	public List getCourseList(int id) {
+//		hql = "from Student as s where s.id=?";
+//		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+//		q.setInteger(0, id);
+//		Student s = (Student)q.uniqueResult();
+//		return s.getCourseList();
 		return null;
 	}
 	

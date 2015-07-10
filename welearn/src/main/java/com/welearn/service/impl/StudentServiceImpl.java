@@ -14,8 +14,13 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public boolean checkBindByOpenId(String openid) {
-		// TODO Auto-generated method stub
-		return false;
+		Student student = studentDao.getStudentByOpenID(openid);
+		//学生不存在，或者查出来的学号为空
+		if(student == null || student.getStudentNo() == null){
+			return false;
+		}
+				
+		return true;
 	}
 	
 	public View checkUser(String openid) {
@@ -39,11 +44,12 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.getStudentByOpenID(openId);
 	}
 
-	public Student getStudentByStudentId(int studentId) {
-		return studentDao.getStudent(studentId);
-	}
-
 	public boolean updateStudent(Student student) {
 		return studentDao.updateStudent(student);
+	}
+
+	public Student getStudentByStudentNo(String studentNo) {
+		// TODO Auto-generated method stub
+		return studentDao.getStudentByStudentNo(studentNo);
 	}
 }

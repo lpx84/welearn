@@ -27,10 +27,10 @@ public interface StudentService {
 	
 	/**
 	 * 根据用户学号来获取学生信息
-	 * @param studentId
+	 * @param studentNo
 	 * @return
 	 */
-	public Student getStudentByStudentId(int studentId);
+	public Student getStudentByStudentNo(String studentNo);
 	
 	/**
 	 * 更新学生信息
