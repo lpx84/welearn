@@ -142,19 +142,31 @@ public class QueryPublicController {
 	}
 
 	/**
+	 * 查询全校课程,用ajax调用
+	 * 
+	 * @param pageNo
+	 * @param keyword
+	 * @return
+	 */
+	@RequestMapping("school-course-query-page")
+	@Authentication()
+	@ResponseBody
+	public String schoolCourseQuery(@RequestParam("pageNo") Integer pageNo,
+			@RequestParam("keyword") String keyword) {
+
+		return null;
+	}
+	
+	/**
 	 * 查询全校课程
 	 * 
-	 * @param code
-	 * @param pageNo
 	 * @param keyword
 	 * @return
 	 */
 	@RequestMapping("school-course-query")
 	@Authentication()
 	@ResponseBody
-	public String schoolCourseQuery(@RequestParam(value = "code") String code,
-			@RequestParam("pageNo") Integer pageNo,
-			@RequestParam("keyword") String keyword) {
+	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
 
 		return null;
 	}

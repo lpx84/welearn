@@ -1,7 +1,6 @@
 package com.welearn.service.intef;
 
 import com.welearn.model.MsgReceive;
-import com.welearn.model.MsgReceiveText;
 
 public interface WechatMsgService {
 
