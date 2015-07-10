@@ -12,29 +12,29 @@
     .query-div {
         position: fixed;
         top: 0;
-        width: calc(100% - 10px);
+        width: 100%;
         background-color: #EAE8E8;
         padding-left: 5px;
         padding-right: 5px;
     }
     
     .query-div select {
-        font-size: 1.2em;
+        font-size: 1.5em;
+		width: 100%;
+		margin-left: -5px;
         margin-top: 5px;
         margin-bottom: 5px;
-        padding: 5px;
-        background-color: #EAE8E8;
-        border-top: none;
-        border-left: none;
-        border-right: none;
+        padding: 10px;
+        background-color: rgba(0,0,0,0);
+        border: none;
     }
     
     .data {
-        margin-top: 109px;
+        margin-top: 100px;
     }
     
     table.table-head {
-        width: calc(100% + 10px);
+        width: 100%;
         margin-left: -5px;
         margin-right: -5px;
     }
@@ -113,7 +113,7 @@
             <c:forEach var="r" items="${roomList }">
                 <tr class="_all ${r.getBuildingCode() }">
                     <td class="building-name">${r.getBuilding() }</td>
-                    <td class="room-name">${r.getBuilding() }</td>
+                    <td class="room-name">${r.getRoomName() }</td>
                     <c:forEach var="room" items="${r.getStatus() }">
                     <c:choose>
                     <c:when test="${'有课' == room }">
@@ -139,9 +139,7 @@
                 <td class="room-cell room-inclass">有课</td>
                 <td class="room-cell room-empty">空</td>
                 <td class="room-cell room-empty">空</td>
-            </tr> -->
-
-            
+            </tr> -->            
         </tbody>
     </table>
 </div>

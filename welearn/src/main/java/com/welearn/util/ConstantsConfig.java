@@ -21,6 +21,11 @@ public class ConstantsConfig {
 	 */
 	public static String schoolShortName;
 	
+	/**
+	 * 服务器主机域名
+	 */
+	public static String hostName;
+	
 	public ConstantsConfig() {
 		super();
 	}
@@ -35,6 +40,10 @@ public class ConstantsConfig {
 
 	public void setSchoolShortName(String _schoolShortName) {
 		schoolShortName = _schoolShortName;
+	}
+
+	public static void setHostName(String _hostName) {
+		hostName = _hostName;
 	}
 	
 }

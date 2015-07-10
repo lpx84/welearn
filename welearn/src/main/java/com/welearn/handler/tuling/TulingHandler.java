@@ -18,7 +18,7 @@ public class TulingHandler {
 	public String getTulingMsg(String keyword) throws ParseException, IOException {
 		String info = URLEncoder.encode(keyword, "utf-8");
 		String requesturl = "http://www.tuling123.com/openapi/api?key="+TulingConfig.key+"&info="+info; 
-		HttpGet request = new HttpGet(requesturl); 
+		HttpGet request = new HttpGet(requesturl);
 		HttpResponse response = HttpClients.createDefault().execute(request); 
 		
 		//200即正确的返回码 

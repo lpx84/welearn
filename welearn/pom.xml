@@ -36,6 +36,35 @@
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aes-jre1.6.jar</systemPath>  
 	</dependency>
+	<dependency>
+	    <groupId>com.httpclient</groupId>  
+	    <artifactId>client</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-codec-1.6.jar</systemPath>  
+	</dependency>
+	<dependency>
+	    <groupId>com.httpclient</groupId>  
+	    <artifactId>client</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-logging-1.1.1.jar</systemPath>  
+	</dependency>
+	<dependency>
+	    <groupId>com.httpclient</groupId>  
+	    <artifactId>client</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/fluent-hc-4.2.5.jar</systemPath>  
+	</dependency>
+	<dependency>
+	    <groupId>com.httpclient</groupId>  
+	    <artifactId>client</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/httpmime-4.2.5.jar</systemPath>  
+	</dependency>
+	
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-webmvc</artifactId>
