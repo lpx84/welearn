@@ -3,14 +3,17 @@ package com.welearn.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Id;
 
 @Entity
 @Table(name="bjtu_student_course")
 public class StudentCourse {
 
+	@Id
 	@Column(name="course_id", columnDefinition="int(11)", nullable=false)
 	private Integer courseId;
 	
+	@Id
 	@Column(name="student_id", columnDefinition="int(11)", nullable=false)
 	private Integer studentId;
 
