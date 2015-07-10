@@ -41,10 +41,15 @@ public class StudentDao extends SuperDao {
 	}
 	
 	public Student getStudentByOpenID(String openID) {
+<<<<<<< HEAD
 		hql = "from Student as s where s.openId=?";
 		Query q = sessionFactory.getCurrentSession().createQuery(hql);
 		q.setString(0, openID);
 		return (Student)q.uniqueResult();
+=======
+		//openID存在返回记录，不存在返回空
+		return null;
+>>>>>>> bdc83e888ab276f3fec558e9c6fadf36e7d74599
 	}
 	
 	public Student getStudentByFakeID(String fakeID) {

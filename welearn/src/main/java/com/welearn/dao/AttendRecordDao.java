@@ -2,7 +2,6 @@ package com.welearn.dao;
 
 import java.util.Date;
 import java.util.List;
-
 import com.welearn.entity.AttendRecord;
 
 public class AttendRecordDao extends SuperDao {
