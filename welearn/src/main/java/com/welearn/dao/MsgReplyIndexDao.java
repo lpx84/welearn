@@ -33,7 +33,7 @@ public class MsgReplyIndexDao extends SuperDao {
 		return null;
 	}
 	
-	public List getMsgReplyIndexs(int pageNo, int pageItemNum) {
+	public List<MsgReplyIndex> getMsgReplyIndexs(int pageNo, int pageItemNum) {
 		return null;
 		
 	}
