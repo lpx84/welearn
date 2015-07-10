@@ -27,6 +27,7 @@ public class StudentDao extends SuperDao {
 	}
 	
 	public Student getStudentByOpenID(String openID) {
+		//openID存在返回记录，不存在返回空
 		return null;
 	}
 	
