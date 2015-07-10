@@ -2,16 +2,19 @@ package com.welearn.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
+import com.welearn.entity.MsgNewsItem;
 import com.welearn.entity.MsgReplyNews;
 
-public class MsgReplyNewsDao {
+public class MsgReplyNewsDao extends SuperDao{
 	/**
 	 * 新增一条记录
 	 * @param msgReplyNews
 	 * @return
 	 */
 	public Integer addMsgReplyNews(MsgReplyNews msgReplyNews){
-		return null;
+		return (Integer)this.sessionFactory.getCurrentSession().save(msgReplyNews);
 	}
 	
 	/**
@@ -20,7 +23,10 @@ public class MsgReplyNewsDao {
 	 * @return
 	 */
 	public boolean delMsgReplyNews(int id){
-		return false;
+		this.hql = "DELETE FROM MsgReplyNews AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -29,7 +35,10 @@ public class MsgReplyNewsDao {
 	 * @return
 	 */
 	public boolean delMsgReplyNewsByIndexId(int indexId){
-		return false;
+		this.hql = "DELETE FROM MsgReplyNews AS u WHERE u.index_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, indexId);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -38,18 +47,21 @@ public class MsgReplyNewsDao {
 	 * @return
 	 */
 	public boolean updateMsgReplyNews(MsgReplyNews msgReplyNews){
-		return false;
+		this.sessionFactory.getCurrentSession().update(msgReplyNews);
+		//update的返回值为空，这里怎么判断是否成功
+		return true;
 	}
 	
 	/**
 	 * 查找一条记录
 	 * @param id
-	 * @param pageNo
-	 * @param pageItemNum
 	 * @return
 	 */
-	public MsgReplyNews getMsgReplyNewsById(int id, int pageNo, int pageItemNum){
-		return null;
+	public MsgReplyNews getMsgReplyNewsById(int id){
+		this.hql = "FROM MsgReplyNews AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return (MsgReplyNews) query.uniqueResult();
 	}
 	
 	/**
@@ -58,6 +70,10 @@ public class MsgReplyNewsDao {
 	 * @return
 	 */
 	public List<MsgReplyNews> getMsgReplyNewsByIndexID(int indexID){
-		return null;
+		this.hql = "from MsgReplyNews as a where a.index_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, indexID);
+		List<MsgReplyNews> result = query.list();
+		return result;
 	}
 }
