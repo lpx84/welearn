@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="bjtu_student",catalog="Hibernate_Many2Many")
+@Table(name="bjtu_student")
 public class Student {
 
 	@Id
