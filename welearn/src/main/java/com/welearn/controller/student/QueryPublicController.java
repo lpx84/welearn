@@ -123,7 +123,7 @@ public class QueryPublicController {
 	 */
 
 	@RequestMapping("school-course-detail")
-	@Authentication()
+	//@Authentication()
 	public View schoolCourseDetail(
 			@RequestParam(value = "courseid") int courseid) {
 
@@ -145,7 +145,7 @@ public class QueryPublicController {
 	@RequestMapping("school-course-query-page")
 	@Authentication()
 	@ResponseBody
-	public String schoolCourseQuery(@RequestParam("pageNo") Integer pageNo,
+	public String schoolCourseQueryPage(@RequestParam("pageNo") Integer pageNo,
 			@RequestParam("keyword") String keyword) {
 
 		return null;
@@ -158,8 +158,7 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-course-query")
-	@Authentication()
-	@ResponseBody
+	//@Authentication()
 	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
 		// 创建显示页面
 		View view = new View("student", "query-public", "school-course-list",

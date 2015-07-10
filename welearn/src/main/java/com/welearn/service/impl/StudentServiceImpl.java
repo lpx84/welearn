@@ -14,8 +14,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public boolean checkBindByOpenId(String openid) {
-		Student student = studentDao.getStudentByOpenID(openid);
-		//学生不存在，或者查出来的学号为空
+//		Student student = studentDao.getStudentByOpenID(openid);
+//		//学生不存在，或者查出来的学号为空
 //		if(student == null || student.getStudentNo() == null){
 //			return false;
 //		}
