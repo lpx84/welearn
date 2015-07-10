@@ -55,22 +55,24 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 */
 	public String getOpenIdByCode(String code) {
 		// 替换对应的字符串
-		get_access_token_url = get_access_token_url.replace("APPID",
-				WechatConfig.appId);
-		get_access_token_url = get_access_token_url.replace("SECRET",
-				WechatConfig.appsecret);
-		get_access_token_url = get_access_token_url.replace("CODE", code);
-		String json = HttpUtil.getUrl(get_access_token_url);
-
-		JSONObject jsonObject = JSONObject.fromObject(json);
-		String openid = "illegal";
-		try {
-			openid = jsonObject.getString("openid");
-		} catch (Exception e) {
-			System.err.println(e.toString());
-		}
-
-		return openid;
+//		get_access_token_url = get_access_token_url.replace("APPID",
+//				WechatConfig.appId);
+//		get_access_token_url = get_access_token_url.replace("SECRET",
+//				WechatConfig.appsecret);
+//		get_access_token_url = get_access_token_url.replace("CODE", code);
+//		String json = HttpUtil.getUrl(get_access_token_url);
+//
+//		JSONObject jsonObject = JSONObject.fromObject(json);
+//		String openid = "illegal";
+//		try {
+//			openid = jsonObject.getString("openid");
+//		} catch (Exception e) {
+//			System.err.println(e.toString());
+//		}
+//
+//		return openid;
+		
+		return code;
 	}
 
 }
