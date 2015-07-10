@@ -30,7 +30,7 @@ public interface StudentService {
 	 * @param studentId
 	 * @return
 	 */
-	public Student getStudentByStudentId(int studentId);
+	public Student getStudentByStudentId(String studentId);
 	
 	/**
 	 * 更新学生信息
