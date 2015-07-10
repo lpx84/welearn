@@ -44,11 +44,12 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.getStudentByOpenID(openId);
 	}
 
-	public Student getStudentByStudentId(int studentId) {
-		return studentDao.getStudent(studentId);
-	}
-
 	public boolean updateStudent(Student student) {
 		return studentDao.updateStudent(student);
+	}
+
+	public Student getStudentByStudentNo(String studentNo) {
+		// TODO Auto-generated method stub
+		return studentDao.getStudentByStudentNo(studentNo);
 	}
 }
