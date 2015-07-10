@@ -2,6 +2,8 @@ package com.welearn.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
@@ -10,10 +12,12 @@ import javax.persistence.Id;
 public class StudentCourse {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
 	@Column(name="course_id", columnDefinition="int(11)", nullable=false)
 	private Integer courseId;
 	
-	@Id
 	@Column(name="student_id", columnDefinition="int(11)", nullable=false)
 	private Integer studentId;
 
@@ -31,6 +35,14 @@ public class StudentCourse {
 
 	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	
