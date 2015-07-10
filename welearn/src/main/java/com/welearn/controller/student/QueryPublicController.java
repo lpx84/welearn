@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +20,9 @@ import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
+import com.welearn.util.HttpUtil;
 import com.welearn.util.TimeUtil;
+import com.welearn.util.WechatConfig;
 import com.welearn.view.View;
 
 @Controller
@@ -66,6 +70,44 @@ public class QueryPublicController {
 		List<EmptyRoom> roomList = emptyRoomService.getEmptyRooms(new Date());
 		view.addObject("roomList", roomList);
 
+		return view;
+	}
+
+	/**
+	 * 查询学校的空教室
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("test-aouth")
+	public View testAouth(@RequestParam(value = "code") String code) {
+		// 获取用户access_token的url
+		String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
+				+ "appid=APPID"
+				+ "&secret=SECRET&"
+				+ "code=CODE&grant_type=authorization_code";
+		get_access_token_url = get_access_token_url.replace("APPID",
+				WechatConfig.appId);
+		get_access_token_url = get_access_token_url.replace("SECRET",
+				WechatConfig.appsecret);
+		get_access_token_url = get_access_token_url.replace("CODE", code);
+		String json = HttpUtil.getUrl(get_access_token_url);
+
+		JSONObject jsonObject = JSONObject.fromObject(json);
+		String openid = "illegal";
+		try {
+			openid = jsonObject.getString("openid");
+		} catch (Exception e) {
+			System.err.println(e.toString());
+		}
+		System.out.println(jsonObject.toString());
+        System.out.println("code："+code);
+        System.out.println("openid: "+openid);
+        System.out.println("appid: "+WechatConfig.appId);
+        System.out.println("appsecret: "+WechatConfig.appsecret);
+		// 跳转至空教室页面
+		View view = new View("error","wechat","info","Code无效，请用公告平台访问。");
+		view.addObject("info", "code："+code+"  openid："+openid);
 		return view;
 	}
 
@@ -123,7 +165,7 @@ public class QueryPublicController {
 	 */
 
 	@RequestMapping("school-course-detail")
-	//@Authentication()
+	@Authentication()
 	public View schoolCourseDetail(
 			@RequestParam(value = "courseid") int courseid) {
 
@@ -158,12 +200,12 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-course-query")
-	//@Authentication()
+	@Authentication()
 	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
 		// 创建显示页面
 		View view = new View("student", "query-public", "school-course-list",
 				"课程查询结果");
-        
+
 		return view;
 	}
 

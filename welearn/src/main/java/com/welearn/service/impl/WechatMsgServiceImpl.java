@@ -17,11 +17,7 @@ import com.welearn.util.XmlUtil;
 public class WechatMsgServiceImpl implements WechatMsgService {
 	// 数据库操作对象
 	private MsgReplyIndexDao msgReplyIndexDao;
-	// 获取用户access_token的url
-	private String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-			+ "appid=APPID"
-			+ "&secret=SECRET&"
-			+ "code=CODE&grant_type=authorization_code";
+
 
 	public void setMsgReplyIndexDao(MsgReplyIndexDao msgReplyIndexDao) {
 		this.msgReplyIndexDao = msgReplyIndexDao;
@@ -54,6 +50,11 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 * 根据code获取用户的openid，如果code不存在或者非法，则返回illegal
 	 */
 	public String getOpenIdByCode(String code) {
+		// 获取用户access_token的url
+//		String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
+//				+ "appid=APPID"
+//				+ "&secret=SECRET&"
+//				+ "code=CODE&grant_type=authorization_code";
 		// 替换对应的字符串
 //		get_access_token_url = get_access_token_url.replace("APPID",
 //				WechatConfig.appId);
