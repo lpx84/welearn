@@ -2,44 +2,70 @@ package com.welearn.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import com.welearn.entity.Student;
 
 public class StudentDao extends SuperDao {
 
 	public Integer addStudent(Student student) {
-		return null;
+		return (Integer)sessionFactory.getCurrentSession().save(student);
 	}
 	
 	public boolean delStudent(int id) {
-		return false;
+		hql = "delete from Student as s where s.id=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setInteger(0, id);
+		return q.executeUpdate() > 0;
 	}
 	
 	public boolean delStudentByOpenID(String openID) {
-		return false;
+		hql = "delete from Student as s where s.openId=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setString(0, openID);
+		return q.executeUpdate() > 0;
 	}
 	
 	public boolean delStudentByStudentNo(String studentNo) {
-		return false;
+		hql = "delete from Student as s where s.studentNo=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setString(0, studentNo);
+		return q.executeUpdate() > 0;
 	}
 	
 	public Student getStudent(int id) {
-		return null;
+		hql = "from Student as s where s.id=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setInteger(0, id);
+		return (Student)q.uniqueResult();
 	}
 	
 	public Student getStudentByOpenID(String openID) {
-		return null;
+		hql = "from Student as s where s.openId=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setString(0, openID);
+		return (Student)q.uniqueResult();
 	}
 	
 	public Student getStudentByFakeID(String fakeID) {
-		return null;
+		hql = "from Student as s where s.fakeId=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setString(0, fakeID);
+		return (Student)q.uniqueResult();
 	}
 	
 	public List getStudentsByTrueName(String trueName) {
-		return null;
+		hql = "from Student as s where s.trueName=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setString(0, trueName);
+		return q.list();
 	}
 	
 	public Student getStudentByStudentNo(String studentNo) {
-		return null;
+		hql = "from Student as s where s.studentNo=?";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		q.setString(0, studentNo);
+		return (Student)q.uniqueResult();
 	}
 	
 	public List getStudents(int pageNo, int pageItemNum) {
@@ -47,8 +73,8 @@ public class StudentDao extends SuperDao {
 	}
 	
 	public boolean updateStudent(Student student) {
-		return false;
 		
+		return true;
 	}
 	
 	/**
