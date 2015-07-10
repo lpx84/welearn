@@ -18,8 +18,11 @@
         <div class="form-row pad0B">
             <div class="form-input col-md-12">
                 <div class="form-input-icon">
+                <form id="search-course" action="<%=request.getContextPath() %>/student/query/public/school-course-query" method="POST">
                     <i class="glyph-icon icon-search transparent"></i>
-                    <input type="text" placeholder="输入查询课程" class="radius-all-100" name="" id="" />
+                    <input type="text" placeholder="输入查询课程" class="radius-all-100" name="keyword" id="keyword" onkeydown="javascript:enterSearch();"/>
+                    <input type="submit" style="display:none;">
+                </form>
                 </div>
             </div>
         </div>
@@ -62,7 +65,31 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
-
+function enterSearch() {
+	var event = window.event || arguments.callee.caller.arguments[0];
+	if (event.keyCode == 13) {
+		var key = $("#keyword").val();
+		if('' != key) {
+			/*
+			$.ajax({
+				url: "",
+				type: "POST",
+				data: {
+					keyword: key
+				},
+				dataType: "JSON",
+				success: function(res) {
+					
+				},
+				complete: completeHandler
+			});
+			*/
+			$("#search-course").submit();
+			//location.href = 'school-course-list.html';
+		}
+		
+	}
+}
 </script>
 </body>
 </html>

@@ -2,9 +2,12 @@ package com.welearn.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
+import com.welearn.entity.Admin;
 import com.welearn.entity.CourseTime;
 
-public class CourseTimeDao {
+public class CourseTimeDao extends SuperDao{
 
 	/**
 	 * 新增一条记录
@@ -12,7 +15,7 @@ public class CourseTimeDao {
 	 * @return
 	 */
 	public Integer addCourseTime(CourseTime courseTime){
-		return null;
+		return (Integer)this.sessionFactory.getCurrentSession().save(courseTime);
 	}
 	
 	/**
@@ -21,7 +24,10 @@ public class CourseTimeDao {
 	 * @return
 	 */
 	public boolean delCourseTime(int id){
-		return false;
+		this.hql = "DELETE FROM CourseTime AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return query.executeUpdate() > 0;
 	}
 	
 	/**
@@ -30,18 +36,21 @@ public class CourseTimeDao {
 	 * @return
 	 */
 	public boolean updateCourseTime(CourseTime courseTime){
-		return false;
+		this.sessionFactory.getCurrentSession().update(courseTime);
+		//update的返回值为空，这里怎么判断是否成功
+		return true;
 	}
 	
 	/**
 	 * 查询记录
 	 * @param id
-	 * @param pageNo
-	 * @param pageItemNum
 	 * @return
 	 */
-	public CourseTime getCourseTime(int id, int pageNo, int pageItemNum){
-		return null;
+	public CourseTime getCourseTime(int id){
+		this.hql = "FROM CourseTime AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return (CourseTime) query.uniqueResult();
 	}
 	
 	/**
@@ -49,7 +58,11 @@ public class CourseTimeDao {
 	 * @param section_id
 	 * @return
 	 */
-	public List<CourseTime> getCourseTimeBySection(int section_id){
-		return null;
+	public List<CourseTime> getCourseTimeBySection(int section_no){
+		this.hql = "FROM CourseTime AS u WHERE u.section_no=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, section_no);
+		List<CourseTime> result = query.list();
+		return result;
 	}
 }
