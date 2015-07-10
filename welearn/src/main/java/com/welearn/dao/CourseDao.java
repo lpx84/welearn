@@ -2,26 +2,35 @@ package com.welearn.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseProblem;
 
 public class CourseDao  extends SuperDao {
 
 	public Integer addCourse(Course course) {
-		return null;
-		
+		return (Integer)this.sessionFactory.getCurrentSession().save(course);
 	}
 	
 	public boolean delCourse(int id) {
-		return false;
+		this.hql = "DELETE FROM Course AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return query.executeUpdate() > 0;
 	}
 	
 	public boolean delCourseByCourseNo(String courseNo) {
-		return false;
-		
+		this.hql = "DELETE FROM Course AS u WHERE u.course_no=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, courseNo);
+		return query.executeUpdate() > 0;
 	}
 	
 	public boolean updateCourse(Course course) {
-		return false;
+		this.sessionFactory.getCurrentSession().update(course);
+		//update的返回值为空，这里怎么判断是否成功
+		return true;
 	}
 	
 	/**
@@ -30,8 +39,10 @@ public class CourseDao  extends SuperDao {
 	 * @return
 	 */
 	public Course getCourse(int id) {
-		return null;
-		
+		this.hql = "FROM Course AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return (Course) query.uniqueResult();
 	}
 	
 	/**
@@ -40,7 +51,10 @@ public class CourseDao  extends SuperDao {
 	 * @return
 	 */
 	public Course getCourseByCourseNo(String courseNo) {
-		return null;
+		this.hql = "FROM Course AS u WHERE u.course_no=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, courseNo);
+		return (Course) query.uniqueResult();
 	}
 	
 	/**
@@ -50,7 +64,20 @@ public class CourseDao  extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List getCoursesByTeacher(int teacherId, int pageNo, int pageItemNum) {
-		return null;
+	public List<Course> getCoursesByTeacher(int teacherId, int pageNo, int pageItemNum) {
+		this.hql = "FROM Course AS u WHERE u.teacher_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
+	}
+	
+	public List<Course> getCoursesByName(String name, int pageNo, int pageItemNum) {
+		this.hql = "FROM Course AS u WHERE u.name like '%"+name+"%'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 }
