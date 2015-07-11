@@ -10,6 +10,7 @@ import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
 import com.welearn.model.Course;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.ExamPlan;
 import com.welearn.service.intef.CourseService;
 
 public class CourseServiceImpl implements CourseService {
@@ -118,6 +119,26 @@ public class CourseServiceImpl implements CourseService {
 			grade.setWrite("123");
 			list.add(grade);			
 		}		
+		
+		return list;
+	}
+
+	public ArrayList<ExamPlan> queryExamPlan(String openid) {
+		//模拟生成考试安排
+		ArrayList<ExamPlan> list = new ArrayList<ExamPlan>();
+		
+		ExamPlan examPlan;
+		
+		for(int i=0;i<3;i++){
+			examPlan= new ExamPlan();
+			examPlan.setBuilding("逸夫楼");
+			examPlan.setClassRoom("YF305");
+			examPlan.setExamNo("123456789");
+			examPlan.setName("系统分析与设计"+i);
+			examPlan.setSection("主校区");
+			examPlan.setTime("2015-6-30 9:00-11:00");
+			list.add(examPlan);
+		}
 		
 		return list;
 	}

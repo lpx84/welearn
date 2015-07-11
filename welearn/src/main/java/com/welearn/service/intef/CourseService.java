@@ -8,6 +8,7 @@ import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
 import com.welearn.model.Course;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.ExamPlan;
 
 public interface CourseService {
 
@@ -47,4 +48,6 @@ public interface CourseService {
 	 */
 	public ArrayList<CETGrade> queryCETGrade(String openid);
 	
+	
+	public ArrayList<ExamPlan> queryExamPlan(String openid);
 }

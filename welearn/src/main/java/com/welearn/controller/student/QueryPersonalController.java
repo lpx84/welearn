@@ -101,12 +101,10 @@ public class QueryPersonalController {
 			return view;
 		}
 		
-		
-
+		//获取考试安排
+		ArrayList<ExamPlan> list = courseService.queryExamPlan(openid);
 		view = new View("student", "query-private", "exam-plan", "考试安排");
-		ExamPlan examPlan = new ExamPlan();
-
-		view.addObject("list", null);
+		view.addObject("list", list);
 		return view;
 	}
 
