@@ -38,10 +38,11 @@ public class StudentController {
 			@RequestParam("openId")String openId) {
 		if( null == studentNo ||
 			null == pwd ||
-			null == openId ||
 			"".equals(studentNo) ||
 			"".equals(pwd)) {
 			return new InfoView("学号和密码不能为空！");
+		} else if(null == openId) {
+			return new InfoView("请从微信进入！");
 		} else if(studentNo.length() != 8) {
 			return new InfoView("学号必须为8位！");
 		} else {
