@@ -137,7 +137,6 @@ public class QueryPersonalController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
-        System.out.println(map.toString());
         //返回课程成绩
 		view = new View("student", "query-private", "grade-course", "课程成绩");
 		view.addObject("gradeMap", map);

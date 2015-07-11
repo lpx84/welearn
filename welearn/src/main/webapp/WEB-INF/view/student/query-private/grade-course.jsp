@@ -47,7 +47,7 @@ ul.menu-float {
 <body>
 	<div class="content-box">
 		<ul class="menu-float" style="display: none;">
-			<li><a href="grade-english.html">英语成绩</a></li>
+			<li><a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fcourse-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect">英语成绩</a></li>
 		</ul>
 		<h3 class="content-box-header bg-gray">
 			<div class="glyph-icon icon-separator transparent menu-toggle">
