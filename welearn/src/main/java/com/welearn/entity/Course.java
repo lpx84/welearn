@@ -1,5 +1,6 @@
 package com.welearn.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bjtu_course",catalog="Hibernate_Many2Many")
+@Table(name="bjtu_course")
 public class Course {
 
 	@Id
@@ -41,16 +42,52 @@ public class Course {
 	@Column(name="teacher_id", columnDefinition="int", nullable=false)
 	private Integer teacherId; //授课老师
 	
+	//课程和老师对应
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="teacher_id",insertable=false,updatable=false)
-	private Teacher teacherEntity;
+	private List<Teacher> teacherList;
+	
+	//课程和学生对应
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<StudentCourse> StudentCourseList;
+	
+	//课程和课程问题
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseProblem> CourseProblemList;
+	
+	//课程和签到任务
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<AttendTask> AttendTaskList;
+	
+	//课程和课程评价
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseComment> CourseCommentList;
+	
+	//课程和课程通知
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseNotify> CourseNotifyList;
+	
+	//课程和课程回复
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseReply> CourseReplyList;
+	
+	//课程和课程回复
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseHomework> CourseHomeworkList;
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	/*@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
             name="bjtu_student_course",
             joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
             inverseJoinColumns=@JoinColumn(name="student_id", referencedColumnName="id")
-    )
+    )*/
 	
 //	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY) 
 //	@JoinTable(name="bjtu_student_course",
@@ -62,16 +99,16 @@ public class Course {
 //			referencedColumnName="id")
 //		}
 //	)
-	private Set<Student> studentList;
+	//private Set<Student> studentList;
 	
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	/*@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
             name="bjtu_time_course",
             joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
             inverseJoinColumns=@JoinColumn(name="time_id", referencedColumnName="id")
-    )
-	private Set<CourseTime> courseTimeList;
+    )*/
+	//private Set<CourseTime> courseTimeList;
 	
 	public Course() {
 		super();

@@ -1,14 +1,18 @@
 package com.welearn.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -49,6 +53,10 @@ public class Student {
 	
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="student_id",insertable=false,updatable=false)
+	private List<StudentCourse> StudentCourseEntityList;
 
 //	@ManyToMany(mappedBy="studentList",cascade=CascadeType.ALL)
 //	private Set<Course> courseList;
