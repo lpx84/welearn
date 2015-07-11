@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: Tracy
-Build-Jdk: 1.8.0_31
-=======
 Built-By: Amose
 Build-Jdk: 1.8.0_40
->>>>>>> 4a16be5c5d527d783f3286c22538f372582fc153
 Created-By: Maven Integration for Eclipse
 
