@@ -118,6 +118,14 @@ public class Admin {
 	public void setRoleEntity(Role roleEntity) {
 		this.roleEntity = roleEntity;
 	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", userName=" + userName + ", pwd=" + pwd
+				+ ", trueName=" + trueName + ", tel=" + tel + ", email="
+				+ email + ", status=" + status + ", roleId=" + roleId
+				+ ", roleEntity=" + roleEntity + "]";
+	}
 	
 	
 }

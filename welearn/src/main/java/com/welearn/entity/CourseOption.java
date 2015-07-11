@@ -2,38 +2,56 @@ package com.welearn.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="bjtu_course_option")
 public class CourseOption {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	/**
+	 * 选项字母编号 ABCD等
+	 */
 	@Column(name="code", columnDefinition="varchar(5)")
 	private String code;
 	
-	@Column(name="content", columnDefinition="varchar(1024)", nullable=false)
-	private String name;
+	/**
+	 * 题目的ID
+	 */
+	@Column(name="problem_id", columnDefinition="int", nullable=false)
+	private Integer problemId;
 	
-	@Column(name="problem_id", columnDefinition="int(11)", nullable=false)
-	private String problemid;
-
+	/**
+	 * 选项内容
+	 */
+	@Column(name="content", columnDefinition="varchar(1024)", nullable=false)
+	private String content;
+	
+	/**
+	 * 所属的问题实体
+	 */
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="problem_id",insertable=false,updatable=false)
+	private CourseProblem problemEntity;
+	
 	public CourseOption() {
 		super();
 	}
-
-	public CourseOption(Integer id, String code, String name, String problemid) {
+	
+	public CourseOption(String code, Integer problemId, String content) {
 		super();
-		this.id = id;
 		this.code = code;
-		this.name = name;
-		this.problemid = problemid;
+		this.problemId = problemId;
+		this.content = content;
 	}
 
 	public Integer getId() {
@@ -52,26 +70,19 @@ public class CourseOption {
 		this.code = code;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getProblemId() {
+		return problemId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProblemId(Integer problemId) {
+		this.problemId = problemId;
 	}
 
-	public String getProblemid() {
-		return problemid;
+	public String getContent() {
+		return content;
 	}
 
-	public void setProblemid(String problemid) {
-		this.problemid = problemid;
+	public void setContent(String content) {
+		this.content = content;
 	}
-
-	@Override
-	public String toString() {
-		return "CourseOption [id=" + id + ", code=" + code + ", name=" + name
-				+ ", problemid=" + problemid + "]";
-	}
-	
 }

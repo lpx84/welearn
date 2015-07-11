@@ -139,5 +139,15 @@ public class AttendRecord {
 	public void setLogTime(Date logTime) {
 		this.logTime = logTime;
 	}
+
+	@Override
+	public String toString() {
+		return "AttendRecord [id=" + id + ", attendTaskId=" + attendTaskId
+				+ ", attendId=" + attendId + ", picUrl=" + picUrl
+				+ ", similarity=" + similarity + ", referenceRes="
+				+ referenceRes + ", logTime=" + logTime + ", status=" + status
+				+ ", attendTaskEntity=" + attendTaskEntity + ", studentEntity="
+				+ studentEntity + "]";
+	}
 	
 }

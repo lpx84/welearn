@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -54,9 +55,18 @@ public class Student {
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="student_id",insertable=false,updatable=false)
-	private List<StudentCourse> StudentCourseEntityList;
+	//课程和中间表对应
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<StudentCourse> StudentCourseList;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseComment> CourseCommentEntityList;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<AttendRecord> AttendRecordEntityList;
 
 //	@ManyToMany(mappedBy="studentList",cascade=CascadeType.ALL)
 //	private Set<Course> courseList;
@@ -159,6 +169,43 @@ public class Student {
 
 	public void setEnrollYear(Integer enrollYear) {
 		this.enrollYear = enrollYear;
+	}
+
+	public List<StudentCourse> getStudentCourseList() {
+		return StudentCourseList;
+	}
+
+	public void setStudentCourseList(List<StudentCourse> studentCourseList) {
+		StudentCourseList = studentCourseList;
+	}
+
+	public List<CourseComment> getCourseCommentEntityList() {
+		return CourseCommentEntityList;
+	}
+
+	public void setCourseCommentEntityList(
+			List<CourseComment> courseCommentEntityList) {
+		CourseCommentEntityList = courseCommentEntityList;
+	}
+
+	public List<AttendRecord> getAttendRecordEntityList() {
+		return AttendRecordEntityList;
+	}
+
+	public void setAttendRecordEntityList(List<AttendRecord> attendRecordEntityList) {
+		AttendRecordEntityList = attendRecordEntityList;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", studentNo=" + studentNo + ", trueName="
+				+ trueName + ", pwd=" + pwd + ", openId=" + openId
+				+ ", fakeId=" + fakeId + ", gender=" + gender + ", avatar="
+				+ avatar + ", tel=" + tel + ", enrollYear=" + enrollYear
+				+ ", status=" + status + ", StudentCourseList="
+				+ StudentCourseList + ", CourseCommentEntityList="
+				+ CourseCommentEntityList + ", AttendRecordEntityList="
+				+ AttendRecordEntityList + "]";
 	}
 	
 }

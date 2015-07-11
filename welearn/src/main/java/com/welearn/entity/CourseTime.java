@@ -6,10 +6,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,19 +23,27 @@ public class CourseTime {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="week_no")
+	@Column(name="section_no", columnDefinition="int(11)")
+	private int sectionNno;
+	
+	@Column(name="week_no", columnDefinition="int(11)")
 	private Integer weekNo;
-	@Column(name="weekday")
+	
+	@Column(name="weekday", columnDefinition="int(11)")
 	private Integer weekday;
 	
-	/**
-	 * 节次
-	 */
-	@Column(name="section_no")
-	private Integer sectionNo;
+	@Column(name="semester", columnDefinition="tinyint")
+	private Integer semester;
 	
-	@ManyToMany(mappedBy="courseTimeList",cascade=CascadeType.ALL)
-	private Set<Course> courseList;
+	@Column(name="course_id", columnDefinition="int(11)")
+	private Integer courseId;
+	
+	@Column(name="year", columnDefinition="int(4)")
+	private Integer year;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="course_id",insertable=false,updatable=false)
+	private Course courseEntity;
 
 	public CourseTime() {
 		
@@ -63,36 +74,60 @@ public class CourseTime {
 		this.weekday = weekday;
 	}
 
-	public Integer getSectionNo() {
-		return sectionNo;
-	}
-
-	public void setSectionNo(Integer sectionNo) {
-		this.sectionNo = sectionNo;
-	}
-
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
-	public Set<Course> getCourseList() {
-		return courseList;
+	public int getSectionNno() {
+		return sectionNno;
 	}
 
-
-
-	public void setCourseList(Set<Course> courseList) {
-		this.courseList = courseList;
+	public void setSectionNno(int sectionNno) {
+		this.sectionNno = sectionNno;
 	}
-	
+
+	public Integer getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Integer semester) {
+		this.semester = semester;
+	}
+
+	public Integer getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Course getCourseEntity() {
+		return courseEntity;
+	}
+
+	public void setCourseEntity(Course courseEntity) {
+		this.courseEntity = courseEntity;
+	}
+
+	@Override
+	public String toString() {
+		return "CourseTime [id=" + id + ", sectionNno=" + sectionNno
+				+ ", weekNo=" + weekNo + ", weekday=" + weekday + ", semester="
+				+ semester + ", courseId=" + courseId + ", year=" + year
+				+ ", courseEntity=" + courseEntity + "]";
+	}
+
 }

@@ -105,6 +105,14 @@ public class CourseNotify {
 	public void setCourseEntity(Course courseEntity) {
 		this.courseEntity = courseEntity;
 	}
+
+	@Override
+	public String toString() {
+		return "CourseNotify [id=" + id + ", title=" + title + ", content="
+				+ content + ", courseId=" + courseId + ", create_time="
+				+ create_time + ", status=" + status + ", courseEntity="
+				+ courseEntity + "]";
+	}
 	
 	
 }
