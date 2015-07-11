@@ -35,7 +35,6 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	public Course queryCourse(int courseid) {
-		// TODO Auto-generated method stub
 		//return courseDao.getCourse(courseid);
 		//这里应该通过学习的接口查询课程,先进行模拟
 		Course course = new Course();
