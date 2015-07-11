@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.welearn.entity.CourseTime;
+import com.welearn.model.CETGrade;
 import com.welearn.model.Course;
 import com.welearn.model.CourseGrade;
 
@@ -38,5 +39,12 @@ public interface CourseService {
 	 * @return
 	 */
 	public Map<String, ArrayList<CourseGrade>> queryCourseGrade(String openid);
+	
+	/**
+	 * 根据openid来查找学生的四六级成绩
+	 * @param openid
+	 * @return
+	 */
+	public ArrayList<CETGrade> queryCETGrade(String openid);
 	
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.welearn.dao.CourseDao;
 import com.welearn.entity.CourseTime;
+import com.welearn.model.CETGrade;
 import com.welearn.model.Course;
 import com.welearn.model.CourseGrade;
 import com.welearn.service.intef.CourseService;
@@ -86,5 +87,41 @@ public class CourseServiceImpl implements CourseService {
         
 		return map;
 	}
+
+	public ArrayList<CETGrade> queryCETGrade(String openid) {
+		ArrayList<CETGrade> list = new ArrayList<CETGrade>();
+		CETGrade grade ;
+		//模拟生成用户的成绩
+		for(int i=0;i<2;i++){
+			grade = new CETGrade();
+			grade.setExamNo("1230112"+i);
+			grade.setListen("120");
+			grade.setName("李鹏翔"+i);
+			grade.setRead("123");
+			grade.setSchool("北京交通大学");
+			grade.setTime("2015-6-20");
+			grade.setTotal("530");
+			grade.setType("英语六级");
+			grade.setWrite("123");
+			list.add(grade);			
+		}
+		for(int i=0;i<2;i++){
+			grade = new CETGrade();
+			grade.setExamNo("1230113"+i);
+			grade.setListen("120");
+			grade.setName("金林荣"+i);
+			grade.setRead("123");
+			grade.setSchool("北京交通大学");
+			grade.setTime("2015-6-20");
+			grade.setTotal("530");
+			grade.setType("英语四级");
+			grade.setWrite("123");
+			list.add(grade);			
+		}		
+		
+		return list;
+	}
+
+
 
 }
