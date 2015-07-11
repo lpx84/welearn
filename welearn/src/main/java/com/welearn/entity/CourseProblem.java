@@ -1,5 +1,7 @@
 package com.welearn.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -52,8 +55,8 @@ public class CourseProblem {
 	/**
 	 * 答案选项的ID
 	 */
-	@Column(name="answer_id", columnDefinition="int")
-	private Integer answerId;
+	@Column(name="answer", columnDefinition="int")
+	private Integer answer;
 	
 	/**
 	 * 状态；0 已被删除  1存在
@@ -61,19 +64,16 @@ public class CourseProblem {
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseOption> courseOptionList;
+	
 	/**
 	 * 所属的课程实体
 	 */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
 	private Course courseEntity;
-	
-	/**
-	 * 题目答案
-	 */
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="answer_id",insertable=false,updatable=false)
-	private ProblemOption answerEntity;
 
 	public CourseProblem() {
 		super();
@@ -137,11 +137,11 @@ public class CourseProblem {
 	}
 
 	public Integer getAnswerId() {
-		return answerId;
+		return answer;
 	}
 
-	public void setAnswerId(Integer answerId) {
-		this.answerId = answerId;
+	public void setAnswerId(Integer answer) {
+		this.answer = answer;
 	}
 
 	public Integer getStatus() {
@@ -160,12 +160,30 @@ public class CourseProblem {
 		this.courseEntity = courseEntity;
 	}
 
-	public ProblemOption getAnswerEntity() {
-		return answerEntity;
+	public Integer getAnswer() {
+		return answer;
 	}
 
-	public void setAnswerEntity(ProblemOption answerEntity) {
-		this.answerEntity = answerEntity;
+	public void setAnswer(Integer answer) {
+		this.answer = answer;
 	}
+
+	public List<CourseOption> getCourseOptionList() {
+		return courseOptionList;
+	}
+
+	public void setCourseOptionList(List<CourseOption> courseOptionList) {
+		this.courseOptionList = courseOptionList;
+	}
+
+	@Override
+	public String toString() {
+		return "CourseProblem [id=" + id + ", displayNo=" + displayNo
+				+ ", content=" + content + ", score=" + score + ", comment="
+				+ comment + ", courseId=" + courseId + ", answer=" + answer
+				+ ", status=" + status + ", courseOptionList="
+				+ courseOptionList + ", courseEntity=" + courseEntity + "]";
+	}
+
 	
 }

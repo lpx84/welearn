@@ -24,7 +24,7 @@ public class SchoolCalender {
 	public SchoolCalender() {
 		super();
 	}
-
+ 
 	public SchoolCalender(String name, String content) {
 		super();
 		this.name = name;

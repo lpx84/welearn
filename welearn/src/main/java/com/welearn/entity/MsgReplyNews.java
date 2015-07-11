@@ -46,7 +46,7 @@ public class MsgReplyNews {
 	public void setIndexId(Integer indexId) {
 		this.indexId = indexId;
 	}
-	
+	 
 	/**
 	 * 得到封装的XML文本
 	 * @param toUser

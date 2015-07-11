@@ -142,5 +142,14 @@ public class CourseComment {
 	public void setLogTime(Date logTime) {
 		this.logTime = logTime;
 	}
+
+
+	@Override
+	public String toString() {
+		return "CourseComment [id=" + id + ", studentId=" + studentId
+				+ ", courseId=" + courseId + ", grade=" + grade + ", content="
+				+ content + ", logTime=" + logTime + ", studentEntity="
+				+ studentEntity + ", courseEntity=" + courseEntity + "]";
+	}
 	
 }

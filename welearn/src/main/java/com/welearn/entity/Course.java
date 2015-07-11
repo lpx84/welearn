@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,12 +25,6 @@ public class Course {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="year", columnDefinition="int(4)")
-	private Integer year;
-	
-	@Column(name="semester", columnDefinition="tinyint(1)")
-	private Integer semester;
-	
 	@Column(name="name", columnDefinition="varchar(100)", nullable=false)
 	private String name; //课程名称
 	
@@ -39,48 +34,45 @@ public class Course {
 	@Column(name="description", columnDefinition="varchar(1024)")
 	private String description;
 	
-	@Column(name="teacher_id", columnDefinition="int", nullable=false)
-	private Integer teacherId; //授课老师
-	
-	//课程和老师对应
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="teacher_id",insertable=false,updatable=false)
-	private List<Teacher> teacherList;
-	
-	//课程和学生对应
-	@ManyToOne(fetch=FetchType.LAZY)
+	//课程和中间表对应
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id",insertable=false,updatable=false)
 	private List<StudentCourse> StudentCourseList;
 	
-	//课程和课程问题
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id",insertable=false,updatable=false)
-	private List<CourseProblem> CourseProblemList;
-	
 	//课程和签到任务
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id",insertable=false,updatable=false)
 	private List<AttendTask> AttendTaskList;
 	
 	//课程和课程评价
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id",insertable=false,updatable=false)
 	private List<CourseComment> CourseCommentList;
 	
+	//课程和课程问题
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseProblem> CourseProblemList;
+	
 	//课程和课程通知
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id",insertable=false,updatable=false)
 	private List<CourseNotify> CourseNotifyList;
 	
 	//课程和课程回复
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id",insertable=false,updatable=false)
 	private List<CourseReply> CourseReplyList;
 	
-	//课程和课程回复
-	@ManyToOne(fetch=FetchType.LAZY)
+	//课程和课程作业
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id",insertable=false,updatable=false)
 	private List<CourseHomework> CourseHomeworkList;
+	
+	//课程和学期
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<CourseTime> CourseTimekList;
 
 	/*@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
@@ -146,52 +138,80 @@ public class Course {
 		this.description = description;
 	}
 
-	public Integer getTeacherId() {
-		return teacherId;
+	public List<StudentCourse> getStudentCourseList() {
+		return StudentCourseList;
 	}
 
-	public void setTeacherId(Integer teacherId) {
-		this.teacherId = teacherId;
+	public void setStudentCourseList(List<StudentCourse> studentCourseList) {
+		StudentCourseList = studentCourseList;
 	}
 
-	public Teacher getTeacherEntity() {
-		return teacherEntity;
+	public List<AttendTask> getAttendTaskList() {
+		return AttendTaskList;
 	}
 
-	public void setTeacherEntity(Teacher teacherEntity) {
-		this.teacherEntity = teacherEntity;
+	public void setAttendTaskList(List<AttendTask> attendTaskList) {
+		AttendTaskList = attendTaskList;
 	}
 
-	public Set<Student> getStudentList() {
-		return studentList;
+	public List<CourseComment> getCourseCommentList() {
+		return CourseCommentList;
 	}
 
-	public void setStudentList(Set<Student> studentList) {
-		this.studentList = studentList;
+	public void setCourseCommentList(List<CourseComment> courseCommentList) {
+		CourseCommentList = courseCommentList;
 	}
 
-	public Integer getYear() {
-		return year;
+	public List<CourseProblem> getCourseProblemList() {
+		return CourseProblemList;
 	}
 
-	public void setYear(Integer year) {
-		this.year = year;
+	public void setCourseProblemList(List<CourseProblem> courseProblemList) {
+		CourseProblemList = courseProblemList;
 	}
 
-	public Integer getSemester() {
-		return semester;
+	public List<CourseNotify> getCourseNotifyList() {
+		return CourseNotifyList;
 	}
 
-	public void setSemester(Integer semester) {
-		this.semester = semester;
+	public void setCourseNotifyList(List<CourseNotify> courseNotifyList) {
+		CourseNotifyList = courseNotifyList;
 	}
 
-	public Set<CourseTime> getCourseTimeList() {
-		return courseTimeList;
+	public List<CourseReply> getCourseReplyList() {
+		return CourseReplyList;
 	}
 
-	public void setCourseTimeList(Set<CourseTime> courseTimeList) {
-		this.courseTimeList = courseTimeList;
+	public void setCourseReplyList(List<CourseReply> courseReplyList) {
+		CourseReplyList = courseReplyList;
+	}
+
+	public List<CourseHomework> getCourseHomeworkList() {
+		return CourseHomeworkList;
+	}
+
+	public void setCourseHomeworkList(List<CourseHomework> courseHomeworkList) {
+		CourseHomeworkList = courseHomeworkList;
+	}
+	
+	public List<CourseTime> getCourseTimekList() {
+		return CourseTimekList;
+	}
+
+	public void setCourseTimekList(List<CourseTime> courseTimekList) {
+		CourseTimekList = courseTimekList;
+	}
+
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", courseNo=" + courseNo
+				+ ", description=" + description + ", StudentCourseList="
+				+ StudentCourseList + ", AttendTaskList=" + AttendTaskList
+				+ ", CourseCommentList=" + CourseCommentList
+				+ ", CourseProblemList=" + CourseProblemList
+				+ ", CourseNotifyList=" + CourseNotifyList
+				+ ", CourseReplyList=" + CourseReplyList
+				+ ", CourseHomeworkList=" + CourseHomeworkList + "]";
 	}
 
 }

@@ -1,10 +1,15 @@
 package com.welearn.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +31,10 @@ public class Role {
 	 */
 	@Column(name="privileges", columnDefinition="varchar(1024)")
 	private String privileges;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<Admin> adminList;
 
 	public Role() {
 		super();
@@ -88,6 +97,21 @@ public class Role {
 			}
 		}
 		return res;
+	}
+
+	public List<Admin> getAdminList() {
+		return adminList;
+	}
+
+	public void setAdminList(List<Admin> adminList) {
+		this.adminList = adminList;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + ", description="
+				+ description + ", privileges=" + privileges + ", adminList="
+				+ adminList + "]";
 	}
 	
 }

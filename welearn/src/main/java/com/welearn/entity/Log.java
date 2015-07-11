@@ -82,4 +82,12 @@ public class Log {
 	public void setLogTime(Date logTime) {
 		this.logTime = logTime;
 	}
+
+	@Override
+	public String toString() {
+		return "Log [id=" + id + ", user=" + user + ", type=" + type
+				+ ", content=" + content + ", logTime=" + logTime + "]";
+	}
+	
+	
 }

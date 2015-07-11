@@ -34,7 +34,7 @@ public class MsgReplyIndex {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+ 
 	public String getKeyword() {
 		return keyword;
 	}

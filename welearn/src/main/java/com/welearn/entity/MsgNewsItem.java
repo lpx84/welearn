@@ -93,7 +93,7 @@ public class MsgNewsItem {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+	 
 	public String getReplyXML() {
 		String r = "<item><Title><![CDATA[";
 		r += title + "]]></Title><Description><![CDATA[";
