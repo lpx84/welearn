@@ -236,7 +236,7 @@ public class QueryPersonalController {
 	 */
 	@RequestMapping("net-flow")
 	public View netFlowDetail(@RequestParam(value = "code") String code) {
-		View view;
+		View view = null;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
 		// 检验用户是否登录

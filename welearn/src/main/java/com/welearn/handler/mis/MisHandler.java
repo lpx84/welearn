@@ -102,7 +102,7 @@ public class MisHandler {
         Document doc = client.responseToDocument(response02, "UTF-8");
         //System.out.println(doc.toString());
         Element res = null;
-        if(null != doc) {
+        if(null != doc || null != doc.getElementsByTag("table")) {
         	res = doc.getElementsByTag("table").get(1); //得到含有数据的div块
         }
 //        System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
