@@ -60,10 +60,6 @@ public class AttendTask {
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
 	private Course courseEntity;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="id",insertable=false,updatable=false)
-	private List<AttendRecord> AttendRecordEntityList;
-	
 	public AttendTask() {}
 
 	public Integer getId() {
@@ -138,22 +134,4 @@ public class AttendTask {
 		this.courseEntity = courseEntity;
 	}
 
-	public List<AttendRecord> getAttendRecordEntityList() {
-		return AttendRecordEntityList;
-	}
-
-	public void setAttendRecordEntityList(List<AttendRecord> attendRecordEntityList) {
-		AttendRecordEntityList = attendRecordEntityList;
-	}
-
-	@Override
-	public String toString() {
-		return "AttendTask [id=" + id + ", name=" + name + ", attendNum="
-				+ attendNum + ", courseId=" + courseId + ", startTime="
-				+ startTime + ", endTime=" + endTime + ", create_time="
-				+ create_time + ", status=" + status + ", courseEntity="
-				+ courseEntity + ", AttendRecordEntityList="
-				+ AttendRecordEntityList + "]";
-	}
-	
 }

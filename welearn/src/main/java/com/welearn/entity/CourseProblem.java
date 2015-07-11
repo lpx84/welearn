@@ -64,10 +64,6 @@ public class CourseProblem {
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="id",insertable=false,updatable=false)
-	private List<CourseOption> courseOptionList;
-	
 	/**
 	 * 所属的课程实体
 	 */
@@ -168,22 +164,4 @@ public class CourseProblem {
 		this.answer = answer;
 	}
 
-	public List<CourseOption> getCourseOptionList() {
-		return courseOptionList;
-	}
-
-	public void setCourseOptionList(List<CourseOption> courseOptionList) {
-		this.courseOptionList = courseOptionList;
-	}
-
-	@Override
-	public String toString() {
-		return "CourseProblem [id=" + id + ", displayNo=" + displayNo
-				+ ", content=" + content + ", score=" + score + ", comment="
-				+ comment + ", courseId=" + courseId + ", answer=" + answer
-				+ ", status=" + status + ", courseOptionList="
-				+ courseOptionList + ", courseEntity=" + courseEntity + "]";
-	}
-
-	
 }
