@@ -8,8 +8,10 @@ import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.welearn.util.MyHttpClient;
@@ -46,14 +48,13 @@ public class MisHandler {
 	 * @throws IOException 
 	 * @throws ParseException 
 	 */
-	public String getNetFlowDetail(String stuNo, String pwd) throws ParseException, IOException {
+	public Element getNetFlowDetail(String stuNo, String pwd) throws ParseException, IOException {
 		
 		String checkCode = "";
 		
 		
-		RequestHeader rh = new RequestHeader(this.host + "/nav_login");
-		//rh.setReferer("");
 		MyHttpClient client = MyHttpClient.getInstance();
+		RequestHeader rh = new RequestHeader(this.host + "/nav_login");
 		
 		Document loginDoc = client.responseToDocument(client.doHttpGet(rh, null),"utf-8");
 		
@@ -66,42 +67,46 @@ public class MisHandler {
 		if(m.find()) {
 			String str = m.group(0);
 			checkCode = str.substring(11,str.length()-1);
-			System.out.println(checkCode);
+			//System.out.println(checkCode);
 		}
 		
+		rh = new RequestHeader(this.host + "/RandomCodeAction.action");
+		client.responseToDocument(client.doHttpGet(rh, null),"utf-8");
+		
 		rh = new RequestHeader(this.host + "/LoginAction.action");
-		rh.setCookie(client.getCookies().toString());
+		//System.out.println(client.getStrCookie());
+		
+		rh.setCookie(client.getStrCookie());
 		rh.setHost("service.bjtu.edu.cn");
 		rh.setProperty("Origin", host);
 		rh.setReferer(this.host + "/nav_login");
-		
+		rh.setProperty("Content-Type", "application/x-www-form-urlencoded");
 		Map<String, Object> params01 = new HashMap<String, Object>();
         params01.put("account", stuNo);
         params01.put("password", pwd);
         params01.put("code", "");
         params01.put("checkcode", checkCode);
-        params01.put("Submit", "登 录");
+        params01.put("Submit", "登+录");
         
 		HttpResponse response00= client.doHttpPost(rh,params01);
-        System.out.println(client.responseToDocument(response00,"utf-8").toString());
-        
-        String cookie = client.getCookies().toString();
+        //System.out.println(client.responseToDocument(response00,"utf-8").toString());
+		EntityUtils.toString(response00.getEntity(), "utf-8");
+
         
         rh = new RequestHeader(this.host + "/nav_getUserInfo");
-        rh.setCookie(cookie);
+        rh.setCookie(client.getStrCookie());
         rh.setReferer(this.host + "/LoginAction.action");
         HttpResponse response02= client.doHttpGet(rh,null);
         
-        //EntityUtils.toString(response02.getEntity(), "utf-8");
         
         Document doc = client.responseToDocument(response02, "UTF-8");
         //System.out.println(doc.toString());
-        String res = null;
+        Element res = null;
         if(null != doc) {
-        	res = doc.attr("class","tabcontent").toString(); //得到含有数据的div块
+        	res = doc.getElementsByTag("table").get(1); //得到含有数据的div块
         }
-        System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println(res);
+//        System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//        System.out.println(res);
         return res;
 	}
 	

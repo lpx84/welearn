@@ -26,8 +26,6 @@ import org.jsoup.nodes.Document;
 
 public class MyHttpClient {
 	
-	
-	
 	//HttpClient
 	private volatile static AbstractHttpClient client = new DefaultHttpClient();
 	private volatile static MyHttpClient instance;
@@ -36,7 +34,17 @@ public class MyHttpClient {
 		return client.getCookieStore().getCookies();
 	}
 	
-	private  MyHttpClient() {}
+	public String getStrCookie() {
+		String cookie = "";
+		for(Cookie c : client.getCookieStore().getCookies()) {
+        	cookie += c.getName()+"="+c.getValue()+";";
+        }
+		return cookie;
+	}
+	
+	private  MyHttpClient() {
+		
+	}
 	
 	public static MyHttpClient getInstance() {
 		if(instance == null) {
@@ -107,7 +115,7 @@ public class MyHttpClient {
 			response = client.execute(post);
 			//response.getEntity();
 			//doc = responseToDocument(response);
-			
+
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
