@@ -134,34 +134,13 @@ public class QueryPersonalController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
         }
-
+        
 		//返回课程成绩
 		view = new View("student", "query-private", "grade-course", "课程成绩");
 		view.addObject("gradeInfo", gradeInfo);
 		return view;
 	}
 
-//	/**
-//	 * 
-//	 * @param year
-//	 *            学年
-//	 * @param semester
-//	 *            学年的上下学期，用1，2表示
-//	 * @return
-//	 */
-//	@RequestMapping("semester-grade/semester")
-//	@Authentication()
-//	public String semesterGrade(@RequestParam(value = "year") Integer year,
-//			@RequestParam(value = "semester") Integer semester) {
-//
-//		// 用一个类 验证呢身份
-//		// 如果false
-//
-//		// return new InfoView();
-//
-//		//
-//		return null;
-//	}
 
 	/**
 	 * 一卡通自助查询 返回一卡通的基本信息
