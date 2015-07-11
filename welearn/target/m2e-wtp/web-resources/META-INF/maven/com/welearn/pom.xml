@@ -37,15 +37,15 @@
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aes-jre1.6.jar</systemPath>  
 	</dependency>
 	<dependency>
-	    <groupId>com.httpclient</groupId>  
-	    <artifactId>client</artifactId>
-	    <version>1.0</version>
+	    <groupId>org.apache.commons</groupId>  
+	    <artifactId>codec</artifactId>
+	    <version>1.6</version>
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-codec-1.6.jar</systemPath>  
 	</dependency>
 	<dependency>
-	    <groupId>com.httpclient</groupId>  
-	    <artifactId>client</artifactId>
+	    <groupId>org.apache.commons</groupId>  
+	    <artifactId>logging</artifactId>
 	    <version>1.0</version>
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-logging-1.1.1.jar</systemPath>  
@@ -53,16 +53,23 @@
 	<dependency>
 	    <groupId>com.httpclient</groupId>  
 	    <artifactId>client</artifactId>
-	    <version>1.0</version>
+	    <version>4.2.5</version>
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/fluent-hc-4.2.5.jar</systemPath>  
 	</dependency>
 	<dependency>
 	    <groupId>com.httpclient</groupId>  
 	    <artifactId>client</artifactId>
-	    <version>1.0</version>
+	    <version>4.2.5</version>
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/httpmime-4.2.5.jar</systemPath>  
+	</dependency>
+	<dependency>
+	    <groupId>org.jsoup</groupId>  
+	    <artifactId>jsoup</artifactId>
+	    <version>1.7.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jsoup-1.7.2.jar</systemPath>  
 	</dependency>
 	
     <dependency>
