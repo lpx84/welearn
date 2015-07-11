@@ -14,12 +14,11 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public boolean checkBindByOpenId(String openid) {
-//		Student student = studentDao.getStudentByOpenID(openid);
-//		//学生不存在，或者查出来的学号为空
-//		if(student == null || student.getStudentNo() == null){
-//			return false;
-//		}
-				
+		Student student = studentDao.getStudentByOpenID(openid);
+		//学生不存在，或者查出来的学号为空,则返回false,否则返回true		
+		if(student == null){			
+			return false;
+		}
 		return true;
 	}
 	
@@ -32,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
 		}
 		//用户没有绑定账户，则跳转至绑定页面
 		if(!checkBindByOpenId(openid)){			
-			View view = new View("student","user-course","bind","绑定用户账户");
+			View view = new View("student","account","bind","绑定用户账户");
 			view.addObject("openid", openid);
 			return view;
 		}
