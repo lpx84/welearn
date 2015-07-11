@@ -84,18 +84,27 @@ public class QueryPersonalController {
 	}
 
 	/**
-	 * 查看考试时间
+	 * 查看考试安排
 	 * 
 	 * @param code
 	 * @return
 	 */
 	@RequestMapping("exam-plan")
 	public View examPlan(@RequestParam(value = "code") String code) {
-		// 用于检验用户是否登录
 		View view;
+		// 创建微信服务类根据code获取 openId
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {
+			return view;
+		}
+		
+		
 
 		view = new View("student", "query-private", "exam-plan", "考试安排");
-		ExamPlan examPlan = new ExamPlan(null);
+		ExamPlan examPlan = new ExamPlan();
 
 		view.addObject("list", null);
 		return view;

@@ -1,27 +1,24 @@
 package com.welearn.model;
-
+/**
+ * 这个类是用于考试安排的显示
+ * @author SikentKim
+ *
+ */
 public class ExamPlan {
 
-	private Semester semester;
-	
-	private String name;
-	
-	private String section; //校区
-	
-	private String building;
-	
-	private String classRoom;
-	
-	private String examNo; //准考证号
-	
-	private String startTime;
-	
-	private String endTime;
+	private String name;//课程名
 
-	public ExamPlan(String jsonStr) {
-		//把json转换成属性
-	}
-	
+	private String section; // 校区
+
+	private String building;//教学楼
+
+	private String classRoom; //教室
+
+	private String examNo; // 准考证号
+
+	private String time;//考试时间
+
+
 	public String getSection() {
 		return section;
 	}
@@ -54,21 +51,7 @@ public class ExamPlan {
 		this.examNo = examNo;
 	}
 
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
+	
 
 	public String getName() {
 		return name;
@@ -78,12 +61,12 @@ public class ExamPlan {
 		this.name = name;
 	}
 
-	public Semester getSemester() {
-		return semester;
+	public String getTime() {
+		return time;
 	}
 
-	public void setSemester(Semester semester) {
-		this.semester = semester;
+	public void setTime(String time) {
+		this.time = time;
 	}
-	
+
 }
