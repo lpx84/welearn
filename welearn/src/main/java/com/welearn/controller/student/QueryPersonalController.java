@@ -127,17 +127,17 @@ public class QueryPersonalController {
 			return view;
 		}
 		//获取课程成绩的信息，以json的字符串形式获取
-        String gradeInfo= courseService.queryCourseGrade(openid);
-        //
-        if(gradeInfo == null){
-			view = new View("error","wechat","info","未找到相应信息。");
-			view.addObject("info", "未找到相应信息。");
-			return view;
-        }
+//        String gradeInfo= courseService.queryCourseGrade(openid);
+//        //
+//        if(gradeInfo == null){
+//			view = new View("error","wechat","info","未找到相应信息。");
+//			view.addObject("info", "未找到相应信息。");
+//			return view;
+//        }
         
 		//返回课程成绩
 		view = new View("student", "query-private", "grade-course", "课程成绩");
-		view.addObject("gradeInfo", gradeInfo);
+	//	view.addObject("gradeInfo", gradeInfo);
 		return view;
 	}
 

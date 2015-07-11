@@ -128,18 +128,7 @@
                     </c:choose>
     	            </c:forEach>                                   
                 </tr>
-    	    </c:forEach> 
-<!--             <tr class="building-yf">
-                <td class="building-name">逸夫楼</td>
-                <td class="room-name">YF106</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-borrow">借用</td>
-                <td class="room-cell room-inclass">有课</td>
-                <td class="room-cell room-empty">空</td>
-                <td class="room-cell room-empty">空</td>
-            </tr> -->            
+    	    </c:forEach>         
         </tbody>
     </table>
 </div>
