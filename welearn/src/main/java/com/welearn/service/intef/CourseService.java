@@ -1,10 +1,12 @@
 package com.welearn.service.intef;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.welearn.entity.CourseTime;
 import com.welearn.model.Course;
+import com.welearn.model.CourseGrade;
 
 public interface CourseService {
 
@@ -29,5 +31,12 @@ public interface CourseService {
 	 * @return
 	 */
 	public Course queryCourse(int courseid);
+	
+	/**
+	 * 根据openid来查找学生的课程成绩
+	 * @param openid
+	 * @return
+	 */
+	public Map<String, ArrayList<CourseGrade>> queryCourseGrade(String openid);
 	
 }

@@ -13,7 +13,7 @@ import com.welearn.util.TimeUtil;
 @Table(name="wx_msg_reply_text")
 public class MsgReplyText {
 
-	@Id
+	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	

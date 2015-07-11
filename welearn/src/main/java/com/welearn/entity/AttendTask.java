@@ -1,6 +1,7 @@
 package com.welearn.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -57,6 +59,10 @@ public class AttendTask {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
 	private Course courseEntity;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<AttendRecord> AttendRecordEntityList;
 	
 	public AttendTask() {}
 
@@ -130,6 +136,24 @@ public class AttendTask {
 
 	public void setCourseEntity(Course courseEntity) {
 		this.courseEntity = courseEntity;
+	}
+
+	public List<AttendRecord> getAttendRecordEntityList() {
+		return AttendRecordEntityList;
+	}
+
+	public void setAttendRecordEntityList(List<AttendRecord> attendRecordEntityList) {
+		AttendRecordEntityList = attendRecordEntityList;
+	}
+
+	@Override
+	public String toString() {
+		return "AttendTask [id=" + id + ", name=" + name + ", attendNum="
+				+ attendNum + ", courseId=" + courseId + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", create_time="
+				+ create_time + ", status=" + status + ", courseEntity="
+				+ courseEntity + ", AttendRecordEntityList="
+				+ AttendRecordEntityList + "]";
 	}
 	
 }

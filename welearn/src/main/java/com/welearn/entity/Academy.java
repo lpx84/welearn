@@ -1,10 +1,15 @@
 package com.welearn.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +34,10 @@ public class Academy {
 	
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id",insertable=false,updatable=false)
+	private List<Teacher> TeacherEntityList;
 	
 	public Academy() {}
 
@@ -78,6 +87,21 @@ public class Academy {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public List<Teacher> getTeacherEntityList() {
+		return TeacherEntityList;
+	}
+
+	public void setTeacherEntityList(List<Teacher> teacherEntityList) {
+		TeacherEntityList = teacherEntityList;
+	}
+
+	@Override
+	public String toString() {
+		return "Academy [id=" + id + ", name=" + name + ", dean=" + dean
+				+ ", tel=" + tel + ", comment=" + comment + ", status="
+				+ status + ", TeacherEntityList=" + TeacherEntityList + "]";
 	}
 	
 	

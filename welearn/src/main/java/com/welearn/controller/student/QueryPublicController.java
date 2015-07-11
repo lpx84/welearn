@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONObject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +18,7 @@ import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
-import com.welearn.util.HttpUtil;
 import com.welearn.util.TimeUtil;
-import com.welearn.util.WechatConfig;
 import com.welearn.view.View;
 
 @Controller
@@ -72,7 +68,6 @@ public class QueryPublicController {
 
 		return view;
 	}
-
 
 	/**
 	 * 查询校历
@@ -131,12 +126,18 @@ public class QueryPublicController {
 	@Authentication()
 	public View schoolCourseDetail(
 			@RequestParam(value = "courseid") int courseid) {
-
+		View view;
 		// 用课程服务类查询具体的课程信息
 		Course course = courseService.queryCourse(courseid);
-		View view = new View("student", "query-public", "school-course-detail",
-				course.getName());
-		view.addObject("course", course);
+		if(course == null){
+			view = new View("error","wechat","info","课程不存在！");
+			view.addObject("info", "课程不存在！");
+		}else{
+			view = new View("student", "query-public", "school-course-detail",
+					course.getName());
+			view.addObject("course", course);
+		}		
+		
 		return view;
 	}
 

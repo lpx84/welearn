@@ -196,5 +196,16 @@ public class Teacher {
 	public void setAcademyEntity(Academy academyEntity) {
 		this.academyEntity = academyEntity;
 	}
+
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", userName=" + userName + ", trueName="
+				+ trueName + ", pwd=" + pwd + ", openId=" + openId
+				+ ", fakeId=" + fakeId + ", gender=" + gender + ", avatar="
+				+ avatar + ", academyId=" + academyId + ", birth=" + birth
+				+ ", title=" + title + ", description=" + description
+				+ ", tel=" + tel + ", email=" + email + ", status=" + status
+				+ ", academyEntity=" + academyEntity + "]";
+	}
 	
 }

@@ -122,5 +122,13 @@ public class CourseReply {
 	public void setCourseEntity(Course courseEntity) {
 		this.courseEntity = courseEntity;
 	}
+
+	@Override
+	public String toString() {
+		return "CourseReply [id=" + id + ", replyor=" + replyor + ", courseId="
+				+ courseId + ", content=" + content + ", type=" + type
+				+ ", reply_time=" + reply_time + ", status=" + status
+				+ ", courseEntity=" + courseEntity + "]";
+	}
 	
 }
