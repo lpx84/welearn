@@ -35,7 +35,6 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	public Course queryCourse(int courseid) {
-		// TODO Auto-generated method stub
 		//return courseDao.getCourse(courseid);
 		//这里应该通过学习的接口查询课程,先进行模拟
 		Course course = new Course();
@@ -45,10 +44,14 @@ public class CourseServiceImpl implements CourseService {
 		course.setPlace("逸夫楼 yf104");
 		course.setSchool("软件学院");
 		course.setTeacher("张红延");
-		course.setTime("1-16周 周一第4节");
-		
+		course.setTime("1-16周 周一第4节");		
 		
 		return course;
+	}
+
+	public String queryCourseGrade(String openid) {
+		
+		return null;
 	}
 
 

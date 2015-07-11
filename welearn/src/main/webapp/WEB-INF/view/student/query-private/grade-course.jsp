@@ -35,7 +35,6 @@
 <body>
 <div class="content-box">
     <ul class="menu-float" style="display: none;">
-        <li><a href="grade-course.html">课程成绩</a></li>
         <li><a href="grade-english.html">英语成绩</a></li>
     </ul>
     <h3 class="content-box-header bg-gray">
@@ -48,29 +47,18 @@
         </div>
     </h3>
     <div class="">
-<!--
-        <ul class="content-list">
-            <li>
-                <span>2014-2015第二学期</span>
-                <div class="glyph-icon icon-separator transparent float-right">
-                    <i class="glyph-icon icon-chevron-right"></i>
-                </div>
-                <ul class="ul-inner">
-                    <li>【专业课】软件系统分析与设计技术 2学分 A</li>
-                </ul>
-            </li>
-        </ul>
--->
         <div class="profile-box content-box">
             <div class="nav-list">
                 <ul>
-                    <li>
-                        <a href="javascript:;" title="">
+                
+                
+                    <li id="rcd342">
+                        <a href="javascript:;" class="grade-toggle" title=""  data-id="342">
                             <i class="glyph-icon font-purple icon-time"></i>
                             2014-2015学年第二学期
                             <i class="glyph-icon icon-chevron-right float-right"></i>
                         </a>
-                        <ul class="ul-inner">
+                        <ul class="ul-inner" style="display: none;">
                             <li class="row">
                                 <div class="col-xs-8">【专业课】软件系统分析与设计技术</div>
                                 <div class="col-xs-2">2学分</div>
@@ -78,7 +66,9 @@
                             </li>
                         </ul>
                     </li>
-                    
+
+
+
                 </ul>
             </div>
         </div>
