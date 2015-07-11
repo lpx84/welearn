@@ -35,10 +35,6 @@ public class Academy {
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="id",insertable=false,updatable=false)
-	private List<Teacher> TeacherEntityList;
-	
 	public Academy() {}
 
 	public Integer getId() {
@@ -89,20 +85,4 @@ public class Academy {
 		this.status = status;
 	}
 
-	public List<Teacher> getTeacherEntityList() {
-		return TeacherEntityList;
-	}
-
-	public void setTeacherEntityList(List<Teacher> teacherEntityList) {
-		TeacherEntityList = teacherEntityList;
-	}
-
-	@Override
-	public String toString() {
-		return "Academy [id=" + id + ", name=" + name + ", dean=" + dean
-				+ ", tel=" + tel + ", comment=" + comment + ", status="
-				+ status + ", TeacherEntityList=" + TeacherEntityList + "]";
-	}
-	
-	
 }
