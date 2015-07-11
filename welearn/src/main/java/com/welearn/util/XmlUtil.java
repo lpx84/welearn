@@ -27,7 +27,11 @@ public class XmlUtil {
 		item.setDescription("欢迎关注北京交通大学微信教学平台，请绑定学号以获得更好的服务！");
 		item.setPicUrl(ConstantsConfig.hostName + "/datafile/file/img/welcome-cover.png");
 		item.setTitle("北京交通大学微信教学平台");
-		item.setUrl(ConstantsConfig.hostName + "/welearn/student/account/bind"); //绑定学号的URL
+		String welcomeUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
+				+ WechatConfig.appId 
+				+ "&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2F"
+				+ "welearn%2Fstudent%2Faccount%2Fbind&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+		item.setUrl(welcomeUrl); //绑定学号的URL
 		items.add(item);
 		return news.getReplyXML(toUser, fromUser, items);
 	}

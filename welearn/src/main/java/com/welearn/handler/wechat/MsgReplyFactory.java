@@ -70,10 +70,10 @@ public class MsgReplyFactory {
 			//当触发事件时处理代码
 			MsgReceiveEvent event = (MsgReceiveEvent)msg;
 			if("subscribe".equals(event.getEvent())) { //订阅
-				Student s = studentService.getStudentByOpenId(event.getFromUserName());
-				s.setStatus(InfoCode.STUDENT_SUBSCRIBED);
-				studentService.updateStudent(s);
-				return "subscribe";
+//				Student s = studentService.getStudentByOpenId(event.getFromUserName());
+//				s.setStatus(InfoCode.STUDENT_SUBSCRIBED);
+//				studentService.updateStudent(s);
+				return XmlUtil.getWelcomeReplyMsg(event.getFromUserName(), event.getToUserName());
 			} else if("unsubscribe".equals(event.getEvent())) { //取消订阅
 				return "unsubscribe";
 			} else {
