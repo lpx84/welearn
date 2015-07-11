@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.entity.Student;
 import com.welearn.service.intef.StudentService;
@@ -51,12 +52,20 @@ public class StudentController {
 				s.setOpenId(openId);
 				s.setStatus(InfoCode.STUDENT_BINDED);
 				studentService.updateStudent(s);
-				return new InfoView("绑定学号成功，请关闭本页面！");
+				return new InfoView("绑定学号成功，请关闭本页面，体验其他操作！");
 			} else {
-				return new InfoView("系统未知错误！");
+				return new InfoView("密码错误，请返回重新输入！");
 			}
 			
 		}
 		
 	}
+	
+//	@RequestMapping("test")
+//	@ResponseBody
+//	public String test() {
+//		Student s = studentService.getStudentByStudentNo("12301124");
+//		return s.getTrueName();
+//	}
+	
 }
