@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
 import com.welearn.model.ExamPlan;
+import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.view.View;
@@ -20,7 +21,8 @@ public class QueryPersonalController {
 	WechatMsgService wechatMsgService;
 	@Resource(name = "studentService")
 	StudentService studentService;
-
+	@Resource(name = "courseService")
+	CourseService courseService;
 	/**
 	 * 查看当前课表
 	 * 
@@ -108,47 +110,58 @@ public class QueryPersonalController {
 	}
 
 	/**
-	 * 查看各个学期的考试成绩
+	 * 查看各个学期的课程成绩
 	 * 
 	 * @param code
 	 * @return
 	 */
 	@RequestMapping("semester-grade")
 	public View semesterGrade(@RequestParam(value = "code") String code) {
+		View view;
+		// 创建微信服务类根据code获取openid
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {			
+			return view;
+		}
+		//获取课程成绩的信息，以json的字符串形式获取
+        String gradeInfo= courseService.queryCourseGrade(openid);
+        //
+        if(gradeInfo == null){
+			view = new View("error","wechat","info","未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+        }
 
-		// 用一个类 验证呢身份
-		// 如果false
-
-		// return new InfoView();
-
-		// 用当前学期
-		// 返回学期列表
-		View view = new View("student", "public", "empty-room", "空教室");
-		view.addObject("list", null);
+		//返回课程成绩
+		view = new View("student", "query-private", "grade-course", "课程成绩");
+		view.addObject("gradeInfo", gradeInfo);
 		return view;
 	}
 
-	/**
-	 * 
-	 * @param year
-	 *            学年
-	 * @param semester
-	 *            学年的上下学期，用1，2表示
-	 * @return
-	 */
-	@RequestMapping("semester-grade/semester")
-	@Authentication()
-	public String semesterGrade(@RequestParam(value = "year") Integer year,
-			@RequestParam(value = "semester") Integer semester) {
-
-		// 用一个类 验证呢身份
-		// 如果false
-
-		// return new InfoView();
-
-		//
-		return null;
-	}
+//	/**
+//	 * 
+//	 * @param year
+//	 *            学年
+//	 * @param semester
+//	 *            学年的上下学期，用1，2表示
+//	 * @return
+//	 */
+//	@RequestMapping("semester-grade/semester")
+//	@Authentication()
+//	public String semesterGrade(@RequestParam(value = "year") Integer year,
+//			@RequestParam(value = "semester") Integer semester) {
+//
+//		// 用一个类 验证呢身份
+//		// 如果false
+//
+//		// return new InfoView();
+//
+//		//
+//		return null;
+//	}
 
 	/**
 	 * 一卡通自助查询 返回一卡通的基本信息

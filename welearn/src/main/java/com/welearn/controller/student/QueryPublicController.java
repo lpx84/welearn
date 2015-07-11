@@ -69,7 +69,6 @@ public class QueryPublicController {
 		return view;
 	}
 
-
 	/**
 	 * 查询校历
 	 * 
