@@ -52,11 +52,38 @@ public class CourseServiceImpl implements CourseService {
 
 		return course;
 	}
-
+    //根据openid获取该同学各门课的成绩
 	public Map<String, ArrayList<CourseGrade>> queryCourseGrade(String openid) {
+		//新建一个Map对象来获取用户的成绩
 		Map<String, ArrayList<CourseGrade>> map = new HashMap<String, ArrayList<CourseGrade>>();
-		CourseGrade grade = new CourseGrade();
-
+		//模拟生成用户的成绩
+		CourseGrade grade;
+        ArrayList<CourseGrade> list = new ArrayList<CourseGrade>();
+        
+        for(int i=0;i<5;i++){
+        	grade = new CourseGrade();
+        	grade.setCredit("2学分");
+        	grade.setGrade("A");
+        	grade.setName("系统分析"+i);
+        	grade.setSemester("2014-2015学年第二学期");
+        	grade.setType("专业课");
+        	list.add(grade);        	
+        }
+        map.put("2014-2015学年第二学期", list);
+        
+        
+        list = new ArrayList<CourseGrade>();        
+        for(int i=0;i<5;i++){
+        	grade = new CourseGrade();
+        	grade.setCredit("2学分");
+        	grade.setGrade("A");
+        	grade.setName("系统分析"+i);
+        	grade.setSemester("2014-2015学年第一学期");
+        	grade.setType("专业课");
+        	list.add(grade);        	
+        }
+        map.put("2014-2015学年第一学期", list);
+        
 		return map;
 	}
 

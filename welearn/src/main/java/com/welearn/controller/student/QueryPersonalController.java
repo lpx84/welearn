@@ -1,5 +1,8 @@
 package com.welearn.controller.student;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.StudentService;
@@ -115,10 +119,10 @@ public class QueryPersonalController {
 	 * @param code
 	 * @return
 	 */
-	@RequestMapping("semester-grade")
-	public View semesterGrade(@RequestParam(value = "code") String code) {
+	@RequestMapping("course-grade")
+	public View courseGrade(@RequestParam(value = "code") String code) {
 		View view;
-		// 创建微信服务类根据code获取openid
+		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
@@ -126,18 +130,17 @@ public class QueryPersonalController {
 		if (view != null) {			
 			return view;
 		}
-		//获取课程成绩的信息，以json的字符串形式获取
-//        String gradeInfo= courseService.queryCourseGrade(openid);
-//        //
-//        if(gradeInfo == null){
-//			view = new View("error","wechat","info","未找到相应信息。");
-//			view.addObject("info", "未找到相应信息。");
-//			return view;
-//        }
-        
-		//返回课程成绩
+		//获取课程成绩的信息，以map的形式存储
+		Map<String, ArrayList<CourseGrade>> map = courseService.queryCourseGrade(openid);
+		if(map.isEmpty()){
+			view = new View("error","wechat","info","未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+		}
+        System.out.println(map.toString());
+        //返回课程成绩
 		view = new View("student", "query-private", "grade-course", "课程成绩");
-	//	view.addObject("gradeInfo", gradeInfo);
+		view.addObject("gradeMap", map);
 		return view;
 	}
 
