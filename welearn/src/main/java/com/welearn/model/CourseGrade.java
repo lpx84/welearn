@@ -53,4 +53,12 @@ public class CourseGrade {
 		this.grade = grade;
 	}
 
+	@Override
+	public String toString() {
+		return "CourseGrade [semester=" + semester + ", type=" + type
+				+ ", name=" + name + ", credit=" + credit + ", grade=" + grade
+				+ "]";
+	}
+	
+
 }
