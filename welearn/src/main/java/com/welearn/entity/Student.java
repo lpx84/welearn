@@ -50,8 +50,8 @@ public class Student {
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 
-	@ManyToMany(mappedBy="studentList",cascade=CascadeType.ALL)
-	private Set<Course> courseList;
+//	@ManyToMany(mappedBy="studentList",cascade=CascadeType.ALL)
+//	private Set<Course> courseList;
 	
 	public Student() {
 		super();
@@ -137,13 +137,13 @@ public class Student {
 		this.status = status;
 	}
 
-	public Set<Course> getCourseList() {
-		return courseList;
-	}
-
-	public void setCourseList(Set<Course> courseList) {
-		this.courseList = courseList;
-	}
+//	public Set<Course> getCourseList() {
+//		return courseList;
+//	}
+//
+//	public void setCourseList(Set<Course> courseList) {
+//		this.courseList = courseList;
+//	}
 
 	public Integer getEnrollYear() {
 		return enrollYear;
