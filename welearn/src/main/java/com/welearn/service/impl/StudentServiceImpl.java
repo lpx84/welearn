@@ -2,6 +2,7 @@ package com.welearn.service.impl;
 
 import com.welearn.dao.StudentDao;
 import com.welearn.entity.Student;
+import com.welearn.model.NetFlow;
 import com.welearn.service.intef.StudentService;
 import com.welearn.view.View;
 
@@ -48,7 +49,18 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public Student getStudentByStudentNo(String studentNo) {
-		// TODO Auto-generated method stub
 		return studentDao.getStudentByStudentNo(studentNo);
+	}
+
+	public NetFlow getNetFlow(String openid) {
+		//模拟生成用户的流量使用情况
+		NetFlow netFlow = new NetFlow();
+		netFlow.setBalance("1.24");
+		netFlow.setExtraFee("0.00");
+		netFlow.setFlow("1850.42");
+		netFlow.setRestFlow("18593.44");
+		netFlow.setTime("6965");
+		
+		return netFlow;
 	}
 }

@@ -14,6 +14,7 @@ import com.welearn.aop.Authentication;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
+import com.welearn.model.NetFlow;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
@@ -100,8 +101,8 @@ public class QueryPersonalController {
 		if (view != null) {
 			return view;
 		}
-		
-		//获取考试安排
+
+		// 获取考试安排
 		ArrayList<ExamPlan> list = courseService.queryExamPlan(openid);
 		view = new View("student", "query-private", "exam-plan", "考试安排");
 		view.addObject("list", list);
@@ -233,16 +234,23 @@ public class QueryPersonalController {
 	 * @param code
 	 * @return
 	 */
-	@RequestMapping("net-flow/detail")
+	@RequestMapping("net-flow")
 	public View netFlowDetail(@RequestParam(value = "code") String code) {
-
-		// 用一个类 验证呢身份
-		// 如果false
-
-		// return new InfoView();
-
-		//
-		return null;
+		View view;
+		// 创建微信服务类根据code获取 openId
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {
+			return view;
+		}
+        //获取当月流量
+		NetFlow netFlow = studentService.getNetFlow(openid);
+		//生成当月流量显示页面并显示
+		view = new View("student", "query-private", "net-flow", "本月流量");
+		view.addObject("netFlow", netFlow);
+		return view;
 	}
 
 }
