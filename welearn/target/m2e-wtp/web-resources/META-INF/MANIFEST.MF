@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: Amose
-Build-Jdk: 1.8.0_40
-=======
 Built-By: SikentKim
 Build-Jdk: 1.8.0_31
->>>>>>> 22ae7cbc13e7c9f284fa0ac242adc685a9b94af3
 Created-By: Maven Integration for Eclipse
 

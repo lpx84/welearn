@@ -18,7 +18,6 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	// 数据库操作对象
 	private MsgReplyIndexDao msgReplyIndexDao;
 
-
 	public void setMsgReplyIndexDao(MsgReplyIndexDao msgReplyIndexDao) {
 		this.msgReplyIndexDao = msgReplyIndexDao;
 	}
@@ -47,43 +46,38 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	}
 
 	/**
+	 * 微信请求返回的格式说明 
+	 * {
+	 *  "access_token":"ACCESS_TOKEN", 
+	 * "expires_in":7200,
+	 * "refresh_token":"REFRESH_TOKEN", 
+	 * "openid":"OPENID", 
+	 * "scope":"SCOPE",
+	 * "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL" 
+	 * }
 	 * 根据code获取用户的openid，如果code不存在或者非法，则返回illegal
 	 */
 	public String getOpenIdByCode(String code) {
-		// 获取用户access_token的url
-		String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-				+ "appid=" + WechatConfig.appId
-				+ "&secret=" + WechatConfig.appsecret 
-				+ "&code=" + code
-				+ "&grant_type=authorization_code";
-		//替换对应的字符串
-//		get_access_token_url = get_access_token_url.replace("APPID",
-//				WechatConfig.appId);
-//		get_access_token_url = get_access_token_url.replace("SECRET",
-//				WechatConfig.appsecret);
-//		get_access_token_url = get_access_token_url.replace("CODE", code);
-		String json = HttpUtil.getUrl(get_access_token_url);
-		System.out.println(json);
-		JSONObject jsonObject = JSONObject.fromObject(json);
-		String openid = "illegal";
-		try {
-			openid = jsonObject.getString("openid");
-		} catch (Exception e) {
-			System.err.println(e.toString());
-		}
-
-		return openid;
-		
-//		return格式说明
-//		{
-//		   "access_token":"ACCESS_TOKEN",
-//		   "expires_in":7200,
-//		   "refresh_token":"REFRESH_TOKEN",
-//		   "openid":"OPENID",
-//		   "scope":"SCOPE",
-//		   "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
-//		}
-		
+		// // 获取用户access_token的url
+		// String get_access_token_url =
+		// "https://api.weixin.qq.com/sns/oauth2/access_token?"
+		// + "appid=" + WechatConfig.appId
+		// + "&secret=" + WechatConfig.appsecret
+		// + "&code=" + code
+		// + "&grant_type=authorization_code";
+		// //向微信发送请求，获取openid
+		// String json = HttpUtil.getUrl(get_access_token_url);
+		// System.out.println(json);
+		// JSONObject jsonObject = JSONObject.fromObject(json);
+		// String openid = "illegal";
+		// try {
+		// openid = jsonObject.getString("openid");
+		// } catch (Exception e) {
+		// System.err.println(e.toString());
+		// }
+		//
+		// return openid;
+        return code;
 	}
 
 }
