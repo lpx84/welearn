@@ -127,4 +127,14 @@ public class Course {
 	public void setTeacherId(String teacherId) {
 		this.teacherId = teacherId;
 	}
+
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", courseNo=" + courseNo
+				+ ", description=" + description + ", teacherId=" + teacherId
+				+ ", academyId=" + academyId + ", credit=" + credit
+				+ ", courseType=" + courseType + ", academyEntity="
+				+ academyEntity + "]";
+	}
+	
 }

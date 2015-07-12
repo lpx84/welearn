@@ -51,9 +51,9 @@ public class CourseDao  extends SuperDao {
 	 * @return
 	 */
 	public Course getCourseByCourseNo(String courseNo) {
-		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.courseNo='?'";
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.courseNo='"+courseNo+"'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setString(0, courseNo);
+		//query.setString(0, courseNo);
 		return (Course) query.uniqueResult();
 	}
 	
@@ -90,8 +90,8 @@ public class CourseDao  extends SuperDao {
 	//select b.* from bjtu_course_time AS a, bjtu_course AS b where a.course_id=b.id and weekday=1;
 	public List<Course> getCoursesByWeekday(int weekday, int pageNo, int pageItemNum) {
 		this.hql = "select b from CourseTime AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId=b.id and a.weekday=?";
+				+ " where a.courseId = b.id and a.weekday=?"
+				+ " inner join fetch b.academyEntity";
 		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql);
 		query.setInteger(0, weekday);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
