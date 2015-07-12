@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="logo">
-    <i class="glyph-icon icon-info"></i>
+    <i class="fa fa-info-circle"></i>
 </div>
 <div class="info">
     <p>${info }</p>

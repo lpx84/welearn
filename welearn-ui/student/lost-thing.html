@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>失物招领</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+    
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+
+<style type="text/css">
+    .title {
+          text-align: center;
+    }
+    
+    .content {
+        margin-bottom: 5px;   
+    }
+    
+    .rcd {
+        padding: 5px 10px;
+        border-bottom: 1px solid #d9d9d9;
+    }
+    
+    .status {
+        color: green;
+        font-weight: bold;
+        float: right;
+    }
+    
+    .content .rcd div div {
+        display: inline-block;
+    }
+    
+    .content .r3 {
+        line-height: 1.5em;
+    }
+    
+    .lab {
+        color: #d9d9d9;
+    }
+    
+    .time {
+        margin-right: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="content-box">
+    <h3 class="content-box-header bg-gray">
+        <p class="pad0L title">失物招领布告栏</p>
+    </h3>
+    <div class="content">
+        <div id="rcd774"  class="rcd">
+            <div class="r1">
+                <div class="name"><span class="lab">物品：</span>一卡通</div>
+                <div class="status">未领取</div>
+            </div>
+            <div class="r2"><span class="lab">描述：</span>李鹏翔 12301124</div>
+            <div class="r3">
+                <div class="time"><i class="fa fa-clock-o"></i>&nbsp;2014-03-12</div>
+                <div class="place"><span class="lab">拾到地点：</span>东区食堂</div>
+            </div>
+        </div>
+        <div id="rcd775" class="rcd">
+            <div class="r1">
+                <div class="name"><span class="lab">物品：</span>一卡通</div>
+                <div class="status">未领取</div>
+            </div>
+            <div class="r2"><span class="lab">描述：</span>李鹏翔 12301124</div>
+            <div class="r3">
+                <div class="time"><i class="fa fa-clock-o"></i>&nbsp;2014-03-12</div>
+                <div class="place"><span class="lab">拾到地点：</span>东区食堂</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 当前页号，下一次请求在此基础上加1 -->
+    <input id="pageNo" type="hidden" value="1">
+    <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
+        <span class="button-content">查看更多</span>
+    </a>
+    
+
+<script type="text/javascript">
+    function fetchData() {
+        //ajax分页取出数据 追加到后面
+    }
+</script>
+</div>
+</body>
+</html>

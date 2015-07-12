@@ -20,6 +20,7 @@
 <!-- Fides Admin Responsive -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/common.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/font-awesome-4.2.0/css/font-awesome.min.css" />
 
 <!-- JS -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/aui-production.min.js"></script>
