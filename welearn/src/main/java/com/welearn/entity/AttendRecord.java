@@ -24,7 +24,7 @@ public class AttendRecord {
 	private Integer attendTaskId;
 	
 	@Column(name="student_id", columnDefinition="int", nullable=false)
-	private Integer attendId;
+	private Integer studentid;
 	
 	@Column(name="pic_url", columnDefinition="varchar(128)")
 	private String picUrl;
@@ -76,13 +76,7 @@ public class AttendRecord {
 		this.attendTaskId = attendTaskId;
 	}
 
-	public Integer getAttendId() {
-		return attendId;
-	}
-
-	public void setAttendId(Integer attendId) {
-		this.attendId = attendId;
-	}
+	
 
 	public String getPicUrl() {
 		return picUrl;
@@ -140,14 +134,14 @@ public class AttendRecord {
 		this.logTime = logTime;
 	}
 
-	@Override
-	public String toString() {
-		return "AttendRecord [id=" + id + ", attendTaskId=" + attendTaskId
-				+ ", attendId=" + attendId + ", picUrl=" + picUrl
-				+ ", similarity=" + similarity + ", referenceRes="
-				+ referenceRes + ", logTime=" + logTime + ", status=" + status
-				+ ", attendTaskEntity=" + attendTaskEntity + ", studentEntity="
-				+ studentEntity + "]";
+	public Integer getStudentid() {
+		return studentid;
 	}
+
+	public void setStudentid(Integer studentid) {
+		this.studentid = studentid;
+	}
+
+	
 	
 }
