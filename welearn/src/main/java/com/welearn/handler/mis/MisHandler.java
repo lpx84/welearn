@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -48,6 +47,7 @@ public class MisHandler {
 	 * @throws IOException 
 	 * @throws ParseException 
 	 */
+	@SuppressWarnings("null")
 	public Element getNetFlowDetail(String stuNo, String pwd) throws ParseException, IOException {
 		
 		String checkCode = "";
