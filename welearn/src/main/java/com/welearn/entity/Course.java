@@ -34,33 +34,21 @@ public class Course {
 	@Column(name="description", columnDefinition="varchar(1024)")
 	private String description;
 	
-	/*@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-            name="bjtu_student_course",
-            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="student_id", referencedColumnName="id")
-    )*/
+	/**
+	 * 所属学院的ID
+	 */
+	@Column(name="academy_id", columnDefinition="int", nullable=false)
+	private Integer academyId;
 	
-//	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY) 
-//	@JoinTable(name="bjtu_student_course",
-//		joinColumns=@JoinColumn(name="course_id"),
-//		inverseJoinColumns={
-//			@JoinColumn(name="student_id",
-//			referencedColumnName="id"),
-//			@JoinColumn(name="course_id",
-//			referencedColumnName="id")
-//		}
-//	)
-	//private Set<Student> studentList;
+	@Column(name="credit", columnDefinition="int default 0", nullable=false)
+	private Integer credit;
 	
+	@Column(name="course_type", columnDefinition="varchar(20)")
+	private String courseType;
 	
-	/*@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-            name="bjtu_time_course",
-            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="time_id", referencedColumnName="id")
-    )*/
-	//private Set<CourseTime> courseTimeList;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="academy_id",insertable=false,updatable=false)
+	private Academy academyEntity;
 	
 	public Course() {
 		super();
@@ -96,6 +84,38 @@ public class Course {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Integer getAcademyId() {
+		return academyId;
+	}
+
+	public void setAcademyId(Integer academyId) {
+		this.academyId = academyId;
+	}
+
+	public Integer getCredit() {
+		return credit;
+	}
+
+	public void setCredit(Integer credit) {
+		this.credit = credit;
+	}
+
+	public String getCourseType() {
+		return courseType;
+	}
+
+	public void setCourseType(String courseType) {
+		this.courseType = courseType;
+	}
+
+	public Academy getAcademyEntity() {
+		return academyEntity;
+	}
+
+	public void setAcademyEntity(Academy academyEntity) {
+		this.academyEntity = academyEntity;
 	}
 
 }
