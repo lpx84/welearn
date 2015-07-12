@@ -53,4 +53,12 @@ public class LostThing {
 		this.place = place;
 	}
 
+	@Override
+	public String toString() {
+		return "LostThing [thing=" + thing + ", state=" + state + ", describe="
+				+ describe + ", time=" + time + ", place=" + place + "]";
+	}
+	
+	
+
 }
