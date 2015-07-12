@@ -83,11 +83,15 @@ public class StudentServiceImpl implements StudentService {
 			netFlow.setRestFlow(String.valueOf(20480-Double.parseDouble(flow)));
 			netFlow.setTime(eles.get(1).getElementsByAttributeValue("class", "t_r1").get(0).html());
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
+		}catch (IndexOutOfBoundsException e) {
+			//超出数组边界，返回null
+			e.printStackTrace();
+			return null;
 		}
 		
 		

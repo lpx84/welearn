@@ -6,7 +6,9 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.welearn.entity.Admin;
+import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
+import com.welearn.util.TimeUtil;
 
 public class CourseHomeworkDao extends SuperDao {
 
@@ -41,41 +43,88 @@ public class CourseHomeworkDao extends SuperDao {
 		return (CourseHomework) query.uniqueResult();
 	}
 	
-	public List<CourseHomework> getCourseHomeworkByContent(String content){
+	public List<CourseHomework> getCourseHomeworkByContent(String content, int pageNo, int pageItemNum){
 		this.hql = "from CourseHomework as a where a.content like '%"+content+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseHomework> result = query.list();
 		return result;
 	}
 	
-	public List<CourseHomework> getCourseHomeworkByCourseId(int courseid){
+	public List<CourseHomework> getCourseHomeworkByCourseId(int courseid, int pageNo, int pageItemNum){
 		this.hql = "FROM CourseHomework AS u WHERE u.course_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseHomework> result = query.list();
 		return result;
 	}
 	
-	public List<CourseHomework> getCourseHomeworkByTitle(String title){
+	public List<CourseHomework> getCourseHomeworkByTitle(String title, int pageNo, int pageItemNum){
 		this.hql = "from CourseHomework as a where a.content like '%"+title+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseHomework> result = query.list();
 		return result;
 	}
 	
-	public List<CourseHomework> getCourseHomeworkByDeadline(Date deadline){
-		this.hql = "FROM CourseHomework AS u WHERE u.deadline=?";
+	public List<CourseHomework> getCourseHomeworkByDeadline(Date deadline, int pageNo, int pageItemNum){
+		this.hql = "select a from bjtu_course_homework as a where to_days(deadline) = to_days('?')";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setDate(0, deadline);
+		query.setString(0, TimeUtil.timeFormat(deadline));
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseHomework> result = query.list();
 		return result;
 	}
 	
-	public List<CourseHomework> getCourseHomeworkByCreateTime(Date createTime){
-		this.hql = "FROM CourseHomework AS u WHERE u.create_time=?";
+	public List<CourseHomework> getCourseHomeworkByCreateTime(Date createTime, int pageNo, int pageItemNum){
+		this.hql = "select a from bjtu_course_homework as a where to_days(create_time) = to_days('?')";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setDate(0, createTime);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseHomework> result = query.list();
 		return result;
 	}
+	
+	/**
+	 * 根据课程号查找课程作业
+	 * @param courseNo
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	//select b.* from bjtu_course AS a, bjtu_course_homework AS b where a.id=b.course_id and a.course_no=1;
+	public List<CourseHomework> getCourseHomeworksByCourseNo(int courseNo, int pageNo, int pageItemNum) {
+		this.hql = "select b from bjtu_course AS a, bjtu_course_homework AS b "
+				+ "where a.id=b.course_id and a.course_no=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseNo);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
+	}
+	
+	/**
+	 * 根据老师的id查找课程作业
+	 * @param teacherId
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public List<CourseHomework> getCourseHomeworksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
+		this.hql = "select b from bjtu_course AS a, bjtu_course_homework AS b "
+				+ "where a.id=b.course_id and a.teacher_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
+	}
+	
+	
 }

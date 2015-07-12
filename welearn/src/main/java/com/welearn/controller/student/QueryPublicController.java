@@ -16,6 +16,7 @@ import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
+import com.welearn.service.intef.SchoolCalendarService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.TimeUtil;
@@ -33,6 +34,8 @@ public class QueryPublicController {
 	EmptyRoomService emptyRoomService;
 	@Resource(name = "courseService")
 	CourseService courseService;
+	@Resource(name = "schoolCalendarService")
+	SchoolCalendarService schoolCalendarService;
 
 	/**
 	 * 查询学校的空教室
