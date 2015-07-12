@@ -20,7 +20,7 @@
 	<div id="subject<%=count %>" class="content-box">
 		<h3 class="content-box-header ui-state-default" data-id="<%=count%>">
 			<div class="glyph-icon icon-separator transparent float-right">
-				<i class="glyph-icon icon-chevron-down"></i>
+				<i class="glyph-icon fa-chevron-down"></i>
 			</div>
 			<span>${item.getName() }</span>
 		</h3>
@@ -76,13 +76,13 @@
         var id=$(this).attr("data-id");
         var i = $("#subject"+id+" .glyph-icon i");
         var content = $("#subject"+id+" .content-box-wrapper");
-        if(i.hasClass("icon-chevron-down")) {
-            i.removeClass("icon-chevron-down");
-            i.addClass("icon-chevron-right");
+        if(i.hasClass("fa-chevron-down")) {
+            i.removeClass("fa-chevron-down");
+            i.addClass("fa-chevron-right");
             content.slideUp();
         } else {
-            i.removeClass("icon-chevron-right");
-            i.addClass("icon-chevron-down");
+            i.removeClass("fa-chevron-right");
+            i.addClass("fa-chevron-down");
             content.slideDown();
         }
     });

@@ -8,47 +8,46 @@
 <%@ include file="/public/section/home/header.jsp"%>
 <title>${title }</title>
 <style type="text/css">
-ul.menu-float {
-	position: fixed;
-	top: 40px;
-	left: 0;
-	min-width: 100px;
-	font-size: 1.2em;
-	line-height: 1.8em;
-	box-shadow: 1px 1px 5px #B2B2B2;
-	background-color: #F2F2F0;
-	text-align: center;
-	z-index: 10;
-}
-
-ul.menu-float li {
-	border-bottom: solid 1px #DBDBD9;
-}
-
-.content-list li span {
-	font-size: 1.2em;
-	line-height: 2em;
-}
-
-table.cet {
-	width: 100%;
-	border-color: #EFEFEF;
-}
-
-table.cet td, table.cet th {
-	padding: 8px;
-}
+	ul.menu-float {
+        position: fixed;
+        top: 40px;
+        left: 0;
+        min-width: 100px;
+        font-size: 1.2em;
+        line-height: 1.8em;
+        box-shadow: 1px 1px 5px #B2B2B2;
+        background-color: #F2F2F0;
+        text-align: center;
+        z-index: 10;
+    }
+    
+    ul.menu-float li {
+        border-bottom: solid 1px #DBDBD9;
+    }
+    
+    .content-list li span {
+        font-size: 1.2em;
+        line-height: 2em;
+    }
+    
+    table.cet {
+        width: 100%;
+        border-color: #EFEFEF;
+    }
+    table.cet td,
+    table.cet th {
+        padding: 8px;
+    }
 </style>
 </head>
 <body>
 	<ul class="menu-float" style="display: none;">
 		<li><a
-			href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fcet-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect">课程成绩</a></li>
-		<!--         <li><a href="grade-english.html">英语成绩</a></li> -->
+			href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fcourse-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect">课程成绩</a></li>
 	</ul>
-	<h3 class="content-box-header bg-gray">
+	<h3 class="content-box-header bg-gray" style="  margin-top: 0;font-size: 14px;">
 		<div class="glyph-icon icon-separator transparent menu-toggle">
-			<i class="glyph-icon icon-reorder"></i>
+			<i class="glyph-icon fa-bars"></i>
 		</div>
 		<span class="pad0L  menu-toggle">英语成绩</span>
 		<div class="glyph-icon icon-separator transparent float-right">

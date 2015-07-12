@@ -19,7 +19,7 @@
             <div class="form-input col-md-12">
                 <div class="form-input-icon">
                 <form id="search-course" action="<%=request.getContextPath() %>/student/query/public/school-course-query" method="POST">
-                    <i class="glyph-icon icon-search transparent"></i>
+                    <i class="glyph-icon fa-search"></i>
                     <input type="text" placeholder="输入查询课程" class="radius-all-100" name="keyword" id="keyword" onkeydown="javascript:enterSearch();"/>
                     <input type="submit" style="display:none;">
                 </form>
@@ -32,27 +32,27 @@
 
             <ul class="notifications-box">
                 <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon icon-list"></span>
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">软件系统分析与设计</span>
                     <div class="notification-time">软件学院</div>
                 </li>
                 <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon icon-list"></span>
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">软件系统分析与设计</span>
                     <div class="notification-time">软件学院</div>
                 </li>
                 <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon icon-list"></span>
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">软件系统分析与设计</span>
                     <div class="notification-time">软件学院</div>
                 </li>
                 <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon icon-list"></span>
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">软件系统分析与设计</span>
                     <div class="notification-time">电子信息工程学院</div>
                 </li>
                 <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon icon-list"></span>
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">软件系统分析与设计</span>
                     <div class="notification-time">软件学院</div>
                 </li>
