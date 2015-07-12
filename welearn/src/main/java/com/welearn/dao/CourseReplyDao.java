@@ -21,7 +21,7 @@ public class CourseReplyDao extends SuperDao {
 	}
 	
 	public boolean delCourseReplyByCourseId(int courseId){
-		this.hql = "DELETE FROM CourseReply AS u WHERE u.course_id=?";
+		this.hql = "DELETE FROM CourseReply AS u WHERE u.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseId);
 		return query.executeUpdate() > 0;
@@ -41,14 +41,14 @@ public class CourseReplyDao extends SuperDao {
 	}
 	
 	public CourseReply getCourseReplyById(int id){
-		this.hql = "FROM CourseReply AS u WHERE u.id=?";
+		this.hql = "FROM CourseReply AS u inner join fetch u.courseEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (CourseReply) query.uniqueResult();
 	}
 	
 	public List<CourseReply> getCourseReplyByCourseID(int courseid){
-		this.hql = "from CourseReply as a where a.course_id=?";
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		List<CourseReply> result = query.list();
@@ -56,7 +56,7 @@ public class CourseReplyDao extends SuperDao {
 	}
 	
 	public List<CourseReply> getCourseReplyByReplyor(String replyor){
-		this.hql = "from CourseReply as a where a.replyor like '%"+ replyor + "%'";
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.replyor like '%"+ replyor + "%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		List<CourseReply> result = query.list();
 		return result;
@@ -71,8 +71,9 @@ public class CourseReplyDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_reply AS b where a.id=b.course_id and a.course_no='1';
 	public List<CourseReply> getCourseReplyByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_reply AS b "
-				+ "where a.id=b.course_id and a.course_no='?'";
+		this.hql = "select b from Course AS a, CourseReply AS b "
+				+ "inner join fetch b.courseEntity"
+				+ "where a.id=b.courseId and a.courseNo='?'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -89,8 +90,9 @@ public class CourseReplyDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseReply> getCourseReplyByTeacherId(int teacherId, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_reply AS b "
-				+ "where a.id=b.course_id and a.teacher_id=?";
+		this.hql = "select b from Course AS a, CourseReply AS b "
+				+ "inner join fetch b.courseEntity"
+				+ "where a.id=b.courseId and a.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);

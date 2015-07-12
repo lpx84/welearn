@@ -47,7 +47,7 @@ public class CourseTimeDao extends SuperDao{
 	 * @return
 	 */
 	public CourseTime getCourseTime(int id){
-		this.hql = "FROM CourseTime AS u WHERE u.id=?";
+		this.hql = "FROM CourseTime AS u inner join fetch u.courseEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (CourseTime) query.uniqueResult();
@@ -59,7 +59,7 @@ public class CourseTimeDao extends SuperDao{
 	 * @return
 	 */
 	public List<CourseTime> getCourseTimeBySection(int section_no){
-		this.hql = "FROM CourseTime AS u WHERE u.section_no=?";
+		this.hql = "FROM CourseTime AS u inner join fetch u.courseEntity WHERE u.sectionNo=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, section_no);
 		List<CourseTime> result = query.list();

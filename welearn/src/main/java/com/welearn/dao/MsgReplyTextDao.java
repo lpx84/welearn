@@ -35,7 +35,7 @@ public class MsgReplyTextDao extends SuperDao{
 	 * @return
 	 */
 	public boolean delMsgReplyTextByIndex(int indexId){
-		this.hql = "DELETE FROM MsgReplyText AS u WHERE u.index_id=?";
+		this.hql = "DELETE FROM MsgReplyText AS u WHERE u.indexId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, indexId);
 		return query.executeUpdate() > 0;
@@ -70,7 +70,7 @@ public class MsgReplyTextDao extends SuperDao{
 	 * @return
 	 */
 	public List<MsgReplyText> getMsgReplyTextByIndexID(int indexID){
-		this.hql = "from MsgReplyText as a where a.index_id=?";
+		this.hql = "from MsgReplyText as a where a.indexId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, indexID);
 		List<MsgReplyText> result = query.list();

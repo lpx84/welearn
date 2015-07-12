@@ -24,7 +24,7 @@ public class StudentCourseDao extends SuperDao{
 	public boolean delStudentCourse(StudentCourse studentCourse){
 		int courseid = studentCourse.getCourseId();
 		int studentid = studentCourse.getStudentId();
-		this.hql = "DELETE FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		this.hql = "DELETE FROM StudentCourse AS u WHERE u.courseId=? AND u.studentId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		query.setInteger(1, studentid);
@@ -38,7 +38,7 @@ public class StudentCourseDao extends SuperDao{
 	 * @return
 	 */
 	public boolean delStudentCourse(int studentID, int courseID){
-		this.hql = "DELETE FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		this.hql = "DELETE FROM StudentCourse AS u WHERE u.courseId=? AND u.studentId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseID);
 		query.setInteger(1, studentID);
@@ -64,7 +64,7 @@ public class StudentCourseDao extends SuperDao{
 	public boolean isExist(StudentCourse studentCourse){
 		int courseid = studentCourse.getCourseId();
 		int studentid = studentCourse.getStudentId();
-		this.hql = "FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		this.hql = "FROM StudentCourse AS u WHERE u.courseId=? AND u.studentId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		query.setInteger(1, studentid);
@@ -78,7 +78,9 @@ public class StudentCourseDao extends SuperDao{
 	 * @return
 	 */
 	public StudentCourse getStudentCourse(int studentID, int courseID){
-		this.hql = "FROM StudentCourse AS u WHERE u.course_id=? AND u.student_id=?";
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity inner join fetch u.courseEntity "
+				+ "WHERE u.courseId=? AND u.studentId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseID);
 		query.setInteger(1, studentID);

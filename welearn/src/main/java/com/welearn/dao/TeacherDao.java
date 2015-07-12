@@ -21,21 +21,21 @@ public class TeacherDao  extends SuperDao {
 	}
 	
 	public boolean delTeacherByUserName(String username) {
-		this.hql = "DELETE FROM Teacher AS u WHERE u.user_name=?";
+		this.hql = "DELETE FROM Teacher AS u WHERE u.userName=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, username);
 		return query.executeUpdate() > 0;
 	}
 	
 	public boolean delTeacherByTrueName(String truename) {
-		this.hql = "DELETE FROM Teacher AS u WHERE u.true_name=?";
+		this.hql = "DELETE FROM Teacher AS u WHERE u.trueName=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, truename);
 		return query.executeUpdate() > 0;
 	}
 	
 	public boolean delTeacherByOpenId(int openId) {
-		this.hql = "DELETE FROM Teacher AS u WHERE u.open_id=?";
+		this.hql = "DELETE FROM Teacher AS u WHERE u.openId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, openId);
 		return query.executeUpdate() > 0;
@@ -49,7 +49,7 @@ public class TeacherDao  extends SuperDao {
 	}
 	
 	public Teacher getTeacher(int id) {
-		this.hql = "FROM Teacher AS u WHERE u.id=?";
+		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (Teacher) query.uniqueResult();
@@ -61,7 +61,7 @@ public class TeacherDao  extends SuperDao {
 	 * @return
 	 */
 	public Teacher getTeacherByUserName(String userName) {
-		this.hql = "FROM Teacher AS u WHERE u.user_name=?";
+		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.userName=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, userName);
 		return (Teacher) query.uniqueResult();
@@ -73,7 +73,7 @@ public class TeacherDao  extends SuperDao {
 	 * @return
 	 */
 	public List<Teacher> getTeachersByTrueName(String trueName) {
-		this.hql = "FROM Teacher AS u WHERE u.true_name=?";
+		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.trueName=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, trueName);
 		List<Teacher> result = query.list();
@@ -88,7 +88,7 @@ public class TeacherDao  extends SuperDao {
 	 * @return
 	 */
 	public List<Teacher> getTeachersByAcademy(int academyId, int pageNo, int pageItemNum) {
-		this.hql = "FROM Teacher AS u WHERE u.academy_id=?";
+		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.academyId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, academyId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);

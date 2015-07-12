@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.hibernate.Query;
 
-public class CourseComment extends SuperDao {
+public class CourseCommentDao extends SuperDao {
 
-	public Integer addCourseComment(CourseComment courseComment){
+	public Integer addCourseComment(CourseCommentDao courseComment){
 		return (Integer)this.sessionFactory.getCurrentSession().save(courseComment);
 	}
 	
@@ -17,21 +17,21 @@ public class CourseComment extends SuperDao {
 		return query.executeUpdate() > 0;
 	}
 	
-	public boolean updateCourseComment(CourseComment courseComment){
+	public boolean updateCourseComment(CourseCommentDao courseComment){
 		this.sessionFactory.getCurrentSession().update(courseComment);
 		//update的返回值为空，这里怎么判断是否成功
 		return true;
 	}
 	
-	public CourseComment getCourseCommentById(int id){
-		this.hql = "FROM CourseComment AS u WHERE u.id=?";
+	public CourseCommentDao getCourseCommentById(int id){
+		this.hql = "FROM CourseComment AS u inner join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
-		return (CourseComment) query.uniqueResult();
+		return (CourseCommentDao) query.uniqueResult();
 	}
 	
-	public List<CourseComment> getCourseCommentByStudentId(int student_id, int pageNo, int pageItemNum) {
-		this.hql = "FROM CourseComment AS u WHERE u.student_id=?";
+	public List<CourseCommentDao> getCourseCommentByStudentId(int student_id, int pageNo, int pageItemNum) {
+		this.hql = "FROM CourseComment AS u inner join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.studentId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, student_id);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -39,8 +39,8 @@ public class CourseComment extends SuperDao {
 		return query.list();
 	}
 	
-	public List<CourseComment> getCourseCommentByCourseId(int course_id, int pageNo, int pageItemNum) {
-		this.hql = "FROM CourseComment AS u WHERE u.course_id=?";
+	public List<CourseCommentDao> getCourseCommentByCourseId(int course_id, int pageNo, int pageItemNum) {
+		this.hql = "FROM CourseComment AS u inner join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, course_id);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -55,9 +55,10 @@ public class CourseComment extends SuperDao {
 	 * @return
 	 */
 	//select b.* from bjtu_student AS a, bjtu_course_comment AS b where a.id=b.student_id and a.student_no=12301111;
-	public List<CourseComment> getCourseCommentsByStudentNo(int studentNo, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_student AS a, bjtu_course_comment AS b "
-				+ "where a.id=b.student_id and a.student_no=?";
+	public List<CourseCommentDao> getCourseCommentsByStudentNo(int studentNo, int pageNo, int pageItemNum){
+		this.hql = "select b from Student AS a, CourseComment AS b "
+				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
+				+ "where a.id=b.studentId and a.studentNo=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -71,9 +72,10 @@ public class CourseComment extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List<CourseComment> getCourseCommentsByStudentTruename(String truename, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_student AS a, bjtu_course_comment AS b "
-				+ "where a.id=b.student_id and a.true_name=?";
+	public List<CourseCommentDao> getCourseCommentsByStudentTruename(String truename, int pageNo, int pageItemNum){
+		this.hql = "select b from Student AS a, CourseComment AS b "
+				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
+				+ "where a.id=b.studentId and a.trueName=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, truename);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -88,9 +90,10 @@ public class CourseComment extends SuperDao {
 	 * @return
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_comment AS b where a.id=b.course_id and course_no=1;
-	public List<CourseComment> getCourseCommentsByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_comment AS b "
-				+ "where a.id=b.course_id and a.course_no=?";
+	public List<CourseCommentDao> getCourseCommentsByCourseNo(String courseNo, int pageNo, int pageItemNum){
+		this.hql = "select b from Course AS a, CourseComment AS b "
+				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
+				+ "where a.id=b.courseId and a.courseNo=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -105,9 +108,10 @@ public class CourseComment extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List<CourseComment> getCourseCommentsByName(String name, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_comment AS b "
-				+ "where a.id=b.course_id and a.name=?";
+	public List<CourseCommentDao> getCourseCommentsByName(String name, int pageNo, int pageItemNum){
+		this.hql = "select b from Course AS a, CourseComment AS b "
+				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
+				+ "where a.id=b.courseId and a.name=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, name);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -121,9 +125,10 @@ public class CourseComment extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List<CourseComment> getCourseCommentsByTeacherId(int teacherId, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_comment AS b "
-				+ "where a.id=b.course_id and a.teacher_id=?";
+	public List<CourseCommentDao> getCourseCommentsByTeacherId(int teacherId, int pageNo, int pageItemNum){
+		this.hql = "select b from Course AS a, CourseComment AS b "
+				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
+				+ "where a.id=b.courseId and a.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);

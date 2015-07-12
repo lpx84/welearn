@@ -73,7 +73,10 @@ public class LogDao extends SuperDao{
 	 */
 	public Log getLogById(int id){
 		
-		return null;
+		this.hql = "FROM Log AS u WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return (Log) query.uniqueResult();
 	}
 	
 	/**
@@ -82,7 +85,7 @@ public class LogDao extends SuperDao{
 	 * @return
 	 */
 	public List<Log> getLogByTime(Date logTime) {
-		this.hql = "from Log as a where a.log_time=?";
+		this.hql = "from Log as a where a.logTime=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setDate(0, logTime);
 		List<Log> result = query.list();
