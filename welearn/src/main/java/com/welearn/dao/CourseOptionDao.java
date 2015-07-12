@@ -67,7 +67,7 @@ public class CourseOptionDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course_problem AS a, bjtu_course_option AS b where a.id=b.problem_id and a.course_id=1;
 	public List<CourseOption> getCourseOptionsByCourseId(int CourseID, int pageNo, int pageItemNum){
-		this.hql = "select b.* from bjtu_course_problem AS a, bjtu_course_option AS b "
+		this.hql = "select b from bjtu_course_problem AS a, bjtu_course_option AS b "
 				+ "where a.id=b.problem_id and a.course_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, CourseID);

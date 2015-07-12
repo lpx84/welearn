@@ -46,7 +46,7 @@ public class SchoolCalenderDao extends SuperDao{
 	}
 	
 	public List<SchoolCalender> getSchoolCalender(){
-		this.hql = "select a from bjtu_school_calender as a order by id desc";
+		this.hql = "select a from SchoolCalender as a order by id desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		//query.setString(0, name);
 		//query.setFirstResult((pageNo - 1) * pageItemNum);

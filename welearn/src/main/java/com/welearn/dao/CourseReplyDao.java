@@ -71,7 +71,7 @@ public class CourseReplyDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_reply AS b where a.id=b.course_id and a.course_no='1';
 	public List<CourseReply> getCourseReplyByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		this.hql = "select b.* from bjtu_course AS a, bjtu_course_reply AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_course_reply AS b "
 				+ "where a.id=b.course_id and a.course_no='?'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
@@ -89,7 +89,7 @@ public class CourseReplyDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseReply> getCourseReplyByTeacherId(int teacherId, int pageNo, int pageItemNum){
-		this.hql = "from bjtu_course AS a, bjtu_course_reply AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_course_reply AS b "
 				+ "where a.id=b.course_id and a.teacher_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);

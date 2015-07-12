@@ -53,7 +53,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByTime(Date start, Date end, int pageNo, int pageItemNum) {
-		this.hql = "select * from bjtu_attend_task "
+		this.hql = "select a from bjtu_attend_task as a"
 				+ "where to_days(start_time)=to_days('?') and to_days(start_time)=to_days('?')";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -71,7 +71,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByCourseNo(String courseNo, int pageNo, int pageItemNum) {
-		this.hql = "select b.* from bjtu_course AS a, bjtu_attend_task AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_attend_task AS b "
 				+ "where a.id=b.course_id and a.course_no=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
@@ -87,7 +87,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
-		this.hql = "select b.* from bjtu_course AS a, bjtu_attend_task AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_attend_task AS b "
 				+ "where a.id=b.course_id and a.teacher_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
@@ -103,7 +103,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByCourseName(String courseName, int pageNo, int pageItemNum) {
-		this.hql = "select b.* from bjtu_course AS a, bjtu_attend_task AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_attend_task AS b "
 				+ "where a.id=b.course_id and a.name=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseName);
@@ -119,7 +119,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByStudentId(int studentId, int pageNo, int pageItemNum) {
-		this.hql = "select b.* from bjtu_attend_record AS a, bjtu_attend_task AS b "
+		this.hql = "select b from bjtu_attend_record AS a, bjtu_attend_task AS b "
 				+ "where a.attend_task_id=b.id and a.student_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentId);

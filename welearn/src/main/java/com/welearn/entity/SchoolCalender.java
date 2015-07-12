@@ -18,8 +18,11 @@ public class SchoolCalender {
 	@Column(name="name", columnDefinition="varchar(255)")
 	private String name;
 
-	@Column(name="content", columnDefinition="varchar(255)")
+	@Column(name="content", columnDefinition="text")
 	private String content;
+	
+	@Column(name="comment", columnDefinition="text")
+	private String comment;
 
 	public SchoolCalender() {
 		super();
@@ -54,12 +57,13 @@ public class SchoolCalender {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	@Override
-	public String toString() {
-		return "SchoolCalender [id=" + id + ", name=" + name + ", content="
-				+ content + "]";
-	}
 	
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
 }

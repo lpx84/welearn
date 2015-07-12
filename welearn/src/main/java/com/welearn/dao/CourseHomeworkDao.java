@@ -72,7 +72,7 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByDeadline(Date deadline, int pageNo, int pageItemNum){
-		this.hql = "select * from bjtu_course_homework where to_days(deadline) = to_days('?')";
+		this.hql = "select a from bjtu_course_homework as a where to_days(deadline) = to_days('?')";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, TimeUtil.timeFormat(deadline));
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -82,7 +82,7 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByCreateTime(Date createTime, int pageNo, int pageItemNum){
-		this.hql = "select * from bjtu_course_homework where to_days(create_time) = to_days('?')";
+		this.hql = "select a from bjtu_course_homework as a where to_days(create_time) = to_days('?')";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setDate(0, createTime);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -100,7 +100,7 @@ public class CourseHomeworkDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_homework AS b where a.id=b.course_id and a.course_no=1;
 	public List<CourseHomework> getCourseHomeworksByCourseNo(int courseNo, int pageNo, int pageItemNum) {
-		this.hql = "select b.* from bjtu_course AS a, bjtu_course_homework AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_course_homework AS b "
 				+ "where a.id=b.course_id and a.course_no=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseNo);
@@ -117,7 +117,7 @@ public class CourseHomeworkDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseHomework> getCourseHomeworksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
-		this.hql = "select b.* from bjtu_course AS a, bjtu_course_homework AS b "
+		this.hql = "select b from bjtu_course AS a, bjtu_course_homework AS b "
 				+ "where a.id=b.course_id and a.teacher_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
