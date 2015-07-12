@@ -61,5 +61,42 @@ public class CourseReplyDao extends SuperDao {
 		List<CourseReply> result = query.list();
 		return result;
 	}
+	
+	/**
+	 * 根据课程号查找课程回复
+	 * @param courseNo
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	//select b.* from bjtu_course AS a, bjtu_course_reply AS b where a.id=b.course_id and a.course_no='1';
+	public List<CourseReply> getCourseReplyByCourseNo(String courseNo, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course AS a, bjtu_course_reply AS b "
+				+ "where a.id=b.course_id and a.course_no='?'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, courseNo);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseReply> result = query.list();
+		return result;
+	}
+	
+	/**
+	 * 根据老师的id
+	 * @param teacherId
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public List<CourseReply> getCourseReplyByTeacherId(int teacherId, int pageNo, int pageItemNum){
+		this.hql = "from bjtu_course AS a, bjtu_course_reply AS b "
+				+ "where a.id=b.course_id and a.teacher_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseReply> result = query.list();
+		return result;
+	}
 
 }
