@@ -25,7 +25,7 @@
 <!-- Fides Admin Responsive -->
 <link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
 <link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
-
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
 
 
 <!-- Fides Admin JS -->
@@ -46,13 +46,19 @@
         bottom: 0;
         width: calc(100% - 20px);
     }
+    
+    .user-name,.info {
+        font-size: 0.7em !important;
+        line-height: 2em;
+        color: #bebebe;
+    }
 </style>
 </head>
 <body>
 <div class="content-box bg-white">
     <h3 class="title-span content-box-header ui-state-default">
         <div class="glyph-icon icon-separator transparent">
-            <i class="glyph-icon icon-chevron-left"></i>
+            <i class="glyph-icon fa-chevron-left"></i>
         </div>
         <label class="pad0L">软件系统分析以设计技术</label>
     </h3>
@@ -60,18 +66,18 @@
         <div class="scrollable-content">
 
             <ul class="chat-box">
-                <li>
+                <li class="float-left">
                     <div class="chat-author">
                         <img width="36" src="../assets/images/gravatar.jpg" alt="" />
                     </div>
-                    <div class="popover left no-shadow">
+                    <div class="popover right no-shadow">
                         <div class="arrow"></div>
                         <div class="popover-content">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                                <div class="chat-time">
-                                    <i class="glyph-icon icon-time"></i>
-                                    a few seconds ago
-                                </div>
+                            <div class="info">
+                                <span>张红延</span>
+                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
+                            </div>
+                            大家有什么问题尽管提
                         </div>
                     </div>
                 </li>
@@ -82,17 +88,11 @@
                     <div class="popover right no-shadow">
                         <div class="arrow"></div>
                         <div class="popover-content">
-                                <h3>
-                                    <a href="#" title="Horia Simon">Horia Simon</a>
-                                    <div class="float-right">
-                                        <a href="#" class="btn glyph-icon icon-inbox font-gray tooltip-button" data-placement="bottom" title="This chat line was received in the mail."></a>
-                                    </div>
-                                </h3>
-                                This comment line has a title (author name) and a right button panel.
-                                <div class="chat-time">
-                                    <i class="glyph-icon icon-time"></i>
-                                    a few seconds ago
-                                </div>
+                            <div class="info">
+                                <span>陈朝朝</span>
+                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
+                            </div>
+                            老师辛苦了！！！
                         </div>
                     </div>
                 </li>
@@ -103,11 +103,11 @@
                     <div class="popover left no-shadow">
                         <div class="arrow"></div>
                         <div class="popover-content">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                                <div class="chat-time">
-                                    <i class="glyph-icon icon-time"></i>
-                                    a few seconds ago
-                                </div>
+                            <div class="info">
+                                <span>陈朝朝</span>
+                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
+                            </div>
+                            老师辛苦了！！！
                         </div>
                     </div>
                 </li>
@@ -118,11 +118,11 @@
                     <div class="popover right no-shadow">
                         <div class="arrow"></div>
                         <div class="popover-content">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                                <div class="chat-time">
-                                    <i class="glyph-icon icon-time"></i>
-                                    a few seconds ago
-                                </div>
+                            <div class="info">
+                                <span>陈朝朝</span>
+                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
+                            </div>
+                            老师辛苦了！！！
                         </div>
                     </div>
                 </li>
@@ -136,10 +136,10 @@
             <div class="form-input col-lg-12">
                 <div class="input-append-wrapper input-append-right">
                     <a href="javascript:;" class="btn input-append primary-bg">
-                        <i class="glyph-icon icon-mail-reply"></i>
+                        <i class="glyph-icon fa-send"></i>
                     </a>
                     <div class="append-right">
-                        <input type="text" placeholder="Say something here..." name="" id="" />
+                        <input type="text" placeholder="输入你的问题" name="" id="" />
                     </div>
                 </div>
             </div>

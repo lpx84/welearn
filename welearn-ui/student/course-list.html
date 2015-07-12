@@ -24,6 +24,7 @@
 <!-- Fides Admin Responsive -->
 <link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
 <link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
 
 <!-- Fides Admin JS -->
 <script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
@@ -68,21 +69,80 @@
     <div class="profile-box content-box">
         <div class="nav-list">
             <ul>
+                <!-- 显示时当前学期先显示，其他学期隐藏-->
                 <li id="rcd342">
                     <a href="javascript:;" class="grade-toggle" title=""  data-id="342">
                         <i class="glyph-icon font-purple icon-time"></i>
                         2014-2015学年第二学期
+                        <i class="glyph-icon icon-chevron-down float-right"></i>
+                    </a>
+                    <ul class="ul-inner">
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li id="rcd343">
+                    <a href="javascript:;" class="grade-toggle" title=""  data-id="343">
+                        <i class="glyph-icon font-purple icon-time"></i>
+                        2014-2015学年第一学期
+                        <i class="glyph-icon fa-chevron-right float-right"></i>
+                    </a>
+                    <ul class="ul-inner" style="display: none;">
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="course-manager.html" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li id="rcd344">
+                    <a href="javascript:;" class="grade-toggle" title=""  data-id="344">
+                        <i class="glyph-icon font-purple icon-time"></i>
+                        2013-2014学年第二学期
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                     <ul class="ul-inner" style="display: none;">
                         <li class="row">
-                            <div class="col-xs-8">【专业课】软件系统分析与设计技术</div>
-                            <div class="col-xs-2">2学分</div>
-                            <div class="col-xs-2">A</div>
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-12">
+                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                            </div>
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -93,6 +153,7 @@
         $("ul.menu-float").slideToggle("fast");
     });
     $(".menu-toggle li").click(function(){
+        $("ul.menu-float").slideUp("fast");
         $("ul.menu-float").slideToggle("fast");
     });
     

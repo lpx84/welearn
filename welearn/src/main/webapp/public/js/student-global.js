@@ -3,7 +3,7 @@
  * @param e
  * @param status
  */
-function completeHandle(e,status) {
+function completeHandler(e,status) {
 	$("#loading").fadeOut();
 	if(status == 'success') {
 		return ;

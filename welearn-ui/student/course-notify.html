@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>课程作业</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+
+<style type="text/css">
+    .btn-more .button-content {
+        font-size: 1.3em;
+        line-height: 2em;
+    }
+    
+    .fixed-bottom {
+        position: fixed !important;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    .title {
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 72%;
+    }
+    
+    .content-box {
+        border: none;
+    }
+    
+    .content {
+        font-size: 1.2em;
+    }
+    
+    .inline-block {
+        display: inline-block;
+    }
+    
+    .rcd {
+        margin: 3px 3px;
+        padding: 5px 10px;
+        border: solid 1px #c3c3c3;
+        border-radius: 3px;
+    }
+    
+    .lab {
+        color: #c3c0c0;
+    }
+    
+    .rows12 {
+        font-size: 0.8em;
+    }
+    
+    .name {
+        font-weight: bold;
+        line-height: 2em;
+    }
+    
+    .rows1 {
+        position: relative;
+        margin-left: auto;
+    }
+    
+    .i-toggle {
+        position: absolute;
+        top: 15px;
+        right: 0px;
+    }
+    
+    .rows.rows2.text {
+        margin-top: 5px;
+        margin-bottom: -5px;
+        padding: 10px 5px;
+        background: #fafafa;
+    }
+    
+</style>
+</head>
+<body>
+<div class="content-box">
+    <h3 class="content-box-header bg-gray">
+        <div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <span class="title">软件工程专业研究方法论与创新教育</span>
+        <div class="glyph-icon icon-separator transparent float-right">
+            <i class="glyph-icon"></i>
+        </div>
+    </h3>
+    <div class="content">
+        <div class="rcd">
+            <div class="rows rows1">
+                <div class="inline-block">
+                    <div class="rows rows11 name">第一次作业更正通知</div>
+                    <div class="rows rows12">
+                        <span class="time ">
+                            <span class="lab"><i class="fa fa-clock-o"></i>&nbsp;</span>
+                            <span>07-11 12:43</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="inline-block i-toggle">
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="row rows rows2 text" style="display: none;">
+                这是更正通知这是更正通知这是更正通知这是更正通知这是更正通知这是更正通知
+            </div>
+        </div>
+        <div class="rcd">
+            <div class="rows rows1">
+                <div class="inline-block">
+                    <div class="rows rows11 name">端午节放假补课安排</div>
+                    <div class="rows rows12">
+                        <span class="time ">
+                            <span class="lab"><i class="fa fa-clock-o"></i>&nbsp;</span>
+                            <span>07-11 12:43</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="inline-block i-toggle">
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="row rows rows2 text" style="display: none;">
+                这是更正通知这是更正通知这是更正通知这是更正通知这是更正通知这是更正通知
+            </div>
+        </div>
+    </div>
+    
+    <!-- 当前页号，下一次请求在此基础上加1 -->
+    <input id="pageNo" type="hidden" value="1">
+    <a href="javascript:fetchData();" class="btn btn-more medium display-block float-none ui-state-default">
+        <span class="button-content">查看更多</span>
+    </a>
+</div>
+<script type="text/javascript">
+    $(".text-toggle").click(function(){
+        if($(this).hasClass("fa-angle-double-down")) {
+            $(".large-text").removeClass("limit-text");
+            $(this).removeClass("fa-angle-double-down");            
+            $(this).addClass("fa-angle-double-up");            
+        } else {
+            $(".large-text").addClass("limit-text");
+            $(this).removeClass("fa-angle-double-up");            
+            $(this).addClass("fa-angle-double-down");
+        }
+    });
+    
+    $(".rows.rows1").click(function(){
+        $(this).siblings(".rows.text").slideToggle();
+        var $i = $(this).children(".i-toggle").children("i.fa");
+        if($i.hasClass("fa-chevron-right")) {
+            $i.removeClass("fa-chevron-right");
+            $i.addClass("fa-chevron-down");
+        } else {
+            $i.removeClass("fa-chevron-down");
+            $i.addClass("fa-chevron-right");
+        }
+    });
+    
+    //如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
+	if (($(document.body).height() + 10) < $(window).height()) {
+	    $(".btn-more").addClass("fixed-bottom");
+	};
+</script>
+</body>
+</html>
