@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-input col-md-10">
                         <div class="form-input-icon">
-                            <i class="glyph-icon icon-user ui-state-default"></i>
+                            <i class="glyph-icon fa-user ui-state-default"></i>
                             <input placeholder="8位数字" data-type="number" data-trigger="change" data-required="true" type="text" name="studentNo" id="studentNo" />
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-input col-md-10">
                         <div class="form-input-icon">
-                            <i class="glyph-icon icon-unlock-alt ui-state-default"></i>
+                            <i class="glyph-icon fa-lock ui-state-default"></i>
                             <input placeholder="教务处密码" data-trigger="keyup" data-rangelength="[3,25]" type="password" name="prepwd" id="prepwd" />
                         </div>
                     </div>

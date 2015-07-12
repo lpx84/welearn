@@ -8,7 +8,7 @@
 <%@ include file="/public/section/home/header.jsp"%>
 <title>${title }</title>
 <style type="text/css">
-ul.menu-float {
+	ul.menu-float {
         position: fixed;
         top: 40px;
         left: 0;
@@ -40,6 +40,7 @@ ul.menu-float {
 	
 	.nav-list li {
 		border: solid 1px #e9ecf1;
+		line-height: 2.5em;
 	}
 	  
 </style>
@@ -47,11 +48,11 @@ ul.menu-float {
 <body>
 	<div class="content-box">
 		<ul class="menu-float" style="display: none;">
-			<li><a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fcourse-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect">英语成绩</a></li>
+			<li><a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fcet-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect">英语成绩</a></li>
 		</ul>
 		<h3 class="content-box-header bg-gray">
 			<div class="glyph-icon icon-separator transparent menu-toggle">
-				<i class="glyph-icon icon-reorder"></i>
+				<i class="glyph-icon fa-bars"></i>
 			</div>
 			<span class="pad0L  menu-toggle">课程成绩</span>
 			<div class="glyph-icon icon-separator transparent float-right">

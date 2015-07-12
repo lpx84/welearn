@@ -24,7 +24,7 @@
             <div class="form-input col-md-12">
                 <div class="form-input-icon">
                 <form id="search-course" action="<%=request.getContextPath() %>/student/query/public/school-course-query" method="POST">
-                    <i class="glyph-icon icon-search transparent"></i>
+                    <i class="glyph-icon fa-search"></i>
                     <input type="text" placeholder="输入查询课程" class="radius-all-100" name="keyword" id="keyword" onkeydown="javascript:enterSearch();"/>
                     <input type="submit" style="display:none;">
                 </form>
@@ -34,9 +34,12 @@
     </div>
     <div class="tips-span">
         <span class="label primary-bg">软件学院</span>
-        <span class="label bg-blue">电子信息学院</span>
+        <span class="label bg-blue">电子信息工程学院</span>
         <span class="label bg-green">建筑与艺术学院</span>
+        <span class="label bg-azure">机械与电子学院</span>
+        <span class="label bg-blue">语言与传播学院</span>
         <span class="label bg-azure">计算机科学与技术学院</span>
+        <span class="label primary-bg">法学院</span>
     </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>
