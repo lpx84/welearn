@@ -1,8 +1,11 @@
 package com.welearn.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 
 import com.welearn.entity.Academy;
+import com.welearn.entity.CourseReply;
 import com.welearn.entity.SchoolCalender;
 
 
@@ -40,6 +43,16 @@ public class SchoolCalenderDao extends SuperDao{
 		//query.setFirstResult((pageNo - 1) * pageItemNum);
 		//query.setMaxResults(pageItemNum);
 		return (SchoolCalender) query.uniqueResult();
+	}
+	
+	public List<SchoolCalender> getSchoolCalender(){
+		this.hql = "select * from bjtu_school_calender order by id desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		//query.setString(0, name);
+		//query.setFirstResult((pageNo - 1) * pageItemNum);
+		//query.setMaxResults(pageItemNum);
+		List<SchoolCalender> result = query.list();
+		return result;
 	}
 	
 }

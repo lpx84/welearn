@@ -107,7 +107,7 @@ public class CourseProblemDao extends SuperDao {
 	//select b.* from bjtu_course AS a, bjtu_course_problem AS b where a.id=b.course_id and a.course_no=1;
 	public List<CourseProblem> getCourseProblemByCourseNo(String courseNo, int pageNo, int pageItemNum){
 		this.hql = "select b.* from bjtu_course AS a, bjtu_course_problem AS b "
-				+ "where a.id=b.course_id and a.course_no=?";
+				+ "where a.id=b.course_id and a.course_no='?'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -115,6 +115,33 @@ public class CourseProblemDao extends SuperDao {
 		List<CourseProblem> result = query.list();
 		return result;
 	}
+	/**
+	 * 根据老师的id查找课程问题
+	 * @param teacherId
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public List<CourseProblem> getCourseProblemByTeacherId(int teacherId, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course AS a, bjtu_course_problem AS b "
+				+ "where a.id=b.course_id and a.teacherId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseProblem> result = query.list();
+		return result;
+	}
 	
-	
+	//select b.* from bjtu_course AS a, bjtu_course_problem AS b where a.id=b.course_id and a.name like '%方%';
+	public List<CourseProblem> getCourseProblemByCourseName(String name, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course AS a, bjtu_course_problem AS b "
+				+ "where a.id=b.course_id and a.name like '%"+name+"%'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		//query.setInteger(0, teacherId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseProblem> result = query.list();
+		return result;
+	}
 }
