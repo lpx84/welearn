@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.welearn.dao.SchoolCalenderDao;
 import com.welearn.entity.SchoolCalender;
-import com.welearn.service.intef.SchoolCalendarService;
+import com.welearn.service.intef.MisService;
 
-public class SchoolCalendarServiceImpl implements SchoolCalendarService {
+public class MisServiceImpl implements MisService {
 	private SchoolCalenderDao schoolCalenderDao;
 	
 	public void setSchoolCalenderDao(SchoolCalenderDao schoolCalenderDao) {

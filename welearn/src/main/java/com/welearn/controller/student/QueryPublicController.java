@@ -18,7 +18,7 @@ import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
-import com.welearn.service.intef.SchoolCalendarService;
+import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.TimeUtil;
@@ -36,8 +36,8 @@ public class QueryPublicController {
 	EmptyRoomService emptyRoomService;
 	@Resource(name = "courseService")
 	CourseService courseService;
-	@Resource(name = "schoolCalendarService")
-	SchoolCalendarService schoolCalendarService;
+	@Resource(name = "misService")
+	MisService misService;
 
 	/**
 	 * 查询学校的空教室
@@ -92,7 +92,7 @@ public class QueryPublicController {
 			return view;
 		}
 		
-		ArrayList<SchoolCalender> list = schoolCalendarService.getSchoolCalender();
+		ArrayList<SchoolCalender> list = misService.getSchoolCalender();
 		if(list.isEmpty()){
 			view = new View("error", "wechat", "info", "未找到相应信息。");
 			view.addObject("info", "未找到相应信息。");

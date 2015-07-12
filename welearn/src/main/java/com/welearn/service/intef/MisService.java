@@ -8,7 +8,7 @@ import com.welearn.entity.SchoolCalender;
  * @author SikentKim
  *
  */
-public interface SchoolCalendarService {
+public interface MisService {
 	/**
 	 * 这是查询学校校历的方法
 	 * @return
