@@ -245,9 +245,16 @@ public class QueryPersonalController {
 		if (view != null) {
 			return view;
 		}
-        //获取当月流量
+		// 获取当月流量
 		NetFlow netFlow = studentService.getNetFlow(openid);
-		//生成当月流量显示页面并显示
+		// 表示获取当月流量出错，则返回至错误页面
+		if (netFlow == null) {
+			view = new View("error", "wechat", "info", "未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+		}
+
+		// 生成当月流量显示页面并显示
 		view = new View("student", "query-private", "net-flow", "本月流量");
 		view.addObject("netFlow", netFlow);
 		return view;
