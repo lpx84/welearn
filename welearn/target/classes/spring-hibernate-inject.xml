@@ -51,5 +51,17 @@
 		<property name="target" ref="courseServiceBase"></property>
 	</bean>
 
+	<!-- ===================== SchoolCalendar =========================== -->
+	<bean id="schoolCalenderDao" class="com.welearn.dao.SchoolCalenderDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="schoolCalendarServiceBase" class="com.welearn.service.impl.SchoolCalendarServiceImpl">
+		<property name="schoolCalenderDao" ref="schoolCalenderDao"></property>
+	</bean>
+	<bean name="schoolCalendarService" parent="transactionProxy">
+		<property name="target" ref="schoolCalendarServiceBase"></property>
+	</bean>
+
+
 </beans>
 
