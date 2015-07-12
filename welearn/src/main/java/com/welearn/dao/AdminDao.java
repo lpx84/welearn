@@ -33,7 +33,7 @@ public class AdminDao extends SuperDao {
 	}
 	
 	public Admin getAdminByID(int id){
-		this.hql = "FROM Admin AS u WHERE u.id=?";
+		this.hql = "FROM Admin AS u inner join fetch u.roleEntity as f WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (Admin) query.uniqueResult();
@@ -44,7 +44,7 @@ public class AdminDao extends SuperDao {
 	 * @return
 	 */
 	public List<Admin> getAdminByUsername(String username){
-		this.hql = "from Admin as a where a.title like '%"+username+"%'";
+		this.hql = "from Admin as a inner join fetch a.roleEntity as f where a.title like '%"+username+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		List<Admin> result = query.list();
 		return result;

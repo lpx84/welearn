@@ -37,14 +37,14 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public CourseHomework getCourseHomeworkById(int id){
-		this.hql = "FROM CourseHomework AS u WHERE u.id=?";
+		this.hql = "FROM CourseHomework AS u inner join fetch u.courseEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (CourseHomework) query.uniqueResult();
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByContent(String content, int pageNo, int pageItemNum){
-		this.hql = "from CourseHomework as a where a.content like '%"+content+"%'";
+		this.hql = "from CourseHomework as a inner join fetch a.courseEntity where a.content like '%"+content+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
@@ -53,7 +53,7 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByCourseId(int courseid, int pageNo, int pageItemNum){
-		this.hql = "FROM CourseHomework AS u WHERE u.courseId=?";
+		this.hql = "FROM CourseHomework AS u inner join fetch u.courseEntity WHERE u.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -63,7 +63,7 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByTitle(String title, int pageNo, int pageItemNum){
-		this.hql = "from CourseHomework as a where a.title like '%"+title+"%'";
+		this.hql = "from CourseHomework as a inner join fetch a.courseEntity where a.title like '%"+title+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
@@ -72,7 +72,7 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByDeadline(Date deadline, int pageNo, int pageItemNum){
-		this.hql = "select a from CourseHomework as a where deadline = ?";
+		this.hql = "select a from CourseHomework as a inner join fetch a.courseEntity where deadline = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, TimeUtil.timeFormat(deadline));
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -82,7 +82,7 @@ public class CourseHomeworkDao extends SuperDao {
 	}
 	
 	public List<CourseHomework> getCourseHomeworkByCreateTime(Date createTime, int pageNo, int pageItemNum){
-		this.hql = "select a from CourseHomework as a where create_time = ?";
+		this.hql = "select a from CourseHomework as a inner join fetch a.courseEntity where create_time = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setDate(0, createTime);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -101,6 +101,7 @@ public class CourseHomeworkDao extends SuperDao {
 	//select b.* from bjtu_course AS a, bjtu_course_homework AS b where a.id=b.course_id and a.course_no=1;
 	public List<CourseHomework> getCourseHomeworksByCourseNo(int courseNo, int pageNo, int pageItemNum) {
 		this.hql = "select b from Course AS a, CourseHomework AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.courseNo=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseNo);
@@ -118,6 +119,7 @@ public class CourseHomeworkDao extends SuperDao {
 	 */
 	public List<CourseHomework> getCourseHomeworksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
 		this.hql = "select b from Course AS a, CourseHomework AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);

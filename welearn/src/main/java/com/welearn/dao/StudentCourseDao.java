@@ -78,7 +78,9 @@ public class StudentCourseDao extends SuperDao{
 	 * @return
 	 */
 	public StudentCourse getStudentCourse(int studentID, int courseID){
-		this.hql = "FROM StudentCourse AS u WHERE u.courseId=? AND u.studentId=?";
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity inner join fetch u.courseEntity "
+				+ "WHERE u.courseId=? AND u.studentId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseID);
 		query.setInteger(1, studentID);

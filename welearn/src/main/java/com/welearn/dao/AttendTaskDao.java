@@ -36,7 +36,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByCourse(int courseId, int pageNo, int pageItemNum) {
-		this.hql = "FROM AttendTask AS u WHERE u.courseId=?";
+		this.hql = "FROM AttendTask AS u inner join fetch u.courseEntity WHERE u.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -53,7 +53,8 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByTime(Date start, Date end, int pageNo, int pageItemNum) {
-		this.hql = "select a from AttendTask as a"
+		this.hql = "select a from AttendTask as a "
+				+ "inner join fetch a.courseEntity"
 				+ "where startTime=? and endTime=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -72,6 +73,7 @@ public class AttendTaskDao extends SuperDao {
 	 */
 	public List<AttendTask> getAttendTasksByCourseNo(String courseNo, int pageNo, int pageItemNum) {
 		this.hql = "select b from Course AS a, AttendTask AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.courseNo=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
@@ -88,6 +90,7 @@ public class AttendTaskDao extends SuperDao {
 	 */
 	public List<AttendTask> getAttendTasksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
 		this.hql = "select b from Course AS a, AttendTask AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
@@ -104,6 +107,7 @@ public class AttendTaskDao extends SuperDao {
 	 */
 	public List<AttendTask> getAttendTasksByCourseName(String courseName, int pageNo, int pageItemNum) {
 		this.hql = "select b from Course AS a, AttendTask AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.coursId and a.name=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseName);
@@ -120,6 +124,7 @@ public class AttendTaskDao extends SuperDao {
 	 */
 	public List<AttendTask> getAttendTasksByStudentId(int studentId, int pageNo, int pageItemNum) {
 		this.hql = "select b from AttendRecord AS a, AttendTask AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.attendTaskId=b.id and a.studentid=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentId);

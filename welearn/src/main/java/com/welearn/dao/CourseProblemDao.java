@@ -34,14 +34,14 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public CourseProblem getCourseProblemById(int id){
-		this.hql = "FROM CourseProblem AS u WHERE u.id=?";
+		this.hql = "FROM CourseProblem AS u inner join fetch u.courseEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (CourseProblem) query.uniqueResult();
 	}
 	
 	public List<CourseProblem> getCourseProblemByAnswerId(int answerid, int pageNo, int pageItemNum){
-		this.hql = "from CourseProblem as a where a.answer=?";
+		this.hql = "from CourseProblem as a inner join fetch a.courseEntity where a.answer=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, answerid);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -51,7 +51,7 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public List<CourseProblem> getCourseProblemByComment(String comment, int pageNo, int pageItemNum){
-		this.hql = "from CourseProblem as a where a.comment like '%"+comment+"%'";
+		this.hql = "from CourseProblem as a inner join fetch a.courseEntity where a.comment like '%"+comment+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
@@ -60,7 +60,7 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public List<CourseProblem> getCourseProblemByContent(String content, int pageNo, int pageItemNum){
-		this.hql = "from CourseProblem as a where a.comment like '%"+content+"%'";
+		this.hql = "from CourseProblem as a inner join fetch a.courseEntity where a.comment like '%"+content+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
@@ -69,7 +69,7 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public List<CourseProblem> getCourseProblemByCourseId(int courseid, int pageNo, int pageItemNum){
-		this.hql = "from CourseProblem as a where a.courseId=?";
+		this.hql = "from CourseProblem as a inner join fetch a.courseEntity where a.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -88,6 +88,7 @@ public class CourseProblemDao extends SuperDao {
 	//select b.* from bjtu_course_option AS a, bjtu_course_problem AS b where a.problem_id=b.id and a.id=1;
 	public List<CourseProblem> getCourseProblemByCourseOptionId(int courseOptionId, int pageNo, int pageItemNum){
 		this.hql = "select b from CourseOption AS a, CourseProblem AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.problemId=b.id and a.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseOptionId);
@@ -107,6 +108,7 @@ public class CourseProblemDao extends SuperDao {
 	//select b.* from bjtu_course AS a, bjtu_course_problem AS b where a.id=b.course_id and a.course_no=1;
 	public List<CourseProblem> getCourseProblemByCourseNo(String courseNo, int pageNo, int pageItemNum){
 		this.hql = "select b from Course AS a, CourseProblem AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.courseNo='?'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
@@ -124,6 +126,7 @@ public class CourseProblemDao extends SuperDao {
 	 */
 	public List<CourseProblem> getCourseProblemByTeacherId(int teacherId, int pageNo, int pageItemNum){
 		this.hql = "select b from Course AS a, CourseProblem AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
@@ -136,6 +139,7 @@ public class CourseProblemDao extends SuperDao {
 	//select b.* from bjtu_course AS a, bjtu_course_problem AS b where a.id=b.course_id and a.name like '%方%';
 	public List<CourseProblem> getCourseProblemByCourseName(String name, int pageNo, int pageItemNum){
 		this.hql = "select b from Course AS a, CourseProblem AS b "
+				+ "inner join fetch b.courseEntity"
 				+ "where a.id=b.courseId and a.name like '%"+name+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		//query.setInteger(0, teacherId);
