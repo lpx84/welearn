@@ -56,8 +56,8 @@ public class AttendRecordDao extends SuperDao {
 	 */
 	public List<AttendRecord> getAttendRecordsByTime(Date startTimeStr, Date endTimeStr, int pageNo, int pageItemNum) {
 		this.hql = "select b from AttendTask AS a, AttendRecord AS b "
-				+ "where a.start_time='?' "
-				+ "and a.end_time=to_days'?' "
+				+ "where a.startTime=? "
+				+ "and a.endTime=? "
 				+ "and a.id = b.attendTaskId";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -78,7 +78,7 @@ public class AttendRecordDao extends SuperDao {
 	public List<AttendRecord> getAttendRecordsByCourseId(int courseId, int pageNo, int pageItemNum){
 		
 		this.hql = "select b from AttendTask AS a, AttendRecord AS b "
-				+ "where a.id = b.attend_task_id and a.course_id=?";
+				+ "where a.id = b.attendTaskId and a.courseId=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseId);
@@ -96,7 +96,7 @@ public class AttendRecordDao extends SuperDao {
 	public List<AttendRecord> getAttendRecordsByName(String name, int pageNo, int pageItemNum){
 		
 		this.hql = "select b from AttendTask AS a, AttendRecord AS b "
-				+ "where a.id = b.attend_task_id and a.name=?";
+				+ "where a.id = b.attendTaskId and a.name=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, name);
@@ -114,7 +114,7 @@ public class AttendRecordDao extends SuperDao {
 	public List<AttendRecord> getAttendRecordsByStrudentNo(String studentNo, int pageNo, int pageItemNum){
 		
 		this.hql = "select b from Student AS a, AttendRecord AS b "
-				+ "where a.id = b.student_id and a.student_no=?";
+				+ "where a.id = b.studentid and a.studentNo=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, studentNo);
@@ -133,7 +133,7 @@ public class AttendRecordDao extends SuperDao {
 	public List<AttendRecord> getAttendRecordsByStrudentTruename(String truename, int pageNo, int pageItemNum){
 		
 		this.hql = "select b from Student AS a, AttendRecord AS b "
-				+ "where a.id = b.student_id and a.true_name=?";
+				+ "where a.id = b.studentid and a.trueName=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, truename);

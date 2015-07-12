@@ -21,7 +21,7 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public boolean delCourseProblemByAnswerId(int answerid){
-		this.hql = "DELETE FROM CourseProblem AS u WHERE u.answer_id=?";
+		this.hql = "DELETE FROM CourseProblem AS u WHERE u.answer=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, answerid);
 		return query.executeUpdate() > 0;
@@ -41,7 +41,7 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public List<CourseProblem> getCourseProblemByAnswerId(int answerid, int pageNo, int pageItemNum){
-		this.hql = "from CourseProblem as a where a.answer_id=?";
+		this.hql = "from CourseProblem as a where a.answer=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, answerid);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -69,7 +69,7 @@ public class CourseProblemDao extends SuperDao {
 	}
 	
 	public List<CourseProblem> getCourseProblemByCourseId(int courseid, int pageNo, int pageItemNum){
-		this.hql = "from CourseProblem as a where a.course_id=?";
+		this.hql = "from CourseProblem as a where a.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -87,8 +87,8 @@ public class CourseProblemDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course_option AS a, bjtu_course_problem AS b where a.problem_id=b.id and a.id=1;
 	public List<CourseProblem> getCourseProblemByCourseOptionId(int courseOptionId, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course_option AS a, bjtu_course_problem AS b "
-				+ "where a.problem_id=b.id and a.id=?";
+		this.hql = "select b from CourseOption AS a, CourseProblem AS b "
+				+ "where a.problemId=b.id and a.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseOptionId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -106,8 +106,8 @@ public class CourseProblemDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_problem AS b where a.id=b.course_id and a.course_no=1;
 	public List<CourseProblem> getCourseProblemByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_problem AS b "
-				+ "where a.id=b.course_id and a.course_no='?'";
+		this.hql = "select b from Course AS a, CourseProblem AS b "
+				+ "where a.id=b.courseId and a.courseNo='?'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -123,8 +123,8 @@ public class CourseProblemDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseProblem> getCourseProblemByTeacherId(int teacherId, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_problem AS b "
-				+ "where a.id=b.course_id and a.teacherId=?";
+		this.hql = "select b from Course AS a, CourseProblem AS b "
+				+ "where a.id=b.courseId and a.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -135,8 +135,8 @@ public class CourseProblemDao extends SuperDao {
 	
 	//select b.* from bjtu_course AS a, bjtu_course_problem AS b where a.id=b.course_id and a.name like '%方%';
 	public List<CourseProblem> getCourseProblemByCourseName(String name, int pageNo, int pageItemNum){
-		this.hql = "select b from bjtu_course AS a, bjtu_course_problem AS b "
-				+ "where a.id=b.course_id and a.name like '%"+name+"%'";
+		this.hql = "select b from Course AS a, CourseProblem AS b "
+				+ "where a.id=b.courseId and a.name like '%"+name+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		//query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);

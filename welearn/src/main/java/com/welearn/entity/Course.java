@@ -34,6 +34,9 @@ public class Course {
 	@Column(name="description", columnDefinition="varchar(1024)")
 	private String description;
 	
+	@Column(name="teacher_id", columnDefinition="int")
+	private String teacherId;
+	
 	/**
 	 * 所属学院的ID
 	 */
@@ -117,5 +120,11 @@ public class Course {
 	public void setAcademyEntity(Academy academyEntity) {
 		this.academyEntity = academyEntity;
 	}
+	public String getTeacherId() {
+		return teacherId;
+	}
 
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
+	}
 }

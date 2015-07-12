@@ -34,7 +34,7 @@ public class MsgNewsItemDao extends SuperDao{
 	 * @return
 	 */
 	public boolean delMsgNewsItemByNewsID(int newsId){
-		this.hql = "DELETE FROM MsgNewsItem AS u WHERE u.news_id=?";
+		this.hql = "DELETE FROM MsgNewsItem AS u WHERE u.newsId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, newsId);
 		return query.executeUpdate() > 0;
@@ -66,7 +66,7 @@ public class MsgNewsItemDao extends SuperDao{
 	 * @return
 	 */
 	public MsgNewsItem getMsgNewsItemByNewsId(int NewsID) {
-		this.hql = "FROM MsgNewsItem AS u WHERE u.news_id=?";
+		this.hql = "FROM MsgNewsItem AS u WHERE u.newsId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, NewsID);
 		return (MsgNewsItem) query.uniqueResult();

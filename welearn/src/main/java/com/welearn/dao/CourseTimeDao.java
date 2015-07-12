@@ -59,7 +59,7 @@ public class CourseTimeDao extends SuperDao{
 	 * @return
 	 */
 	public List<CourseTime> getCourseTimeBySection(int section_no){
-		this.hql = "FROM CourseTime AS u WHERE u.section_no=?";
+		this.hql = "FROM CourseTime AS u WHERE u.sectionNo=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, section_no);
 		List<CourseTime> result = query.list();
