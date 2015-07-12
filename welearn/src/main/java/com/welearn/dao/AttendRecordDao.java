@@ -22,14 +22,14 @@ public class AttendRecordDao extends SuperDao {
 	}
 	
 	public boolean delAttendRecordByStudent(int studentId) {
-		this.hql = "DELETE FROM AttendRecord AS u WHERE u.student_id=?";
+		this.hql = "DELETE FROM AttendRecord AS u WHERE u.studentid=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentId);
 		return query.executeUpdate() > 0;
 	}
 	
 	public List<AttendRecord> getAttendRecordsByTask(int attendTaskId, int pageNo, int pageItemNum) {
-		this.hql = "FROM AttendRecord AS u WHERE u.attend_task_id=?";
+		this.hql = "FROM AttendRecord AS u WHERE u.attendTaskId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, attendTaskId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -38,7 +38,7 @@ public class AttendRecordDao extends SuperDao {
 	}
 	
 	public List<AttendRecord> getAttendRecordsByStudent(int studentId, int pageNo, int pageItemNum) {
-		this.hql = "FROM AttendRecord AS u WHERE u.student_id=?";
+		this.hql = "FROM AttendRecord AS u WHERE u.studentid=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -55,15 +55,15 @@ public class AttendRecordDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendRecord> getAttendRecordsByTime(Date startTimeStr, Date endTimeStr, int pageNo, int pageItemNum) {
-		this.hql = "select b from bjtu_attend_task AS a, bjtu_attend_record AS b "
-				+ "where to_days(a.start_time)=to_days('?') "
-				+ "and to_days(a.end_time)=to_days('?') "
-				+ "and a.id = b.attend_task_id";
+		this.hql = "select b from AttendTask AS a, AttendRecord AS b "
+				+ "where a.start_time='?' "
+				+ "and a.end_time=to_days'?' "
+				+ "and a.id = b.attendTaskId";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		
-		query.setString(0, TimeUtil.timeFormat(startTimeStr));
-		query.setString(1, TimeUtil.timeFormat(endTimeStr));
+		query.setDate(0, startTimeStr);
+		query.setDate(1, endTimeStr);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		return query.list();
@@ -77,7 +77,7 @@ public class AttendRecordDao extends SuperDao {
 	 */
 	public List<AttendRecord> getAttendRecordsByCourseId(int courseId, int pageNo, int pageItemNum){
 		
-		this.hql = "select b from bjtu_attend_task AS a, bjtu_attend_record AS b "
+		this.hql = "select b from AttendTask AS a, AttendRecord AS b "
 				+ "where a.id = b.attend_task_id and a.course_id=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -95,7 +95,7 @@ public class AttendRecordDao extends SuperDao {
 	 */
 	public List<AttendRecord> getAttendRecordsByName(String name, int pageNo, int pageItemNum){
 		
-		this.hql = "select b from bjtu_attend_task AS a, bjtu_attend_record AS b "
+		this.hql = "select b from AttendTask AS a, AttendRecord AS b "
 				+ "where a.id = b.attend_task_id and a.name=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -113,7 +113,7 @@ public class AttendRecordDao extends SuperDao {
 	 */
 	public List<AttendRecord> getAttendRecordsByStrudentNo(String studentNo, int pageNo, int pageItemNum){
 		
-		this.hql = "select b from bjtu_student AS a, bjtu_attend_record AS b "
+		this.hql = "select b from Student AS a, AttendRecord AS b "
 				+ "where a.id = b.student_id and a.student_no=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -132,7 +132,7 @@ public class AttendRecordDao extends SuperDao {
 	 */
 	public List<AttendRecord> getAttendRecordsByStrudentTruename(String truename, int pageNo, int pageItemNum){
 		
-		this.hql = "select b from bjtu_student AS a, bjtu_attend_record AS b "
+		this.hql = "select b from Student AS a, AttendRecord AS b "
 				+ "where a.id = b.student_id and a.true_name=?";
 		
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);

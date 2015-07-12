@@ -89,9 +89,9 @@ public class CourseDao  extends SuperDao {
 	 */
 	//select b.* from bjtu_course_time AS a, bjtu_course AS b where a.course_id=b.id and weekday=1;
 	public List<Course> getCoursesByWeekday(int weekday, int pageNo, int pageItemNum) {
-		this.hql = "select b from bjtu_course_time AS a, bjtu_course AS b "
+		this.hql = "select b.* from CourseTime AS a, Course AS b "
 				+ "where a.course_id=b.id and a.weekday=?";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql);
 		query.setInteger(0, weekday);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

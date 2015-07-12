@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.welearn.util.InfoCode;
+
 
 @Entity
 @Table(name="bjtu_student")
@@ -31,8 +33,24 @@ public class Student {
 	@Column(name="true_name", columnDefinition="varchar(50)", nullable=false)
 	private String trueName;
 	
+	/**
+	 * 默认是教务处密码
+	 */
 	@Column(name="pwd", columnDefinition="varchar(50)", nullable=false)
 	private String pwd;
+	
+	/**
+	 * mis系统密码
+	 */
+	@Column(name="mis_pwd", columnDefinition="varchar(50)", nullable=false)
+	private String misPwd;
+	
+	/**
+	 * 计费网关密码
+	 */
+	@Column(name="gateway_pwd", columnDefinition="varchar(50)", nullable=false)
+	private String gatewayPwd;
+	
 	
 	@Column(name="open_id", columnDefinition="varchar(50)")
 	private String openId;
@@ -52,7 +70,7 @@ public class Student {
 	@Column(name="enroll_year", columnDefinition="int(4)")
 	private Integer enrollYear;
 	
-	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
+	@Column(name="status", columnDefinition="tinyint(1) default 0", nullable=false)
 	private Integer status;
 	
 
@@ -146,6 +164,22 @@ public class Student {
 
 	public void setEnrollYear(Integer enrollYear) {
 		this.enrollYear = enrollYear;
+	}
+
+	public String getMisPwd() {
+		return misPwd;
+	}
+
+	public void setMisPwd(String misPwd) {
+		this.misPwd = misPwd;
+	}
+
+	public String getGatewayPwd() {
+		return gatewayPwd;
+	}
+
+	public void setGatewayPwd(String gatewayPwd) {
+		this.gatewayPwd = gatewayPwd;
 	}
 
 }
