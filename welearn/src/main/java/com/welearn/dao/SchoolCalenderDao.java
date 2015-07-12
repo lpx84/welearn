@@ -33,10 +33,12 @@ public class SchoolCalenderDao extends SuperDao{
 		return (SchoolCalender) query.uniqueResult();
 	}
 	
-	public SchoolCalender getSchoolCalenderById(String name){
-		this.hql = "FROM SchoolCalender AS u WHERE u.name=?";
+	public SchoolCalender getSchoolCalenderByName(String name){
+		this.hql = "FROM SchoolCalender AS u WHERE u.name like '%"+name+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setString(0, name);
+		//query.setString(0, name);
+		//query.setFirstResult((pageNo - 1) * pageItemNum);
+		//query.setMaxResults(pageItemNum);
 		return (SchoolCalender) query.uniqueResult();
 	}
 	

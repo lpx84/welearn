@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.welearn.entity.CourseNotify;
+import com.welearn.util.TimeUtil;
 
 public class CourseNotifyDao extends SuperDao {
 
@@ -27,13 +28,6 @@ public class CourseNotifyDao extends SuperDao {
 		return query.executeUpdate() > 0;
 	}
 	
-	public boolean delCourseNotifyByCreateTime(Date createTime){
-		this.hql = "DELETE FROM CourseNotify AS u WHERE u.create_time=?";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setDate(0, createTime);
-		return query.executeUpdate() > 0;
-	}
-	
 	public boolean updateCourseNotify(CourseNotify courseNotify){
 		this.sessionFactory.getCurrentSession().update(courseNotify);
 		//update的返回值为空，这里怎么判断是否成功
@@ -47,18 +41,78 @@ public class CourseNotifyDao extends SuperDao {
 		return (CourseNotify) query.uniqueResult();
 	}
 	
-	public List<CourseNotify> getCourseNotifyByCourseId(int courseid){
+	public List<CourseNotify> getCourseNotifyByCourseId(int courseid, int pageNo, int pageItemNum){
 		this.hql = "from CourseNotify as a where a.course_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseNotify> result = query.list();
 		return result;
 	}
 	
-	public List<CourseNotify> getCourseNotifyByCreateTime(Date createTime){
-		this.hql = "from CourseNotify as a where a.create_time=?";
+	public List<CourseNotify> getCourseNotifyByCreateTime(Date createTime, int pageNo, int pageItemNum){
+		this.hql = "select * from bjtu_course_notify where to_days(create_time)=to_days('?')";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setDate(0, createTime);
+		query.setString(0, TimeUtil.timeFormat(createTime));
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
+	/**
+	 * 根据课程号查询通知信息
+	 * @param courseNo
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	//select b.* from bjtu_course AS a, bjtu_course_notify AS b where a.id = b.course_id and course_no=1;
+	public List<CourseNotify> getCourseNotifyByCourseNo(String courseNo, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course AS a, bjtu_course_notify AS b "
+				+ "where a.id = b.course_id and a.course_no=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, courseNo);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
+	/**
+	 * 通过老师的id查找提示信息
+	 * @param teacherID
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public List<CourseNotify> getCourseNotifyByTeacherId(int teacherID, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course AS a, bjtu_course_notify AS b "
+				+ "where a.id = b.course_id and a.teacher_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherID);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
+	/**
+	 * 通过课程名查找课程信息，支持模糊查询
+	 * @param name
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	//select b.* from bjtu_course AS a, bjtu_course_notify AS b where a.id = b.course_id and a.name like '%方%';
+	public List<CourseNotify> getCourseNotifyByCourseName(String name, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course AS a, bjtu_course_notify AS b "
+				+ "where a.id = b.course_id and a.name like '%"+name+"%'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		//query.setInteger(0, teacherID);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseNotify> result = query.list();
 		return result;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 
+import com.welearn.entity.CourseNotify;
 import com.welearn.entity.CourseOption;
 
 public class CourseOptionDao extends SuperDao {
@@ -39,17 +40,41 @@ public class CourseOptionDao extends SuperDao {
 		return (CourseOption) query.uniqueResult();
 	}
 	
-	public List<CourseOption> getCourseOptionByProblemId(int problemId){
+	public List<CourseOption> getCourseOptionByProblemId(int problemId, int pageNo, int pageItemNum){
 		this.hql = "from CourseOption as a where a.problem_id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseOption> result = query.list();
 		return result;
 	}
 	
-	public List<CourseOption> getCourseOptionByContent(String content){
+	public List<CourseOption> getCourseOptionByContent(String content, int pageNo, int pageItemNum){
 		this.hql = "from CourseOption as a where a.content like '%"+content+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
 		List<CourseOption> result = query.list();
 		return result;
 	}
+	
+	/**
+	 * 根据课程编号查找options
+	 * @param CourseID
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	//select b.* from bjtu_course_problem AS a, bjtu_course_option AS b where a.id=b.problem_id and a.course_id=1;
+	public List<CourseOption> getCourseOptionsByCourseId(int CourseID, int pageNo, int pageItemNum){
+		this.hql = "select b.* from bjtu_course_problem AS a, bjtu_course_option AS b "
+				+ "where a.id=b.problem_id and a.course_id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, CourseID);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseOption> result = query.list();
+		return result;
+	}
+	
 }
