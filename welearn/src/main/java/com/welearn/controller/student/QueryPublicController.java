@@ -1,5 +1,6 @@
 package com.welearn.controller.student;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.entity.SchoolCalender;
 import com.welearn.model.Building;
 import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
-import com.welearn.service.intef.SchoolCalendarService;
+import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.TimeUtil;
@@ -34,8 +36,8 @@ public class QueryPublicController {
 	EmptyRoomService emptyRoomService;
 	@Resource(name = "courseService")
 	CourseService courseService;
-	@Resource(name = "schoolCalendarService")
-	SchoolCalendarService schoolCalendarService;
+	@Resource(name = "misService")
+	MisService misService;
 
 	/**
 	 * 查询学校的空教室
@@ -89,8 +91,16 @@ public class QueryPublicController {
 			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
 		}
+		
+		ArrayList<SchoolCalender> list = misService.getSchoolCalender();
+		if(list.isEmpty()){
+			view = new View("error", "wechat", "info", "未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+		}
+		
 		view = new View("student", "query-public", "school-schedule", "校历");
-		view.addObject("list", null);
+		view.addObject("list", list);
 		return view;
 	}
 
