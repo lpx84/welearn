@@ -22,28 +22,34 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		this.msgReplyIndexDao = msgReplyIndexDao;
 	}
 
-	public String getMsgReply(MsgReceive msg) {
-		// TODO Auto-generated method stub
-		String keyword = ((MsgReceiveText) msg).getContent();
-		// Integer rid = msgReplyIndexDao.getIndexByKeyword(keyword).getId();
-		// 图灵机器人
-		String tulingMsg = null;
-		try {
-			tulingMsg = new TulingHandler().getTulingMsg(keyword);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (tulingMsg != null) {
-			MsgReplyText text = new MsgReplyText();
-			text.setContent(tulingMsg);
-			return text.getReplyXML(msg.getFromUserName(), msg.getToUserName());
-		} else {
-			return XmlUtil.getNullReplyText(msg.getFromUserName(),
-					msg.getToUserName());
-		}
-
-	}
+//	public String getMsgReply(MsgReceive msg) {
+//		// TODO Auto-generated method stub
+//		
+//		String keyword = ((MsgReceiveText)msg).getContent();
+//		// 图灵机器人
+//		String tulingMsg = null;
+//		try {
+//			
+//			JSONObject json = JSONObject.fromObject(new TulingHandler().getTulingMsg(keyword));
+//			if(json.get("code").equals(100000)) {
+//				tulingMsg = json.getString("text");
+//			} else {
+//				tulingMsg = "未处理的返回类型！";
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if (tulingMsg != null) {
+//			MsgReplyText text = new MsgReplyText();
+//			text.setContent(tulingMsg);
+//			return text.getReplyXML(msg.getFromUserName(), msg.getToUserName());
+//		} else {
+//			return XmlUtil.getNullReplyText(msg.getFromUserName(),
+//					msg.getToUserName());
+//		}
+//
+//	}
 
 	/**
 	 * 微信请求返回的格式说明 

@@ -26,14 +26,14 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/common.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/responsive.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/font-awesome-4.2.0/css/font-awesome.min.css" />
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/css/teacher-global.css">
 
 <!-- Fides Admin JS -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/aui-production.min.js"></script>
 <!-- Global JS -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/student-global.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/teacher-global.js"></script>
 
 <script type="text/javascript">
 jQuery(window).load(

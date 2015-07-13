@@ -9,7 +9,7 @@ public interface WechatMsgService {
 	 * @param msg
 	 * @return
 	 */
-	public String getMsgReply(MsgReceive msg);
+	//public String getMsgReply(MsgReceive msg);
 	
 	/**
 	 * 根据code获得对应的openid
