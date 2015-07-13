@@ -119,6 +119,15 @@ public class TeacherController {
 	}
 	
 	@RequestMapping("test")
+	public String getCourseById(
+			) {
+		
+		teacherService.getCourseById(1).toString();
+		
+		return null;
+	}
+	
+	@RequestMapping("test")
 	public String test(
 			) {
 		
