@@ -25,35 +25,35 @@ import com.welearn.view.View;
 @RequestMapping("/test/*")
 public class TestController {
 
-	@Resource(name = "wechatMsgService")
-	WechatMsgService wechatMsgService;
-
-	@Resource(name = "courseService")
-	CourseService courseService;
-
-	/*
-	 * @Resource(name = "testAmoseService") TestAmoseService testAmoseService;
-	 */
-
-	@RequestMapping("test")
-	@Authentication(role = InfoCode.ROLE_STUDENT)
-	@ResponseBody
-	public String test(@RequestParam("name") String str) {
-
-		return WechatConfig.token;
-	}
-
-	@RequestMapping("testHql")
-	@Authentication(role = InfoCode.ROLE_STUDENT)
-	@ResponseBody
-	public String testHql() {
-		List<Course> course = courseService.getCourses();
-		System.out.println("--------------");
-		for (int i = 0; i < course.size(); i++) {
-			System.out.println(course.get(i).toString());
-		}
-		System.out.println("--------------");
-		return null;
-	}
+//	@Resource(name = "wechatMsgService")
+//	WechatMsgService wechatMsgService;
+//
+//	@Resource(name = "courseService")
+//	CourseService courseService;
+//
+//	/*
+//	 * @Resource(name = "testAmoseService") TestAmoseService testAmoseService;
+//	 */
+//
+//	@RequestMapping("test")
+//	@Authentication(role = InfoCode.ROLE_STUDENT)
+//	@ResponseBody
+//	public String test(@RequestParam("name") String str) {
+//
+//		return WechatConfig.token;
+//	}
+//
+//	@RequestMapping("testHql")
+//	@Authentication(role = InfoCode.ROLE_STUDENT)
+//	@ResponseBody
+//	public String testHql() {
+//		List<Course> course = courseService.getCourses();
+//		System.out.println("--------------");
+//		for (int i = 0; i < course.size(); i++) {
+//			System.out.println(course.get(i).toString());
+//		}
+//		System.out.println("--------------");
+//		return null;
+//	}
 
 }

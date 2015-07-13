@@ -63,7 +63,7 @@
 	</bean>
 
 	<!-- ===================== Teacher =========================== -->
-	<bean id="teacherDao" class="com.welearn.teacherDao">
+	<bean id="teacherDao" class="com.welearn.dao.TeacherDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="teacherServiceBase" class="com.welearn.service.impl.TeacherServiceImpl">
