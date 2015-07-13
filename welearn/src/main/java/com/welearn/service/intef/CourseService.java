@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.welearn.entity.Course;
 import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
-import com.welearn.model.Course;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 
@@ -61,5 +61,6 @@ public interface CourseService {
 	 * @param pageno
 	 * @return
 	 */
-	public ArrayList<com.welearn.entity.Course> queryCoursesByKeyword(String keyword,int pageno);
+	public ArrayList<Course> queryCoursesByKeyword(String keyword,int pageno);
+	
 }

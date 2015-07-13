@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.entity.Course;
 import com.welearn.entity.SchoolCalender;
 import com.welearn.model.Building;
-import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
 import com.welearn.model.LostThing;
 import com.welearn.service.intef.CourseService;
@@ -49,7 +49,8 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("empty-room")
-	public View queryEmptyRoom(@RequestParam(value = "code") String code,HttpSession session) {
+	public View queryEmptyRoom(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -70,8 +71,8 @@ public class QueryPublicController {
 		String curWeek = TimeUtil.getWeekOfDate(new Date());
 		view.addObject("curDate", curDate);
 		view.addObject("curWeek", curWeek);
-		
-		studentService.setSession(session, openid); 
+
+		studentService.setSession(session, openid);
 		// 获取空教室列表
 		List<EmptyRoom> roomList = emptyRoomService.getEmptyRooms(new Date());
 		view.addObject("roomList", roomList);
@@ -86,7 +87,8 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-schedule")
-	public View schoolSchedule(@RequestParam(value = "code") String code,HttpSession session) {
+	public View schoolSchedule(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -96,15 +98,15 @@ public class QueryPublicController {
 			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
 		}
-		
+
 		ArrayList<SchoolCalender> list = misService.getSchoolCalender();
-		if(list.isEmpty()){
+		if (list.isEmpty()) {
 			view = new View("error", "wechat", "info", "未找到相应信息。");
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
-		
-		studentService.setSession(session, openid); 
+
+		studentService.setSession(session, openid);
 		view = new View("student", "query-public", "school-schedule", "校历");
 		view.addObject("list", list);
 		return view;
@@ -117,7 +119,8 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-course")
-	public View schoolCourse(@RequestParam(value = "code") String code,HttpSession session) {
+	public View schoolCourse(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -127,8 +130,8 @@ public class QueryPublicController {
 			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
 		}
-		
-		studentService.setSession(session, openid); 
+
+		studentService.setSession(session, openid);
 		view = new View("student", "query-public", "school-course-search",
 				"查询全校课程");
 		return view;
@@ -149,15 +152,15 @@ public class QueryPublicController {
 		View view;
 		// 用课程服务类查询具体的课程信息
 		Course course = courseService.queryCourse(courseid);
-		if(course == null){
-			view = new View("error","wechat","info","课程不存在！");
+		if (course == null) {
+			view = new View("error", "wechat", "info", "课程不存在！");
 			view.addObject("info", "课程不存在！");
-		}else{
+		} else {
 			view = new View("student", "query-public", "school-course-detail",
 					course.getName());
 			view.addObject("course", course);
-		}		
-		
+		}
+
 		return view;
 	}
 
@@ -170,15 +173,16 @@ public class QueryPublicController {
 	@RequestMapping("school-course-query")
 	@Authentication()
 	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
-		View view ;
-		ArrayList<com.welearn.entity.Course> list = courseService.queryCoursesByKeyword(keyword, 1);
-		//未找到相应信息
-		if(list.isEmpty()){
+		View view;
+		ArrayList<com.welearn.entity.Course> list = courseService
+				.queryCoursesByKeyword(keyword, 1);
+		// 未找到相应信息
+		if (list.isEmpty()) {
 			view = new View("error", "wechat", "info", "未找到相应课程。");
 			view.addObject("info", "未找到相应课程。");
 			return view;
 		}
-				
+
 		// 创建显示页面
 		view = new View("student", "query-public", "school-course-list",
 				"课程查询结果");
@@ -186,7 +190,7 @@ public class QueryPublicController {
 		view.addObject("key", keyword);
 		return view;
 	}
-	
+
 	/**
 	 * 查询全校课程,用ajax调用
 	 * 
@@ -199,15 +203,12 @@ public class QueryPublicController {
 	@ResponseBody
 	public String schoolCourseQueryPage(@RequestParam("pageNo") Integer pageNo,
 			@RequestParam("keyword") String keyword) {
-		ArrayList<com.welearn.entity.Course> list = courseService.queryCoursesByKeyword(keyword, pageNo);
+		ArrayList<com.welearn.entity.Course> list = courseService
+				.queryCoursesByKeyword(keyword, pageNo);
 		String jsonStr = JsonUtil.listToJSONString(list, null);
-		System.out.println(pageNo);
-		System.out.println(keyword);
 		return jsonStr;
 	}
 
-
-	
 	/**
 	 * 失物招领查询
 	 * 
@@ -215,7 +216,8 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("lost-thing")
-	public View lostThingDetail(@RequestParam(value = "code") String code,HttpSession session) {
+	public View lostThingDetail(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -234,14 +236,13 @@ public class QueryPublicController {
 			return view;
 		}
 
-		studentService.setSession(session, openid); 
-		
+		studentService.setSession(session, openid);
+
 		view = new View("student", "query-private", "lost-thing", "失物信息");
 		view.addObject("list", list);
 		return view;
-	}	
-	
-	
+	}
+
 	/**
 	 * 失物招领查询,AJAX请求
 	 * 
@@ -255,8 +256,8 @@ public class QueryPublicController {
 
 		// 获取当月流量
 		ArrayList<LostThing> list = misService.queryLostThings(pageno);
-        String jsonString = JsonUtil.listToJSONString(list, null);
-        //System.out.println(jsonString);
+		String jsonString = JsonUtil.listToJSONString(list, null);
+		// System.out.println(jsonString);
 		return jsonString;
 	}
 }

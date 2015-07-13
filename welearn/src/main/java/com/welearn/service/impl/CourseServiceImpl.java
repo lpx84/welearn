@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.welearn.dao.CourseDao;
+import com.welearn.entity.Course;
 import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
-import com.welearn.model.Course;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 import com.welearn.service.intef.CourseService;
@@ -41,17 +41,8 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	public Course queryCourse(int courseid) {
-		// return courseDao.getCourse(courseid);
 		// 这里应该通过学习的接口查询课程,先进行模拟
-		Course course = new Course();
-		course.setCapacity("80");
-		course.setDescription("这是张奶奶的课");
-		course.setName("系统分析");
-		course.setPlace("逸夫楼 yf104");
-		course.setSchool("软件学院");
-		course.setTeacher("张红延");
-		course.setTime("1-16周 周一第4节");
-
+		Course course = courseDao.getCourse(courseid);
 		return course;
 	}
     //根据openid获取该同学各门课的成绩
