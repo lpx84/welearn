@@ -31,12 +31,12 @@ public class MisServiceImpl implements MisService {
 		ArrayList<LostThing> list = new ArrayList<LostThing>();
 		try {
 			//获取该页面的信息
-			Element ele = misHandler.getLostThing(1);
+			Element ele = misHandler.getLostThing(pageno);
             
 			LostThing lostThing = new LostThing();
 			Elements eles = ele.getElementsByTag("tr");
 			int size = eles.size();
-			System.out.println(size);
+			
 			//该页面不存在失物信息
 			if(size<=4)
 				return null;

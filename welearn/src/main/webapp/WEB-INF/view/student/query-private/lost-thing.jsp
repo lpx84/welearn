@@ -51,10 +51,9 @@
         <p class="pad0L title">失物招领布告栏</p>
     </h3>
     <div class="content">
-    <%int count = 1; %>
     <c:forEach var="item" items="${list }">
   
-        <div id="rcd<%=count %>"  class="rcd">
+        <div class="rcd">
             <div class="r1">
                 <div class="name"><span class="lab">物品：</span>${item.getThing() }</div>
                 <div class="status">${item.getState() }</div>
@@ -66,8 +65,7 @@
             </div>
         </div>
     </c:forEach>
-
-    
+    </div>
     <!-- 当前页号，下一次请求在此基础上加1 -->
     <input id="pageNo" type="hidden" value="1">
     <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
@@ -81,8 +79,10 @@ function fetchData() {
 	//记录当前页数
 	pageno++;
 	//用ajax获取页面信息
+
 	$.ajax({
-		url: "<%=request.getContextPath()%>/query/personal/lost-thing",
+		
+		url: $("#appName").val()+"/query/personal/more-lost-thing",
 		type: "POST",
 		data: {
 			pageno: pageno,
@@ -90,11 +90,44 @@ function fetchData() {
 		timeout: 5000,
 		dataType: "JSON",
 		success: function(res) {
-           
+			if(res.code == 100) {
+				alert(res.msg);
+			} else {
+				console.log(res);
+				joinData(res);
+			}
 		},
-		complete: completeHandle
-	}); 
+		complete: completeHandler
+	});
+	
 }
+
+function joinData(res) {
+	
+	var html = new Array(
+		"<div class='rcd'><div class='r1'><div class='name'><span class='lab'>物品：</span>",
+		"thingname",
+		"</div><div class='status'>",
+		"state",
+		"</div></div><div class='r2'><span class='lab'>描述：</span>",
+		"descri",
+		"</div><div class='r3'><div class='time'><i class='fa fa-clock-o'></i>&nbsp;",
+		"time",
+		"</div><div class='place'><span class='lab'>拾到地点：</span>",
+		"place",
+		"</div></div></div>"
+	);
+	for(var i=0; i<res.length; ++i) {
+		html[1]=res[i].thing;
+		html[3]=res[i].state;
+		html[5]=res[i].describe;
+		html[7]=res[i].time;
+		html[9]=res[i].place;
+		$(".content").append(html.join(''));
+	}
+}
+
+
 </script>
 </body>
 </html>

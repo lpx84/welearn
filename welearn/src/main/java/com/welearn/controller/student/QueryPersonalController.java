@@ -304,12 +304,14 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("more-lost-thing")
+	@Authentication
+	@ResponseBody
 	public String moreLostThingDetail(@RequestParam(value = "pageno") int pageno) {
 
 		// 获取当月流量
 		ArrayList<LostThing> list = misService.queryLostThings(pageno);
         String jsonString = JsonUtil.listToJSONString(list, null);
-
+        //System.out.println(jsonString);
 		return jsonString;
 	}
 
