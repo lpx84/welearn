@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.welearn.entity.Course;
-import com.welearn.entity.CourseProblem;
 
 public class CourseDao  extends SuperDao {
 
@@ -64,6 +63,7 @@ public class CourseDao  extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByTeacher(int teacherId, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -73,6 +73,7 @@ public class CourseDao  extends SuperDao {
 		return query.list();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByName(String name, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.name like '%"+name+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -81,6 +82,7 @@ public class CourseDao  extends SuperDao {
 		return query.list();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByAcademyName(String academyName, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE a.name like '%"+academyName+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);

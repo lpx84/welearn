@@ -186,10 +186,19 @@ public class QueryPublicController {
 	@RequestMapping("school-course-query")
 	@Authentication()
 	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
+		View view ;
+		ArrayList<com.welearn.entity.Course> list = courseService.queryCoursesByKeyword(keyword, 1);
+		//未找到相应信息
+		if(list.isEmpty()){
+			view = new View("error", "wechat", "info", "未找到相应课程。");
+			view.addObject("info", "未找到相应课程。");
+			return view;
+		}
+				
 		// 创建显示页面
-		View view = new View("student", "query-public", "school-course-list",
+		view = new View("student", "query-public", "school-course-list",
 				"课程查询结果");
-
+		view.addObject("list", list);
 		return view;
 	}
 	
