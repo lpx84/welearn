@@ -162,22 +162,6 @@ public class QueryPublicController {
 	}
 
 	/**
-	 * 查询全校课程,用ajax调用
-	 * 
-	 * @param pageNo
-	 * @param keyword
-	 * @return
-	 */
-	@RequestMapping("school-course-query-page")
-	@Authentication()
-	@ResponseBody
-	public String schoolCourseQueryPage(@RequestParam("pageNo") Integer pageNo,
-			@RequestParam("keyword") String keyword) {
-
-		return null;
-	}
-
-	/**
 	 * 查询全校课程,显示查询结果页面
 	 * 
 	 * @param keyword
@@ -199,8 +183,30 @@ public class QueryPublicController {
 		view = new View("student", "query-public", "school-course-list",
 				"课程查询结果");
 		view.addObject("list", list);
+		view.addObject("key", keyword);
 		return view;
 	}
+	
+	/**
+	 * 查询全校课程,用ajax调用
+	 * 
+	 * @param pageNo
+	 * @param keyword
+	 * @return
+	 */
+	@RequestMapping("school-course-query-page")
+	@Authentication()
+	@ResponseBody
+	public String schoolCourseQueryPage(@RequestParam("pageNo") Integer pageNo,
+			@RequestParam("keyword") String keyword) {
+		ArrayList<com.welearn.entity.Course> list = courseService.queryCoursesByKeyword(keyword, pageNo);
+		String jsonStr = JsonUtil.listToJSONString(list, null);
+		System.out.println(pageNo);
+		System.out.println(keyword);
+		return jsonStr;
+	}
+
+
 	
 	/**
 	 * 失物招领查询
