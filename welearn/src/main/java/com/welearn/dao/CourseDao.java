@@ -80,6 +80,15 @@ public class CourseDao  extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
+	
+	public List<Course> getCoursesByAcademyName(String academyName, int pageNo, int pageItemNum) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE a.name like '%"+academyName+"%'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
+	}
+	
 	/**
 	 * 通过weekday查找课程列表
 	 * @param weekday
