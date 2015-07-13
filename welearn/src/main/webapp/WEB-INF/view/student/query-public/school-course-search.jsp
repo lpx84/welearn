@@ -50,29 +50,10 @@
 		if (event.keyCode == 13) {
 			var key = $("#keyword").val();
 			if('' != key) {
-				/*
-				$.ajax({
-					url: "",
-					type: "POST",
-					data: {
-						keyword: key
-					},
-					dataType: "JSON",
-					success: function(res) {
-						
-					},
-					complete: completeHandler
-				});
-				*/
-				$("#search-course").submit();
-				//location.href = 'school-course-list.html';
-			}
-			
+				$("#search-course").submit();				
+			}			
 		}
 	}
-	
-	
-
 </script>
 </body>
 </html>

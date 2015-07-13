@@ -251,7 +251,7 @@ public class QueryPersonalController {
 			return view;
 		}
 		// 获取当月流量
-		NetFlow netFlow = studentService.getNetFlow(openid);
+		NetFlow netFlow = misService.getNetFlow(openid);
 		// 表示获取当月流量出错，则返回至错误页面
 		if (netFlow == null) {
 			view = new View("error", "wechat", "info", "未找到相应信息。");
