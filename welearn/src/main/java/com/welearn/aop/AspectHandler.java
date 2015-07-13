@@ -14,11 +14,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+import com.welearn.util.InfoCode;
 import com.welearn.util.JsonUtil;
+import com.welearn.view.InfoView;
 import com.welearn.view.View;
 
 
@@ -67,31 +70,37 @@ public class AspectHandler {
         Object target = joinPoint.getTarget();
         Method method = this.getMethodByClassAndName(target.getClass(), methodName); //得到拦截的方法  
         Object[] args = joinPoint.getArgs();	//方法的参数
-        getAnnotationByMethod(method,Authentication.class);
         HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
-        Parameter[] s = method.getParameters();
-        for(Parameter t:s) {
-        	System.out.println(t.getName());
+        
+        Role role = (Role)getAnnotationByMethod(method ,Role.class );
+        Integer roleId = role.id();
+        boolean isLogin = false;
+        ModelAndView view = new View("admin","admin","login","登录");
+        if(InfoCode.ROLE_STUDENT == roleId) {
+        	isLogin = null != session.getAttribute("sid");
+        	view = new InfoView("抱歉，登录超时，请从微信重新进入！");
+        } else if(InfoCode.ROLE_TEACHER == roleId) {
+        	isLogin = null != session.getAttribute("tid");
+        	view = new View("teacher","teacher","login","教师登录");
+        } else if(InfoCode.ROLE_ADMIN == roleId) {
+        	isLogin = null != session.getAttribute("aid");
+        	view = new View("admin","admin","login","管理员登录");
         }
         
-        Object o1 = method.getDefaultValue();
-        Object o2 = method.getParameterAnnotations();
-        
-        return joinPoint.proceed();
-        
-//    	if(session.getAttribute("aid") != null) {	//当aid不为空的时候  视为已经登录
-//            return joinPoint.proceed();
-//    	} else {
-//            Class returnType = method.getReturnType();//得到方法返回值类型  
-//            if(returnType == String.class) { //如果返回值为String
-//                return JsonUtil.getJsonLoginTimeOut();
-//            } else if(returnType == View.class) {
-//            	return new View("admin","admin","login","登录"); 
-//            } else {  //当使用Ajax的时候 可能会出现这种情况  
-//                
-//            	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");
-//            }
-//    	}
+    	if(isLogin) {	//当aid不为空的时候  视为已经登录
+            return joinPoint.proceed();
+    	} else {
+            Class returnType = method.getReturnType();//得到方法返回值类型  
+            if(returnType == String.class) { //如果返回值为String
+                return JsonUtil.getJsonLoginTimeOut();
+            } else if(returnType == View.class) {
+            	
+            	return view;
+            } else {  //当使用Ajax的时候 可能会出现这种情况  
+                
+            	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");
+            }
+    	}
 	}
 	
 	
