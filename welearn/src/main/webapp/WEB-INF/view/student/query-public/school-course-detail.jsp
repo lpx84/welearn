@@ -24,23 +24,23 @@
         </li>
         <li>
             <span class="float-left font-gray">开课学院</span>
-            <span class="notification-text float-right list-content">${course.getSchool() }</span>
+            <span class="notification-text float-right list-content">${course.getAcademyEntity().getName() }</span>
         </li>
         <li>
             <span class="float-left font-gray">任课老师</span>
-            <span class="notification-text float-right list-content">${course.getTeacher() }</span>
+            <span class="notification-text float-right list-content">${course.getTeacherId() }</span>
         </li>
         <li>
             <span class="float-left font-gray">上课时间</span>
-            <span class="notification-text float-right list-content">${course.getTime() }</span>
+            <span class="notification-text float-right list-content">周一第四节</span>
         </li>
         <li>
             <span class="float-left font-gray">上课地点</span>
-            <span class="notification-text float-right list-content">${course.getPlace() }</span>
+            <span class="notification-text float-right list-content">逸夫楼</span>
         </li>
         <li>
             <span class="float-left font-gray">课容量</span>
-            <span class="notification-text float-right list-content">${course.getCapacity() }</span>
+            <span class="notification-text float-right list-content">60</span>
         </li>
         <li style="height: auto;">
             <span class="float-left font-gray">课程简介</span>
