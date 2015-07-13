@@ -72,8 +72,9 @@ public class AspectHandler {
         Object[] args = joinPoint.getArgs();	//方法的参数
         HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
         
-        Role role = (Role)getAnnotationByMethod(method ,Role.class );
-        Integer roleId = role.id();
+        Authentication a = (Authentication)getAnnotationByMethod(method ,Authentication.class );
+        
+        Integer roleId = a.role();
         boolean isLogin = false;
         ModelAndView view = new View("admin","admin","login","登录");
         if(InfoCode.ROLE_STUDENT == roleId) {
@@ -87,20 +88,19 @@ public class AspectHandler {
         	view = new View("admin","admin","login","管理员登录");
         }
         
-    	if(isLogin) {	//当aid不为空的时候  视为已经登录
-            return joinPoint.proceed();
-    	} else {
-            Class returnType = method.getReturnType();//得到方法返回值类型  
-            if(returnType == String.class) { //如果返回值为String
-                return JsonUtil.getJsonLoginTimeOut();
-            } else if(returnType == View.class) {
-            	
-            	return view;
-            } else {  //当使用Ajax的时候 可能会出现这种情况  
-                
-            	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");
-            }
-    	}
+//    	if(isLogin) {	//当aid不为空的时候  视为已经登录
+//            return joinPoint.proceed();
+//    	} else {
+//            Class returnType = method.getReturnType();//得到方法返回值类型  
+//            if(returnType == String.class) { //如果返回值为String
+//                return JsonUtil.getJsonLoginTimeOut();
+//            } else if(returnType == View.class || returnType == InfoView.class) {
+//            	return view;
+//            } else {  //当使用Ajax的时候 可能会出现这种情况  
+//            	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");
+//            }
+//    	}
+        return joinPoint.proceed();
 	}
 	
 	

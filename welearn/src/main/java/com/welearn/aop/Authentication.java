@@ -18,5 +18,5 @@ import com.welearn.util.InfoCode;
 @Target(ElementType.METHOD)
 public @interface Authentication {
 
-	public Role role();
+	public int role() default InfoCode.ROLE_STUDENT;
 }

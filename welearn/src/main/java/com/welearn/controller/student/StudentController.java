@@ -65,7 +65,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping("test")
-	@Authentication(role=@Role())
+	@Authentication()
 	@ResponseBody
 	public String test() {
 		Student s = studentService.getStudentByStudentNo("12301124");

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.aop.Role;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
@@ -20,6 +21,7 @@ import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
+import com.welearn.util.InfoCode;
 import com.welearn.view.View;
 
 @Controller
@@ -63,7 +65,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-schedule-week")
-	@Authentication()
+	@Authentication(role=InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo") Integer weekNo) {
 
@@ -80,7 +82,7 @@ public class QueryPersonalController {
 	 * @return json格式的字符串
 	 */
 	@RequestMapping("course-schedule-weekday")
-	@Authentication()
+	@Authentication(role=InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo") Integer weekNo,
 			@RequestParam("weekday") Integer weekday) {
@@ -220,7 +222,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("e-card/consume-detail")
-	@Authentication()
+	@Authentication(role=InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String ecardConsumeDetail(
 			@RequestParam(value = "startTime") String startTime,
