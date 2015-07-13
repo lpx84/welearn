@@ -72,14 +72,14 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByCourseNo(String courseNo, int pageNo, int pageItemNum) {
-		this.hql = "select b from Course AS a, AttendTask AS b "
+		/*this.hql = "select b from Course AS a, AttendTask AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.courseNo=?";
+				+ "where a.id=b.courseId and a.courseNo=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	/**
 	 * 根据老师的ID查找签到任务
@@ -89,14 +89,14 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
-		this.hql = "select b from Course AS a, AttendTask AS b "
+		/*this.hql = "select b from Course AS a, AttendTask AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.teacherId=?";
+				+ "where a.id=b.courseId and a.teacherId=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	/**
 	 * 根据课程名字查找签到任务
@@ -106,14 +106,14 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByCourseName(String courseName, int pageNo, int pageItemNum) {
-		this.hql = "select b from Course AS a, AttendTask AS b "
+		/*this.hql = "select b from Course AS a, AttendTask AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.coursId and a.name=?";
+				+ "where a.id=b.coursId and a.name=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseName);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	/**
 	 * 通过学生的id查询他所签过到的任务
@@ -123,14 +123,14 @@ public class AttendTaskDao extends SuperDao {
 	 * @return
 	 */
 	public List<AttendTask> getAttendTasksByStudentId(int studentId, int pageNo, int pageItemNum) {
-		this.hql = "select b from AttendRecord AS a, AttendTask AS b "
+		/*this.hql = "select b from AttendRecord AS a, AttendTask AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.attendTaskId=b.id and a.studentid=?";
+				+ "where a.attendTaskId=b.id and a.studentid=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	
 	public boolean updateAttendTask(AttendTask attendTask) {

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.welearn.aop.Authentication;
 import com.welearn.dao.AcademyDao;
 import com.welearn.entity.Academy;
+import com.welearn.entity.Course;
+import com.welearn.service.intef.CourseService;
+import com.welearn.service.intef.TestAmoseService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
 import com.welearn.util.WechatConfig;
@@ -24,6 +27,13 @@ public class TestController {
 
 	@Resource(name = "wechatMsgService")
 	WechatMsgService wechatMsgService;
+
+	@Resource(name = "courseService")
+	CourseService courseService;
+
+	/*
+	 * @Resource(name = "testAmoseService") TestAmoseService testAmoseService;
+	 */
 
 	@RequestMapping("test")
 	@Authentication(role = InfoCode.ROLE_STUDENT)
@@ -37,14 +47,13 @@ public class TestController {
 	@Authentication(role = InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String testHql() {
-
-		AcademyDao test = null;
-		List<Academy> testList = test.getAcademyByDean("luwei");
-		for (int i = 0; i < testList.size(); i++) {
-			System.out.println(testList.get(i));
+		List<Course> course = courseService.getCourses();
+		System.out.println("--------------");
+		for (int i = 0; i < course.size(); i++) {
+			System.out.println(course.get(i).toString());
 		}
-
-		return WechatConfig.token;
+		System.out.println("--------------");
+		return null;
 	}
 
 }
