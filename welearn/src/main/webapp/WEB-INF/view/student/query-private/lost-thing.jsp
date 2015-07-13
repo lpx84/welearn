@@ -82,7 +82,7 @@ function fetchData() {
 
 	$.ajax({
 		
-		url: $("#appName").val()+"/query/personal/more-lost-thing",
+		url: $("#appName").val()+"/student/query/public/more-lost-thing",
 		type: "POST",
 		data: {
 			pageno: pageno,

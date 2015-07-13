@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
-import com.welearn.aop.Role;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
