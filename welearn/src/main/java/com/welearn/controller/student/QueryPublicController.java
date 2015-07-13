@@ -22,6 +22,7 @@ import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
+import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
@@ -41,6 +42,8 @@ public class QueryPublicController {
 	CourseService courseService;
 	@Resource(name = "misService")
 	MisService misService;
+	@Resource(name = "teacherService")
+	TeacherService teacherService;
 
 	/**
 	 * 查询学校的空教室
@@ -158,7 +161,11 @@ public class QueryPublicController {
 		} else {
 			view = new View("student", "query-public", "school-course-detail",
 					course.getName());
+			String teacherName=teacherService.getTeacherById(Integer.valueOf(course.getTeacherId())).getTrueName();
+			
+			
 			view.addObject("course", course);
+			view.addObject("teacher",teacherName);
 		}
 
 		return view;

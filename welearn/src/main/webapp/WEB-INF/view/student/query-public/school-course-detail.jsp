@@ -28,7 +28,7 @@
         </li>
         <li>
             <span class="float-left font-gray">任课老师</span>
-            <span class="notification-text float-right list-content">${course.getTeacherId() }</span>
+            <span class="notification-text float-right list-content">${teacher }</span>
         </li>
         <li>
             <span class="float-left font-gray">上课时间</span>
@@ -45,7 +45,7 @@
         <li style="height: auto;">
             <span class="float-left font-gray">课程简介</span>
             <span class="notification-text float-right list-content">
-                <p style="white-space: normal;">${course.getDescription() }</p>
+                <p style="white-space: normal">${course.getDescription() }</p>
             </span>
         </li>
     </ul>

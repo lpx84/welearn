@@ -24,7 +24,7 @@ import com.welearn.util.InfoCode;
 import com.welearn.view.View;
 
 @Controller
-@RequestMapping("query/personal/*")
+@RequestMapping("student/query/personal/*")
 public class QueryPersonalController {
 	@Resource(name = "wechatMsgService")
 	WechatMsgService wechatMsgService;
