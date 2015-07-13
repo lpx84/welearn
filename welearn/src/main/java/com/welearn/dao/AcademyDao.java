@@ -63,12 +63,12 @@ public class AcademyDao extends SuperDao {
 	 * @return
 	 */
 	public List<Teacher> getTeachersByAcademyId(int id, int pageNo, int pageItemNum){
-		this.hql = "select a from Teacher as a,Academy as b where b.id=a.id and a.id=?";
+		//this.hql = "select a from Teacher as a,Academy as b where b.id=a.id and a.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	
 }

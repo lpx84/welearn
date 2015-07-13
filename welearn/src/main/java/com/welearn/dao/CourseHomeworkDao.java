@@ -100,14 +100,14 @@ public class CourseHomeworkDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_homework AS b where a.id=b.course_id and a.course_no=1;
 	public List<CourseHomework> getCourseHomeworksByCourseNo(int courseNo, int pageNo, int pageItemNum) {
-		this.hql = "select b from Course AS a, CourseHomework AS b "
+		/*this.hql = "select b from Course AS a, CourseHomework AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.courseNo=?";
+				+ "where a.id=b.courseId and a.courseNo=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	
 	/**
@@ -118,14 +118,14 @@ public class CourseHomeworkDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseHomework> getCourseHomeworksByTeacherId(int teacherId, int pageNo, int pageItemNum) {
-		this.hql = "select b from Course AS a, CourseHomework AS b "
+		/*this.hql = "select b from Course AS a, CourseHomework AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.teacherId=?";
+				+ "where a.id=b.courseId and a.teacherId=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	
 	

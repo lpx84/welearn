@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Query;
 
-import com.welearn.entity.Admin;
 import com.welearn.entity.Teacher;
 
 public class TeacherDao  extends SuperDao {
@@ -76,6 +75,7 @@ public class TeacherDao  extends SuperDao {
 		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.trueName=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, trueName);
+		@SuppressWarnings("unchecked")
 		List<Teacher> result = query.list();
 		return result;
 	}
@@ -87,6 +87,7 @@ public class TeacherDao  extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Teacher> getTeachersByAcademy(int academyId, int pageNo, int pageItemNum) {
 		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.academyId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);

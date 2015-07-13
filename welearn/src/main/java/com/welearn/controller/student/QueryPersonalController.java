@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,11 @@ import com.welearn.aop.Authentication;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
-import com.welearn.model.LostThing;
 import com.welearn.model.NetFlow;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
-import com.welearn.util.JsonUtil;
 import com.welearn.view.View;
 
 @Controller
@@ -96,7 +95,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("exam-plan")
-	public View examPlan(@RequestParam(value = "code") String code) {
+	public View examPlan(@RequestParam(value = "code") String code,HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -107,6 +106,7 @@ public class QueryPersonalController {
 			return view;
 		}
 
+		studentService.setSession(session, openid); 
 		// 获取考试安排
 		ArrayList<ExamPlan> list = courseService.queryExamPlan(openid);
 		view = new View("student", "query-private", "exam-plan", "考试安排");
@@ -166,7 +166,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-grade")
-	public View courseGrade(@RequestParam(value = "code") String code) {
+	public View courseGrade(@RequestParam(value = "code") String code,HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -184,6 +184,8 @@ public class QueryPersonalController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
+		
+		studentService.setSession(session, openid); 
 		// 返回课程成绩
 		view = new View("student", "query-private", "grade-course", "课程成绩");
 		view.addObject("gradeMap", map);
@@ -240,7 +242,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("net-flow")
-	public View netFlowDetail(@RequestParam(value = "code") String code) {
+	public View netFlowDetail(@RequestParam(value = "code") String code,HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -251,66 +253,21 @@ public class QueryPersonalController {
 			return view;
 		}
 		// 获取当月流量
-		NetFlow netFlow = studentService.getNetFlow(openid);
+		NetFlow netFlow = misService.getNetFlow(openid);
 		// 表示获取当月流量出错，则返回至错误页面
 		if (netFlow == null) {
 			view = new View("error", "wechat", "info", "未找到相应信息。");
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
-
+        
+		studentService.setSession(session, openid); 
 		// 生成当月流量显示页面并显示
 		view = new View("student", "query-private", "net-flow", "本月流量");
 		view.addObject("netFlow", netFlow);
 		return view;
 	}
 	
-	/**
-	 * 失物招领查询
-	 * 
-	 * @param code
-	 * @return
-	 */
-	@RequestMapping("lost-thing")
-	public View lostThingDetail(@RequestParam(value = "code") String code) {
-		View view = null;
-		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code);
-		// 检验用户是否登录
-		view = studentService.checkUser(openid);
-		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
-		if (view != null) {
-			return view;
-		}
-		// 获取当月流量
-		ArrayList<LostThing> list = misService.queryLostThings(1);
-		// 表示获取当月流量出错，则返回至错误页面
-		if (list.isEmpty()) {
-			view = new View("error", "wechat", "info", "未找到相应信息。");
-			view.addObject("info", "未找到相应信息。");
-			return view;
-		}
 
-		// 生成当月流量显示页面并显示
-		view = new View("student", "query-private", "lost-thing", "失物信息");
-		view.addObject("list", list);
-		return view;
-	}
-	
-	/**
-	 * 失物招领查询,AJAX请求
-	 * 
-	 * @param pageno
-	 * @return
-	 */
-	@RequestMapping("more-lost-thing")
-	public String moreLostThingDetail(@RequestParam(value = "pageno") int pageno) {
-
-		// 获取当月流量
-		ArrayList<LostThing> list = misService.queryLostThings(pageno);
-        String jsonString = JsonUtil.listToJSONString(list, null);
-
-		return jsonString;
-	}
 
 }

@@ -113,12 +113,13 @@ public class MisHandler {
 	 * @return
 	 */
 	public Element getLostThing(int pageNo) throws ParseException, IOException {
-		String host = "http://myhome.bjtu.edu.cn/user/listLost.action?pageno=";
+		String host = "http://myhome.bjtu.edu.cn";
 		MyHttpClient client = MyHttpClient.getInstance();
 		
-		RequestHeader rh = new RequestHeader(host + pageNo);
-
-		Document doc = client.responseToDocument(client.doHttpGet(rh, null),
+		RequestHeader rh = new RequestHeader(host+"/user/listLost.action");
+		Map<String, Object> params01 = new HashMap<String, Object>();
+		params01.put("pageNo", String.valueOf(pageNo));
+		Document doc = client.responseToDocument(client.doHttpPost(rh, params01),
 				"utf-8");
 
 		Element element = doc.getElementById("GridView1");

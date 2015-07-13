@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,13 @@ import com.welearn.entity.SchoolCalender;
 import com.welearn.model.Building;
 import com.welearn.model.Course;
 import com.welearn.model.EmptyRoom;
+import com.welearn.model.LostThing;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
+import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
 
@@ -46,7 +49,7 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("empty-room")
-	public View queryEmptyRoom(@RequestParam(value = "code") String code) {
+	public View queryEmptyRoom(@RequestParam(value = "code") String code,HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -67,6 +70,8 @@ public class QueryPublicController {
 		String curWeek = TimeUtil.getWeekOfDate(new Date());
 		view.addObject("curDate", curDate);
 		view.addObject("curWeek", curWeek);
+		
+		studentService.setSession(session, openid); 
 		// 获取空教室列表
 		List<EmptyRoom> roomList = emptyRoomService.getEmptyRooms(new Date());
 		view.addObject("roomList", roomList);
@@ -81,7 +86,7 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-schedule")
-	public View schoolSchedule(@RequestParam(value = "code") String code) {
+	public View schoolSchedule(@RequestParam(value = "code") String code,HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -99,6 +104,7 @@ public class QueryPublicController {
 			return view;
 		}
 		
+		studentService.setSession(session, openid); 
 		view = new View("student", "query-public", "school-schedule", "校历");
 		view.addObject("list", list);
 		return view;
@@ -111,7 +117,7 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-course")
-	public View schoolCourse(@RequestParam(value = "code") String code) {
+	public View schoolCourse(@RequestParam(value = "code") String code,HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -121,7 +127,8 @@ public class QueryPublicController {
 			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
 		}
-
+		
+		studentService.setSession(session, openid); 
 		view = new View("student", "query-public", "school-course-search",
 				"查询全校课程");
 		return view;
@@ -185,32 +192,56 @@ public class QueryPublicController {
 
 		return view;
 	}
-
+	
 	/**
-	 * 失误招领页面
+	 * 失物招领查询
 	 * 
 	 * @param code
 	 * @return
 	 */
 	@RequestMapping("lost-thing")
-	public View lostThing(@RequestParam(value = "code") String code) {
+	public View lostThingDetail(@RequestParam(value = "code") String code,HttpSession session) {
+		View view = null;
+		// 创建微信服务类根据code获取 openId
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {
+			return view;
+		}
+		// 获取当月流量
+		ArrayList<LostThing> list = misService.queryLostThings(1);
+		// 表示获取当月流量出错，则返回至错误页面
+		if (list.isEmpty()) {
+			view = new View("error", "wechat", "info", "未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+		}
 
-		View view = new View("student", "query-public", "empty-room", "空教室");
+		studentService.setSession(session, openid); 
+		
+		view = new View("student", "query-private", "lost-thing", "失物信息");
+		view.addObject("list", list);
 		return view;
-	}
-
+	}	
+	
+	
 	/**
-	 * 失物招领查询
+	 * 失物招领查询,AJAX请求
 	 * 
-	 * @param pageNo
+	 * @param pageno
 	 * @return
 	 */
-	@RequestMapping("lost-thing/query")
-	@Authentication()
+	@RequestMapping("more-lost-thing")
+	@Authentication
 	@ResponseBody
-	public String lostThingQuery(@RequestParam("pageNo") Integer pageNo) {
+	public String moreLostThingDetail(@RequestParam(value = "pageno") int pageno) {
 
-		return null;
+		// 获取当月流量
+		ArrayList<LostThing> list = misService.queryLostThings(pageno);
+        String jsonString = JsonUtil.listToJSONString(list, null);
+        //System.out.println(jsonString);
+		return jsonString;
 	}
-
 }

@@ -51,17 +51,34 @@
 		<property name="target" ref="courseServiceBase"></property>
 	</bean>
 
-	<!-- ===================== SchoolCalendar =========================== -->
+	<!-- ===================== Mis =========================== -->
 	<bean id="schoolCalenderDao" class="com.welearn.dao.SchoolCalenderDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
 	<bean id="misServiceBase" class="com.welearn.service.impl.MisServiceImpl">
 		<property name="schoolCalenderDao" ref="schoolCalenderDao"></property>
+		<property name="studentDao" ref="studentDao"></property>
 	</bean>
 	<bean name="misService" parent="transactionProxy">
 		<property name="target" ref="misServiceBase"></property>
 	</bean>
 
+	<!-- ===================== Teacher =========================== -->
+	<bean id="teacherDao" class="com.welearn.dao.TeacherDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="courseHomeworkDao" class="com.welearn.dao.CourseHomeworkDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="teacherServiceBase" class="com.welearn.service.impl.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+		<property name="courseHomeworkDao" ref="courseHomeworkDao"></property>
+		<property name="courseDao" ref="courseDao"></property>
+	</bean>
+	<bean name="teacherService" parent="transactionProxy">
+		<property name="target" ref="teacherServiceBase"></property>
+	</bean>
 
 </beans>
 

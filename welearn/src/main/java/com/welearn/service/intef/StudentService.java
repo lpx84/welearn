@@ -1,7 +1,8 @@
 package com.welearn.service.intef;
 
+import javax.servlet.http.HttpSession;
+
 import com.welearn.entity.Student;
-import com.welearn.model.NetFlow;
 import com.welearn.view.View;
 
 public interface StudentService {
@@ -41,10 +42,10 @@ public interface StudentService {
 	public boolean updateStudent(Student student);
 	
 	/**
-	 * 根据用户的openid来获取用户的流量使用情况
+	 * 设置session
+	 * @param session
 	 * @param openid
-	 * @return
 	 */
-	public NetFlow getNetFlow(String openid);
+	public void setSession(HttpSession session,String openid);
 	
 }
