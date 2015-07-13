@@ -59,6 +59,18 @@ public class CourseHomework {
 		super();
 	}
 
+	public CourseHomework(String title, String content, Integer courseId,
+			Date create_time, Date deadline) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.courseId = courseId;
+		this.create_time = create_time;
+		this.deadline = deadline;
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}

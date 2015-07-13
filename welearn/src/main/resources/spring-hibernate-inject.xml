@@ -74,6 +74,7 @@
 	<bean id="teacherServiceBase" class="com.welearn.service.impl.TeacherServiceImpl">
 		<property name="teacherDao" ref="teacherDao"></property>
 		<property name="courseHomeworkDao" ref="courseHomeworkDao"></property>
+		<property name="courseDao" ref="courseDao"></property>
 	</bean>
 	<bean name="teacherService" parent="transactionProxy">
 		<property name="target" ref="teacherServiceBase"></property>
