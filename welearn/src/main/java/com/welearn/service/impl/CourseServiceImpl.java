@@ -145,7 +145,16 @@ public class CourseServiceImpl implements CourseService {
 
 	public ArrayList<com.welearn.entity.Course> queryCoursesByKeyword(
 			String keyword,int pageno) {
-		ArrayList<com.welearn.entity.Course> list = (ArrayList<com.welearn.entity.Course>) courseDao.getCoursesByName(keyword, pageno, 10);
+		ArrayList<com.welearn.entity.Course> list = new ArrayList<com.welearn.entity.Course>();
+		//根据课程名模糊查询
+		ArrayList<com.welearn.entity.Course> listByName = (ArrayList<com.welearn.entity.Course>) courseDao.getCoursesByName(keyword, pageno, 10);
+		//根据学院查询
+		ArrayList<com.welearn.entity.Course> listByAcadamy=(ArrayList<com.welearn.entity.Course>) courseDao.getCoursesByAcademyName(keyword, pageno, 10);
+		//ArrayList<com.welearn.entity.Course> listByTeacher = courseDao.getcoursesb
+		
+		list.addAll(listByName);
+		list.addAll(listByAcadamy);		
+		
 		return list;
 	}
 
