@@ -70,15 +70,15 @@ public class CourseNotifyDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_notify AS b where a.id = b.course_id and course_no=1;
 	public List<CourseNotify> getCourseNotifyByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		this.hql = "select b from Course AS a, CourseNotify AS b "
+		/*this.hql = "select b from Course AS a, CourseNotify AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id = b.courseId and a.courseNo=?";
+				+ "where a.id = b.courseId and a.courseNo=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		List<CourseNotify> result = query.list();
-		return result;
+		return null;
 	}
 	
 	/**
@@ -89,15 +89,15 @@ public class CourseNotifyDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseNotify> getCourseNotifyByTeacherId(int teacherID, int pageNo, int pageItemNum){
-		this.hql = "select b from Course AS a, CourseNotify AS b "
+		/*this.hql = "select b from Course AS a, CourseNotify AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id = b.courseId and a.teacherId=?";
+				+ "where a.id = b.courseId and a.teacherId=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherID);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		List<CourseNotify> result = query.list();
-		return result;
+		return null;
 	}
 	
 	/**
@@ -109,14 +109,14 @@ public class CourseNotifyDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_notify AS b where a.id = b.course_id and a.name like '%方%';
 	public List<CourseNotify> getCourseNotifyByCourseName(String name, int pageNo, int pageItemNum){
-		this.hql = "select b from Course AS a, CourseNotify AS b "
+		/*this.hql = "select b from Course AS a, CourseNotify AS b "
 				+ "inner join fetch b.courseEntity"
-				+ "where a.id = b.courseId and a.name like '%"+name+"%'";
+				+ "where a.id = b.courseId and a.name like '%"+name+"%'";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		//query.setInteger(0, teacherID);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		List<CourseNotify> result = query.list();
-		return result;
+		return null;
 	}
 }

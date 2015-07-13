@@ -56,14 +56,14 @@ public class CourseCommentDao extends SuperDao {
 	 */
 	//select b.* from bjtu_student AS a, bjtu_course_comment AS b where a.id=b.student_id and a.student_no=12301111;
 	public List<CourseCommentDao> getCourseCommentsByStudentNo(int studentNo, int pageNo, int pageItemNum){
-		this.hql = "select b from Student AS a, CourseComment AS b "
+		/*this.hql = "select b from Student AS a, CourseComment AS b "
 				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
-				+ "where a.id=b.studentId and a.studentNo=?";
+				+ "where a.id=b.studentId and a.studentNo=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, studentNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	/**
 	 * 通过学生的真实姓名查找他们做过的一些评价
@@ -73,14 +73,14 @@ public class CourseCommentDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseCommentDao> getCourseCommentsByStudentTruename(String truename, int pageNo, int pageItemNum){
-		this.hql = "select b from Student AS a, CourseComment AS b "
+		/*this.hql = "select b from Student AS a, CourseComment AS b "
 				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
-				+ "where a.id=b.studentId and a.trueName=?";
+				+ "where a.id=b.studentId and a.trueName=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, truename);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	/**
 	 * 通过课程号查找课程评价
@@ -91,14 +91,14 @@ public class CourseCommentDao extends SuperDao {
 	 */
 	//select b.* from bjtu_course AS a, bjtu_course_comment AS b where a.id=b.course_id and course_no=1;
 	public List<CourseCommentDao> getCourseCommentsByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		this.hql = "select b from Course AS a, CourseComment AS b "
+		/*this.hql = "select b from Course AS a, CourseComment AS b "
 				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.courseNo=?";
+				+ "where a.id=b.courseId and a.courseNo=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, courseNo);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	
 	/**
@@ -109,14 +109,14 @@ public class CourseCommentDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseCommentDao> getCourseCommentsByName(String name, int pageNo, int pageItemNum){
-		this.hql = "select b from Course AS a, CourseComment AS b "
+		/*this.hql = "select b from Course AS a, CourseComment AS b "
 				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.name=?";
+				+ "where a.id=b.courseId and a.name=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, name);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	/**
 	 * 通过老师的id获取这门课程的评价 
@@ -126,14 +126,14 @@ public class CourseCommentDao extends SuperDao {
 	 * @return
 	 */
 	public List<CourseCommentDao> getCourseCommentsByTeacherId(int teacherId, int pageNo, int pageItemNum){
-		this.hql = "select b from Course AS a, CourseComment AS b "
+		/*this.hql = "select b from Course AS a, CourseComment AS b "
 				+ "inner join fetch b.studentEntity inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.teacherId=?";
+				+ "where a.id=b.courseId and a.teacherId=?";*/
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teacherId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();
+		return null;
 	}
 	
 }
