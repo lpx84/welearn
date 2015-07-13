@@ -72,7 +72,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public Course getCourseById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		//courseDao.getCourse(id);
+		return courseDao.getCourse(id);
 	}
 
 
@@ -120,6 +121,11 @@ public class TeacherServiceImpl implements TeacherService {
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).toString());
 		}
+	}
+
+	public List<Course> getCourseList(int teacherId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

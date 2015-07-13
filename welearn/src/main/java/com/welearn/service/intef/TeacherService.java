@@ -27,6 +27,8 @@ public interface TeacherService {
 	
 	public Course getCourseByCourseNo(String courseNo);
 	
+	public List<Course> getCourseList(int teacherId);
+	
 	public List<Student> getStudentList();
 	
 	public List<Student> getStudentListByCourseId(int id);

@@ -117,12 +117,29 @@ public class TeacherController {
 		
 		return null;
 	}
-	
+	/**
+	 * 根据课程id获得课程
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("getCourseById")
 	public String getCourseById(
+			@RequestParam(value = "courseId") int id
 			) {
 		
-		teacherService.getCourseById(1).toString();
+		System.out.println(teacherService.getCourseById(id).toString());
+		
+		return null;
+	}
+	/**
+	 * 根据老师的id查找老师的课程列表
+	 * @return
+	 */
+	@RequestMapping("getCourseList")
+	public String getCourseList(
+			) {
+		
+		teacherService.test();
 		
 		return null;
 	}
