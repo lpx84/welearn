@@ -2,3 +2,4 @@
     pageEncoding="UTF-8"%>
 <!-- 全局页面变量 -->
 <input id="appName" type="hidden" value="<%=request.getContextPath() %>">
+<input id="dftItemNum" type="hidden" value="${dftItemNum }">

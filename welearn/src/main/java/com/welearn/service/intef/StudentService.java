@@ -1,5 +1,7 @@
 package com.welearn.service.intef;
 
+import javax.servlet.http.HttpSession;
+
 import com.welearn.entity.Student;
 import com.welearn.view.View;
 
@@ -39,6 +41,11 @@ public interface StudentService {
 	 */
 	public boolean updateStudent(Student student);
 	
-
+	/**
+	 * 设置session
+	 * @param session
+	 * @param openid
+	 */
+	public void setSession(HttpSession session,String openid);
 	
 }

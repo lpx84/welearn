@@ -15,3 +15,11 @@ function completeHandler(e,status) {
 	}
 	console.log(e);
 }
+
+$(document).ready(function(){
+	
+	//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
+	if (($(document.body).height() + 10) < $(window).height()) {
+	    $(".btn-more").addClass("fixed-bottom");
+	};
+});

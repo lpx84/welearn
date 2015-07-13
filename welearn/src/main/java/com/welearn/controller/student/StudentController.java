@@ -5,7 +5,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.welearn.aop.Authentication;
+import com.welearn.aop.Role;
 import com.welearn.entity.Student;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
@@ -61,11 +64,12 @@ public class StudentController {
 		
 	}
 	
-//	@RequestMapping("test")
-//	@ResponseBody
-//	public String test() {
-//		Student s = studentService.getStudentByStudentNo("12301124");
-//		return s.getTrueName();
-//	}
+	@RequestMapping("test")
+	@Authentication()
+	@ResponseBody
+	public String test() {
+		Student s = studentService.getStudentByStudentNo("12301124");
+		return s.getTrueName();
+	}
 	
 }
