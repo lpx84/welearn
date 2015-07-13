@@ -62,6 +62,16 @@
 		<property name="target" ref="misServiceBase"></property>
 	</bean>
 
+	<!-- ===================== Teacher =========================== -->
+	<bean id="teacherDao" class="com.welearn.teacherDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="teacherServiceBase" class="com.welearn.service.impl.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>
+	<bean name="teacherService" parent="transactionProxy">
+		<property name="target" ref="teacherServiceBase"></property>
+	</bean>
 
 </beans>
 
