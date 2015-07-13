@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
-import com.welearn.aop.Role;
 import com.welearn.entity.Student;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;

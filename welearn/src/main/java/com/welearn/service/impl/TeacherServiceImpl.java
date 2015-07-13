@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.welearn.dao.CourseDao;
 import com.welearn.dao.CourseHomeworkDao;
+import com.welearn.dao.CourseNotifyDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.AttendRecord;
 import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
+import com.welearn.entity.CourseNotify;
 import com.welearn.entity.Student;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
@@ -18,29 +20,30 @@ public class TeacherServiceImpl implements TeacherService {
 
 	TeacherDao teacherDao;
 	CourseHomeworkDao courseHomeworkDao;
+	CourseNotifyDao courseNotifyDao;
 	CourseDao courseDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
 	}
 
-
 	public void setTeacherDao(TeacherDao teacherDao) {
 		this.teacherDao = teacherDao;
 	}
 	
-
 	public void setCourseHomeworkDao(CourseHomeworkDao courseHomeworkDao) {
 		this.courseHomeworkDao = courseHomeworkDao;
 	}
 
+	public void setCourseNotifyDao(CourseNotifyDao courseNotifyDao) {
+		this.courseNotifyDao = courseNotifyDao;
+	}
 
 	public Teacher getTeacherById(int id) {
 		// TODO Auto-generated method stub
 		//teacherDao.getTeacher(id);
 		return teacherDao.getTeacher(1);
 	}
-
 
 	public boolean publishCourseHomework(CourseHomework homework) {
 		// TODO Auto-generated method stub
@@ -56,18 +59,29 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
+	public CourseHomework getHomeworkById(int id) {
+		// TODO Auto-generated method stub
+		return courseHomeworkDao.getCourseHomeworkById(id);
+	}
 
 	public boolean updateCourseHomework(CourseHomework homework) {
 		// TODO Auto-generated method stub
-		return false;
+		return courseHomeworkDao.updateCourseHomework(homework);
 	}
 
 
 	public Course getCourseById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		//courseDao.getCourse(id);
+		return courseDao.getCourse(id);
 	}
 
+	public List<Course> getCourseList(int teacherId) {
+		// TODO Auto-generated method stub
+		
+		//List<Course> list = courseDao.getCoursesByTeacher(teacherId);
+		return courseDao.getCoursesByTeacher(teacherId);
+	}
 
 	public Course getCourseByCourseNo(String courseNo) {
 		// TODO Auto-generated method stub
@@ -92,6 +106,10 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
+	public boolean publishAttendTask(AttendTask attendTask) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	public AttendRecord getAttendRecordByAttendTaskId(int id) {
 		// TODO Auto-generated method stub
@@ -99,20 +117,24 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 
-	public boolean publisCourseNotify(String title, String content,
-			int courseId, Date createTime) {
+	public boolean publisCourseNotify(CourseNotify courseNotify) {
 		// TODO Auto-generated method stub
-		return false;
+		//courseNotifyDao.addCourseNotify(courseNotify);
+		return courseNotifyDao.addCourseNotify(courseNotify)>0;
 	}
 
 
 	public void test() {
 		// TODO Auto-generated method stub
-		List<Course> list = courseDao.getCoursesByAcademyName("软件", 1, 1);
+		List<Course> list = courseDao.getCoursesByTeacherName("yaoJie", 1, 1);
 		System.out.println("-----------------");
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).toString());
 		}
 	}
+
+
+
+
 
 }

@@ -1,11 +1,14 @@
 package com.welearn.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 
 import com.welearn.entity.Course;
-import com.welearn.entity.CourseProblem;
+import com.welearn.entity.Teacher;
 
 public class CourseDao  extends SuperDao {
 
@@ -64,6 +67,7 @@ public class CourseDao  extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByTeacher(int teacherId, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.teacherId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -72,7 +76,20 @@ public class CourseDao  extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
+	/**
+	 * 根据老师的id查找课程,全部都查出来
+	 * @param teacherId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByTeacher(int teacherId) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.teacherId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherId);
+		return query.list();
+	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByName(String name, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.name like '%"+name+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
@@ -81,12 +98,45 @@ public class CourseDao  extends SuperDao {
 		return query.list();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByAcademyName(String academyName, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE a.name like '%"+academyName+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		return query.list();
+	}
+	/**
+	 * 根据老师的真实姓名获得课程列表,精准查找
+	 * @param teacherName
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByTeacherName(String teacherName, int pageNo, int pageItemNum) {
+		this.hql = "FROM Teacher as u WHERE u.trueName like '%"+teacherName+"%'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		
+		ArrayList<Integer> teachersId = new ArrayList<Integer>();
+		List<Teacher> teachers = query.list();
+		for(int i=0;i<teachers.size();i++){
+			teachersId.add(i, teachers.get(i).getId());
+		}
+		
+		Set<Course> set = new HashSet<Course>();
+		for(int i=0;i<teachersId.size();i++){
+			this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.teacherId=?";
+			Query query2 = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+			query2.setInteger(0, teachersId.get(i));
+			List<Course> course = query2.list();
+			set.addAll(course);
+		}
+		List<Course> result = new ArrayList<Course>(set);
+		
+		return result;
 	}
 	
 	/**

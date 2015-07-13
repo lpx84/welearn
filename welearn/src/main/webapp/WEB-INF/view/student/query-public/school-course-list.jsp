@@ -31,35 +31,21 @@
         <div class="scrollable-content">
 
             <ul class="notifications-box">
-                <li onclick="javascript:location.href='school-course-detail.html';">
+            <c:forEach var="item" items="${list }">            
+                <li onclick="javascript:location.href='school-course-detail?courseid=${item.getId() }';">
                     <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
+                    <span class="notification-text">${item.getName() }</span>
+                    <div class="notification-time">${item.getAcademyEntity().getName() }</div>
                 </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
-                </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
-                </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">电子信息工程学院</div>
-                </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
-                </li>
+            </c:forEach>
+
                 
             </ul>
 
         </div>
+        <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
+        <span class="button-content">查看更多</span>
+        </a>
     </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>
@@ -70,26 +56,66 @@ function enterSearch() {
 	if (event.keyCode == 13) {
 		var key = $("#keyword").val();
 		if('' != key) {
-			/*
-			$.ajax({
-				url: "",
-				type: "POST",
-				data: {
-					keyword: key
-				},
-				dataType: "JSON",
-				success: function(res) {
-					
-				},
-				complete: completeHandler
-			});
-			*/
-			$("#search-course").submit();
-			//location.href = 'school-course-list.html';
+			$("#search-course").submit();			
 		}
 		
 	}
 }
+
+var pageno=1;
+var key = "${key}"
+function fetchData() {
+	//记录当前页数
+	pageno++;
+	//用ajax获取页面信息
+
+	$.ajax({
+		
+		url: $("#appName").val()+"/student/query/public/school-course-query-page",
+		type: "POST",
+		data: {
+			keyword: key,
+			pageNo: pageno,
+		},
+		timeout: 5000,
+		dataType: "JSON",
+		success: function(res) {
+			if(res.code == 100) {
+				alert(res.msg);
+			} else {
+				if(res.length<1){
+					alert("没有更多的数据。");
+				}else{
+					console.log(res);
+					joinData(res);
+				}			
+			}
+		},
+		complete: completeHandler
+	});
+	
+}
+
+function joinData(res) {
+	
+   	var html = new Array(
+			"<li onclick=\"javascript:location.href='school-course-detail?courseid=",
+			"id",
+			"';\"><span class='btn bg-green icon-notification glyph-icon fa-book'></span><span class='notification-text'>",
+			"name",
+			"</span><div class='notification-time'>",
+			"academy",
+			"</div></li>"			
+	);
+	for(var i=0; i<res.length; ++i) {
+		html[1]=res[i].id;
+		html[3]=res[i].name;
+		html[5]=res[i].academyEntity.name;
+		$(".notifications-box").append(html.join(''));
+	}
+}
+
+
 </script>
 </body>
 </html>
