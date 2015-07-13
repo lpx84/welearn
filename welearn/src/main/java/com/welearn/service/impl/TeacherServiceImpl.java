@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.welearn.dao.CourseDao;
 import com.welearn.dao.CourseHomeworkDao;
+import com.welearn.dao.CourseNotifyDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.AttendRecord;
 import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
+import com.welearn.entity.CourseNotify;
 import com.welearn.entity.Student;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
@@ -18,29 +20,30 @@ public class TeacherServiceImpl implements TeacherService {
 
 	TeacherDao teacherDao;
 	CourseHomeworkDao courseHomeworkDao;
+	CourseNotifyDao courseNotifyDao;
 	CourseDao courseDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
 	}
 
-
 	public void setTeacherDao(TeacherDao teacherDao) {
 		this.teacherDao = teacherDao;
 	}
 	
-
 	public void setCourseHomeworkDao(CourseHomeworkDao courseHomeworkDao) {
 		this.courseHomeworkDao = courseHomeworkDao;
 	}
 
+	public void setCourseNotifyDao(CourseNotifyDao courseNotifyDao) {
+		this.courseNotifyDao = courseNotifyDao;
+	}
 
 	public Teacher getTeacherById(int id) {
 		// TODO Auto-generated method stub
 		//teacherDao.getTeacher(id);
 		return teacherDao.getTeacher(1);
 	}
-
 
 	public boolean publishCourseHomework(CourseHomework homework) {
 		// TODO Auto-generated method stub
@@ -56,10 +59,14 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
+	public CourseHomework getHomeworkById(int id) {
+		// TODO Auto-generated method stub
+		return courseHomeworkDao.getCourseHomeworkById(id);
+	}
 
 	public boolean updateCourseHomework(CourseHomework homework) {
 		// TODO Auto-generated method stub
-		return false;
+		return courseHomeworkDao.updateCourseHomework(homework);
 	}
 
 
@@ -99,10 +106,10 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 
-	public boolean publisCourseNotify(String title, String content,
-			int courseId, Date createTime) {
+	public boolean publisCourseNotify(CourseNotify courseNotify) {
 		// TODO Auto-generated method stub
-		return false;
+		//courseNotifyDao.addCourseNotify(courseNotify);
+		return courseNotifyDao.addCourseNotify(courseNotify)>0;
 	}
 
 
@@ -114,5 +121,7 @@ public class TeacherServiceImpl implements TeacherService {
 			System.out.println(list.get(i).toString());
 		}
 	}
+
+
 
 }
