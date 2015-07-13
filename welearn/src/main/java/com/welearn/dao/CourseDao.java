@@ -1,10 +1,14 @@
 package com.welearn.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 
 import com.welearn.entity.Course;
+import com.welearn.entity.Teacher;
 
 public class CourseDao  extends SuperDao {
 
@@ -89,6 +93,32 @@ public class CourseDao  extends SuperDao {
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByTeacherName(String teacherName, int pageNo, int pageItemNum) {
+		this.hql = "FROM Teacher as u WHERE u.trueName like '%"+teacherName+"%'";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		
+		ArrayList<Integer> teachersId = new ArrayList<Integer>();
+		List<Teacher> teachers = query.list();
+		for(int i=0;i<teachers.size();i++){
+			teachersId.add(i, teachers.get(i).getId());
+		}
+		
+		Set<Course> set = new HashSet<Course>();
+		for(int i=0;i<teachersId.size();i++){
+			this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.teacherId=?";
+			Query query2 = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+			query2.setInteger(0, teachersId.get(i));
+			List<Course> course = query2.list();
+			set.addAll(course);
+		}
+		List<Course> result = new ArrayList<Course>(set);
+		
+		return result;
 	}
 	
 	/**

@@ -118,7 +118,7 @@ public class TeacherController {
 		return null;
 	}
 	
-	@RequestMapping("test")
+	@RequestMapping("getCourseById")
 	public String getCourseById(
 			) {
 		

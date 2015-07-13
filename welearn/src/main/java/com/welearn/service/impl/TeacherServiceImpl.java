@@ -115,7 +115,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public void test() {
 		// TODO Auto-generated method stub
-		List<Course> list = courseDao.getCoursesByAcademyName("软件", 1, 1);
+		List<Course> list = courseDao.getCoursesByTeacherName("yaoJie", 1, 1);
 		System.out.println("-----------------");
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).toString());
