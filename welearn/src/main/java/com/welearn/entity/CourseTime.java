@@ -24,7 +24,7 @@ public class CourseTime {
 	private Integer id;
 	
 	@Column(name="section_no", columnDefinition="int(11)")
-	private int sectionNno;
+	private int sectionNo;
 	
 	@Column(name="week_no", columnDefinition="int(11)")
 	private Integer weekNo;
@@ -40,10 +40,6 @@ public class CourseTime {
 	
 	@Column(name="year", columnDefinition="int(4)")
 	private Integer year;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="course_id",insertable=false,updatable=false)
-	private Course courseEntity;
 
 	public CourseTime() {
 		
@@ -83,11 +79,11 @@ public class CourseTime {
 	}
 
 	public int getSectionNno() {
-		return sectionNno;
+		return sectionNo;
 	}
 
-	public void setSectionNno(int sectionNno) {
-		this.sectionNno = sectionNno;
+	public void setSectionNno(int sectionNo) {
+		this.sectionNo = sectionNo;
 	}
 
 	public Integer getSemester() {
@@ -114,20 +110,12 @@ public class CourseTime {
 		this.year = year;
 	}
 
-	public Course getCourseEntity() {
-		return courseEntity;
-	}
-
-	public void setCourseEntity(Course courseEntity) {
-		this.courseEntity = courseEntity;
-	}
-
 	@Override
 	public String toString() {
-		return "CourseTime [id=" + id + ", sectionNno=" + sectionNno
+		return "CourseTime [id=" + id + ", sectionNno=" + sectionNo
 				+ ", weekNo=" + weekNo + ", weekday=" + weekday + ", semester="
 				+ semester + ", courseId=" + courseId + ", year=" + year
-				+ ", courseEntity=" + courseEntity + "]";
+				+ "]";
 	}
 
 }

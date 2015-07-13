@@ -1,6 +1,7 @@
 package com.welearn.controller.teacher;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.Teacher;
@@ -96,7 +98,15 @@ public class TeacherController {
 		
 		return null;
 	}
-	
+	/**
+	 * 发布课程通知
+	 * @param content
+	 * @param courseId
+	 * @param title
+	 * @param createTime
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping("publishNotify")
 	public String publishNotify(
 			@RequestParam(value = "content") String content,
@@ -137,9 +147,18 @@ public class TeacherController {
 	 */
 	@RequestMapping("getCourseList")
 	public String getCourseList(
+			@RequestParam(value = "teacherId") int id
 			) {
 		
-		teacherService.test();
+		List<Course> list = teacherService.getCourseList(id);
+		
+		return null;
+	}
+	
+	@RequestMapping("publishAttendTask")
+	public String publishAttendTask(
+			) {
+		//发布课程签到信息，还没写
 		
 		return null;
 	}

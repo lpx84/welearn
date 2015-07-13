@@ -33,6 +33,8 @@ public interface TeacherService {
 	
 	public List<Student> getStudentListByCourseId(int id);
 	
+	public boolean publishAttendTask(AttendTask attendTask);
+	
 	public List<AttendTask> getAttendTaskByCourseId(int id);
 	
 	public AttendRecord getAttendRecordByAttendTaskId(int id);

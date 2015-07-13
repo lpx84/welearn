@@ -76,6 +76,18 @@ public class CourseDao  extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
+	/**
+	 * 根据老师的id查找课程,全部都查出来
+	 * @param teacherId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByTeacher(int teacherId) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.teacherId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teacherId);
+		return query.list();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByName(String name, int pageNo, int pageItemNum) {
@@ -94,7 +106,13 @@ public class CourseDao  extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
-	
+	/**
+	 * 根据老师的真实姓名获得课程列表,精准查找
+	 * @param teacherName
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByTeacherName(String teacherName, int pageNo, int pageItemNum) {
 		this.hql = "FROM Teacher as u WHERE u.trueName like '%"+teacherName+"%'";

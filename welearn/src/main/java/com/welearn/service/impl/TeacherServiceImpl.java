@@ -76,6 +76,12 @@ public class TeacherServiceImpl implements TeacherService {
 		return courseDao.getCourse(id);
 	}
 
+	public List<Course> getCourseList(int teacherId) {
+		// TODO Auto-generated method stub
+		
+		//List<Course> list = courseDao.getCoursesByTeacher(teacherId);
+		return courseDao.getCoursesByTeacher(teacherId);
+	}
 
 	public Course getCourseByCourseNo(String courseNo) {
 		// TODO Auto-generated method stub
@@ -100,6 +106,10 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
+	public boolean publishAttendTask(AttendTask attendTask) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	public AttendRecord getAttendRecordByAttendTaskId(int id) {
 		// TODO Auto-generated method stub
@@ -123,10 +133,7 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 	}
 
-	public List<Course> getCourseList(int teacherId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 

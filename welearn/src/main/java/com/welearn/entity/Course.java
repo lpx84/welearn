@@ -30,6 +30,15 @@ public class Course {
 	@Column(name="teacher_id", columnDefinition="int")
 	private String teacherId;
 	
+	@Column(name="class_size", columnDefinition="int")
+	private String classSize;
+	
+	@Column(name="semester", columnDefinition="tinyint")
+	private String semester;
+	
+	@Column(name="year", columnDefinition="int")
+	private String year;
+	
 	/**
 	 * 所属学院的ID
 	 */
@@ -121,13 +130,37 @@ public class Course {
 		this.teacherId = teacherId;
 	}
 
+	public String getClassSize() {
+		return classSize;
+	}
+
+	public void setClassSize(String classSize) {
+		this.classSize = classSize;
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", courseNo=" + courseNo
 				+ ", description=" + description + ", teacherId=" + teacherId
-				+ ", academyId=" + academyId + ", credit=" + credit
-				+ ", courseType=" + courseType + ", academyEntity="
+				+ ", classSize=" + classSize + ", semester=" + semester
+				+ ", year=" + year + ", academyId=" + academyId + ", credit="
+				+ credit + ", courseType=" + courseType + ", academyEntity="
 				+ academyEntity + "]";
 	}
-	
 }
