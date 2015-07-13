@@ -20,12 +20,12 @@ public interface CourseService {
 	/**
 	 * 根据周，查询当前学期的课表
 	 */
-	public List queryCourseScheduleByWeek(int id, CourseTime time);
+	public List<?> queryCourseScheduleByWeek(int id, CourseTime time);
 	
 	/**
 	 * 根据天，查询当前学期的课表
 	 */
-	public List queryCourseScheduleByWeekDay(int id, CourseTime time);
+	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time);
 
 	/**
 	 * 根据课程id获取课程信息
@@ -48,6 +48,18 @@ public interface CourseService {
 	 */
 	public ArrayList<CETGrade> queryCETGrade(String openid);
 	
-	
+	/**
+	 * 根据Openid查找学生的考试安排
+	 * @param openid
+	 * @return
+	 */
 	public ArrayList<ExamPlan> queryExamPlan(String openid);
+	
+	/**
+	 * 根据关键字查找课程信息
+	 * @param keyword
+	 * @param pageno
+	 * @return
+	 */
+	public ArrayList<com.welearn.entity.Course> queryCoursesByKeyword(String keyword,int pageno);
 }

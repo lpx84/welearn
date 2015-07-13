@@ -30,12 +30,12 @@ public class CourseServiceImpl implements CourseService {
 		return null;
 	}
 
-	public List queryCourseScheduleByWeek(int id, CourseTime time) {
+	public List<?> queryCourseScheduleByWeek(int id, CourseTime time) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List queryCourseScheduleByWeekDay(int id, CourseTime time) {
+	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -140,6 +140,12 @@ public class CourseServiceImpl implements CourseService {
 			list.add(examPlan);
 		}
 		
+		return list;
+	}
+
+	public ArrayList<com.welearn.entity.Course> queryCoursesByKeyword(
+			String keyword,int pageno) {
+		ArrayList<com.welearn.entity.Course> list = (ArrayList<com.welearn.entity.Course>) courseDao.getCoursesByName(keyword, pageno, 10);
 		return list;
 	}
 

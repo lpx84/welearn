@@ -31,31 +31,15 @@
         <div class="scrollable-content">
 
             <ul class="notifications-box">
+            
+            
                 <li onclick="javascript:location.href='school-course-detail.html';">
                     <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">软件系统分析与设计</span>
                     <div class="notification-time">软件学院</div>
                 </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
-                </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
-                </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">电子信息工程学院</div>
-                </li>
-                <li onclick="javascript:location.href='school-course-detail.html';">
-                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
-                    <span class="notification-text">软件系统分析与设计</span>
-                    <div class="notification-time">软件学院</div>
-                </li>
+
+
                 
             </ul>
 
