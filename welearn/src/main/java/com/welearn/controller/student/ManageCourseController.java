@@ -1,5 +1,7 @@
 package com.welearn.controller.student;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.welearn.aop.Authentication;
+import com.welearn.entity.CourseNotify;
 import com.welearn.model.Course;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
@@ -97,6 +100,27 @@ public class ManageCourseController {
 		return view;
 	}
 	
-	
+	/**
+	 * 进入某一门课的课程公共页面，为了防止爬取数据，这里需要验证微信登录
+	 * 
+	 * @param courseid
+	 *            课程id
+	 * @return
+	 */
+
+	@RequestMapping("course-notify")
+	@Authentication()
+	public View courseNotify(@RequestParam(value = "courseid") int courseid) {
+		View view;
+		//课程名
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 用课程服务类查询具体的课程通知
+		ArrayList<CourseNotify> list = courseService.queryCourseNotify(courseid);				
+		
+		view = new View("student", "manage-course", "course-manage", "课程作业");
+		view.addObject("courseName",courseName);
+		view.addObject("list",list);
+		return view;
+	}
 	
 }

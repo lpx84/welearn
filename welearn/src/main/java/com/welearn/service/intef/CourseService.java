@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseNotify;
 import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
@@ -67,5 +68,12 @@ public interface CourseService {
 	 * @return
 	 */
 	public com.welearn.model.Course queryCourseModleByCourseId(int courseid);
+	
+	/**
+	 * 根据课程id查找课程通知
+	 * @param courseId
+	 * @return
+	 */
+	public ArrayList<CourseNotify> queryCourseNotify(int courseId);
 	
 }

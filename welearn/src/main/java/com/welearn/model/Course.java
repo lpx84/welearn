@@ -11,6 +11,7 @@ public class Course {
 	String capacity;// 课容量
 	String description;// 课程简介
 	String teacherTel;// 教室电话
+	int credit;// 学分
 
 	public String getName() {
 		return name;
@@ -90,6 +91,14 @@ public class Course {
 
 	public void setCourseNo(String courseNo) {
 		this.courseNo = courseNo;
+	}
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
 	}
 
 }
