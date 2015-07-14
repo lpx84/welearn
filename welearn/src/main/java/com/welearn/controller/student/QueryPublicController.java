@@ -153,14 +153,15 @@ public class QueryPublicController {
 			@RequestParam(value = "courseid") int courseid) {
 		View view;
 		// 用课程服务类查询具体的课程信息
-		com.welearn.model.Course course = courseService.queryCourseModleByCourseId(courseid);
-		
+		com.welearn.model.Course course = courseService
+				.queryCourseModleByCourseId(courseid);
+
 		if (course == null) {
 			view = new View("error", "wechat", "info", "课程不存在！");
 			view.addObject("info", "课程不存在！");
 		} else {
 			view = new View("student", "query-public", "school-course-detail",
-					course.getName());						
+					course.getName());
 			view.addObject("course", course);
 		}
 
@@ -209,6 +210,7 @@ public class QueryPublicController {
 		ArrayList<com.welearn.entity.Course> list = courseService
 				.queryCoursesByKeyword(keyword, pageNo);
 		String jsonStr = JsonUtil.listToJSONString(list, null);
+
 		return jsonStr;
 	}
 
@@ -259,8 +261,16 @@ public class QueryPublicController {
 
 		// 获取当月流量
 		ArrayList<LostThing> list = misService.queryLostThings(pageno);
+		int i=0;
+		while(i<list.size()){
+			if(list.get(i).getThing().equals("")){
+				list.remove(i);
+			}else{
+				i++;
+			}			
+		}
 		String jsonString = JsonUtil.listToJSONString(list, null);
-		// System.out.println(jsonString);
+		
 		return jsonString;
 	}
 }

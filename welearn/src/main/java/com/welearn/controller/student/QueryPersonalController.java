@@ -202,11 +202,6 @@ public class QueryPersonalController {
 	@RequestMapping("e-card")
 	public View eCard(@RequestParam(value = "code") String code) {
 
-		// 用一个类 验证呢身份
-		// 如果false
-
-		// return new InfoView();
-
 		// 查询余额
 		View view = new View("student", "public", "empty-room", "空教室");
 		view.addObject("list", null);
@@ -227,12 +222,6 @@ public class QueryPersonalController {
 			@RequestParam(value = "startTime") String startTime,
 			@RequestParam(value = "endTime") String endTime) {
 
-		// 用一个类 验证呢身份
-		// 如果false
-
-		// return new InfoView();
-
-		//
 		return null;
 	}
 

@@ -34,6 +34,10 @@ public class Semester {
 		return semester;
 	}
 
+	public Semester(){
+		super();
+	}
+	
 	public Semester(Integer year, Integer semesterNo) {
 		super();
 		this.year = year;
@@ -55,5 +59,11 @@ public class Semester {
 	public void setSemesterNo(Integer semesterNo) {
 		this.semesterNo = semesterNo;
 	}
+
+	@Override
+	public String toString() {
+		return "Semester [year=" + year + ", semesterNo=" + semesterNo + "]";
+	}
+	
 
 }

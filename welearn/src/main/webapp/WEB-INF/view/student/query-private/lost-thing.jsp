@@ -42,7 +42,17 @@
     .time {
         margin-right: 20px;
     }
+    
+    .btn-more {
+   		display: block;
+   		width: 100%;
+   }
    
+   .btn-more span {
+   		position: absolute;
+   		width: 100%;
+   		text-align: center;
+   }
 </style>
 </head>
 <body>
@@ -66,9 +76,8 @@
         </div>
     </c:forEach>
     </div>
-    <!-- 当前页号，下一次请求在此基础上加1 -->
-    <input id="pageNo" type="hidden" value="1">
-    <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
+ 
+    <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
         <span class="button-content">查看更多</span>
     </a>
 <%@ include file="/public/section/public.jsp" %>
@@ -93,13 +102,18 @@ function fetchData() {
 			if(res.code == 100) {
 				alert(res.msg);
 			} else {
-				console.log(res);
-				joinData(res);
+				if(res.length<1){
+					$(".btn-more").removeAttr("href");
+					$(".btn-more").html("没有更多了");		
+				}else{
+					joinData(res);
+					$(".btn-more").html("查看更多");	
+				}	
 			}
 		},
 		complete: completeHandler
 	});
-	
+	$(".btn-more").html("获取中...");
 }
 
 function joinData(res) {

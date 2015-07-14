@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.welearn.dao.CourseDao;
+import com.welearn.dao.CourseNotifyDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseNotify;
 import com.welearn.entity.CourseTime;
 import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
@@ -20,6 +22,7 @@ public class CourseServiceImpl implements CourseService {
 	private CourseDao courseDao;
 	private TeacherDao teacherDao;
 	private TimeCourseDao timeCourseDao;
+	private CourseNotifyDao courseNotifyDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;		
@@ -27,6 +30,10 @@ public class CourseServiceImpl implements CourseService {
 	
 	public void setTeacherDao(TeacherDao teacherDao){
 		this.teacherDao = teacherDao;
+	}
+	
+	public void setCourseNotifyDao(CourseNotifyDao courseNotifyDao){
+		this.courseNotifyDao = courseNotifyDao;
 	}
 	
 	public void setTimeCourseDao(TimeCourseDao timeCourseDao){
@@ -38,7 +45,8 @@ public class CourseServiceImpl implements CourseService {
 		return null;
 	}
 
-	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {
+	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {		
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -177,6 +185,12 @@ public class CourseServiceImpl implements CourseService {
 		}		
 
 		return courseModel;
+	}
+
+	
+	public ArrayList<CourseNotify> queryCourseNotify(int courseId) {
+		//ArrayList<CourseNotify> list courseNotifyDao.getCourseNotifyByCourseId(courseid, pageNo, pageItemNum)
+		return null;
 	}
 
 }

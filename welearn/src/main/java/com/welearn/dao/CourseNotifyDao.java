@@ -42,7 +42,7 @@ public class CourseNotifyDao extends SuperDao {
 	}
 	
 	public List<CourseNotify> getCourseNotifyByCourseId(int courseid, int pageNo, int pageItemNum){
-		this.hql = "from CourseNotify as a inner join fetch a.courseEntity where a.courseId=?";
+		this.hql = "from CourseNotify as a inner join fetch a.courseEntity where a.courseId=? order by create_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseid);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -51,12 +51,38 @@ public class CourseNotifyDao extends SuperDao {
 		return result;
 	}
 	
+	public List<CourseNotify> getPublishedCourseNotifyByCourseId(int courseid, int pageNo, int pageItemNum){
+		this.hql = "from CourseNotify as a inner join fetch a.courseEntity where a.status=1 and a.courseId=? order by create_time desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
+	public List<CourseNotify> getCourseNotifyByCourseId(int courseid){
+		this.hql = "from CourseNotify as a inner join fetch a.courseEntity where a.courseId=? order by create_time desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
 	public List<CourseNotify> getCourseNotifyByCreateTime(Date createTime, int pageNo, int pageItemNum){
-		this.hql = "select a from CourseNotify as a inner join fetch a.courseEntity where create_time=?";
+		this.hql = "select a from CourseNotify as a inner join fetch a.courseEntity where create_time=? order by create_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, TimeUtil.timeFormat(createTime));
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
+	public List<CourseNotify> getCourseNotifyByCreateTime(Date createTime){
+		this.hql = "select a from CourseNotify as a inner join fetch a.courseEntity where create_time=? order by create_time desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, TimeUtil.timeFormat(createTime));
 		List<CourseNotify> result = query.list();
 		return result;
 	}

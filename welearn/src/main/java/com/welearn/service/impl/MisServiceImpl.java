@@ -47,7 +47,7 @@ public class MisServiceImpl implements MisService {
 
 			// 该页面不存在失物信息
 			if (size <= 4)
-				return null;
+				return list;
 
 			// 获取该页面的失物信息
 			for (int i = 1; i < size - 3; i++) {
@@ -64,10 +64,8 @@ public class MisServiceImpl implements MisService {
 
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
 		}
 
 		return list;
@@ -82,7 +80,7 @@ public class MisServiceImpl implements MisService {
 			Element ele = new MisHandler().getNetFlowDetail(s.getStudentNo(),
 					s.getGatewayPwd());
 			if (null == ele) {
-				return null;
+				return netFlow;
 			}
 			Elements eles = ele.getElementsByTag("tr");
 			netFlow.setBalance(eles.get(0).getElementsByTag("font").get(0)
@@ -98,14 +96,11 @@ public class MisServiceImpl implements MisService {
 					.getElementsByAttributeValue("class", "t_r1").get(0).html());
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
 		} catch (IndexOutOfBoundsException e) {
-			// 超出数组边界，返回null
+			// 超出数组边界
 			e.printStackTrace();
-			return null;
 		}
 
 		return netFlow;
