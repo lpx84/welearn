@@ -66,9 +66,10 @@ public class StudentController {
 	@RequestMapping("test")
 	@Authentication()
 	@ResponseBody
-	public String test() {
-		Student s = studentService.getStudentByStudentNo("12301124");
-		return s.getTrueName();
+	public View test() {
+//		Student s = studentService.getStudentByStudentNo("12301124");
+//		return s.getTrueName();
+		return new View("teacher","teacher","home","sample");
 	}
 	
 }

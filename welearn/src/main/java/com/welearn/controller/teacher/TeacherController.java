@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
@@ -40,7 +41,7 @@ public class TeacherController {
 	}
 	
 	/**
-	 * 发布作业
+	 * 新增作业，但是没有正式发布
 	 * @param content
 	 * @param courseId
 	 * @param title
@@ -48,8 +49,8 @@ public class TeacherController {
 	 * @param deadline
 	 * @return
 	 */
-	@RequestMapping("publishHomework")
-	public String publishHomework(
+	@RequestMapping("addHomework")
+	public String addHomework(
 			@RequestParam(value = "content") String content,
 			@RequestParam(value = "courseId") int courseId,
 			@RequestParam(value = "title") String title,
@@ -57,7 +58,14 @@ public class TeacherController {
 			@RequestParam(value = "deadline") Date deadline
 			) {
 		
-		CourseHomework homework = new CourseHomework(title, content, courseId, createTime, deadline);
+		//CourseHomework homework = new CourseHomework(title, content, courseId, createTime, deadline);
+		CourseHomework homework = new CourseHomework();
+		homework.setCourseId(courseId);
+		homework.setTitle(title);
+		homework.setContent(content);
+		homework.setCreate_time(createTime);
+		homework.setDeadline(deadline);
+		homework.setStatus(0);
 		
 		boolean flag = teacherService.publishCourseHomework(homework);
 		System.out.println(flag);
@@ -66,7 +74,7 @@ public class TeacherController {
 	}
 	
 	/**
-	 * 根据作业的id修改作业
+	 * 根据作业的id修改作业,修改后正式发布
 	 * @param id
 	 * @param content
 	 * @param courseId
@@ -92,6 +100,7 @@ public class TeacherController {
 		homework.setCourseId(courseId);
 		homework.setCreate_time(createTime);
 		homework.setDeadline(deadline);
+		homework.setStatus(1);
 		
 		boolean flag = teacherService.updateCourseHomework(homework);
 		System.out.println(flag);
@@ -99,31 +108,59 @@ public class TeacherController {
 		return null;
 	}
 	/**
-	 * 发布课程通知
+	 * 新增作业之后，回到作业列表，点击发布，发布作业
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("publishHomework")
+	public String publishHomework(
+			@RequestParam(value = "id") int id
+			) {
+		CourseHomework homework = teacherService.getHomeworkById(id);
+		
+		boolean flag = teacherService.updateCourseHomework(homework);
+		System.out.println(flag);
+		
+		return null;
+	}
+	
+	/**
+	 * 新增课程通知,但是没有发布
 	 * @param content
 	 * @param courseId
 	 * @param title
 	 * @param createTime
-	 * @param status
 	 * @return
 	 */
-	@RequestMapping("publishNotify")
-	public String publishNotify(
+	@RequestMapping("addNotify")
+	public String addNotify(
 			@RequestParam(value = "content") String content,
 			@RequestParam(value = "courseId") int courseId,
 			@RequestParam(value = "title") String title,
-			@RequestParam(value = "createTime") Date createTime,
-			@RequestParam(value = "status") int status
+			@RequestParam(value = "createTime") Date createTime
 			) {
 		
 		CourseNotify courseNotify = new CourseNotify();
 		courseNotify.setTitle(title);
 		courseNotify.setContent(content);
 		courseNotify.setCourseId(courseId);
-		courseNotify.setStatus(status);
+		courseNotify.setStatus(0);
 		courseNotify.setCreate_time(createTime);
 		
 		teacherService.publisCourseNotify(courseNotify);
+		
+		return null;
+	}
+	
+	@RequestMapping("publishNotify")
+	public String publishNotify(
+			@RequestParam(value = "id") int id
+			) {
+		
+		CourseNotify courseNotify = teacherService.getCourseNotifyById(id);
+		courseNotify.setStatus(1);
+		boolean flag = teacherService.updateCourseNotify(courseNotify);
+		System.out.println(flag);
 		
 		return null;
 	}
@@ -154,12 +191,86 @@ public class TeacherController {
 		
 		return null;
 	}
-	
+	/**
+	 * 添加签到任务，但是不发布
+	 * @param courseId
+	 * @param attendNum
+	 * @param createTime
+	 * @param startTime
+	 * @param endTime
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping("addAttendTask")
+	public String addAttendTask(
+			@RequestParam(value = "courseId") int courseId,
+			@RequestParam(value = "attendNum") int attendNum,
+			@RequestParam(value = "createTime") Date createTime,
+			@RequestParam(value = "startTime") Date startTime,
+			@RequestParam(value = "endTime") Date endTime,
+			@RequestParam(value = "name") String name
+			) {
+		AttendTask attendTask = new AttendTask();
+		attendTask.setAttendNum(attendNum);
+		attendTask.setCourseId(courseId);
+		attendTask.setCreate_time(createTime);
+		attendTask.setEndTime(new Date());
+		attendTask.setName(name);
+		attendTask.setStartTime(startTime);
+		attendTask.setStatus(0);
+		
+		boolean flag = teacherService.publishAttendTask(attendTask);
+		
+		System.out.println(flag);
+		
+		return null;
+	}
+	/**
+	 * 修改签到任务
+	 * @param courseId
+	 * @param attendNum
+	 * @param createTime
+	 * @param startTime
+	 * @param endTime
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping("updateAttendTask")
+	public String updateAttendTask(
+			@RequestParam(value = "courseId") int courseId,
+			@RequestParam(value = "attendNum") int attendNum,
+			@RequestParam(value = "createTime") Date createTime,
+			@RequestParam(value = "startTime") Date startTime,
+			@RequestParam(value = "endTime") Date endTime,
+			@RequestParam(value = "name") String name
+			) {
+		AttendTask attendTask = new AttendTask();
+		attendTask.setAttendNum(attendNum);
+		attendTask.setCourseId(courseId);
+		attendTask.setCreate_time(createTime);
+		attendTask.setEndTime(new Date());
+		attendTask.setName(name);
+		attendTask.setStartTime(startTime);
+		attendTask.setStatus(0);
+		
+		boolean flag = teacherService.publishAttendTask(attendTask);
+		
+		System.out.println(flag);
+		
+		return null;
+	}
+	/**
+	 * 发布课程签到任务
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("publishAttendTask")
 	public String publishAttendTask(
+			@RequestParam(value = "id") int id
 			) {
-		//发布课程签到信息，还没写
-		
+		AttendTask attendTask = teacherService.getAttendTaskById(id);
+		attendTask.setStatus(1);
+		teacherService.updateAttendTask(attendTask);
 		return null;
 	}
 	

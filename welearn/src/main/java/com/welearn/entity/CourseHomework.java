@@ -50,6 +50,8 @@ public class CourseHomework {
 	@Column(name="deadline", columnDefinition="datetime", nullable=false)
 	private Date deadline;
 	
+	@Column(name="status", columnDefinition="tinyint", nullable=false)
+	private int status;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
@@ -127,12 +129,20 @@ public class CourseHomework {
 		this.courseEntity = courseEntity;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseHomework [id=" + id + ", title=" + title + ", content="
 				+ content + ", courseId=" + courseId + ", create_time="
-				+ create_time + ", deadline=" + deadline + ", courseEntity="
-				+ courseEntity + "]";
+				+ create_time + ", deadline=" + deadline + ", status=" + status
+				+ ", courseEntity=" + courseEntity + "]";
 	}
 	
 }
