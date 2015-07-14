@@ -41,5 +41,9 @@ public interface TeacherService {
 	
 	public boolean publisCourseNotify(CourseNotify courseNotify);
 	
+	public CourseNotify getCourseNotifyById(int id);
+	
+	public boolean updateCourseNotify(CourseNotify courseNotify);
+	
 	public void test();
 }

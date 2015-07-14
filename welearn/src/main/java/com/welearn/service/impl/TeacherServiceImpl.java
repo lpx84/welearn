@@ -1,8 +1,8 @@
 package com.welearn.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
+import com.welearn.dao.AttendTaskDao;
 import com.welearn.dao.CourseDao;
 import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
@@ -22,6 +22,7 @@ public class TeacherServiceImpl implements TeacherService {
 	CourseHomeworkDao courseHomeworkDao;
 	CourseNotifyDao courseNotifyDao;
 	CourseDao courseDao;
+	AttendTaskDao attendTaskDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -37,6 +38,10 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public void setCourseNotifyDao(CourseNotifyDao courseNotifyDao) {
 		this.courseNotifyDao = courseNotifyDao;
+	}
+	
+	public void setAttendTaskDao(AttendTaskDao attendTaskDao) {
+		this.attendTaskDao = attendTaskDao;
 	}
 
 	public Teacher getTeacherById(int id) {
@@ -108,7 +113,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public boolean publishAttendTask(AttendTask attendTask) {
 		// TODO Auto-generated method stub
-		return false;
+		//attendTaskDao.addAttendTask(attendTask);
+		return attendTaskDao.addAttendTask(attendTask)>0;
 	}
 
 	public AttendRecord getAttendRecordByAttendTaskId(int id) {
@@ -123,6 +129,16 @@ public class TeacherServiceImpl implements TeacherService {
 		return courseNotifyDao.addCourseNotify(courseNotify)>0;
 	}
 
+	public CourseNotify getCourseNotifyById(int id) {
+		// TODO Auto-generated method stub
+		//courseNotifyDao.getCourseNotifyById(id);
+		return courseNotifyDao.getCourseNotifyById(id);
+	}
+
+	public boolean updateCourseNotify(CourseNotify courseNotify) {
+		// TODO Auto-generated method stub
+		return courseNotifyDao.updateCourseNotify(courseNotify);
+	}
 
 	public void test() {
 		// TODO Auto-generated method stub
@@ -132,6 +148,8 @@ public class TeacherServiceImpl implements TeacherService {
 			System.out.println(list.get(i).toString());
 		}
 	}
+
+
 
 
 
