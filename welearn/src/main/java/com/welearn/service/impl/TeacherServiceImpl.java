@@ -111,10 +111,22 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
+	public AttendTask getAttendTaskById(int id) {
+		// TODO Auto-generated method stub
+		//attendTaskDao.getAttendTaskById(id);
+		return attendTaskDao.getAttendTaskById(id);
+	}
+
 	public boolean publishAttendTask(AttendTask attendTask) {
 		// TODO Auto-generated method stub
 		//attendTaskDao.addAttendTask(attendTask);
 		return attendTaskDao.addAttendTask(attendTask)>0;
+	}
+
+	public boolean updateAttendTask(AttendTask attendTask) {
+		// TODO Auto-generated method stub
+		//attendTaskDao.updateAttendTask(attendTask);
+		return attendTaskDao.updateAttendTask(attendTask);
 	}
 
 	public AttendRecord getAttendRecordByAttendTaskId(int id) {
@@ -148,6 +160,8 @@ public class TeacherServiceImpl implements TeacherService {
 			System.out.println(list.get(i).toString());
 		}
 	}
+
+
 
 
 
