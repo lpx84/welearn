@@ -88,6 +88,20 @@ public class CourseDao  extends SuperDao {
 		query.setInteger(0, teacherId);
 		return query.list();
 	}
+	/**
+	 * 根据上课时间查询课程
+	 * @param year
+	 * @param semester
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByYearAndSemester(int year, int semester) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.year=? and u.semester=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, year);
+		query.setInteger(1, semester);
+		return query.list();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByName(String name, int pageNo, int pageItemNum) {
@@ -97,7 +111,13 @@ public class CourseDao  extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
-	
+	/**
+	 * 根据学院的name查找课程
+	 * @param academyName
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByAcademyName(String academyName, int pageNo, int pageItemNum) {
 		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE a.name like '%"+academyName+"%'";
@@ -106,6 +126,24 @@ public class CourseDao  extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
+	
+	/**
+	 * 根据学院的id查找课程
+	 * @param academyId
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByAcademyId(int academyId, int pageNo, int pageItemNum) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE a.academyId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, academyId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
+	}
+	
 	/**
 	 * 根据老师的真实姓名获得课程列表,精准查找
 	 * @param teacherName
@@ -140,206 +178,36 @@ public class CourseDao  extends SuperDao {
 	}
 	
 	/**
-	 * 通过weekday查找课程列表
-	 * @param weekday
+	 * 根据课程类型查找课程，支持模糊查询
+	 * @param courseType
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	//select b.* from bjtu_course_time AS a, bjtu_course AS b where a.course_id=b.id and weekday=1;
-	public List<Course> getCoursesByWeekday(int weekday, int pageNo, int pageItemNum) {
-		/*this.hql = "from Course AS b "
-				+ "left join CourseTime where CourseTime.weekday=?"
-				+ " inner join fetch b.academyEntity";*/
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql);
-		query.setInteger(0, weekday);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		
-		return null;
-	}
-	/**
-	 * 通过weekno查找课程列表
-	 * @param weekno
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 * .
-	 */
-	public List<Course> getCoursesByWeekNo(int weekno, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseTime AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId=b.id and a.weekNo=?";*/
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByCourseType(String courseType, int pageNo, int pageItemNum) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE u.courseType like '%"+courseType+"%'";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, weekno);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	/**
-	 * 根据签到任务获得课程列表
-	 * @param attendTaskId
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_attend_task AS a,bjtu_course AS b where a.course_id=b.id and a.id=1;
-	public List<Course> getCoursesByAttendTaskId(int attendTaskId, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from AttendTask AS a,Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId=b.id and a.id=?";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, attendTaskId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	/**
-	 * 根据学生的id获得课程记录，是从选课表查询
-	 * @param studentId
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_student_course AS a, bjtu_course AS b where a.course_id = b.id and student_id = 1;
-	public List<Course> getCoursesByStudentId(int studentId, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from StudentCourse AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.studentId =?";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, studentId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
+		return query.list();
 	}
 	
 	/**
-	 * 根据作业的id获得课程信息
-	 * @param homeworkId
+	 * 根据学分查询课程
+	 * @param credit
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	//select b.* from bjtu_course_homework AS a, bjtu_course AS b where a.course_id = b.id and a.id = 1;
-	public List<Course> getCoursesByHomeworkId(int homeworkId, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseHomework AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.id = ?";*/
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByCredit(int credit, int pageNo, int pageItemNum) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity as a WHERE u.credit=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, homeworkId);
+		query.setInteger(0, credit);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	
-	/**
-	 * 根据作业的标题查询课程信息，支持模糊查询
-	 * @param title
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_course_homework AS a, bjtu_course AS b where a.course_id = b.id and a.title like '%方法论%';
-	public List<Course> getCoursesByHomeworkTitle(String title, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseHomework AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.title like '%"+title+"%'";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		//query.setInteger(0, homeworkId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	/**
-	 * 根据提示的标题查找课程信息，支持模糊查询
-	 * @param title
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_course_notify AS a, bjtu_course AS b where a.course_id = b.id and a.title like '%提示%';
-	public List<Course> getCoursesByNotifyTitle(String title, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseNotify AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.title like '%"+title+"%'";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		//query.setInteger(0, homeworkId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	/**
-	 * 根据提示的内容查找课程信息，支持模糊查询
-	 * @param content
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_course_notify AS a, bjtu_course AS b where a.course_id = b.id and a.content like '%提示%';
-	public List<Course> getCoursesByNotifyContent(String content, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseNotify AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.content like '%"+content+"%'";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		//query.setInteger(0, homeworkId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	/**
-	 * 根据课程回复的replyor查找课程信息，精确查找
-	 * @param replyor
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_course_reply AS a, bjtu_course AS b where a.course_id = b.id and a.replyor = 'Tom';
-	public List<Course> getCoursesByReplyor(String replyor, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseReply AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.replyor = '?'";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setString(0, replyor);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	/**
-	 * 根据课程回复的内容查找课程信息，支持模糊查询
-	 * @param content
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_course_reply AS a, bjtu_course AS b where a.course_id = b.id and a.content like '%选项%';
-	public List<Course> getCoursesByReplyContent(String content, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseReply AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.content like '%"+content+"%'";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		//query.setString(0, replyor);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
-	}
-	
-	/**
-	 * 根据问题的id查找课程信息
-	 * @param problemId
-	 * @param pageNo
-	 * @param pageItemNum
-	 * @return
-	 */
-	//select b.* from bjtu_course_problem AS a, bjtu_course AS b where a.course_id = b.id and a.id=1;
-	public List<Course> getCoursesByProblemId(int problemId, int pageNo, int pageItemNum) {
-		/*this.hql = "select b from CourseProblem AS a, Course AS b "
-				+ "inner join fetch b.academyEntity"
-				+ "where a.courseId = b.id and a.id=?";*/
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, problemId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return null;
+		return query.list();
 	}
 	
 }

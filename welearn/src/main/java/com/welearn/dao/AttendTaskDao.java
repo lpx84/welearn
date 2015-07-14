@@ -27,6 +27,17 @@ public class AttendTaskDao extends SuperDao {
 		query.setInteger(0, courseId);
 		return query.executeUpdate() > 0;
 	}
+	/**
+	 * 根据id获得签到任务
+	 * @param id
+	 * @return
+	 */
+	public AttendTask getAttendTaskById(int id){
+		this.hql = "FROM AttendTask AS u inner join fetch u.courseEntity WHERE u.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setMaxResults(id);
+		return (AttendTask) query.uniqueResult();
+	}
 	
 	/**
 	 * 指定课程下的所有签到任务
