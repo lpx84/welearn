@@ -51,6 +51,16 @@ public class CourseNotifyDao extends SuperDao {
 		return result;
 	}
 	
+	public List<CourseNotify> getPublishedCourseNotifyByCourseId(int courseid, int pageNo, int pageItemNum){
+		this.hql = "from CourseNotify as a inner join fetch a.courseEntity where a.status=1 and a.courseId=? order by create_time desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
 	public List<CourseNotify> getCourseNotifyByCourseId(int courseid){
 		this.hql = "from CourseNotify as a inner join fetch a.courseEntity where a.courseId=? order by create_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);

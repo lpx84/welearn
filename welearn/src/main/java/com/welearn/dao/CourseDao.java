@@ -302,6 +302,7 @@ public class CourseDao extends SuperDao {
 		query.setInteger(0, studentId);
 
 		List<Object[]> object = query.list();
+		
 		for (Object[] o : object) {
 			int len = o.length;
 			System.out.println("----------+++++++++++");

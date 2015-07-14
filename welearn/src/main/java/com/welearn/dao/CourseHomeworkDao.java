@@ -70,6 +70,16 @@ public class CourseHomeworkDao extends SuperDao {
 		return result;
 	}
 	
+	public List<CourseHomework> getPublishedCourseHomeworkByCourseId(int courseid, int pageNo, int pageItemNum){
+		this.hql = "FROM CourseHomework AS u inner join fetch u.courseEntity WHERE u.status=1 and u.courseId=? order by create_time desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		List<CourseHomework> result = query.list();
+		return result;
+	}
+	
 	public List<CourseHomework> getCourseHomeworkByTitle(String title, int pageNo, int pageItemNum){
 		this.hql = "from CourseHomework as a inner join fetch a.courseEntity where a.title like '%"+title+"%' order by create_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
