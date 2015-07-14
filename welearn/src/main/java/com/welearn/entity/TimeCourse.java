@@ -25,10 +25,10 @@ public class TimeCourse {
 	private int timeId;
 	
 	@Column(name="classroom", columnDefinition="varchar(255)")
-	private int classroom;
+	private String classroom;
 	
 	@Column(name="class_time", columnDefinition="varchar(255)")
-	private int classTime;
+	private String classTime;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
@@ -88,19 +88,19 @@ public class TimeCourse {
 		this.courseTimeEntity = courseTimeEntity;
 	}
 
-	public int getClassroom() {
+	public String getClassroom() {
 		return classroom;
 	}
 
-	public void setClassroom(int classroom) {
+	public void setClassroom(String classroom) {
 		this.classroom = classroom;
 	}
 
-	public int getClassTime() {
+	public String getClassTime() {
 		return classTime;
 	}
 
-	public void setClassTime(int classTime) {
+	public void setClassTime(String classTime) {
 		this.classTime = classTime;
 	}
 

@@ -154,7 +154,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public void test() {
 		// TODO Auto-generated method stub
-		List<Course> list = courseDao.getCoursesByYear(2014);
+		List<Course> list = courseDao.getCoursesByYearAndSemester(2014,1);
 		System.out.println("-----------------");
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).toString());
