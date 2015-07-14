@@ -297,21 +297,20 @@ public class CourseDao extends SuperDao {
 	public List<Semester> getCourseTimeByStudentId(int studentId) {
 		this.hql = "select distinct year,semester from bjtu_course where id in "
 				+ "(select course_id from bjtu_student_course where student_id =?);";
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(
-				this.hql);
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql);
 		query.setInteger(0, studentId);
-
-		List<Object[]> object = query.list();
 		
+		List<Semester> semesters = new ArrayList<Semester>();
+		List<Object[]> object = query.list();
 		for (Object[] o : object) {
-			int len = o.length;
-			System.out.println("----------+++++++++++");
-			for (int i = 0; i < len; i++) {
-				System.out.println(o[i]);
-			}
+			
+			Semester semester = new Semester();
+			semester.setYear(Integer.parseInt(o[0].toString()));
+			semester.setSemesterNo(Integer.parseInt(o[1].toString()));
+			
+			semesters.add(semester);
 		}
-
-		return null;
+		return semesters;
 	}
 
 }
