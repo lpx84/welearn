@@ -11,6 +11,7 @@ import com.welearn.entity.Course;
 import com.welearn.entity.Student;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
+import com.welearn.model.Semester;
 
 public class CourseDao  extends SuperDao {
 
@@ -247,17 +248,15 @@ public class CourseDao  extends SuperDao {
 		return result;
 	}
 	
-	public String getCourseTimeByStudentId(int studentId){
-		this.hql = "FROM StudentCourse AS u inner "
-				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity "
-				+ "WHERE a.studentId=?";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+	public List<Semester> getCourseTimeByStudentId(int studentId){
+		this.hql = "select distinct year,semester from bjtu_course where id in "
+				+ "(select course_id from bjtu_student_course where student_id =?);";
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql).addEntity(Semester.class);
 		query.setInteger(0, studentId);
 		
-		ArrayList<Integer> coursesId = new ArrayList<Integer>();
-		List<StudentCourse> courses = query.list();
+		List<Semester> courses = query.list();
 		for(int i=0;i<courses.size();i++){
-			coursesId.add(i, courses.get(i).getCourseId());
+			
 		}
 		
 		
