@@ -9,6 +9,16 @@
 <title>${title }</title>
 <style type="text/css">
    
+   .btn-more {
+   		display: block;
+   		width: 100%;
+   }
+   
+   .btn-more span {
+   		position: absolute;
+   		width: 100%;
+   		text-align: center;
+   }
    
 </style>
 </head>
@@ -43,7 +53,7 @@
             </ul>
 
         </div>
-        <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
+        <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
         <span class="button-content">查看更多</span>
         </a>
     </div>
@@ -84,16 +94,16 @@ function fetchData() {
 				alert(res.msg);
 			} else {
 				if(res.length<1){
-					alert("没有更多的数据。");
+					$(".btn-more").removeAttr("href");
+					$(".btn-more").html("没有更多了");		
 				}else{
-					console.log(res);
 					joinData(res);
 				}			
 			}
 		},
 		complete: completeHandler
 	});
-	
+	$(".btn-more").html("获取中...");
 }
 
 function joinData(res) {
