@@ -160,7 +160,7 @@ public class TeacherServiceImpl implements TeacherService {
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).toString());
 		}*/
-		List<CourseHomework> list = courseHomeworkDao.getCourseHomeworkByCourseId(2);
+		List<CourseHomework> list = courseHomeworkDao.getPublishedCourseHomeworkByCourseId(2, 1, 10);
 		
 		System.out.println("-----------------");
 		for(int i=0;i<list.size();i++){
