@@ -64,17 +64,9 @@ public class ManageCourseController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
+		
+		
 
-//		// 把四六级分开成两个List
-//		ArrayList<CETGrade> cet4List = new ArrayList<CETGrade>();
-//		ArrayList<CETGrade> cet6List = new ArrayList<CETGrade>();
-//		for (int i = 0; i < list.size(); i++) {
-//			if (list.get(i).getType().equals("英语四级")) {
-//				cet4List.add(list.get(i));
-//			} else {
-//				cet6List.add(list.get(i));
-//			}
-//		}
 //		// 返回四六级成绩列表
 //		view = new View("student", "query-private", "grade-english", "四六级成绩");
 //		view.addObject("cet4List", cet4List);

@@ -13,9 +13,7 @@ import com.welearn.model.ExamPlan;
 public interface CourseService {
 
 	
-	public String getCourseList(String keyword, int pageNo, int academyId);
-	
-	public String getCourseList(String keyword, int pageNo);
+
 	
 	/**
 	 * 根据周，查询当前学期的课表
@@ -62,5 +60,12 @@ public interface CourseService {
 	 * @return
 	 */
 	public ArrayList<Course> queryCoursesByKeyword(String keyword,int pageno);
+	
+	/**
+	 * 根据courseid获取model中的course对象
+	 * @param courseid
+	 * @return
+	 */
+	public com.welearn.model.Course queryCourseModleByCourseId(int courseid);
 	
 }

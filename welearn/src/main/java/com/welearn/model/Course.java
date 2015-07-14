@@ -1,7 +1,6 @@
 package com.welearn.model;
 
 public class Course {
-	int id;
 	String name;
 	String school;
 	String teacher;
@@ -10,12 +9,6 @@ public class Course {
 	String capacity;// 课容量
 	String description;// 课程简介
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
