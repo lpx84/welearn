@@ -98,6 +98,7 @@ function fetchData() {
 					$(".btn-more").html("没有更多了");		
 				}else{
 					joinData(res);
+					$(".btn-more").html("查看更多");	
 				}			
 			}
 		},

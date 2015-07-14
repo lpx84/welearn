@@ -261,8 +261,16 @@ public class QueryPublicController {
 
 		// 获取当月流量
 		ArrayList<LostThing> list = misService.queryLostThings(pageno);
+		int i=0;
+		while(i<list.size()){
+			if(list.get(i).getThing().equals("")){
+				list.remove(i);
+			}else{
+				i++;
+			}			
+		}
 		String jsonString = JsonUtil.listToJSONString(list, null);
-		// System.out.println(jsonString);
+		
 		return jsonString;
 	}
 }
