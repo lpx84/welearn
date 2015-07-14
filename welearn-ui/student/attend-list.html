@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>签到记录</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+    
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+    
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+
+<style type="text/css">
+    .title {
+          text-align: center;
+    }
+    
+    .content {
+        margin-bottom: 5px;   
+    }
+    
+    .rcd {
+        padding: 5px 10px;
+        border-bottom: 1px solid #d9d9d9;
+    }
+    
+    .status {
+        font-weight: bold;
+        float: right;
+    }
+    
+    .img-avatar {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    
+    .inline-block {
+        display: inline-block;
+    }
+    
+    .rcd>div {
+        vertical-align: top;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="content-box">
+    <h3 class="content-box-header bg-gray">
+        <p class="pad0L title">我的签到记录</p>
+    </h3>
+    <div class="content">
+        <div class="rcd">
+            <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
+            <div class="inline-block">
+                <div class="font-bold">第四次签到</div>
+                <div><span class="font-gray ">签到于</span> 07-12 9:00:34</div>
+            </div>
+            <div class="status inline-block font-green"><i class="fa fa-check-circle"></i>&nbsp;成功</div>
+        </div>
+        <div class="rcd">
+            <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
+            <div class="inline-block">
+                <div class="font-bold">第三次签到</div>
+                <div><span class="font-gray ">签到于</span> 07-12 9:00:34</div>
+            </div>
+            <div class="status inline-block font-green"><i class="fa fa-check-circle"></i>&nbsp;成功</div>
+        </div>
+        <div class="rcd">
+            <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
+            <div class="inline-block">
+                <div class="font-bold">第二次签到</div>
+                <div><span class="font-gray ">签到于</span> 07-12 9:00:34</div>
+            </div>
+            <div class="status inline-block font-red"><i class="fa fa-clock-o"></i>&nbsp;审核中</div>
+        </div>
+        <div class="rcd">
+            <img class="img-avatar inline-block" src="../img/attend-dafault.png">
+            <div class="inline-block">
+                <div class="font-bold">第一次签到</div>
+            </div>
+            <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;未签到</div>
+        </div>
+    </div>
+    
+    <!-- 当前页号，下一次请求在此基础上加1 -->
+    <input id="pageNo" type="hidden" value="1">
+    <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
+        <span class="button-content">查看更多</span>
+    </a>
+    
+
+<script type="text/javascript">
+    function fetchData() {
+        //ajax分页取出数据 追加到后面
+    }
+</script>
+</div>
+</body>
+</html>
