@@ -9,6 +9,7 @@ import com.welearn.dao.CourseDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseTime;
+import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
@@ -38,12 +39,11 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Course queryCourse(int courseid) {
-		// 这里应该通过学习的接口查询课程,先进行模拟
+		
 		Course course = courseDao.getCourse(courseid);
 		return course;
 	}
@@ -157,9 +157,24 @@ public class CourseServiceImpl implements CourseService {
 
 	public com.welearn.model.Course queryCourseModleByCourseId(int courseid) {
 		com.welearn.model.Course courseModel = new com.welearn.model.Course();
-		Course course = courseDao.getCourse(courseid);
-		String teacherName = teacherDao.getTeacher(
-				Integer.valueOf(course.getTeacherId())).getTrueName();
+		try {
+			Course course = courseDao.getCourse(courseid);
+			String teacherName = teacherDao.getTeacher(
+					Integer.valueOf(course.getTeacherId())).getTrueName();
+			//设置相应的信息
+			courseModel.setCapacity(course.getClassSize());
+			courseModel.setDescription(course.getDescription());
+			courseModel.setName(course.getName());		
+			courseModel.setSchool(course.getAcademyEntity().getName());
+			courseModel.setTeacher(teacherName);
+			TimeCourse timeCourse = timeCourseDao.getTimeCourseById(courseid);			
+			String time = timeCourse.getClassTime();
+			String place = timeCourse.getClassroom();
+			courseModel.setTime(time);	
+			courseModel.setPlace(place);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 
 		return courseModel;
 	}

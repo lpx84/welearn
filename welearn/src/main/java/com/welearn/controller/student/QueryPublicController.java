@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
-import com.welearn.entity.Course;
 import com.welearn.entity.SchoolCalender;
 import com.welearn.model.Building;
 import com.welearn.model.EmptyRoom;
@@ -154,18 +153,15 @@ public class QueryPublicController {
 			@RequestParam(value = "courseid") int courseid) {
 		View view;
 		// 用课程服务类查询具体的课程信息
-		Course course = courseService.queryCourse(courseid);
+		com.welearn.model.Course course = courseService.queryCourseModleByCourseId(courseid);
+		
 		if (course == null) {
 			view = new View("error", "wechat", "info", "课程不存在！");
 			view.addObject("info", "课程不存在！");
 		} else {
 			view = new View("student", "query-public", "school-course-detail",
-					course.getName());
-			String teacherName=teacherService.getTeacherById(Integer.valueOf(course.getTeacherId())).getTrueName();
-			
-			
+					course.getName());						
 			view.addObject("course", course);
-			view.addObject("teacher",teacherName);
 		}
 
 		return view;

@@ -39,7 +39,7 @@
 	<bean id="teacherDao" class="com.welearn.dao.TeacherDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="timeCourseDao" class="TimeCourseDao">
+	<bean id="timeCourseDao" class="com.welearn.dao.TimeCourseDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
