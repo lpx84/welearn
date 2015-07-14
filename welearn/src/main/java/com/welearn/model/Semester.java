@@ -56,4 +56,10 @@ public class Semester {
 		this.semesterNo = semesterNo;
 	}
 
+	@Override
+	public String toString() {
+		return "Semester [year=" + year + ", semesterNo=" + semesterNo + "]";
+	}
+	
+
 }
