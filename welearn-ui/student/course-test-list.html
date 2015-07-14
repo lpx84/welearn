@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>课程小测</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+    
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+    
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+
+<style type="text/css">
+    
+    .btn-more {
+        width: 100%;
+        padding: 5px 0;
+    }
+    
+    .btn-more .button-content {
+        font-size: 1.3em;
+        width: 100%;
+        text-align: center;
+        padding: 0 !important;
+    }
+    
+    
+    .fixed-bottom {
+        position: fixed !important;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    .title {
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 72%;
+    }
+    
+    .content-box {
+        border: none;
+    }
+    
+    .introduce {
+        padding: 10px;
+    }
+    
+    ol {
+        display: block;
+        list-style: decimal;
+        list-style-type: decimal;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 40px;
+    }
+    
+    ol li {
+        list-style: decimal;
+    }
+    
+    .test-new,
+    .lab {
+        margin: 10px 5px;
+    }
+    
+    .lab {
+        font-size: 1.4em;
+        border-bottom: 1px solid #e7e7e7;
+    }
+    
+    .rcd {
+        padding: 10px;
+        font-size: 1.3em;
+        border-bottom: 1px solid #e7e7e7;
+    }
+    
+    .rcd:nth-child(even) {
+        background-color: #F7F7F7;
+    }
+    
+</style>
+</head>
+<body>
+<div class="content-box">
+    <h3 class="content-box-header bg-gray">
+        <div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <span class="title">软件工程专业研究方法论与创新教育</span>
+        <div class="glyph-icon icon-separator transparent float-right">
+            <i class="glyph-icon"></i>
+        </div>
+    </h3>
+    <div class="content">
+        <div class="test-new">
+            <div class="introduce">
+                <p>测试说明：</p>
+                <p>
+                    <ol>
+                        <li>测试题目全部为选择题；</li>
+                        <li>开始答题时原则不允许退出，如果中途退出，已答题目将丢失；</li>
+                        <li>题目必须全部答完才允许提交；</li>
+                    </ol>
+                </p>
+            </div>
+            <a href="course-test-ing.html" class="btn large display-block float-none primary-bg">
+                <span class="button-content"><i class="fa fa-share"></i> 开始新测试</span>
+            </a>
+        </div>
+        <p class="lab font-gray pad5A">历史测评</p>
+        <div class="item-list">
+            <div class="rcd">
+                <span><i class="fa fa-clock-o font-purple"></i> 07-14 10:34</span>
+                <span class="font-size-14"><span class="font-gray ">用时 </span>12<span class="font-gray"> 分钟</span></span>
+                <span class="score float-right font-green font-bold mrg10R">80</span>
+            </div>
+            <div class="rcd">
+                <span><i class="fa fa-clock-o font-purple"></i> 07-14 10:34</span>
+                <span class="font-size-14"><span class="font-gray ">用时 </span>12<span class="font-gray"> 分钟</span></span>
+                <span class="score float-right font-green font-bold mrg10R">80</span>
+            </div>
+            <div class="rcd">
+                <span><i class="fa fa-clock-o font-purple"></i> 07-14 10:34</span>
+                <span class="font-size-14"><span class="font-gray ">用时 </span>12<span class="font-gray"> 分钟</span></span>
+                <span class="score float-right font-green font-bold mrg10R">80</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 当前页号，下一次请求在此基础上加1 -->
+    <input id="pageNo" type="hidden" value="1">
+    <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
+        <span class="button-content">查看更多</span>
+    </a>
+</div>
+</body>
+</html>
