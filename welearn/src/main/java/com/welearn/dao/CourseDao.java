@@ -247,7 +247,7 @@ public class CourseDao  extends SuperDao {
 		return result;
 	}
 	
-	public void getCourseTimeByStudentId(int studentId){
+	public String getCourseTimeByStudentId(int studentId){
 		this.hql = "FROM StudentCourse AS u inner "
 				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity "
 				+ "WHERE a.studentId=?";
@@ -261,7 +261,7 @@ public class CourseDao  extends SuperDao {
 		}
 		
 		
-		
+		return null;
 	}
 	
 }
