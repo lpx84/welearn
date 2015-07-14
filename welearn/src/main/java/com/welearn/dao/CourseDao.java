@@ -8,6 +8,8 @@ import java.util.Set;
 import org.hibernate.Query;
 
 import com.welearn.entity.Course;
+import com.welearn.entity.Student;
+import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 
 public class CourseDao  extends SuperDao {
@@ -208,6 +210,58 @@ public class CourseDao  extends SuperDao {
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		return query.list();
+	}
+	/**
+	 * 根据学生的id获得他上过的课，在根据课程id，上课时间获得满足要求的课程列表
+	 * @param studentId
+	 * @param year
+	 * @param semester
+	 * @return
+	 */
+	public List<Course> getCoursesByStudentIdAndSemester(int studentId, int year, int semester){
+		
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity "
+				+ "WHERE a.studentId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, studentId);
+		
+		ArrayList<Integer> coursesId = new ArrayList<Integer>();
+		List<StudentCourse> courses = query.list();
+		for(int i=0;i<courses.size();i++){
+			coursesId.add(i, courses.get(i).getCourseId());
+		}
+		
+		Set<Course> set = new HashSet<Course>();
+		for(int i=0;i<coursesId.size();i++){
+			this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.id=? and u.year=? and u.semester=?";
+			Query query2 = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+			query2.setInteger(0, coursesId.get(i));
+			query2.setInteger(1, year);
+			query2.setInteger(2, semester);
+			List<Course> course = query2.list();
+			set.addAll(course);
+		}
+		List<Course> result = new ArrayList<Course>(set);
+		
+		return result;
+	}
+	
+	public void getCourseTimeByStudentId(int studentId){
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity "
+				+ "WHERE a.studentId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, studentId);
+		
+		ArrayList<Integer> coursesId = new ArrayList<Integer>();
+		List<StudentCourse> courses = query.list();
+		for(int i=0;i<courses.size();i++){
+			coursesId.add(i, courses.get(i).getCourseId());
+		}
+		
+		
+		
 	}
 	
 }
