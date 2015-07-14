@@ -38,7 +38,8 @@ public class CourseServiceImpl implements CourseService {
 		return null;
 	}
 
-	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {
+	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {		
+		// TODO Auto-generated method stub
 		return null;
 	}
 

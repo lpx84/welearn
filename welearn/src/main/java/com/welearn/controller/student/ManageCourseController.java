@@ -1,14 +1,13 @@
 package com.welearn.controller.student;
 
-import java.util.ArrayList;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.welearn.model.CETGrade;
+import com.welearn.aop.Authentication;
+import com.welearn.model.Course;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.MisService;
@@ -55,22 +54,46 @@ public class ManageCourseController {
 			return view;
 		}
 
-		// 获取四六级成绩的list
-		ArrayList<CETGrade> list = courseService.queryCETGrade(openid);
 
 		// 如果没有查到成绩，则显示没有 查到成绩
-		if (list.isEmpty()) {
-			view = new View("error", "wechat", "info", "未找到相应信息。");
-			view.addObject("info", "未找到相应信息。");
-			return view;
-		}
-		
-		
+//		if (list.isEmpty()) {
+//			view = new View("error", "wechat", "info", "未找到相应信息。");
+//			view.addObject("info", "未找到相应信息。");
+//			return view;
+//		}		
 
-//		// 返回四六级成绩列表
-//		view = new View("student", "query-private", "grade-english", "四六级成绩");
-//		view.addObject("cet4List", cet4List);
-//		view.addObject("cet6List", cet6List);
+		// 返回四六级成绩列表
+		view = new View("student", "manage-course", "course-list", "我的课程");
+
+		return view;
+	}
+	
+	/**
+	 * 进入某一门课的课程管理页面，为了防止爬取数据，这里需要验证微信登录
+	 * 
+	 * @param courseid
+	 *            课程id
+	 * @return
+	 */
+
+	@RequestMapping("course-manage")
+	@Authentication()
+	public View courseManage(@RequestParam(value = "courseid") int courseid) {
+		View view;
+		// 用课程服务类查询具体的课程信息
+		Course course = new Course();
+		
+//		if (course == null) {
+//			view = new View("error", "wechat", "info", "课程不存在！");
+//			view.addObject("info", "课程不存在！");
+//		} else {
+//			view = new View("student", "query-public", "school-course-detail",
+//					course.getName());						
+//			view.addObject("course", course);
+//		}
+		
+		
+		view = new View("student", "manage-course", "course-manage", course.getName());
 		return view;
 	}
 	
