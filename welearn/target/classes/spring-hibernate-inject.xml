@@ -13,59 +13,12 @@
 							http://www.springframework.org/schema/task/spring-task-3.0.xsd
 							http://www.springframework.org/schema/mvc
 							http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-
-	<!-- ===================== WechatMessage =========================== -->
-	<bean id="msgReplyIndexDao" class="com.welearn.dao.MsgReplyIndexDao">
+							
+	<!-- ===================== Dao =========================== -->
+	<bean id="attendTaskDao" class="com.welearn.dao.AttendTaskDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="wechatMsgServiceBase" class="com.welearn.service.impl.WechatMsgServiceImpl">
-		<property name="msgReplyIndexDao" ref="msgReplyIndexDao"></property>
-	</bean>
-	<bean name="wechatMsgService" parent="transactionProxy">
-		<property name="target" ref="wechatMsgServiceBase"></property>
-	</bean>
-
-	<!-- ===================== Student=========================== -->
-	<bean id="studentDao" class="com.welearn.dao.StudentDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<bean id="studentServiceBase" class="com.welearn.service.impl.StudentServiceImpl">
-		<property name="studentDao" ref="studentDao"></property>
-	</bean>
-	<bean name="studentService" parent="transactionProxy">
-		<property name="target" ref="studentServiceBase"></property>
-	</bean>
-
-	<!-- ===================== EmptyRoom =========================== -->
-	<bean name="emptyRoomService" class="com.welearn.service.impl.EmptyRoomServiceImpl">
-	</bean>
-
-	<!-- ===================== Course =========================== -->
 	<bean id="courseDao" class="com.welearn.dao.CourseDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<bean id="courseServiceBase" class="com.welearn.service.impl.CourseServiceImpl">
-		<property name="courseDao" ref="courseDao"></property>
-	</bean>
-	<bean name="courseService" parent="transactionProxy">
-		<property name="target" ref="courseServiceBase"></property>
-	</bean>
-
-	<!-- ===================== Mis =========================== -->
-	<bean id="schoolCalenderDao" class="com.welearn.dao.SchoolCalenderDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="misServiceBase" class="com.welearn.service.impl.MisServiceImpl">
-		<property name="schoolCalenderDao" ref="schoolCalenderDao"></property>
-		<property name="studentDao" ref="studentDao"></property>
-	</bean>
-	<bean name="misService" parent="transactionProxy">
-		<property name="target" ref="misServiceBase"></property>
-	</bean>
-
-	<!-- ===================== Teacher =========================== -->
-	<bean id="teacherDao" class="com.welearn.dao.TeacherDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="courseHomeworkDao" class="com.welearn.dao.CourseHomeworkDao">
@@ -74,9 +27,63 @@
 	<bean id="courseNotifyDao" class="com.welearn.dao.CourseNotifyDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="attendTaskDao" class="com.welearn.dao.AttendTaskDao">
+	<bean id="msgReplyIndexDao" class="com.welearn.dao.MsgReplyIndexDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="schoolCalenderDao" class="com.welearn.dao.SchoolCalenderDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="studentDao" class="com.welearn.dao.StudentDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	<bean id="teacherDao" class="com.welearn.dao.TeacherDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="timeCourseDao" class="TimeCourseDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	<!-- ===================== WechatMessage =========================== -->
+	<bean id="wechatMsgServiceBase" class="com.welearn.service.impl.WechatMsgServiceImpl">
+		<property name="msgReplyIndexDao" ref="msgReplyIndexDao"></property>
+	</bean>
+	<bean name="wechatMsgService" parent="transactionProxy">
+		<property name="target" ref="wechatMsgServiceBase"></property>
+	</bean>
+
+	<!-- ===================== Student=========================== -->
+	<bean id="studentServiceBase" class="com.welearn.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<bean name="studentService" parent="transactionProxy">
+		<property name="target" ref="studentServiceBase"></property>
+	</bean>
+
+	<!-- ===================== EmptyRoomService =========================== -->
+	<bean name="emptyRoomService" class="com.welearn.service.impl.EmptyRoomServiceImpl">
+	</bean>
+
+	<!-- ===================== CourseService =========================== -->
+	<bean id="courseServiceBase" class="com.welearn.service.impl.CourseServiceImpl">
+		<property name="courseDao" ref="courseDao"></property>
+		<property name="teacherDao" ref="teacherDao"></property>
+		<property name="timeCourseDao" ref="timeCourseDao"></property>
+	</bean>
+	<bean name="courseService" parent="transactionProxy">
+		<property name="target" ref="courseServiceBase"></property>
+	</bean>
+
+	<!-- ===================== MisService =========================== -->
+	<bean id="misServiceBase" class="com.welearn.service.impl.MisServiceImpl">
+		<property name="schoolCalenderDao" ref="schoolCalenderDao"></property>
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<bean name="misService" parent="transactionProxy">
+		<property name="target" ref="misServiceBase"></property>
+	</bean>
+
+	<!-- ===================== TeacherService =========================== -->
 	<bean id="teacherServiceBase" class="com.welearn.service.impl.TeacherServiceImpl">
 		<property name="teacherDao" ref="teacherDao"></property>
 		<property name="courseHomeworkDao" ref="courseHomeworkDao"></property>
@@ -87,6 +94,7 @@
 	<bean name="teacherService" parent="transactionProxy">
 		<property name="target" ref="teacherServiceBase"></property>
 	</bean>
+	
 
 </beans>
 

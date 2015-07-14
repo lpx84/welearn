@@ -64,6 +64,8 @@ public class ManageCourseController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
+		
+		
 
 //		// 返回四六级成绩列表
 //		view = new View("student", "query-private", "grade-english", "四六级成绩");
