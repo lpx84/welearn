@@ -34,6 +34,10 @@ public class Semester {
 		return semester;
 	}
 
+	public Semester(){
+		super();
+	}
+	
 	public Semester(Integer year, Integer semesterNo) {
 		super();
 		this.year = year;
