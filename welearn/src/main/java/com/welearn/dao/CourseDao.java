@@ -251,10 +251,10 @@ public class CourseDao  extends SuperDao {
 	public List<Semester> getCourseTimeByStudentId(int studentId){
 		this.hql = "select distinct year,semester from bjtu_course where id in "
 				+ "(select course_id from bjtu_student_course where student_id =?);";
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql).addEntity(Semester.class);
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.hql);
 		query.setInteger(0, studentId);
 		
-		List<Semester> courses = query.list();
+		List courses = query.list();
 		for(int i=0;i<courses.size();i++){
 			
 		}

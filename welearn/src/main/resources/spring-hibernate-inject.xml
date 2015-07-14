@@ -42,7 +42,9 @@
 	<bean id="timeCourseDao" class="com.welearn.dao.TimeCourseDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+	<bean id="courseFeedbackDao" class="com.welearn.dao.CourseFeedbackDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 	<!-- ===================== WechatMessage =========================== -->
 	<bean id="wechatMsgServiceBase" class="com.welearn.service.impl.WechatMsgServiceImpl">

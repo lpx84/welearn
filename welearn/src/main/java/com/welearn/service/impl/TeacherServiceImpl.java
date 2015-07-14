@@ -14,6 +14,7 @@ import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.Student;
 import com.welearn.entity.Teacher;
+import com.welearn.model.Semester;
 import com.welearn.service.intef.TeacherService;
 
 public class TeacherServiceImpl implements TeacherService {
@@ -154,7 +155,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public void test() {
 		// TODO Auto-generated method stub
-		List<Course> list = courseDao.getCoursesByYearAndSemester(2014,1);
+		List<Semester> list = courseDao.getCourseTimeByStudentId(1);
 		System.out.println("-----------------");
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).toString());
