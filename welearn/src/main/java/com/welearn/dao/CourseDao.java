@@ -88,6 +88,18 @@ public class CourseDao  extends SuperDao {
 		query.setInteger(0, teacherId);
 		return query.list();
 	}
+	/**
+	 * 根据上课时间查询课程
+	 * @param year
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Course> getCoursesByYear(int year) {
+		this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.year=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, year);
+		return query.list();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByName(String name, int pageNo, int pageItemNum) {
