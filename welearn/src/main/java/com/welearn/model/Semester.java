@@ -25,7 +25,7 @@ public class Semester {
 				|| (month == 7 && day < 15)) {
 			semesterNo = 2;
 		} else {
-			if(month<=1){
+			if (month <= 1) {
 				year--;
 			}
 		}
@@ -34,10 +34,10 @@ public class Semester {
 		return semester;
 	}
 
-	public Semester(){
+	public Semester() {
 		super();
 	}
-	
+
 	public Semester(Integer year, Integer semesterNo) {
 		super();
 		this.year = year;
@@ -62,8 +62,14 @@ public class Semester {
 
 	@Override
 	public String toString() {
-		return "Semester [year=" + year + ", semesterNo=" + semesterNo + "]";
+		String semesterStr;
+		if (semesterNo == 1) {
+			semesterStr = "一";
+		} else {
+			semesterStr = "二";
+		}
+		return String.valueOf(year) + "-" + String.valueOf(year + 1) + "学年第"
+				+ semesterStr + "学期";
 	}
-	
 
 }

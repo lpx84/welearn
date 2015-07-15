@@ -15,6 +15,7 @@ import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
+import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
 import com.welearn.dao.TimeCourseDao;
 
@@ -191,6 +192,24 @@ public class CourseServiceImpl implements CourseService {
 	public ArrayList<CourseNotify> queryCourseNotify(int courseId) {
 		//ArrayList<CourseNotify> list courseNotifyDao.getCourseNotifyByCourseId(courseid, pageNo, pageItemNum)
 		return null;
+	}
+
+	public ArrayList<Semester> querySemesterByStudentId(int studentId) {		
+		return (ArrayList<Semester>) courseDao.getCourseTimeByStudentId(studentId);
+	}
+
+	public Map<Semester, ArrayList<Course>> querySemesterCourseByStudentId(
+			int studentId) {
+		Map<Semester, ArrayList<Course>> map = new HashMap<Semester, ArrayList<Course>>();
+		//获取该学生所拥有的学期
+		ArrayList<Semester> semesterList = (ArrayList<Semester>)courseDao.getCourseTimeByStudentId(studentId);
+		//对 该学生的每一个学期赋值
+		for(int i=0;i<semesterList.size();i++){
+			ArrayList<Course> courseList = (ArrayList<Course>) courseDao.getCoursesByStudentIdAndSemester(studentId, semesterList.get(i).getYear(), semesterList.get(i).getSemesterNo());
+			map.put(semesterList.get(i), courseList);
+		}
+		
+		return map;
 	}
 
 }

@@ -1,8 +1,10 @@
 package com.welearn.controller.student;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.welearn.aop.Authentication;
 import com.welearn.entity.CourseNotify;
 import com.welearn.model.Course;
+import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.MisService;
@@ -46,7 +49,7 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-list")
-	public View getCourseList(@RequestParam(value = "code") String code) {
+	public View getCourseList(@RequestParam(value = "code") String code,HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -56,18 +59,23 @@ public class ManageCourseController {
 		if (view != null) {
 			return view;
 		}
+        
+		//获取该学生有的学期和他各学期选的课程
+		int studentId = studentService.getStudentByOpenId(openid).getId();
+		ArrayList<Semester> semesterList = courseService.querySemesterByStudentId(studentId);
+		Map<Semester, ArrayList<com.welearn.entity.Course>> map = courseService.querySemesterCourseByStudentId(studentId);
 
-
-		// 如果没有查到成绩，则显示没有 查到成绩
-//		if (list.isEmpty()) {
-//			view = new View("error", "wechat", "info", "未找到相应信息。");
-//			view.addObject("info", "未找到相应信息。");
-//			return view;
-//		}		
-
-		// 返回四六级成绩列表
+		// 如果没有查到，则显示没有 查到
+		if (semesterList.isEmpty()) {
+			view = new View("error", "wechat", "info", "未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+		}		
+		studentService.setSession(session, openid); 
+		// 返回课程列表
 		view = new View("student", "manage-course", "course-list", "我的课程");
-
+		view.addObject("list", semesterList);
+		view.addObject("map", map);
 		return view;
 	}
 	
@@ -86,14 +94,7 @@ public class ManageCourseController {
 		// 用课程服务类查询具体的课程信息
 		Course course = new Course();
 		
-//		if (course == null) {
-//			view = new View("error", "wechat", "info", "课程不存在！");
-//			view.addObject("info", "课程不存在！");
-//		} else {
-//			view = new View("student", "query-public", "school-course-detail",
-//					course.getName());						
-//			view.addObject("course", course);
-//		}
+
 		
 		
 		view = new View("student", "manage-course", "course-manage", course.getName());

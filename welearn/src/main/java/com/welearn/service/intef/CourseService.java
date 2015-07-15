@@ -10,6 +10,7 @@ import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
+import com.welearn.model.Semester;
 
 public interface CourseService {
 
@@ -75,5 +76,19 @@ public interface CourseService {
 	 * @return
 	 */
 	public ArrayList<CourseNotify> queryCourseNotify(int courseId);
+	
+	/**
+	 * 根据学生的id获取该学生这学期上的课程
+	 * @param studentId
+	 * @return
+	 */
+	public ArrayList<Semester> querySemesterByStudentId(int studentId);
+	
+	/**
+	 * 获取该学生各个学期的成绩
+	 * @param studentId
+	 * @return
+	 */
+	public Map<Semester, ArrayList<Course>> querySemesterCourseByStudentId(int studentId);
 	
 }
