@@ -21,6 +21,9 @@
 	<bean id="courseDao" class="com.welearn.dao.CourseDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="courseFeedbackDao" class="com.welearn.dao.CourseFeedbackDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<bean id="courseHomeworkDao" class="com.welearn.dao.CourseHomeworkDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -33,6 +36,9 @@
 	<bean id="schoolCalenderDao" class="com.welearn.dao.SchoolCalenderDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="studentCourseDao" class="com.welearn.dao.StudentCourseDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<bean id="studentDao" class="com.welearn.dao.StudentDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>	
@@ -42,9 +48,7 @@
 	<bean id="timeCourseDao" class="com.welearn.dao.TimeCourseDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="courseFeedbackDao" class="com.welearn.dao.CourseFeedbackDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
+
 	
 	<!-- ===================== WechatMessage =========================== -->
 	<bean id="wechatMsgServiceBase" class="com.welearn.service.impl.WechatMsgServiceImpl">
@@ -71,6 +75,8 @@
 		<property name="courseDao" ref="courseDao"></property>
 		<property name="teacherDao" ref="teacherDao"></property>
 		<property name="timeCourseDao" ref="timeCourseDao"></property>
+		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
+		<property name="courseHomeworkDao" ref="courseHomeworkDao"></property>
 	</bean>
 	<bean name="courseService" parent="transactionProxy">
 		<property name="target" ref="courseServiceBase"></property>
@@ -92,6 +98,8 @@
 		<property name="courseDao" ref="courseDao"></property>
 		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
 		<property name="attendTaskDao" ref="attendTaskDao"></property>
+		<property name="studentDao" ref="studentDao"></property>
+		<property name="studentCourseDao" ref="studentCourseDao"></property>
 	</bean>
 	<bean name="teacherService" parent="transactionProxy">
 		<property name="target" ref="teacherServiceBase"></property>

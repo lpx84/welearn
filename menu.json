@@ -12,6 +12,7 @@
                     "type": "view", 
                     "name": "我要蹭课", 
                     "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fschool-course&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+
                 }, 
                 {
                     "type": "view", 
@@ -21,7 +22,7 @@
                 {
                     "type": "view", 
                     "name": "失物招领", 
-                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Flost-thing&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Flost-thing&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                 }
             ]
         },
@@ -31,7 +32,7 @@
                 {
                     "type": "view", 
                     "name": "课程管理", 
-                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Flost-thing&response_type=code&scope=snsapi_base&state=123#wechat_redirect"                    
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fmanage%2Fcourse%2Fcourse-list&response_type=code&scope=snsapi_base&state=123#wechat_redirect"                    
                 }, 
                 {
                     "type": "view", 
@@ -61,7 +62,7 @@
                 {
                     "type": "view", 
                     "name": "成绩查询", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fcourse-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpersonal%2Fcourse-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                 }, 
                 {
                     "type": "view", 
@@ -71,7 +72,7 @@
                 {
                     "type": "view", 
                     "name": "上网流量", 
-                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Fnet-flow&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpersonal%2Fnet-flow&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                 }
             ]
         }

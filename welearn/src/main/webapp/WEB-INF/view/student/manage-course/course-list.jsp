@@ -48,79 +48,30 @@
         <div class="nav-list">
             <ul>
                 <!-- 显示时当前学期先显示，其他学期隐藏-->
-                <li id="rcd342">
-                    <a href="javascript:;" class="grade-toggle" title=""  data-id="342">
+                <%int count =343; %>
+                <c:forEach var="item" items="${list }">
+                <%count++; %>
+                <li id="rcd<%=count%>">
+                    <a href="javascript:;" class="grade-toggle" title=""  data-id="<%=count%>">                    
                         <i class="glyph-icon font-purple icon-time"></i>
-                        2014-2015学年第二学期
+                        ${item.toString() }
                         <i class="glyph-icon icon-chevron-down float-right"></i>
                     </a>
-                    <ul class="ul-inner">
+                    <ul class="ul-inner" style="display: none;">
+                    
+                    <c:forEach var="course" items="${map.get(item.toString()) }">
                         <li class="row">
                             <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
+                                <a href="course-manage?courseid=${course.getId() }" >【${course.getCourseType() } 】${course.getName() }</a>
                             </div>
                         </li>
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
+                     </c:forEach> 
+                     
                     </ul>
                 </li>
                 
-                <li id="rcd343">
-                    <a href="javascript:;" class="grade-toggle" title=""  data-id="343">
-                        <i class="glyph-icon font-purple icon-time"></i>
-                        2014-2015学年第一学期
-                        <i class="glyph-icon fa-chevron-right float-right"></i>
-                    </a>
-                    <ul class="ul-inner" style="display: none;">
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="course-manager.html" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li id="rcd344">
-                    <a href="javascript:;" class="grade-toggle" title=""  data-id="344">
-                        <i class="glyph-icon font-purple icon-time"></i>
-                        2013-2014学年第二学期
-                        <i class="glyph-icon icon-chevron-right float-right"></i>
-                    </a>
-                    <ul class="ul-inner" style="display: none;">
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                        <li class="row">
-                            <div class="col-xs-12">
-                                <a href="#" >【专业课】软件系统分析与设计技术</a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+             </c:forEach>
+
             </ul>
         </div>
     </div>

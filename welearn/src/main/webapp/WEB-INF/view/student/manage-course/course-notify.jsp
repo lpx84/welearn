@@ -77,6 +77,17 @@
         padding: 10px 5px;
         background: #fafafa;
     }
+    
+   .btn-more {
+   		display: block;
+   		width: 100%;
+   }
+   
+   .btn-more span {
+   		position: absolute;
+   		width: 100%;
+   		text-align: center;
+   }
    
 </style>
 </head>
@@ -93,8 +104,7 @@
     </h3>
     <div class="content">
     
-    <c:forEach var="item" items="${list }">
-    
+    <c:forEach var="item" items="${list }">    
         <div class="rcd">
             <div class="rows rows1">
                 <div class="inline-block">
@@ -115,31 +125,10 @@
             </div>
         </div>
     </c:forEach>
-   <!--      <div class="rcd">
-            <div class="rows rows1">
-                <div class="inline-block">
-                    font-red表示消息未读 已读消息设为font-gray
-                    <div class="rows rows11 name"><i class="glyph-icon font-red fa-bullhorn"></i>&nbsp;端午节放假补课安排</div>
-                    <div class="rows rows12">
-                        <span class="time ">
-                            <span class="lab"><i class="fa fa-clock-o"></i>&nbsp;</span>
-                            <span>07-11 12:43</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="inline-block i-toggle">
-                    <i class="fa fa-chevron-right"></i>
-                </div>
-            </div>
-            <div class="row rows rows2 text" style="display: none;">
-                这是更正通知这是更正通知这是更正通知这是更正通知这是更正通知这是更正通知
-            </div>
-        </div> -->
+    
     </div>
     
-    <!-- 当前页号，下一次请求在此基础上加1 -->
-    <input id="pageNo" type="hidden" value="1">
-    <a href="javascript:fetchData();" class="btn btn-more medium display-block float-none ui-state-default">
+    <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
         <span class="button-content">查看更多</span>
     </a>
 </div>
@@ -174,6 +163,61 @@ $(".rows.rows1").click(function(){
 if (($(document.body).height() + 10) < $(window).height()) {
     $(".btn-more").addClass("fixed-bottom");
 };
+
+
+var pageno=1;
+var courseid= ${courseid };
+function fetchData() {
+	//记录当前页数
+	pageno++;
+	//用ajax获取页面信息
+	
+	$.ajax({
+		
+		url: $("#appName").val()+"/student/manage/course/more-course-notify",
+		type: "POST",
+		data: {
+			courseid:courseid,
+			pageNo: pageno,
+		},
+		timeout: 5000,
+		dataType: "JSON",
+		success: function(res) {
+			if(res.code == 100) {
+				alert(res.msg);
+			} else {
+				if(res.length<1){
+					$(".btn-more").removeAttr("href");
+					$(".btn-more").html("没有更多了");		
+				}else{
+					joinData(res);
+					$(".btn-more").html("查看更多");	
+				}	
+			}
+		},
+		complete: completeHandler
+	});
+	$(".btn-more").html("获取中...");
+}
+
+function joinData(res) {              
+	var html = new Array(
+		"<div class='rcd'><div class='rows rows1'><div class='inline-block'><div class='rows rows11 name'><i class='glyph-icon font-red fa-bullhorn'></i>&nbsp;",
+		"title",
+		"</div><div class='rows rows12'><span class='time '><span class='lab'><i class='fa fa-clock-o'></i>&nbsp;</span><span>",
+		"time",
+		" </span></span></div></div><div class='inline-block i-toggle'> <i class='fa fa-chevron-right'></i></div></div><div class='row rows rows2 text' style='display: none;'>",
+		"content",
+		"</div></div>"
+	);
+	for(var i=0; i<res.length; ++i) {
+		html[1]=res[i].title;
+		html[3]=res[i].create_time;
+		html[5]=res[i].content;
+
+		$(".content").append(html.join(''));
+	}
+}
 </script>
 </body>
 </html>

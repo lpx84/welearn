@@ -77,36 +77,36 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6">
                     <span class="lab">课程号：</span>
-                    <span>${course.getName() }</span>
+                    <span>${course.getCourseNo() }</span>
                 </div>
                 <div class="col-xs-5 col-sm-5">
                     <span class="lab">学分：</span>
-                    <span>2</span>
+                    <span>${course.getCredit() }</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <span class="lab">开课学院：</span>
-                    <span>计算机信息技术学院</span>
+                    <span>${course.getSchool() }</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <span class="lab">任课教师：</span>
-                    <span>张红延</span>
+                    <span>${course.getTeacher() }</span>
                 </div>
                 
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <span class="lab">联系方式：</span>
-                    <span>010-23424254</span>
+                    <span>${course.getTeacherTel() }</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <span class="lab">课程简介：</span>
-                    <span class="large-text limit-text">软件工程专业研究方法论与创新教育着重培养同学的创新能力，让同学做到敢想、善做、懂表达。</span>
+                    <span class="large-text limit-text">${course.getDescription() }</span>
                 </div>
             </div>
             <div class="toggle"><i class="fa fa-angle-double-down text-toggle"></i></div>
@@ -124,21 +124,21 @@
         <div class="nav-list">
             <ul>
                 <li>
-                    <a href="course-homework.html">
+                    <a href="course-homework?courseid=${course.getId() }">
                         <i class="glyph-icon font-blue-alt fa-archive"></i>
                         课程作业
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="course-notify.html">
+                    <a href="course-notify?courseid=${course.getId() }">
                         <i class="glyph-icon font-orange fa-bell"></i>
                         课程公告
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="course-discuss.html">
+                    <a href="course-discuss?courseid=${course.getId() }">
                         <i class="glyph-icon font-green fa-weixin"></i>
                         课程讨论
                         <i class="glyph-icon icon-chevron-right float-right"></i>
@@ -152,14 +152,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="attend-list.html">
+                    <a href="attend-list?courseid=${course.getId() }">
                         <i class="glyph-icon font-purple fa-list-ol"></i>
                         考勤记录
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="course-feedback.html">
+                    <a href="course-feedback?courseid=${course.getId() }">
                         <i class="glyph-icon font-gray fa-star-half-o"></i>
                         课程反馈
                         <i class="glyph-icon icon-chevron-right float-right"></i>
