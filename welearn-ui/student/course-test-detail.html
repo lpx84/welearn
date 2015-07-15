@@ -4,7 +4,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>课程测评</title>
+<title>测评详情</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -108,7 +108,7 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray">
-        <div class="glyph-icon icon-separator transparent back-btn">
+        <div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='./course-test-list.html'">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
         <span class="title">软件工程专业研究方法论与创新教育</span>
@@ -118,13 +118,13 @@
     </h3>
     <div class="content">
         <div id="rcd34" class="rcd" data-id="34"> <!-- rcd32中32指的是problem的id号 -->
-            <div class="problem-title">
+            <div class="problem-title mrg5B">
                 <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
                 <span class="problem-no">1</span>、
                 <span>北京交通大学是哪一年建立的？</span>
             </div>
             <div class="problem-options">
-                <div class="option">
+                <div class="option selected">
                     <span class="code">A</span>
                     <span class="text">1896</span>
                 </div>
@@ -141,15 +141,31 @@
                     <span class="text">1897</span>
                 </div>
             </div>
+            <div class="problem-answer">
+                <div class="mrg10T">
+                    <span class="font-gray">正确答案：</span>
+                    <span class="font-green font-size-20">A</span>
+                </div>
+                <div class="mrg5T">
+                    <span class="font-gray">你的答案：</span>
+                    <span class="font-blue font-size-20">C</span>
+                </div>
+                <div class="explain mrg10T">
+                    <span class="font-gray">题解：</span>
+                    <span class="font-size-15">这道题你都不会？？？？？？？还是交大人么</span>
+                    
+                </div>
+            </div>
         </div>
+        
         <div id="rcd35" class="rcd" data-id="35"> <!-- rcd32中32指的是problem的id号 -->
-            <div class="problem-title">
+            <div class="problem-title mrg5B">
                 <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
                 <span class="problem-no">2</span>、
                 <span>北京交通大学是哪一年建立的？</span>
             </div>
             <div class="problem-options">
-                <div class="option">
+                <div class="option selected">
                     <span class="code">A</span>
                     <span class="text">1896</span>
                 </div>
@@ -166,95 +182,29 @@
                     <span class="text">1897</span>
                 </div>
             </div>
-        </div>
-        <div id="rcd32" class="rcd" data-id="32"> <!-- rcd32中32指的是problem的id号 -->
-            <div class="problem-title">
-                <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
-                <span class="problem-no">3</span>、
-                <span>北京交通大学是哪一年建立的？</span>
-            </div>
-            <div class="problem-options">
-                <div class="option">
-                    <span class="code">A</span>
-                    <span class="text">1896</span>
+            <div class="problem-answer">
+                <div class="mrg10T">
+                    <span class="font-gray">正确答案：</span>
+                    <span class="font-green font-size-20">A</span>
                 </div>
-                <div class="option">
-                    <span class="code">B</span>
-                    <span class="text">1856</span>
+                <div class="mrg5T">
+                    <span class="font-gray">你的答案：</span>
+                    <span class="font-blue font-size-20">C</span>
                 </div>
-                <div class="option">
-                    <span class="code">C</span>
-                    <span class="text">1886</span>
-                </div>
-                <div class="option">
-                    <span class="code">D</span>
-                    <span class="text">1897</span>
+                <div class="explain mrg10T">
+                    <span class="font-gray">题解：</span>
+                    <span class="font-size-15">这道题你都不会？？？？？？？还是交大人么</span>
+                    
                 </div>
             </div>
         </div>
+        
     </div>
     
-    <a href="javascript:submitAnswer();" class="btn btn-submit large display-block float-none bg-blue">
-        <span class="button-span">提交答案</span>
-    </a>
 </div>
 <script type="text/javascript">
     
-    $(".problem-options .option").click(function(){
-        var $options = $(this).siblings();
-        
-        $options.each(function(n, node) {
-            $(node).removeClass("selected");
-        });
-        $(this).addClass("selected");
-        $(this).parent().parent().removeClass("unfinish");
-        
-        //console.log($options);
-    });
     
-    function submitAnswer() {
-        var ans = "";
-        var finished = true;
-        var firstUnfinishId = 0;
-//        $(".rcd").each(function(i,node){
-//            
-//        });
-        var $problems = $(".rcd");
-        for(var i=0; i<$problems.length; ++i) {
-            var $problem = jQuery($problems.get(i));
-            var id = $problem.attr("data-id");
-            var answer = getProblemSelected($problem);
-            if(answer == "null") {
-                finished = false;
-                firstUnfinishId = id;
-                $("#rcd"+id).addClass("unfinish");
-            } else {
-                ans += (id + ":" + answer + ";");
-            }
-        }
-        
-        if(finished) {
-            //提交操作 答案格式： "id:answer;id:answer;id:answer;"
-            alert(ans);
-            location.href = "./course-test-result.html";
-        } else {
-            location = "#rcd"+firstUnfinishId;
-            alert("您还有未完成的题目，请完成后提交！");
-        }
-        
-    }
-    
-    function getProblemSelected($node) {
-        var $options = $node.children(".problem-options").children(".option");
-        var res = "null";
-        for(var i=0; i<$options.length; ++i) {
-            var $option = jQuery($options.get(i));
-            if($option.hasClass("selected")) {
-                res = $option.children(".code").html();
-            }
-        }
-        return res;
-    }
 </script>
 </body>
 </html>
