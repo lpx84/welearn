@@ -11,6 +11,7 @@ import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.CourseTime;
+import com.welearn.entity.Teacher;
 import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
@@ -166,21 +167,25 @@ public class CourseServiceImpl implements CourseService {
 
 	public com.welearn.model.Course queryCourseModleByCourseId(int courseid) {
 		com.welearn.model.Course courseModel = new com.welearn.model.Course();
-		try {
-			Course course = courseDao.getCourse(courseid);
-			String teacherName = teacherDao.getTeacher(
-					Integer.valueOf(course.getTeacherId())).getTrueName();
+		Course course = courseDao.getCourse(courseid);
+		Teacher teacher = teacherDao.getTeacher(
+				Integer.valueOf(course.getTeacherId()));
+		TimeCourse timeCourse = timeCourseDao.getTimeCourseById(courseid);	
+		
+
+		try {			
 			//设置相应的信息
 			courseModel.setCapacity(course.getClassSize());
 			courseModel.setDescription(course.getDescription());
 			courseModel.setName(course.getName());		
 			courseModel.setSchool(course.getAcademyEntity().getName());
-			courseModel.setTeacher(teacherName);
-			TimeCourse timeCourse = timeCourseDao.getTimeCourseById(courseid);			
-			String time = timeCourse.getClassTime();
-			String place = timeCourse.getClassroom();
-			courseModel.setTime(time);	
-			courseModel.setPlace(place);
+			courseModel.setTeacher(teacher.getTrueName());
+			courseModel.setTime(timeCourse.getClassTime());	
+			courseModel.setPlace(timeCourse.getClassroom());
+			courseModel.setCredit(course.getCredit());
+			courseModel.setCourseNo(course.getCourseNo());
+			courseModel.setId(courseid);
+			courseModel.setTeacherTel(teacher.getTel());			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

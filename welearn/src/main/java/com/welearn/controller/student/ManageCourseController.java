@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.welearn.aop.Authentication;
+import com.welearn.dao.CourseDao;
 import com.welearn.entity.CourseNotify;
 import com.welearn.model.Course;
 import com.welearn.model.Semester;
@@ -77,9 +78,6 @@ public class ManageCourseController {
 		view.addObject("list", semesterList);
 		view.addObject("map", map);
 		
-		System.out.println(map.toString());
-		System.out.println(map.get(semesterList.get(0).toString()));
-		
 		return view;
 	}
 	
@@ -96,12 +94,10 @@ public class ManageCourseController {
 	public View courseManage(@RequestParam(value = "courseid") int courseid) {
 		View view;
 		// 用课程服务类查询具体的课程信息
-		Course course = new Course();
+		Course course = courseService.queryCourseModleByCourseId(courseid);		
 		
-
-		
-		
-		view = new View("student", "manage-course", "course-manage", course.getName());
+		view = new View("student", "manage-course", "course-manage", "我的课程");
+		view.addObject("course",course);
 		return view;
 	}
 	
