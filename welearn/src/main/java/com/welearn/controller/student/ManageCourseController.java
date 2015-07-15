@@ -63,7 +63,7 @@ public class ManageCourseController {
 		//获取该学生有的学期和他各学期选的课程
 		int studentId = studentService.getStudentByOpenId(openid).getId();
 		ArrayList<Semester> semesterList = courseService.querySemesterByStudentId(studentId);
-		Map<Semester, ArrayList<com.welearn.entity.Course>> map = courseService.querySemesterCourseByStudentId(studentId);
+		Map<String, ArrayList<com.welearn.entity.Course>> map = courseService.querySemesterCourseByStudentId(studentId);
 
 		// 如果没有查到，则显示没有 查到
 		if (semesterList.isEmpty()) {
@@ -76,6 +76,10 @@ public class ManageCourseController {
 		view = new View("student", "manage-course", "course-list", "我的课程");
 		view.addObject("list", semesterList);
 		view.addObject("map", map);
+		
+		System.out.println(map.toString());
+		System.out.println(map.get(semesterList.get(0).toString()));
+		
 		return view;
 	}
 	

@@ -195,20 +195,23 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	public ArrayList<Semester> querySemesterByStudentId(int studentId) {		
-		return (ArrayList<Semester>) courseDao.getCourseTimeByStudentId(studentId);
+		//获取该学生所拥有的学期
+		ArrayList<Semester> semesterList = (ArrayList<Semester>)courseDao.getCourseTimeByStudentId(studentId);
+			
+		return semesterList;
 	}
 
-	public Map<Semester, ArrayList<Course>> querySemesterCourseByStudentId(
+	public Map<String, ArrayList<Course>> querySemesterCourseByStudentId(
 			int studentId) {
-		Map<Semester, ArrayList<Course>> map = new HashMap<Semester, ArrayList<Course>>();
+		Map<String, ArrayList<Course>> map = new HashMap<String, ArrayList<Course>>();
 		//获取该学生所拥有的学期
 		ArrayList<Semester> semesterList = (ArrayList<Semester>)courseDao.getCourseTimeByStudentId(studentId);
 		//对 该学生的每一个学期赋值
 		for(int i=0;i<semesterList.size();i++){
 			ArrayList<Course> courseList = (ArrayList<Course>) courseDao.getCoursesByStudentIdAndSemester(studentId, semesterList.get(i).getYear(), semesterList.get(i).getSemesterNo());
-			map.put(semesterList.get(i), courseList);
+			map.put(semesterList.get(i).toString(), courseList);
 		}
-		
+
 		return map;
 	}
 

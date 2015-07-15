@@ -59,7 +59,7 @@
                     </a>
                     <ul class="ul-inner" style="display: none;">
                     
-                    <c:forEach var="course" items="${map.get(item) }">
+                    <c:forEach var="course" items="${map.get(item.toString()) }">
                         <li class="row">
                             <div class="col-xs-12">
                                 <a href="course-manage?courseid=${course.getId() }" >【${course.getCourseType() } 】${course.getName() }</a>

@@ -89,6 +89,6 @@ public interface CourseService {
 	 * @param studentId
 	 * @return
 	 */
-	public Map<Semester, ArrayList<Course>> querySemesterCourseByStudentId(int studentId);
+	public Map<String, ArrayList<Course>> querySemesterCourseByStudentId(int studentId);
 	
 }
