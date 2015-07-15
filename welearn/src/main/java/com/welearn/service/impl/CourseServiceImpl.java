@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.welearn.dao.CourseDao;
+import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.CourseTime;
 import com.welearn.entity.Teacher;
@@ -25,6 +27,7 @@ public class CourseServiceImpl implements CourseService {
 	private TeacherDao teacherDao;
 	private TimeCourseDao timeCourseDao;
 	private CourseNotifyDao courseNotifyDao;
+	private CourseHomeworkDao courseHomeworkDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -40,6 +43,10 @@ public class CourseServiceImpl implements CourseService {
 
 	public void setTimeCourseDao(TimeCourseDao timeCourseDao) {
 		this.timeCourseDao = timeCourseDao;
+	}
+
+	public void setCourseHomeworkDao(CourseHomeworkDao courseHomeworkDao) {
+		this.courseHomeworkDao = courseHomeworkDao;
 	}
 
 	public List<?> queryCourseScheduleByWeek(int id, CourseTime time) {
@@ -220,7 +227,15 @@ public class CourseServiceImpl implements CourseService {
 
 	public ArrayList<CourseNotify> queryCourseNotify(int courseId, int pageNo,
 			int pageItemNo) {
-		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao.getCourseNotifyByCourseId(courseId, pageNo, pageItemNo);
+		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao
+				.getCourseNotifyByCourseId(courseId, pageNo, pageItemNo);
+		return list;
+	}
+
+	public ArrayList<CourseHomework> queryCourseHomework(int courseId,
+			int pageNo, int pageItemNo) {
+		ArrayList<CourseHomework> list = (ArrayList<CourseHomework>) courseHomeworkDao
+				.getCourseHomeworkByCourseId(courseId, pageNo, pageItemNo);
 		return list;
 	}
 

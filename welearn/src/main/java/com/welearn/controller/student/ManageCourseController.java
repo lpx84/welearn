@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.model.Course;
 import com.welearn.model.Semester;
@@ -108,13 +109,12 @@ public class ManageCourseController {
 	}
 
 	/**
-	 * 进入某一门课的课程公共页面，为了防止爬取数据，这里需要验证微信登录
+	 * 进入某一门课通知页面，为了防止爬取数据，这里需要验证微信登录
 	 * 
 	 * @param courseid
 	 *            课程id
 	 * @return
 	 */
-
 	@RequestMapping("course-notify")
 	@Authentication()
 	public View courseNotify(@RequestParam(value = "courseid") int courseid) {
@@ -125,11 +125,11 @@ public class ManageCourseController {
 		ArrayList<CourseNotify> list = courseService.queryCourseNotify(
 				courseid, 1, 10);
 
-		view = new View("student", "manage-course", "course-notify", "课程公共");
+		view = new View("student", "manage-course", "course-notify", "课程公告");
 		view.addObject("courseName", courseName);
-		view.addObject("courseid",courseid);
+		view.addObject("courseid", courseid);
 		view.addObject("list", list);
-
+        
 		return view;
 	}
 
@@ -151,9 +151,55 @@ public class ManageCourseController {
 				courseid, pageNo, 10);
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
+		
+		return jsonStr;
+	}
+
+	/**
+	 * 进入某一门课的课程公共页面，为了防止爬取数据，这里需要验证微信登录
+	 * 
+	 * @param courseid
+	 *            课程id
+	 * @return
+	 */
+	@RequestMapping("course-homework")
+	@Authentication()
+	public View courseHomework(@RequestParam(value = "courseid") int courseid) {
+		View view;
+		// 课程名
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 用课程服务类查询具体的课程作业
+		ArrayList<CourseHomework> list = courseService.queryCourseHomework(courseid, 1, 10);
+
+		view = new View("student", "manage-course", "course-homework", "课程作业");
+		view.addObject("courseName", courseName);
+		view.addObject("courseid", courseid);
+		view.addObject("list", list);
+
+		return view;
+	}
+
+	/**
+	 * ajax请求更多的课程作业
+	 * 
+	 * @param courseid
+	 * @param pageNo
+	 * @return
+	 */
+	@RequestMapping("more-course-homework")
+	@Authentication()
+	@ResponseBody
+	public String moreCourseHomework(
+			@RequestParam(value = "courseid") int courseid,
+			@RequestParam(value = "pageNo") int pageNo) {
+		// 用课程服务类查询具体的课程作业
+		ArrayList<CourseHomework> list = courseService.queryCourseHomework(courseid, pageNo, 10);
+
+		// 把list用json格式封装
+		String jsonStr = JsonUtil.listToJSONString(list, null);
 		System.out.println(jsonStr);
 
 		return jsonStr;
 	}
-
+	
 }

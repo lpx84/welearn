@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
@@ -76,6 +77,13 @@ public interface CourseService {
 	 * @return
 	 */
 	public ArrayList<CourseNotify> queryCourseNotify(int courseId,int pageNo,int pageItemNo);
+	
+	/**
+	 * 根据课程id查找课程作业
+	 * @param courseId
+	 * @return
+	 */
+	public ArrayList<CourseHomework> queryCourseHomework(int courseId,int pageNo,int pageItemNo);
 	
 	/**
 	 * 根据学生的id获取该学生这学期上的课程

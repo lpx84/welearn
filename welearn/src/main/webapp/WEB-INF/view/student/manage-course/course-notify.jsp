@@ -128,8 +128,6 @@
     
     </div>
     
-    <!-- 当前页号，下一次请求在此基础上加1 -->
-    <input id="pageNo" type="hidden" value="1">
     <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
         <span class="button-content">查看更多</span>
     </a>
@@ -213,11 +211,10 @@ function joinData(res) {
 		"</div></div>"
 	);
 	for(var i=0; i<res.length; ++i) {
-		html[1]=res[i].thing;
-		html[3]=res[i].state;
-		html[5]=res[i].describe;
-		html[7]=res[i].time;
-		html[9]=res[i].place;
+		html[1]=res[i].title;
+		html[3]=res[i].create_time;
+		html[5]=res[i].content;
+
 		$(".content").append(html.join(''));
 	}
 }
