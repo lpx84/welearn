@@ -75,7 +75,7 @@ public interface CourseService {
 	 * @param courseId
 	 * @return
 	 */
-	public ArrayList<CourseNotify> queryCourseNotify(int courseId);
+	public ArrayList<CourseNotify> queryCourseNotify(int courseId,int pageNo,int pageItemNo);
 	
 	/**
 	 * 根据学生的id获取该学生这学期上的课程

@@ -74,6 +74,7 @@
 		<property name="courseDao" ref="courseDao"></property>
 		<property name="teacherDao" ref="teacherDao"></property>
 		<property name="timeCourseDao" ref="timeCourseDao"></property>
+		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
 	</bean>
 	<bean name="courseService" parent="transactionProxy">
 		<property name="target" ref="courseServiceBase"></property>

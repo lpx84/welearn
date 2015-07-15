@@ -124,21 +124,21 @@
         <div class="nav-list">
             <ul>
                 <li>
-                    <a href="course-homework.jsp?courseid=${course.getId() }">
+                    <a href="course-homework?courseid=${course.getId() }">
                         <i class="glyph-icon font-blue-alt fa-archive"></i>
                         课程作业
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="course-notify.jsp?courseid=${course.getId() }">
+                    <a href="course-notify?courseid=${course.getId() }">
                         <i class="glyph-icon font-orange fa-bell"></i>
                         课程公告
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="course-discuss.jsp?courseid=${course.getId() }">
+                    <a href="course-discuss?courseid=${course.getId() }">
                         <i class="glyph-icon font-green fa-weixin"></i>
                         课程讨论
                         <i class="glyph-icon icon-chevron-right float-right"></i>
@@ -152,14 +152,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="attend-list.jsp?courseid=${course.getId() }">
+                    <a href="attend-list?courseid=${course.getId() }">
                         <i class="glyph-icon font-purple fa-list-ol"></i>
                         考勤记录
                         <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="course-feedback.jsp?courseid=${course.getId() }">
+                    <a href="course-feedback?courseid=${course.getId() }">
                         <i class="glyph-icon font-gray fa-star-half-o"></i>
                         课程反馈
                         <i class="glyph-icon icon-chevron-right float-right"></i>
