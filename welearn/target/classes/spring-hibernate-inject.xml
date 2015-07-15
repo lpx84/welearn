@@ -45,6 +45,9 @@
 	<bean id="courseFeedbackDao" class="com.welearn.dao.CourseFeedbackDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="studentCourseDao" class="com.welearn.dao.StudentCourseDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 	<!-- ===================== WechatMessage =========================== -->
 	<bean id="wechatMsgServiceBase" class="com.welearn.service.impl.WechatMsgServiceImpl">
@@ -92,6 +95,8 @@
 		<property name="courseDao" ref="courseDao"></property>
 		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
 		<property name="attendTaskDao" ref="attendTaskDao"></property>
+		<property name="studentDao" ref="studentDao"></property>
+		<property name="studentCourseDao" ref="studentCourseDao"></property>
 	</bean>
 	<bean name="teacherService" parent="transactionProxy">
 		<property name="target" ref="teacherServiceBase"></property>
