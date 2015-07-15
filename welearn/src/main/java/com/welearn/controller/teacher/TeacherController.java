@@ -64,6 +64,19 @@ public class TeacherController {
 			) {
 		
 		List<Course> list = teacherService.getCourseList(id);
+		/*System.out.println("-------------");
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i).toString());
+		}*/
+		
+		return null;
+	}
+	
+	@RequestMapping("getStudentListByCourseId")
+	public String getStudentListByCourseId(
+			) {
+		
+		teacherService.getStudentList();
 		
 		return null;
 	}

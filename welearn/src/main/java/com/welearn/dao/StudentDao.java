@@ -69,8 +69,13 @@ public class StudentDao extends SuperDao {
 		return (Student)q.uniqueResult();
 	}
 	
-	public List getStudents(int pageNo, int pageItemNum) {
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<Student> getStudents(int pageNo, int pageItemNum) {
+		this.hql = "from Student";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 	
 	public boolean updateStudent(Student student) {

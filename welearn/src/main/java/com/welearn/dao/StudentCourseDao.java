@@ -1,5 +1,7 @@
 package com.welearn.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 
 import com.welearn.entity.MsgNewsItem;
@@ -85,5 +87,45 @@ public class StudentCourseDao extends SuperDao{
 		query.setInteger(0, courseID);
 		query.setInteger(1, studentID);
 		return (StudentCourse) query.uniqueResult();
+	}
+	
+	/**
+	 * 获得所有的studentCourse表里的记录
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<StudentCourse> getStudentCourse(){
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity inner join fetch u.courseEntity ";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		return query.list();
+	}
+	
+	/**
+	 * 根据课程的id获取选课记录
+	 * @param courseId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<StudentCourse> getStudentCourseByCourseId(int courseId){
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity inner join fetch u.courseEntity as a where a.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseId);
+		return query.list();
+	}
+	
+	/**
+	 * 根据学生的id获得他的选课记录
+	 * @param studentId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<StudentCourse> getStudentCourseByStudentId(int studentId){
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity where a.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, studentId);
+		return query.list();
 	}
 }

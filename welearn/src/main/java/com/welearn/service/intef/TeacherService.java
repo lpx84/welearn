@@ -7,6 +7,7 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.entity.Student;
 
@@ -31,9 +32,9 @@ public interface TeacherService {
 	public List<Course> getCourseList(int teacherId);
 	
 	//学生管理
-	public List<Student> getStudentList();
+	public List<StudentCourse> getStudentList();
 	
-	public List<Student> getStudentListByCourseId(int id);
+	public List<StudentCourse> getStudentListByCourseId(int id);
 	
 	//签到任务
 	public boolean publishAttendTask(AttendTask attendTask);
@@ -54,5 +55,6 @@ public interface TeacherService {
 	
 	public boolean updateCourseNotify(CourseNotify courseNotify);
 	
+	//测试
 	public void test();
 }
