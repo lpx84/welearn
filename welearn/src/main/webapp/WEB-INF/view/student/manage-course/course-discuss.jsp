@@ -66,21 +66,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="float-left">
-                    <div class="chat-author">
-                        <img width="36" src="../assets/images/gravatar.jpg" alt="" />
-                    </div>
-                    <div class="popover right no-shadow">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <div class="info">
-                                <span>陈朝朝</span>
-                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
-                            </div>
-                            老师辛苦了！！！
-                        </div>
-                    </div>
-                </li>
+
                 <li>
                     <div class="chat-author">
                         <img width="36" src="../assets/images/gravatar.jpg" alt="" />
@@ -96,53 +82,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="float-left">
-                    <div class="chat-author">
-                        <img width="36" src="../assets/images/gravatar.jpg" alt="" />
-                    </div>
-                    <div class="popover right no-shadow">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <div class="info">
-                                <span>陈朝朝</span>
-                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
-                            </div>
-                            老师辛苦了！！！
-                        </div>
-                    </div>
-                </li>
                 
-                <li class="float-left">
-                    <div class="chat-author">
-                        <img width="36" src="../assets/images/gravatar.jpg" alt="" />
-                    </div>
-                    <div class="popover right no-shadow">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <div class="info">
-                                <span>陈朝朝</span>
-                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
-                            </div>
-                            老师辛苦了！！！
-                        </div>
-                    </div>
-                </li>
-                <li class="float-left">
-                    <div class="chat-author">
-                        <img width="36" src="../assets/images/gravatar.jpg" alt="" />
-                    </div>
-                    <div class="popover right no-shadow">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <div class="info">
-                                <span>陈朝朝</span>
-                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
-                            </div>
-                            老师辛苦了！！！
-                        </div>
-                    </div>
-                </li>
-
             </ul>
 
         </div>
