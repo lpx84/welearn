@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.welearn.util.InfoCode;
-
 @Entity
 @Table(name="bjtu_course_notify")
 public class CourseNotify {

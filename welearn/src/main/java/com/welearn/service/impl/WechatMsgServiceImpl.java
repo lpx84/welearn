@@ -81,9 +81,9 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 //		 } catch (Exception e) {
 //		 System.err.println(e.toString());
 //		 }
-		
+	
 //		 return openid;
-        return code;
+         return code;
 	}
 
 }
