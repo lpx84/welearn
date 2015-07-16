@@ -275,6 +275,7 @@ public class CourseServiceImpl implements CourseService {
 			courseFeedback.setStudentId(String.valueOf(studentid));
 		
 		int returnMode = courseFeedbackDao.addCourseFeedback(courseFeedback);
+		System.out.println(returnMode);
 	    if (returnMode >0) {
 			return true;
 		} else {

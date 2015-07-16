@@ -31,9 +31,9 @@
                 <textarea name="content" class="textarea-autoresize" id="content" placeholder="请填写对本门课程的意见和建议" style="height: 200px;"></textarea>
                 <div class="button-pane">                    
                     <div class="btn x-large" title="" style="font-size: 1.2em; margin-left:10px;">
-                    <input id="courseid" value="${courseid }" style="display: none;"></input>
-                        <input name="anonymity" id="anonymity" type="checkbox" checked="checked" style="width: 1.5em;">
-                        <label for="anonymity">匿名</label>
+                        <input name="courseid" id="courseid" value="${courseid }" style="display: none;"></input>
+                        <input name="anonymous" id="anonymous" type="checkbox" checked="checked" style="width: 1.5em;">
+                        <label for="anonymous">匿名</label>
                     </div>
                     <button id="btn-submit" type="button" class="btn btn-post large bg-green" id="demo-form-valid" title="Validate!">
                         <span class="button-content">提交</span>

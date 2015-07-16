@@ -237,18 +237,21 @@ public class ManageCourseController {
 		System.out.println(anonymous);
 		boolean result = courseService.addFeedback(courseid, content,
 				anonymous, studentid);
-		if (result == false) {
-			// 插入失败
-			view = new View("error", "wechat", "info", "反馈失败。");
-			view.addObject("info", "反馈失败，请稍后再试。");
-			return view;
-		} else {
-			// 插入成功
-			view = new View("prompt", "wechat", "info", "反馈成功。");
-			view.addObject("info", "反馈成功。。");
-			view.addObject("url", "student/manage/course/course-manage?courseid"+courseid);
-			return view;
-		}
+		view = new View("error", "wechat", "info", "反馈失败。");
+		view.addObject("info", "反馈失败，请稍后再试。");
+		return view;
+//		if (result == false) {
+//			// 插入失败
+//			view = new View("error", "wechat", "info", "反馈失败。");
+//			view.addObject("info", "反馈失败，请稍后再试。");
+//			return view;
+//		} else {
+//			// 插入成功
+//			view = new View("prompt", "wechat", "info", "反馈成功。");
+//			view.addObject("info", "反馈成功。。");
+//			view.addObject("url", "student/manage/course/course-manage?courseid"+courseid);
+//			return view;
+//		}
 
 	}
 
