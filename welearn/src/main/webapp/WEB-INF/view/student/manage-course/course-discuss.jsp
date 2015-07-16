@@ -45,43 +45,30 @@
 <body>
 <div class="content-box bg-white">
     <h3 class="title-span content-box-header ui-state-default">
-        <label class="pad0L">软件系统分析以设计技术</label>
+        <label class="pad0L">${courseName}</label>
     </h3>
     <div class="content-box-wrapper" style="padding-top: 50px;">
         <div class="scrollable-content">
-
+        
             <ul class="chat-box">
-                <li class="float-left">
+            	<c:forEach var="item" items="${list }">
+            	<li <c:if test = "${!item.isMe() }">class="float-left" </c:if>>            	    
                     <div class="chat-author">
-                        <img width="36" src="../assets/images/gravatar.jpg" alt="" />
+                        <img width="36" src="${item.getAvatar() }" alt="" />
                     </div>
-                    <div class="popover right no-shadow">
+                    <div <c:if test = "${!item.isMe() }">class="popover right no-shadow" </c:if>
+                         <c:if test = "${item.isMe() }">class="popover left no-shadow" </c:if>>
                         <div class="arrow"></div>
                         <div class="popover-content">
                             <div class="info">
-                                <span>张红延</span>
-                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
+                                <span>${item.getRelayorName() }</span>
+                                <span class="float-right"><i class="glyph-icon icon-time"></i> ${item.getTime() }</span>
                             </div>
-                            大家有什么问题尽管提
+                             ${item.getContent() }
                         </div>
                     </div>
                 </li>
-
-                <li>
-                    <div class="chat-author">
-                        <img width="36" src="../assets/images/gravatar.jpg" alt="" />
-                    </div>
-                    <div class="popover left no-shadow">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <div class="info">
-                                <span>陈朝朝</span>
-                                <span class="float-right"><i class="glyph-icon icon-time"></i> 02:43:23</span>
-                            </div>
-                            老师辛苦了！！！
-                        </div>
-                    </div>
-                </li>
+                </c:forEach>
                 
             </ul>
 
@@ -91,11 +78,11 @@
         <div class="form-row pad0B">
             <div class="form-input col-lg-12">
                 <div class="input-append-wrapper input-append-right">
-                    <a href="javascript:;" class="btn input-append primary-bg">
+                    <a href="javascript:sendData();" class="btn input-append primary-bg">
                         <i class="glyph-icon fa-send"></i>
                     </a>
                     <div class="append-right">
-                        <input type="text" placeholder="输入你的问题" name="" id="" />
+                        <input type="text" placeholder="输入内容" name="content" id="content" />
                     </div>
                 </div>
             </div>
@@ -105,7 +92,77 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
+	function refreshData() {
+		//用ajax获取页面信息
+		$.ajax({
+			url : $("#appName").val()
+					+ "/student/manage/course/refresh-course-discuss",
+			type : "POST",
+			timeout : 5000,
+			dataType : "JSON",
+			success : function(res) {
+				if (res.code != 100) {
+					joinData(res);
+				}
+			}
+			//complete : completeHandler
+		});
+		setTimeout(refreshData, 3000);
+	}
+    
+	refreshData();
 
+	function joinData(res) {       
+		var html = new Array(
+				"<li class='float-left'>",
+				"<div class='chat-author'><img width='36' src='",
+				"avatar",
+				"' alt='' /></div>",
+				"<div class='popover right no-shadow'>",
+				"<div class='arrow'></div><div class='popover-content'><div class='info'><span>",
+				"name",
+				"</span><span class='float-right'><i class='glyph-icon icon-time'></i> ",
+				"time",
+				"</span></div>",
+				"content",
+				"</div></div></li>"				
+		);
+		for (var i = 0; i < res.length; ++i) {
+			if(res[i].me == true){
+				html[0] = "<li>";
+				html[4] = "<div class='popover left no-shadow'>";
+			}
+			html[2] = res[i].avatar;			
+			html[4] = res[i].relayorName;			
+			html[6] = res[i].time;
+			html[8] = res[i].content;
+			$(".chat-box").append(html.join(''));
+		}
+	}
+	
+	function sendData() {
+		alert("nihao");
+		//用ajax获取页面信息
+		$.ajax({
+			url : $("#appName").val()
+					+ "/student/manage/course/send-course-discuss-content",
+			type : "POST",
+			data : {
+				content : $("#content").val(),
+			},
+			timeout : 5000,
+			dataType : "JSON",
+			success : function(res) {
+				if (res.code == 100) {
+					alert(res.msg);
+				} else {
+					refreshData();
+				}
+			},
+			complete : completeHandler
+		});
+	}
+	
 </script>
 </body>
 </html>

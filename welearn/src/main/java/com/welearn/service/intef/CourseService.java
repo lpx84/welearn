@@ -1,10 +1,12 @@
 package com.welearn.service.intef;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import com.welearn.entity.Course;
 import com.welearn.model.CETGrade;
+import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
@@ -105,5 +107,31 @@ public interface CourseService {
 	 */
 	public boolean addFeedback(int courseid,String content,boolean anonymous,String studentName);
 	
+	/**
+	 * 查找在一个时间之前的聊天记录
+	 * @param courseid
+	 * @param studentid
+	 * @param date
+	 * @return
+	 */
+	public ArrayList<CourseDiscuss> queryDiscussesBefore(int courseid,int studentid,Date date);
+	
+	/**
+	 * 查找在一个时间之后的聊天记录
+	 * @param courseid
+	 * @param studentid
+	 * @param date
+	 * @return
+	 */
+	public ArrayList<CourseDiscuss> queryDiscussesAfter(int courseid,int studentid,Date date);
+	
+	/**
+	 * 发送一条消息
+	 * @param courseid
+	 * @param studentid
+	 * @param content
+	 * @return
+	 */
+	public boolean addDiscussContent(int courseid,int studentid,String content);
 	
 }
