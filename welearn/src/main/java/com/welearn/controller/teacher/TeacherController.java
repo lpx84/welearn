@@ -13,6 +13,7 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.view.View;
@@ -72,11 +73,25 @@ public class TeacherController {
 		return null;
 	}
 	
+	@RequestMapping("getStudentList")
+	public String getStudentList(
+			) {
+		
+		teacherService.getStudentList();
+		
+		return null;
+	}
+	
 	@RequestMapping("getStudentListByCourseId")
 	public String getStudentListByCourseId(
 			) {
 		
-		teacherService.getStudentList();
+		List<StudentCourse> list = teacherService.getStudentListByCourseId(1);
+		//这里在可以在model里面加一个处理类，把数据重新封装一下
+		for(int i=0;i<list.size();i++){
+			System.out.println("---------------");
+			System.out.println(list.get(i).getCourseId() +"  "+ list.get(i).getStudentId());
+		}
 		
 		return null;
 	}

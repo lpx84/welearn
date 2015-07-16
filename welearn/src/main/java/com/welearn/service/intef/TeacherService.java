@@ -57,4 +57,5 @@ public interface TeacherService {
 	
 	//测试
 	public void test();
+
 }

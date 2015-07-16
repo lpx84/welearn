@@ -107,7 +107,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public List<StudentCourse> getStudentListByCourseId(int courseId) {
-		return null;
+		List<StudentCourse> list = studentCourseDao.getStudentCourseByCourseId(courseId);
+		return list;
 	}
 
 	//签到任务
