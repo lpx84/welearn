@@ -30,6 +30,9 @@ public class CourseFeedback {
 	@Column(name="content", columnDefinition="text")
 	private String content;
 	
+	@Column(name="icon_url", columnDefinition="varchar(1204)")
+	private String iconUrl;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
 	private Course courseEntity;
@@ -85,12 +88,25 @@ public class CourseFeedback {
 	public void setCourseEntity(Course courseEntity) {
 		this.courseEntity = courseEntity;
 	}
+	
+	
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
 
 	@Override
 	public String toString() {
 		return "CourseFeedback [id=" + id + ", studentName=" + studentName
 				+ ", courseId=" + courseId + ", time=" + time + ", content="
-				+ content + ", courseEntity=" + courseEntity + "]";
+				+ content + ", iconUrl=" + iconUrl + ", courseEntity="
+				+ courseEntity + "]";
 	}
+
+	
 	
 }
