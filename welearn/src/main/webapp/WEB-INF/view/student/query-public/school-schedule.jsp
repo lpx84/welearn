@@ -8,33 +8,35 @@
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
 <style type="text/css">
-     body {
+    body {
     }
     
     .query-div {
         position: fixed;
         top: 0;
-        width: calc(100% - 10px);
+        width: 100%;
         background-color: #EAE8E8;
         padding-left: 5px;
         padding-right: 5px;
+        height: 10%;
     }
     
     .query-div select {
-        font-size: 1.2em;
+        font-size: 1.8em;
         margin-top: 5px;
         margin-bottom: 5px;
         padding: 5px;
         background-color: #EAE8E8;
         border-top: none;
         border-left: none;
-        border-right: none;
+        border-right: none; 
     }
     
     .fixed {
         position: absolute;
-        top: 45px;
-        height: calc(100% - 45px);
+        top: 10%;
+        width: 10%;
+        height: 90%;
     }
     
     .fixed>table {
@@ -42,13 +44,13 @@
         text-align: center;
     }
     
-    .fixed>table td {
+    .data.fixed>table td {
         width:25px;
     }
     
     .data {
-        width: calc(100% - 39px);
-        left: 39px;
+        width: 90%;
+        left: 10%;
         text-align: center;
         overflow-x: auto;
     }
@@ -58,10 +60,18 @@
         color: red;
     }
     
+    .data>table tr:nth-child(3) {
+    	background-color: azure;
+    }
+    
     .nav-left>table {
         border: #DBDBDB;
         width: 40px;
         background-color: #EFEFEF;
+    }
+    
+    .nav-left.fixed table {
+    	width: 100%;
     }
    
 </style>

@@ -32,9 +32,18 @@
 <script type="text/javascript" src="../js/global.js"></script>
 
 <style type="text/css">
+    .btn-more {
+        margin-top: 5px;
+        width: 100%;
+    }
+    
     .btn-more .button-content {
         font-size: 1.3em;
         line-height: 2em;
+        display: block;
+        text-align: center;
+        width: 100%;
+        
     }
     
     .fixed-bottom {
@@ -79,14 +88,25 @@
         margin: 10px 5px;
     }
     
-    .content .row:nth-child(even) {
-        background-color: #e7e7e7;
-    }
-    
     .row {
         line-height: 3em;
+        margin-left: 10%;
     }
 
+    .time {
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
+    
+    .ecard-query {
+        border: 1px solid #EDEDEB;
+    }
+    
+    .rcd {
+        padding: 5px;
+        margin: 2px 0;
+        border: 1px solid #e7e7e7;
+    }
     
 </style>
 </head>
@@ -94,7 +114,7 @@
 <div class="content-box">
     <h3 class="content-box-header bg-gray">
         <div class="glyph-icon icon-separator transparent">
-            <i class="glyph-icon"></i>
+            <i class="glyph-icon fa-chevron-left"></i>
         </div>
         <span class="title">一卡通查询</span>
         <div class="glyph-icon icon-separator transparent float-right">
@@ -103,26 +123,103 @@
     </h3>
     <div class="content">
         
-        <div class="row mrg10T">
-            <div class="col-xs-2">从 </div>
-            <div class="col-xs-8">
-                <input class="start-time" type="text" value="20150723">
+        <div class="ecard-query">
+            <div class="row mrg10T">
+                <div class="col-xs-1">从 </div>
+                <div class="col-xs-9">
+                    <input class="time start-time" type="text" value="20150723">
+                </div>
             </div>
-        </div>
-        <div class="row mrg5T">
-            <div class="col-xs-2">到 </div>
-            <div class="col-xs-8">
-                <input class="end-time" type="text" value="20150725">
+            <div class="row mrg5T">
+                <div class="col-xs-1">到 </div>
+                <div class="col-xs-9">
+                    <input class="time end-time" type="text" value="20150725">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="javascript:queryData();" class="btn btn-submit  large float-none bg-blue mrg10T">
+                    <span class="button-content">查询消费记录</span>
+                </a>
             </div>
         </div>
         
-        <a href="javascript:fetchData();" class="btn btn-more display-block large float-none bg-blue mrg20T">
-            <span class="button-content">查询消费记录</span>
-        </a>
-        
-        <div class="ecard-list">
+        <div class="ecard-list" style="display:none;">
+            <div class="pad10T pad5L pad5B font-bold font-gray font-size-15" style="">
+                消费记录
+            </div>
             <div class="item-list">
+                <div class="rcd">
+                    <div class="rows r1">
+                        <span class="mrg5R">
+                            <span class="font-gray">描述：</span>
+                            <span class="">餐费支出</span>
+                        </span>
+                        <span class="mrg5R">
+                            <span class="font-gray">消费：</span>
+                            <span class="font-purple">￥4.67</span>
+                        </span>
+                        <span class="">
+                            <span class="font-gray">余额：</span>
+                            <span class="font-red">￥54.67</span>
+                        </span>
+                    </div>
+                    <div class="rows r2">
+                        <span class="mrg5R"><i class="fa fa-clock-o font-gray"></i>&nbsp;2015-7-15 12:45:23</span>
+                        <span class=""><i class="fa fa-user font-gray"></i>&nbsp;虚拟职员</span>
+                    </div>
+                    <div class="rows r3">
+                        <span class=""><i class="fa fa-hospital-o font-gray"></i>&nbsp;活动中心饮食工作站---二层商品服务部004</span>
+                    </div>
+                </div>
                 
+                <div class="rcd">
+                    <div class="rows r1">
+                        <span class="mrg5R">
+                            <span class="font-gray">描述：</span>
+                            <span class="">餐费支出</span>
+                        </span>
+                        <span class="mrg5R">
+                            <span class="font-gray">消费：</span>
+                            <span class="font-purple">￥4.67</span>
+                        </span>
+                        <span class="">
+                            <span class="font-gray">余额：</span>
+                            <span class="font-red">￥54.67</span>
+                        </span>
+                    </div>
+                    <div class="rows r2">
+                        <span class="mrg5R"><i class="fa fa-clock-o font-gray"></i>&nbsp;2015-7-15 12:45:23</span>
+                        <span class=""><i class="fa fa-user font-gray"></i>&nbsp;虚拟职员</span>
+                    </div>
+                    <div class="rows r3">
+                        <span class=""><i class="fa fa-hospital-o font-gray"></i>&nbsp;活动中心饮食工作站---二层商品服务部004</span>
+                    </div>
+                </div>
+                
+                <div class="rcd">
+                    <div class="rows r1">
+                        <span class="mrg5R">
+                            <span class="font-gray">描述：</span>
+                            <span class="">餐费支出</span>
+                        </span>
+                        <span class="mrg5R">
+                            <span class="font-gray">消费：</span>
+                            <span class="font-purple">￥4.67</span>
+                        </span>
+                        <span class="">
+                            <span class="font-gray">余额：</span>
+                            <span class="font-red">￥54.67</span>
+                        </span>
+                    </div>
+                    <div class="rows r2">
+                        <span class="mrg5R"><i class="fa fa-clock-o font-gray"></i>&nbsp;2015-7-15 12:45:23</span>
+                        <span class=""><i class="fa fa-user font-gray"></i>&nbsp;虚拟职员</span>
+                    </div>
+                    <div class="rows r3">
+                        <span class=""><i class="fa fa-hospital-o font-gray"></i>&nbsp;活动中心饮食工作站---二层商品服务部004</span>
+                    </div>
+                </div>
             </div>
 
             <!-- 当前页号，下一次请求在此基础上加1 -->
@@ -137,6 +234,9 @@
 </div>
 <script type="text/javascript">
     
+    function queryData() {
+        $(".ecard-list").show();
+    }
     
 </script>
 </body>

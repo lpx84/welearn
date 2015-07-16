@@ -69,7 +69,7 @@ public class StudentController {
 	public View test() {
 //		Student s = studentService.getStudentByStudentNo("12301124");
 //		return s.getTrueName();
-		return new View("teacher","teacher","home","sample");
+		return new View("teacher","teacher","course-home","sample");
 	}
 	
 }
