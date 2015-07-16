@@ -18,11 +18,11 @@ public class CourseFeedback {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="student_id", columnDefinition="int(11)", nullable=false)
-	private String studentId;
+	@Column(name="student_name", columnDefinition="varchar(11)")
+	private String studentName;
 	
 	@Column(name="course_id", columnDefinition="int(11)", nullable=false)
-	private String courseId;
+	private int courseId;
 	
 	@Column(name="time", columnDefinition="datetime")
 	private String time;
@@ -47,18 +47,18 @@ public class CourseFeedback {
 	}
 
 	public String getStudentId() {
-		return studentId;
+		return studentName;
 	}
 
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
+	public void setStudentId(String studentName) {
+		this.studentName = studentName;
 	}
 
-	public String getCourseId() {
+	public int getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(String courseId) {
+	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
 
@@ -88,7 +88,7 @@ public class CourseFeedback {
 
 	@Override
 	public String toString() {
-		return "CourseFeedback [id=" + id + ", studentId=" + studentId
+		return "CourseFeedback [id=" + id + ", studentName=" + studentName
 				+ ", courseId=" + courseId + ", time=" + time + ", content="
 				+ content + ", courseEntity=" + courseEntity + "]";
 	}
