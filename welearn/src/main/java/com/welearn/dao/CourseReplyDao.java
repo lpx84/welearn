@@ -1,5 +1,6 @@
 package com.welearn.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -55,50 +56,67 @@ public class CourseReplyDao extends SuperDao {
 		return result;
 	}
 	
-	public List<CourseReply> getCourseReplyByReplyor(String replyor){
-		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.replyor like '%"+ replyor + "%'";
+	public List<CourseReply> getCourseReplyByReplyIDandType(int replyId, int type){
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.replyIdId=? AND a.type=? order by a.reply_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, replyId);
+		query.setInteger(1, type);
 		List<CourseReply> result = query.list();
+		
+		/*for(int i=0;i<result.size();i++){
+			System.out.println("---------------");
+			System.out.println(result.get(i).toString());
+		}*/
+		
 		return result;
 	}
 	
 	/**
-	 * 根据课程号查找课程回复
-	 * @param courseNo
-	 * @param pageNo
-	 * @param pageItemNum
+	 * 参数时间之后的回复
+	 * @param courseId
+	 * @param time
 	 * @return
 	 */
-	//select b.* from bjtu_course AS a, bjtu_course_reply AS b where a.id=b.course_id and a.course_no='1';
-	public List<CourseReply> getCourseReplyByCourseNo(String courseNo, int pageNo, int pageItemNum){
-		/*this.hql = "select b from Course AS a, CourseReply AS b "
-				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.courseNo='?'";*/
+	@SuppressWarnings("unchecked")
+	public List<CourseReply> getCourseReplyByTimeAfter(int courseId, Date time){
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time > :date";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setString(0, courseNo);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		List<CourseReply> result = query.list();
-		return null;
+		query.setInteger("courseId", courseId);
+		query.setTimestamp("date", time);
+		return query.list();
 	}
 	
 	/**
-	 * 根据老师的id
-	 * @param teacherId
-	 * @param pageNo
-	 * @param pageItemNum
+	 * 参数时间之前的回复
+	 * @param courseId
+	 * @param time
 	 * @return
 	 */
-	public List<CourseReply> getCourseReplyByTeacherId(int teacherId, int pageNo, int pageItemNum){
-		/*this.hql = "select b from Course AS a, CourseReply AS b "
-				+ "inner join fetch b.courseEntity"
-				+ "where a.id=b.courseId and a.teacherId=?";*/
+	@SuppressWarnings("unchecked")
+	public List<CourseReply> getCourseReplyByTimeBefore(int courseId, Date time){
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time < :date";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, teacherId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		List<CourseReply> result = query.list();
-		return null;
+		query.setInteger("courseId", courseId);
+		query.setTimestamp("date", time);
+		return query.list();
 	}
-
+	
+	/**
+	 * 参数之前的回复，规定条数
+	 * @param courseId
+	 * @param time
+	 * @param num
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CourseReply> getCourseReplyByTimeBefore(int courseId, Date time, int num){
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time < :date";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger("courseId", courseId);
+		query.setTimestamp("date", time);
+		query.setMaxResults(num);
+		return query.list();
+	}
+	
+	
 }
