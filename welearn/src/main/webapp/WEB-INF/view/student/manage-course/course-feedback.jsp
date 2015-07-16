@@ -27,17 +27,17 @@
     </h3>
     <div class="row">
         <div class="col-md-12">
-            <form class="content-box bg-white post-box">
-                <textarea name="content" class="textarea-autoresize" id="" placeholder="请填写对本门课程的意见和建议" style="height: 200px;"></textarea>
-                <div class="button-pane">
+            <form id="feedback-form"  class="content-box bg-white post-box" action="<%=request.getContextPath()%>/student/manage/course/course-feedback.act">
+                <textarea name="content" class="textarea-autoresize" id="content" placeholder="请填写对本门课程的意见和建议" style="height: 200px;"></textarea>
+                <div class="button-pane">                    
                     <div class="btn x-large" title="" style="font-size: 1.2em; margin-left:10px;">
-                        <input name="anonymity" id="anonymity" type="checkbox" checked="checked" style="width: 1.5em;">
-                        <label for="anonymity">匿名</label>
+                        <input name="courseid" id="courseid" value="${courseid }" style="display: none;"></input>
+                        <input name="anonymous" id="anonymous" type="checkbox" checked="checked" style="width: 1.5em;">
+                        <label for="anonymous">匿名</label>
                     </div>
-                    
-                    <a href="javascript:;" class="btn btn-post large bg-green" title="">
+                    <button id="btn-submit" type="button" class="btn btn-post large bg-green" id="demo-form-valid" title="Validate!">
                         <span class="button-content">提交</span>
-                    </a>
+                    </button>                  
                 </div>
             </form>
         </div>
@@ -46,7 +46,12 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
-
+$("#btn-submit").click(function() {
+	var content = $("#content").val();
+	if('' != content) {
+		$("#feedback-form").submit();
+	}
+});
 </script>
 </body>
 </html>

@@ -113,16 +113,7 @@
             </div>
             <div class="toggle"><i class="fa fa-angle-double-down text-toggle"></i></div>
         </div>
-<!--
-        <div class="content-oper">
-            <ul>
-                <li><i class="fa fa-weixin"></i>&nbsp;&nbsp;课程讨论</li>
-                <li><i class="fa fa-weixin"></i>&nbsp;&nbsp;课程讨论</li>
-                <li><i class="fa fa-weixin"></i>&nbsp;&nbsp;课程讨论</li>
-                
-            </ul>
-        </div>
--->
+
         <div class="nav-list">
             <ul>
                 <li>
