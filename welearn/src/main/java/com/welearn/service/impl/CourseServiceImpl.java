@@ -20,6 +20,7 @@ import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
+import com.welearn.util.StrUtil;
 import com.welearn.dao.TimeCourseDao;
 
 public class CourseServiceImpl implements CourseService {
@@ -225,18 +226,46 @@ public class CourseServiceImpl implements CourseService {
 		return map;
 	}
 
-	public ArrayList<CourseNotify> queryCourseNotify(int courseId, int pageNo,
+	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotify(int courseId, int pageNo,
 			int pageItemNo) {
 		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao
 				.getCourseNotifyByCourseId(courseId, pageNo, pageItemNo);
-		return list;
+		ArrayList<com.welearn.model.CourseNotify> modelList = new ArrayList<com.welearn.model.CourseNotify>();
+		for(int i=0;i<list.size();i++){
+			com.welearn.model.CourseNotify courseModel = new com.welearn.model.CourseNotify();
+			if(list.get(i).getStatus() == 1){
+				courseModel.setContent(list.get(i).getContent());
+				courseModel.setCourseId(list.get(i).getId());
+				courseModel.setCreate_time(StrUtil.formatDate(list.get(i).getCreate_time()));
+				courseModel.setTitle(list.get(i).getTitle());
+				modelList.add(courseModel);
+			}
+			
+		}
+		
+		
+		return modelList;
 	}
 
-	public ArrayList<CourseHomework> queryCourseHomework(int courseId,
+	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomework(int courseId,
 			int pageNo, int pageItemNo) {
 		ArrayList<CourseHomework> list = (ArrayList<CourseHomework>) courseHomeworkDao
 				.getCourseHomeworkByCourseId(courseId, pageNo, pageItemNo);
-		return list;
+		ArrayList<com.welearn.model.CourseHomework> modelList = new ArrayList<com.welearn.model.CourseHomework>();
+		
+		for(int i =0;i<list.size();i++){
+			com.welearn.model.CourseHomework courseHomework = new com.welearn.model.CourseHomework();
+			if(list.get(i).getStatus() == 1){
+				courseHomework.setContent(list.get(i).getContent());
+				courseHomework.setCourseId(list.get(i).getCourseId());
+				courseHomework.setCreate_time(StrUtil.formatDate(list.get(i).getCreate_time()));
+				courseHomework.setDeadline(StrUtil.formatDate(list.get(i).getDeadline()));
+				courseHomework.setTitle(list.get(i).getTitle());
+				modelList.add(courseHomework);
+			}
+		}		
+		
+		return modelList;
 	}
 
 }

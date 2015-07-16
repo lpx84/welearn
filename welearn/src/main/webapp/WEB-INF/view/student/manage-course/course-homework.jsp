@@ -94,7 +94,9 @@
 <div class="content-box">
     <h3 class="content-box-header bg-gray">
         <div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
+            <a href="javascript:history.back();" >
+                <i class="glyph-icon fa-chevron-left" ></i>
+            </a>  
         </div>
         <span class="title">${courseName }</span>
         <div class="glyph-icon icon-separator transparent float-right">
@@ -113,6 +115,7 @@
                             <span class="lab">发布：</span>
                             <span class="label bg-gray">${item.getCreate_time() }</span>
                         </span>
+                        <p></p>
                         <span class="time ">
                             <span class="lab">截止：</span>
                             <span class="label bg-green">${item.getDeadline() }</span>

@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
-import com.welearn.entity.CourseHomework;
-import com.welearn.entity.CourseNotify;
 import com.welearn.model.Course;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
@@ -122,7 +120,7 @@ public class ManageCourseController {
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 用课程服务类查询具体的课程通知
-		ArrayList<CourseNotify> list = courseService.queryCourseNotify(
+		ArrayList<com.welearn.model.CourseNotify> list = courseService.queryCourseNotify(
 				courseid, 1, 10);
 
 		view = new View("student", "manage-course", "course-notify", "课程公告");
@@ -130,6 +128,7 @@ public class ManageCourseController {
 		view.addObject("courseid", courseid);
 		view.addObject("list", list);
         
+		System.out.println(list.toString());
 		return view;
 	}
 
@@ -147,7 +146,7 @@ public class ManageCourseController {
 			@RequestParam(value = "courseid") int courseid,
 			@RequestParam(value = "pageNo") int pageNo) {
 		// 用课程服务类查询具体的课程通知
-		ArrayList<CourseNotify> list = courseService.queryCourseNotify(
+		ArrayList<com.welearn.model.CourseNotify> list = courseService.queryCourseNotify(
 				courseid, pageNo, 10);
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
@@ -169,7 +168,7 @@ public class ManageCourseController {
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 用课程服务类查询具体的课程作业
-		ArrayList<CourseHomework> list = courseService.queryCourseHomework(courseid, 1, 10);
+		ArrayList<com.welearn.model.CourseHomework> list = courseService.queryCourseHomework(courseid, 1, 10);
 
 		view = new View("student", "manage-course", "course-homework", "课程作业");
 		view.addObject("courseName", courseName);
@@ -193,12 +192,11 @@ public class ManageCourseController {
 			@RequestParam(value = "courseid") int courseid,
 			@RequestParam(value = "pageNo") int pageNo) {
 		// 用课程服务类查询具体的课程作业
-		ArrayList<CourseHomework> list = courseService.queryCourseHomework(courseid, pageNo, 10);
+		ArrayList<com.welearn.model.CourseHomework> list = courseService.queryCourseHomework(courseid, pageNo, 10);
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
-		System.out.println(jsonStr);
-
+		
 		return jsonStr;
 	}
 	
