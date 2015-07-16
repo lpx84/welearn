@@ -46,11 +46,11 @@ public class CourseFeedback {
 		this.id = id;
 	}
 
-	public String getStudentId() {
+	public String getStudentName() {
 		return studentName;
 	}
 
-	public void setStudentId(String studentName) {
+	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}
 
