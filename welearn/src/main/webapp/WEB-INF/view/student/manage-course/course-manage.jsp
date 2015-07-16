@@ -64,11 +64,6 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray">
-        <div class="glyph-icon icon-separator transparent back-btn">
-            <a href="javascript:history.back();" >
-                <i class="glyph-icon fa-chevron-left" ></i>
-            </a>  
-        </div>
         <span class="title">${course.getName() }</span>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>

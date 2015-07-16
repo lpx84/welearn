@@ -103,5 +103,5 @@ public interface CourseService {
 	 * @param studentid
 	 * @return
 	 */
-	public boolean addFeedback(int courseid,String content,boolean anonymous,int studentid);
+	public boolean addFeedback(int courseid,String content,boolean anonymous,String studentName);
 }
