@@ -233,7 +233,8 @@ public class ManageCourseController {
 			HttpSession session) {
 		View view;
 		String openid = (String) session.getAttribute("openid");
-		String studentName = studentService.getStudentByOpenId(openid).getTrueName();
+		String studentName = studentService.getStudentByOpenId(openid)
+				.getTrueName();
 		System.out.println(anonymous);
 		boolean result = courseService.addFeedback(courseid, content,
 				anonymous, studentName);
@@ -247,10 +248,37 @@ public class ManageCourseController {
 			// 插入成功
 			view = new View("prompt", "wechat", "info", "反馈成功。");
 			view.addObject("info", "反馈成功。。");
-			view.addObject("url", "student/manage/course/course-manage?courseid"+courseid);
+			view.addObject("url",
+					"student/manage/course/course-manage?courseid=" + courseid);
 			return view;
 		}
-
 	}
+	
+	/**
+	 * 课程反馈
+	 * 
+	 * @param courseid
+	 *            课程id
+	 * @return
+	 */
+	@RequestMapping("course-discuss")
+	@Authentication()
+	public View courseDiscuss(@RequestParam(value = "courseid") int courseid) {
+		View view;
+		// 课程名
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 
+		
+		
+		
+		
+		view = new View("student", "manage-course", "course-discuss", "课程讨论");
+		view.addObject("courseName", courseName);
+		
+		return view;
+	}
+	
+	
+	
 
 }
