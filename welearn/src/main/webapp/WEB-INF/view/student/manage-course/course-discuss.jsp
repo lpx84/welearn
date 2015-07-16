@@ -45,9 +45,6 @@
 <body>
 <div class="content-box bg-white">
     <h3 class="title-span content-box-header ui-state-default">
-        <div class="glyph-icon icon-separator transparent">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
         <label class="pad0L">软件系统分析以设计技术</label>
     </h3>
     <div class="content-box-wrapper" style="padding-top: 50px;">

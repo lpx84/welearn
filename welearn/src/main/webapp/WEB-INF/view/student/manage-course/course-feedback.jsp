@@ -17,9 +17,6 @@
 <body>
 <div class="content-box" style="border: none;">
     <h3 class="content-box-header bg-gray">
-        <div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
         <span class="title">课程反馈</span>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>

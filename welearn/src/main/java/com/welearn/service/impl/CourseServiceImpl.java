@@ -265,17 +265,19 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	public boolean addFeedback(int courseid, String content, boolean anonymous,
-			int studentid) {
+			String studentName) {
 		CourseFeedback courseFeedback = new CourseFeedback();
 		courseFeedback.setContent(content);
-		courseFeedback.setCourseId(String.valueOf(courseid));
-		courseFeedback.setTime(new Date().toString());
+		courseFeedback.setCourseId(courseid);
+		courseFeedback.setTime(StrUtil.formatDate1(new Date()));
 		//如果用户选择非匿名，则设置用户的id
-		if(!anonymous)
-			courseFeedback.setStudentId(String.valueOf(studentid));
+		if(!anonymous){
+			courseFeedback.setStudentName(studentName);
+		}
+		
 		
 		int returnMode = courseFeedbackDao.addCourseFeedback(courseFeedback);
-		System.out.println(returnMode);
+		
 	    if (returnMode >0) {
 			return true;
 		} else {
