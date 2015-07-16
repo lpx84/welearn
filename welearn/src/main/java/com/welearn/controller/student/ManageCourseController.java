@@ -120,15 +120,14 @@ public class ManageCourseController {
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 用课程服务类查询具体的课程通知
-		ArrayList<com.welearn.model.CourseNotify> list = courseService.queryCourseNotify(
-				courseid, 1, 10);
+		ArrayList<com.welearn.model.CourseNotify> list = courseService
+				.queryCourseNotify(courseid, 1, 10);
 
 		view = new View("student", "manage-course", "course-notify", "课程公告");
 		view.addObject("courseName", courseName);
 		view.addObject("courseid", courseid);
 		view.addObject("list", list);
-        
-		System.out.println(list.toString());
+
 		return view;
 	}
 
@@ -146,11 +145,11 @@ public class ManageCourseController {
 			@RequestParam(value = "courseid") int courseid,
 			@RequestParam(value = "pageNo") int pageNo) {
 		// 用课程服务类查询具体的课程通知
-		ArrayList<com.welearn.model.CourseNotify> list = courseService.queryCourseNotify(
-				courseid, pageNo, 10);
+		ArrayList<com.welearn.model.CourseNotify> list = courseService
+				.queryCourseNotify(courseid, pageNo, 10);
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
-		
+
 		return jsonStr;
 	}
 
@@ -168,7 +167,8 @@ public class ManageCourseController {
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 用课程服务类查询具体的课程作业
-		ArrayList<com.welearn.model.CourseHomework> list = courseService.queryCourseHomework(courseid, 1, 10);
+		ArrayList<com.welearn.model.CourseHomework> list = courseService
+				.queryCourseHomework(courseid, 1, 10);
 
 		view = new View("student", "manage-course", "course-homework", "课程作业");
 		view.addObject("courseName", courseName);
@@ -192,12 +192,64 @@ public class ManageCourseController {
 			@RequestParam(value = "courseid") int courseid,
 			@RequestParam(value = "pageNo") int pageNo) {
 		// 用课程服务类查询具体的课程作业
-		ArrayList<com.welearn.model.CourseHomework> list = courseService.queryCourseHomework(courseid, pageNo, 10);
+		ArrayList<com.welearn.model.CourseHomework> list = courseService
+				.queryCourseHomework(courseid, pageNo, 10);
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
-		
+
 		return jsonStr;
 	}
-	
+
+	/**
+	 * 课程反馈
+	 * 
+	 * @param courseid
+	 *            课程id
+	 * @return
+	 */
+	@RequestMapping("course-feedback")
+	@Authentication()
+	public View courseFeedback(@RequestParam(value = "courseid") int courseid) {
+		View view;
+		view = new View("student", "manage-course", "course-feedback", "课程反馈");
+		view.addObject("courseid", courseid);
+		return view;
+	}
+
+	/**
+	 * 课程反馈
+	 * 
+	 * @param courseid
+	 *            课程id
+	 * @return
+	 */
+	@RequestMapping("course-feedback.act")
+	@Authentication()
+	public View courseFeedbackAct(
+			@RequestParam(value = "courseid") int courseid,
+			@RequestParam(value = "content") String content,
+			@RequestParam(value = "anonymous") boolean anonymous,
+			HttpSession session) {
+		View view;
+		String openid = (String) session.getAttribute("openid");
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		System.out.println(anonymous);
+		boolean result = courseService.addFeedback(courseid, content,
+				anonymous, studentid);
+		if (result == false) {
+			// 插入失败
+			view = new View("error", "wechat", "info", "反馈失败。");
+			view.addObject("info", "反馈失败，请稍后再试。");
+			return view;
+		} else {
+			// 插入成功
+			view = new View("prompt", "wechat", "info", "反馈成功。");
+			view.addObject("info", "反馈成功。。");
+			view.addObject("url", "student/manage/course/course-manage?courseid"+courseid);
+			return view;
+		}
+
+	}
+
 }

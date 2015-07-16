@@ -1,27 +1,15 @@
 package com.welearn.service.intef;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import com.welearn.entity.Course;
-import com.welearn.entity.CourseTime;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
 
 public interface CourseService {
-
-	/**
-	 * 根据周，查询当前学期的课表
-	 */
-	public List<?> queryCourseScheduleByWeek(int id, CourseTime time);
-
-	/**
-	 * 根据天，查询当前学期的课表
-	 */
-	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time);
 
 	/**
 	 * 根据课程id获取课程信息
@@ -106,5 +94,14 @@ public interface CourseService {
 	 */
 	public Map<String, ArrayList<Course>> querySemesterCourseByStudentId(
 			int studentId);
-
+	
+	/**
+	 * 添加课程反馈
+	 * @param courseid
+	 * @param content
+	 * @param anonymous
+	 * @param studentid
+	 * @return
+	 */
+	public boolean addFeedback(int courseid,String content,boolean anonymous,int studentid);
 }
