@@ -23,4 +23,5 @@ public class InfoView extends ModelAndView {
 		super("error/wechat/info");
 		this.addObject("info", info);
 	}
+	
 }

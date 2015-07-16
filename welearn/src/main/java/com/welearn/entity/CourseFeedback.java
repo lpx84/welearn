@@ -18,17 +18,20 @@ public class CourseFeedback {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="student_id", columnDefinition="int(11)", nullable=false)
-	private String studentId;
+	@Column(name="student_name", columnDefinition="varchar(11)")
+	private String studentName;
 	
 	@Column(name="course_id", columnDefinition="int(11)", nullable=false)
-	private String courseId;
+	private int courseId;
 	
 	@Column(name="time", columnDefinition="datetime")
 	private String time;
 	
 	@Column(name="content", columnDefinition="text")
 	private String content;
+	
+	@Column(name="icon_url", columnDefinition="varchar(1204)")
+	private String iconUrl;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="course_id",insertable=false,updatable=false)
@@ -46,19 +49,19 @@ public class CourseFeedback {
 		this.id = id;
 	}
 
-	public String getStudentId() {
-		return studentId;
+	public String getStudentName() {
+		return studentName;
 	}
 
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
-	public String getCourseId() {
+	public int getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(String courseId) {
+	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
 
@@ -85,12 +88,25 @@ public class CourseFeedback {
 	public void setCourseEntity(Course courseEntity) {
 		this.courseEntity = courseEntity;
 	}
+	
+	
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
 
 	@Override
 	public String toString() {
-		return "CourseFeedback [id=" + id + ", studentId=" + studentId
+		return "CourseFeedback [id=" + id + ", studentName=" + studentName
 				+ ", courseId=" + courseId + ", time=" + time + ", content="
-				+ content + ", courseEntity=" + courseEntity + "]";
+				+ content + ", iconUrl=" + iconUrl + ", courseEntity="
+				+ courseEntity + "]";
 	}
+
+	
 	
 }

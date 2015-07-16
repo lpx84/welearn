@@ -81,5 +81,5 @@ public class StudentCourse {
 				+ ", studentId=" + studentId + ", studentEntity="
 				+ studentEntity + ", courseEntity=" + courseEntity + "]";
 	}
-	
+
 }

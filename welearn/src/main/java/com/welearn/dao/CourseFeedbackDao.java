@@ -40,10 +40,9 @@ public class CourseFeedbackDao extends SuperDao {
 		return query.list();
 	}
 	
-	public List<CourseFeedback> getCourseFeedbacksByStudentId(int studentId){
-		this.hql = "FROM CourseFeedback AS u inner join fetch u.courseEntity WHERE u.student_id=?";
+	public List<CourseFeedback> getCourseFeedbacksByStudentName(String studentName){
+		this.hql = "FROM CourseFeedback AS u inner join fetch u.courseEntity WHERE u.studentName="+"studentName";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, studentId);
 		return query.list();
 	} 
 }

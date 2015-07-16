@@ -23,14 +23,14 @@ public class CourseReply {
 	/**
 	 * 回复者姓名
 	 */
-	@Column(name="replyor", columnDefinition="varchar(50)", nullable=false)
-	private String replyor;
+	@Column(name="reply_id", columnDefinition="int(11)", nullable=false)
+	private int replyId;
 	
 	/**
 	 * 回复课程的ID
 	 */
 	@Column(name="course_id", columnDefinition="int", nullable=false)
-	private Integer courseId;
+	private int courseId;
 	
 	/**
 	 * 回复内容
@@ -75,13 +75,7 @@ public class CourseReply {
 		this.id = id;
 	}
 
-	public String getReplyor() {
-		return replyor;
-	}
-
-	public void setReplyor(String replyor) {
-		this.replyor = replyor;
-	}
+	
 
 	public Integer getCourseId() {
 		return courseId;
@@ -123,12 +117,29 @@ public class CourseReply {
 		this.courseEntity = courseEntity;
 	}
 
+	public int getReplyId() {
+		return replyId;
+	}
+
+	public void setReplyId(int replyId) {
+		this.replyId = replyId;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "CourseReply [id=" + id + ", replyor=" + replyor + ", courseId="
+		return "CourseReply [id=" + id + ", replyId=" + replyId + ", courseId="
 				+ courseId + ", content=" + content + ", type=" + type
 				+ ", reply_time=" + reply_time + ", status=" + status
 				+ ", courseEntity=" + courseEntity + "]";
 	}
 	
+
 }

@@ -1,18 +1,19 @@
 package com.welearn.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.welearn.dao.CourseDao;
+import com.welearn.dao.CourseFeedbackDao;
 import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseFeedback;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
-import com.welearn.entity.CourseTime;
 import com.welearn.entity.Teacher;
 import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
@@ -29,6 +30,7 @@ public class CourseServiceImpl implements CourseService {
 	private TimeCourseDao timeCourseDao;
 	private CourseNotifyDao courseNotifyDao;
 	private CourseHomeworkDao courseHomeworkDao;
+	private CourseFeedbackDao courseFeedbackDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -49,15 +51,9 @@ public class CourseServiceImpl implements CourseService {
 	public void setCourseHomeworkDao(CourseHomeworkDao courseHomeworkDao) {
 		this.courseHomeworkDao = courseHomeworkDao;
 	}
-
-	public List<?> queryCourseScheduleByWeek(int id, CourseTime time) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<?> queryCourseScheduleByWeekDay(int id, CourseTime time) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void setCourseFeedbackDao(CourseFeedbackDao courseFeedbackDao){
+		this.courseFeedbackDao = courseFeedbackDao;
 	}
 
 	public Course queryCourse(int courseid) {
@@ -266,6 +262,27 @@ public class CourseServiceImpl implements CourseService {
 		}		
 		
 		return modelList;
+	}
+
+	public boolean addFeedback(int courseid, String content, boolean anonymous,
+			String studentName) {
+		CourseFeedback courseFeedback = new CourseFeedback();
+		courseFeedback.setContent(content);
+		courseFeedback.setCourseId(courseid);
+		courseFeedback.setTime(StrUtil.formatDate1(new Date()));
+		//如果用户选择非匿名，则设置用户的id
+		if(!anonymous){
+			courseFeedback.setStudentName(studentName);
+		}
+		
+		
+		int returnMode = courseFeedbackDao.addCourseFeedback(courseFeedback);
+		
+	    if (returnMode >0) {
+			return true;
+		} else {
+			return false;
+		}		
 	}
 
 }

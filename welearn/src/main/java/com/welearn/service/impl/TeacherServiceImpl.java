@@ -1,11 +1,13 @@
 package com.welearn.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.welearn.dao.AttendTaskDao;
 import com.welearn.dao.CourseDao;
 import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
+import com.welearn.dao.CourseReplyDao;
 import com.welearn.dao.StudentCourseDao;
 import com.welearn.dao.StudentDao;
 import com.welearn.dao.TeacherDao;
@@ -14,6 +16,7 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.CourseReply;
 import com.welearn.entity.Student;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
@@ -29,6 +32,7 @@ public class TeacherServiceImpl implements TeacherService {
 	AttendTaskDao attendTaskDao;
 	StudentDao studentDao;
 	StudentCourseDao studentCourseDao;
+	CourseReplyDao courseReplyDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -58,6 +62,10 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public void setStudentCourseDao(StudentCourseDao studentCourseDao) {
 		this.studentCourseDao = studentCourseDao;
+	}
+	
+	public void setCourseReplyDao(CourseReplyDao courseReplyDao) {
+		this.courseReplyDao = courseReplyDao;
 	}
 
 	public Teacher getTeacherById(int id) {
@@ -107,7 +115,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public List<StudentCourse> getStudentListByCourseId(int courseId) {
-		return null;
+		List<StudentCourse> list = studentCourseDao.getStudentCourseByCourseId(courseId);
+		return list;
 	}
 
 	//签到任务
@@ -153,26 +162,13 @@ public class TeacherServiceImpl implements TeacherService {
 	//测试
 	public void test() {
 		// TODO Auto-generated method stub
-		List<Course> list = courseDao.getCoursesByStudentIdAndSemester(1, 2014, 2);
-		System.out.println("---------11111111111111111--------");
+		List<CourseReply> list = courseReplyDao.getCourseReplyByTimeBefore(1, new Date(),1);
+		
 		for(int i=0;i<list.size();i++){
+			System.out.println("-----------------");
 			System.out.println(list.get(i).toString());
 		}
-		/*List<CourseHomework> list = courseHomeworkDao.getPublishedCourseHomeworkByCourseId(2, 1, 10);
-		
-		System.out.println("-----------------");
-		for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i).toString());
-		}*/
 		
 	}
-
-
-
-
-
-
-
-
 
 }
