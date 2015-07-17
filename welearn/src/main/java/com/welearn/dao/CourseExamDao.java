@@ -26,21 +26,21 @@ public class CourseExamDao extends SuperDao {
 	}
 	
 	public CourseExam getCourseExamById(int id){
-		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.id=?";
+		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.id=? order by u.finishId desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
 		return (CourseExam) query.uniqueResult();
 	}
 	
 	public List<CourseExam> getCourseExamByCourseId(int courseId){
-		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.courseId=?";
+		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.courseId=? order by u.finishId desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseId);
 		return query.list();
 	}
 
 	public List<CourseExam> getCourseExamByCourseId(int courseId, int pageNo, int pageItemNum){
-		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.courseId=?";
+		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.courseId=? order by u.finishId desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
