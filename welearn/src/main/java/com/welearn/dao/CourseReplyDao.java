@@ -79,7 +79,7 @@ public class CourseReplyDao extends SuperDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CourseReply> getCourseReplyByTimeAfter(int courseId, Date time){
-		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time > :date";
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time > :date order by a.reply_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger("courseId", courseId);
 		query.setTimestamp("date", time);
@@ -94,7 +94,7 @@ public class CourseReplyDao extends SuperDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CourseReply> getCourseReplyByTimeBefore(int courseId, Date time){
-		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time < :date";
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time < :date order by a.reply_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger("courseId", courseId);
 		query.setTimestamp("date", time);
@@ -110,7 +110,7 @@ public class CourseReplyDao extends SuperDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CourseReply> getCourseReplyByTimeBefore(int courseId, Date time, int num){
-		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time < :date";
+		this.hql = "from CourseReply as a inner join fetch a.courseEntity where a.courseId=:courseId and a.reply_time < :date order by a.reply_time desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger("courseId", courseId);
 		query.setTimestamp("date", time);
