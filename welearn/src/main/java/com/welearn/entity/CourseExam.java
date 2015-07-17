@@ -27,7 +27,7 @@ public class CourseExam {
 	@Column(name="spend_time", columnDefinition="int(11)", nullable=false)
 	private Integer spendTime;
 	
-	@Column(name="finish_id", columnDefinition="datetime", nullable=false)
+	@Column(name="finish_time", columnDefinition="datetime", nullable=false)
 	private Integer finishId;
 	
 	@Column(name="score", columnDefinition="varchar(100)", nullable=false)
