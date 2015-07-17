@@ -45,8 +45,11 @@
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <p class="pad0L title">我的签到记录</p>
+    <h3 class="content-box-header bg-gray text-center">
+    	<div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <label class="pad0L title">我的签到记录</label>
     </h3>
     <div class="content">
         <div class="rcd">

@@ -14,7 +14,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 72%;
     }
     .content-head {
         line-height: 2em;
@@ -63,8 +62,11 @@
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <span class="title">${course.getName() }</span>
+    <h3 class="content-box-header bg-gray text-center">
+    	<div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <label class="title">${course.getName() }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>

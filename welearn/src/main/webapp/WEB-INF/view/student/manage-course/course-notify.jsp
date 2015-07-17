@@ -93,8 +93,11 @@
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <span class="title">${courseName }</span>
+    <h3 class="content-box-header bg-gray text-center">
+    	<div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <label class="title">${courseName }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>

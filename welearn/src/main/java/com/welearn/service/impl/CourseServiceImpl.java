@@ -151,14 +151,14 @@ public class CourseServiceImpl implements CourseService {
 
 		ExamPlan examPlan;
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
 			examPlan = new ExamPlan();
-			examPlan.setBuilding("逸夫楼");
-			examPlan.setClassRoom("YF305");
-			examPlan.setExamNo("123456789");
-			examPlan.setName("系统分析与设计" + i);
+			examPlan.setBuilding("思源西楼");
+			examPlan.setClassRoom("SX205");
+			examPlan.setExamNo("103143254");
+			examPlan.setName("软件体系结构");
 			examPlan.setSection("主校区");
-			examPlan.setTime("2015-6-30 9:00-11:00");
+			examPlan.setTime("2015-07-06 9:00-11:00");
 			list.add(examPlan);
 		}
 

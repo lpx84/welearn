@@ -84,11 +84,8 @@
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <span class="title">软件工程专业研究方法论与创新教育</span>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
+    <h3 class="content-box-header bg-gray text-center">
+        <label class="title">软件工程专业研究方法论与创新教育</label>
     </h3>
     <div class="content">
         <div id="rcd34" class="rcd" data-id="34"> <!-- rcd32中32指的是problem的id号 -->
