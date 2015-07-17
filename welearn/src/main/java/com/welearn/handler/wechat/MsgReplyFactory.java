@@ -87,6 +87,13 @@ public class MsgReplyFactory {
 				return XmlUtil.getWelcomeReplyMsg(event.getFromUserName(), event.getToUserName());
 			} else if("unsubscribe".equals(event.getEvent())) { //取消订阅
 				return "unsubscribe";
+			} else if("click".equals(event.getEvent().toLowerCase())) { //点击事件
+				
+				if("B_COURSE_ATTEND".equals(event.getEventKey())) { //点击的是签到按钮
+					
+				}
+				
+				return "unsubscribe";
 			} else {
 				return null;
 			}

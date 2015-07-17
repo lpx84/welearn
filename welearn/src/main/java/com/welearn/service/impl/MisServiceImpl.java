@@ -1,6 +1,7 @@
 package com.welearn.service.impl;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.apache.http.ParseException;
@@ -90,8 +91,11 @@ public class MisServiceImpl implements MisService {
 			String flow = eles.get(2)
 					.getElementsByAttributeValue("class", "t_r1").get(0).html();
 			flow = flow.replace("&nbsp; ", "");
+			
 			netFlow.setFlow(flow);
-			netFlow.setRestFlow(String.valueOf(20480 - Double.parseDouble(flow)));
+			
+			DecimalFormat df1 = new DecimalFormat(".000");
+			netFlow.setRestFlow(String.valueOf(df1.format(20480 - Double.parseDouble(flow))));
 			netFlow.setTime(eles.get(1)
 					.getElementsByAttributeValue("class", "t_r1").get(0).html());
 		} catch (ParseException e) {
