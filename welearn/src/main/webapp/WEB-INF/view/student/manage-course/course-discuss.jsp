@@ -39,6 +39,17 @@
         padding-bottom: 50px;
         overflow: auto;
     }   
+    
+   .btn-more {
+   		display: block;
+   		width: 100%;
+   }
+   
+   .btn-more span {
+   		position: absolute;
+   		width: 100%;
+   		text-align: center;
+   }
    
 </style>
 </head>
@@ -47,9 +58,11 @@
     <h3 class="title-span content-box-header ui-state-default">
         <label class="pad0L">${courseName}</label>
     </h3>
-    <div class="content-box-wrapper" style="padding-top: 50px;">
+    <div class="content-box-wrapper" id="chat-div" style="padding-top: 50px;">
         <div class="scrollable-content">
-        
+            <a href="javascript:prefetchData();" class="btn btn-more medium float-none ui-state-default mrg10B">
+                <span class="button-content">更多聊天记录</span>
+            </a>
             <ul class="chat-box">
             	<c:forEach var="item" items="${list }">
             	<li <c:if test = "${!item.isMe() }">class="float-left" </c:if>>            	    
@@ -107,41 +120,40 @@
 			}
 			//complete : completeHandler
 		});
-		setTimeout(refreshData, 3000);
+		//setTimeout(refreshData, 3000);
 	}
     
-	refreshData();
+	//refreshData();
 
-	function joinData(res) {       
+	function joinData(res) {     	        
 		var html = new Array(
 				"<li class='float-left'>",
 				"<div class='chat-author'><img width='36' src='",
 				"avatar",
-				"' alt='' /></div>",
+				"'  /></div>",
 				"<div class='popover right no-shadow'>",
 				"<div class='arrow'></div><div class='popover-content'><div class='info'><span>",
 				"name",
-				"</span><span class='float-right'><i class='glyph-icon icon-time'></i> ",
+				"</span><span class='float-right'><i class='glyph-icon icon-time'></i>",
 				"time",
 				"</span></div>",
 				"content",
-				"</div></div></li>"				
+				"</div></div></li>"		
 		);
-		for (var i = 0; i < res.length; ++i) {
+		for (var i = res.length-1; i>=0;i--) {
 			if(res[i].me == true){
 				html[0] = "<li>";
 				html[4] = "<div class='popover left no-shadow'>";
 			}
 			html[2] = res[i].avatar;			
-			html[4] = res[i].relayorName;			
-			html[6] = res[i].time;
-			html[8] = res[i].content;
+			html[6] = res[i].relayorName;			
+			html[8] = res[i].time;
+			html[10] = res[i].content;
 			$(".chat-box").append(html.join(''));
 		}
 	}
 	
-	function sendData() {
-		alert("nihao");
+	function sendData() {		
 		//用ajax获取页面信息
 		$.ajax({
 			url : $("#appName").val()
@@ -152,17 +164,75 @@
 			},
 			timeout : 5000,
 			dataType : "JSON",
-			success : function(res) {
+			success : function(res) {				
 				if (res.code == 100) {
 					alert(res.msg);
 				} else {
 					refreshData();
+					$("#content").val("");	
+/* 					var div = document.getElementById("chat-div");
+					div.scrollTop = div.scrollHeight; */				
 				}
 			},
 			complete : completeHandler
 		});
 	}
 	
+ 	function prefetchData() {
+		//用ajax获取页面信息
+		$.ajax({
+			url : $("#appName").val()
+					+ "/student/manage/course/more-course-discuss",
+			type : "POST",
+			timeout : 5000,
+			dataType : "JSON",
+			success : function(res) {
+				if (res.code != 100) {
+					if(res.length<1){
+						$(".btn-more").removeAttr("href");
+						$(".btn-more").html("没有更多了");		
+					}else{
+						preJoinData(res);
+						$(".btn-more").html("查看更多聊天记录");	
+						console.log(res);
+					}			
+				}
+			}
+			//complete : completeHandler
+		});
+		$(".btn-more").html("获取中...");
+	}
+	
+	function preJoinData(res) {       
+		var html = new Array(
+				"<li class='float-left'>",
+				"<div class='chat-author'><img width='36' src='",
+				"avatar",
+				"'  /></div>",
+				"<div class='popover right no-shadow'>",
+				"<div class='arrow'></div><div class='popover-content'><div class='info'><span>",
+				"name",
+				"</span><span class='float-right'><i class='glyph-icon icon-time'></i>",
+				"time",
+				"</span></div>",
+				"content",
+				"</div></div></li>"		
+		);
+		for (var i = 0; i<res.length;i++) {
+			if(res[i].me){				
+				html[0] = "<li>";
+				html[4] = "<div class='popover left no-shadow'>";
+			} else{
+				html[0] = "<li class='float-left'>";
+				html[4] = "<div class='popover right no-shadow'>";
+			}
+			html[2] = res[i].avatar;			
+			html[6] = res[i].relayorName;			
+			html[8] = res[i].time;
+			html[10] = res[i].content;
+			$(".chat-box").prepend(html.join(''));
+		}
+	} 
 </script>
 </body>
 </html>

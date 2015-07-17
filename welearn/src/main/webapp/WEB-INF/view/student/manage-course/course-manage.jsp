@@ -170,7 +170,7 @@ $(".text-toggle").click(function(){
         $(this).removeClass("fa-angle-double-up");            
         $(this).addClass("fa-angle-double-down");
     }
-});s
+});
 </script>
 </body>
 </html>
