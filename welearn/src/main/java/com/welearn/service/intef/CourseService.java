@@ -134,4 +134,6 @@ public interface CourseService {
 	 */
 	public boolean addDiscussContent(int courseid,int studentid,String content);
 	
+	
+	
 }

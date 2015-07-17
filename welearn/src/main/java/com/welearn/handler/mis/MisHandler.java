@@ -19,28 +19,6 @@ import com.welearn.util.RequestHeader;
 public class MisHandler {
 
 	/**
-	 * 一卡通余额
-	 * 
-	 * @param stuNo
-	 * @return
-	 */
-	public String getEcardRemaing(String stuNo) {
-
-		return null;
-	}
-
-	/**
-	 * 一卡通消费明细
-	 * 
-	 * @param stuNo
-	 * @return
-	 */
-	public String getEcardConsumeDetail(String stuNo) {
-
-		return null;
-	}
-
-	/**
 	 * 上网流量查询
 	 * 
 	 * @param stuNo
@@ -140,57 +118,91 @@ public class MisHandler {
 	@SuppressWarnings("null")
 	public Element getEcardInfo(String stuNo, String pwd)
 			throws ParseException, IOException {
-		String host = "http://service.bjtu.edu.cn";
-		String checkCode = "";
-
+//		String host = "http://service.bjtu.edu.cn";
+//		String checkCode = "";
+//
+//		MyHttpClient client = MyHttpClient.getInstance();
+//		RequestHeader rh = new RequestHeader(host + "/nav_login");
+//
+//		Document loginDoc = client.responseToDocument(
+//				client.doHttpGet(rh, null), "utf-8");
+//
+//		Elements eles = loginDoc.getElementsByTag("script");
+//		String jscode = eles.get(eles.size() - 1).html();
+//
+//		Pattern p = Pattern.compile("checkcode=\"(.+?)\"");
+//		Matcher m = p.matcher(jscode);
+//		if (m.find()) {
+//			String str = m.group(0);
+//			checkCode = str.substring(11, str.length() - 1);
+//		}
+//
+//		rh = new RequestHeader(host + "/RandomCodeAction.action");
+//		client.responseToDocument(client.doHttpGet(rh, null), "utf-8");
+//
+//		rh = new RequestHeader(host + "/LoginAction.action");
+//
+//		rh.setCookie(client.getStrCookie());
+//		rh.setHost("service.bjtu.edu.cn");
+//		rh.setProperty("Origin", host);
+//		rh.setReferer(host + "/nav_login");
+//		rh.setProperty("Content-Type", "application/x-www-form-urlencoded");
+//		Map<String, Object> params01 = new HashMap<String, Object>();
+//		params01.put("account", stuNo);
+//		params01.put("password", pwd);
+//		params01.put("code", "");
+//		params01.put("checkcode", checkCode);
+//		params01.put("Submit", "登+录");
+//
+//		HttpResponse response00 = client.doHttpPost(rh, params01);
+//		EntityUtils.toString(response00.getEntity(), "utf-8");
+//
+//		rh = new RequestHeader(host + "/nav_getUserInfo");
+//		rh.setCookie(client.getStrCookie());
+//		rh.setReferer(host + "/LoginAction.action");
+//		HttpResponse response02 = client.doHttpGet(rh, null);
+//
+//		Document doc = client.responseToDocument(response02, "UTF-8");
+//		Element res = null;
+//		if (null != doc || null != doc.getElementsByTag("table")) {
+//			res = doc.getElementsByTag("table").get(1); // 得到含有数据的div块
+//		}
+//
+//		return res;
+				
+		String host = "https://mis.bjtu.edu.cn";
+		
 		MyHttpClient client = MyHttpClient.getInstance();
-		RequestHeader rh = new RequestHeader(host + "/nav_login");
-
-		Document loginDoc = client.responseToDocument(
-				client.doHttpGet(rh, null), "utf-8");
-
-		Elements eles = loginDoc.getElementsByTag("script");
-		String jscode = eles.get(eles.size() - 1).html();
-
-		Pattern p = Pattern.compile("checkcode=\"(.+?)\"");
-		Matcher m = p.matcher(jscode);
-		if (m.find()) {
-			String str = m.group(0);
-			checkCode = str.substring(11, str.length() - 1);
-		}
-
-		rh = new RequestHeader(host + "/RandomCodeAction.action");
-		client.responseToDocument(client.doHttpGet(rh, null), "utf-8");
-
-		rh = new RequestHeader(host + "/LoginAction.action");
-
+		RequestHeader rh = new RequestHeader(host + "/auth/login/");	
+			
 		rh.setCookie(client.getStrCookie());
-		rh.setHost("service.bjtu.edu.cn");
+		rh.setHost("mis.bjtu.edu.cn");
 		rh.setProperty("Origin", host);
-		rh.setReferer(host + "/nav_login");
+		rh.setReferer(host + "/cms/");
 		rh.setProperty("Content-Type", "application/x-www-form-urlencoded");
 		Map<String, Object> params01 = new HashMap<String, Object>();
-		params01.put("account", stuNo);
+		params01.put("uid", stuNo);
+		params01.put("pass", pwd);
+		params01.put("sid", "9D55527BC88077A463E985D1EB5B34B3");
+		params01.put("pwd", "");
+		params01.put("loginname", stuNo);
 		params01.put("password", pwd);
-		params01.put("code", "");
-		params01.put("checkcode", checkCode);
-		params01.put("Submit", "登+录");
-
-		HttpResponse response00 = client.doHttpPost(rh, params01);
-		EntityUtils.toString(response00.getEntity(), "utf-8");
-
-		rh = new RequestHeader(host + "/nav_getUserInfo");
+		params01.put("redirect", "/home/");
+		
+		HttpResponse response01=client.doHttpPost(rh, params01);
+		EntityUtils.toString(response01.getEntity(), "utf-8");
+		
+		rh = new RequestHeader(host + "/home/");
 		rh.setCookie(client.getStrCookie());
-		rh.setReferer(host + "/LoginAction.action");
+		rh.setHost("mis.bjtu.edu.cn");
+		rh.setProperty("Origin", host);
+		rh.setReferer(host + "/cms/");
+
 		HttpResponse response02 = client.doHttpGet(rh, null);
+		EntityUtils.toString(response02.getEntity(), "utf-8");
 
-		Document doc = client.responseToDocument(response02, "UTF-8");
-		Element res = null;
-		if (null != doc || null != doc.getElementsByTag("table")) {
-			res = doc.getElementsByTag("table").get(1); // 得到含有数据的div块
-		}
 
-		return res;
+		return null;
 	}
 
 }
