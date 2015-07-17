@@ -5,12 +5,12 @@ import java.util.Date;
 
 public class StrUtil {
 	public static String formatDate(Date date) {
-		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return myFormat.format(date );
 	}
 	
 	public static String formatDate1(Date date){
-		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return myFormat.format(date );
 	}
 

@@ -47,7 +47,7 @@
                 {
                     "type": "click", 
                     "name": "课程签到",                     
-                    "key": "V1001_TODAY_MUSIC"
+                    "key": "B_COURSE_ATTEND"
                 }
             ]
         },
@@ -64,6 +64,11 @@
                     "name": "成绩查询", 
                     "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpersonal%2Fcourse-grade&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                 }, 
+                {
+                    "type": "view", 
+                    "name": "考试安排", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpersonal%2Fexam-plan&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                },
                 {
                     "type": "view", 
                     "name": "一卡通查询", 

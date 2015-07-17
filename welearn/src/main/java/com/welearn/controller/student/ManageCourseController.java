@@ -7,17 +7,12 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.welearn.aop.Authentication;
 import com.welearn.model.Course;
@@ -276,7 +271,6 @@ public class ManageCourseController {
 	public View courseDiscuss(@RequestParam(value = "courseid") int courseid,
 			HttpSession session) {
 		View view = null;
-		;
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 从session中获取openid
@@ -297,18 +291,22 @@ public class ManageCourseController {
 		}
 		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
 
+		//将list倒置
+		ArrayList<CourseDiscuss> list1 = new ArrayList<CourseDiscuss>();
+		for(int i=list.size()-1;i>=0;i--){
+			list1.add(list.get(i));
+		}
+		
 		view = new View("student", "manage-course", "course-discuss", "课程讨论");
 		view.addObject("courseName", courseName);
-		view.addObject("list", list);
-        
+		view.addObject("list", list1);
+
 		return view;
 	}
 
 	/**
 	 * ajax请求最新的对话信息
 	 * 
-	 * @param courseid
-	 * @param pageNo
 	 * @return
 	 */
 	@RequestMapping("refresh-course-discuss")
@@ -324,14 +322,14 @@ public class ManageCourseController {
 		// 获取上次刷新的时间
 		String lastTime = (String) session.getAttribute("lastTime");
 
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//小写的mm表示的是分钟  
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 小写的mm表示的是分钟
 		Date lastTimeDate = new Date();
 		try {
 			lastTimeDate = sdf.parse(lastTime);
 		} catch (ParseException e) {
 			e.printStackTrace();
-		} 
-
+		}
+		
 		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
 		// 获取讨论信息的列表
 		ArrayList<CourseDiscuss> list = courseService.queryDiscussesAfter(
@@ -339,7 +337,7 @@ public class ManageCourseController {
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
-        System.out.println(jsonStr);
+		System.out.println(jsonStr);
 		return jsonStr;
 	}
 
@@ -353,7 +351,8 @@ public class ManageCourseController {
 	@RequestMapping("send-course-discuss-content")
 	@Authentication()
 	@ResponseBody
-	public String sendCourseDiscussContent(@RequestParam(value = "content") String content,HttpSession session) {
+	public String sendCourseDiscussContent(
+			@RequestParam(value = "content") String content, HttpSession session) {
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
 		// 获得courseid
@@ -361,8 +360,111 @@ public class ManageCourseController {
 		// 获取studentid
 		int studentid = studentService.getStudentByOpenId(openid).getId();
 
-		Boolean result = courseService.addDiscussContent(courseid, studentid, content);
-		System.out.println(result);
+		Boolean result = courseService.addDiscussContent(courseid, studentid,
+				content);
+		
 		return JsonUtil.objectToJSONString(result, null);
+	}
+
+	@RequestMapping("more-course-discuss")
+	@Authentication()
+	@ResponseBody
+	public String moreCourseDiscuss(HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		// 获取上次刷新的时间
+		String firstTime = (String) session.getAttribute("firstTime");
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 小写的mm表示的是分钟
+		Date firstTimeDate = new Date();
+		try {
+			firstTimeDate = sdf.parse(firstTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(firstTimeDate);
+		// 获得讨论的消息列表
+		ArrayList<CourseDiscuss> list = courseService.queryDiscussesBefore(
+				courseid, studentid, firstTimeDate);
+		if (list.size() > 0)
+			session.setAttribute("firstTime",list.get(list.size()-1).getTime());// 最早的记录时间
+
+		// 把list用json格式封装
+		String jsonStr = JsonUtil.listToJSONString(list, null);
+		return jsonStr;
+	}
+	
+	/**
+	 * 签到记录查询
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("attend-list")
+	public View eCardDetail() {
+		// 查询余额
+		View view = new View("student", "manage-course", "attend-list", "签到记录");
+		
+		return view;
+	}
+	
+	/**
+	 * 课程测试主页面
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-test")
+	public View courseTest() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-test", "课程小测");
+		
+		return view;
+	}
+	
+	/**
+	 *测试进行中
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-testing")
+	public View courseTesting() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-testing", "课程评测");
+		
+		return view;
+	}
+
+	/**
+	 * 课程测试结果
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-test-result")
+	public View courseTestResult() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-test-result", "测评结果");
+		
+		return view;
+	}
+	
+	/**
+	 * 课程测试结果详情
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-test-detail")
+	public View courseTestDetail() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-test-detail", "测评详情");
+		
+		return view;
 	}
 }

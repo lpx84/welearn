@@ -133,7 +133,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="course-test?courseid=${course.getId() }">
                         <i class="glyph-icon font-azure fa-lightbulb-o"></i>
                         在线测评
                         <i class="glyph-icon icon-chevron-right float-right"></i>
@@ -170,7 +170,7 @@ $(".text-toggle").click(function(){
         $(this).removeClass("fa-angle-double-up");            
         $(this).addClass("fa-angle-double-down");
     }
-});s
+});
 </script>
 </body>
 </html>

@@ -1,5 +1,8 @@
 package com.welearn.service.intef;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.qq.weixin.mp.aes.AesException;
 import com.welearn.model.MsgReceive;
 
 public interface WechatMsgService {
@@ -11,11 +14,13 @@ public interface WechatMsgService {
 	 */
 	//public String getMsgReply(MsgReceive msg);
 	
+	public String getReplyMsg(MsgReceive msg, boolean isEncode, String timestamp, String nonce) throws AesException;
+	
 	/**
 	 * 根据code获得对应的openid
 	 * @param code
 	 * @return
 	 */
-	public abstract String getOpenIdByCode(String code);
+	public String getOpenIdByCode(String code);
 	
 }

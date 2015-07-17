@@ -42,4 +42,16 @@ public class InfoCode {
 	public static final Integer STUDENT_SUBSCRIBED = 1;
 	/***********学生状态：已绑定学号*********/
 	public static final Integer STUDENT_BINDED = 2;
+	
+	/***********签到记录状态：未签到*********/
+	public static final Integer ATTEND_NOT = 0;
+	/***********签到记录状态：准备签到*********/
+	public static final Integer ATTEND_PREPARE = 1;
+	/***********签到记录状态：等待审核*********/
+	public static final Integer ATTEND_VERIFY = 2;
+	/***********签到记录状态：审核通过*********/
+	public static final Integer ATTEND_PASS = 3;
+	/***********签到记录状态：审核未通过*********/
+	public static final Integer ATTEND_NOT_PASS = -1;
+	
 }

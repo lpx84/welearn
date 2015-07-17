@@ -28,12 +28,6 @@ import com.welearn.util.WechatConfig;
 import com.welearn.util.XmlUtil;
 
 public class MsgReplyFactory {
-
-	@Resource(name="wechatMsgService")
-	private WechatMsgService wechatMsgService;
-	@Resource(name="studentService")
-	StudentService studentService;
-	
 	
 	/**
 	 * 给回复的消息加密
@@ -43,7 +37,7 @@ public class MsgReplyFactory {
 	 * @return
 	 * @throws AesException
 	 */
-	public String encodeReplyMsg(String replyMsg, String timestamp, String nonce) throws AesException {
+	public static String encodeReplyMsg(String replyMsg, String timestamp, String nonce) throws AesException {
 		String token = WechatConfig.token;
 		String encodingAesKey = WechatConfig.encodingAesKey;
 		String appId = WechatConfig.appId;
@@ -51,56 +45,7 @@ public class MsgReplyFactory {
 		return pc.encryptMsg(replyMsg, timestamp, nonce);
 	}
 	
-	/**
-	 * 根据接收的消息得到返回的格式化的XML文本消息
-	 * @param msg 解密之后明文的消息体
-	 * @param isEncode 返回消息是否加密
-	 * @param timestamp
-	 * @param nonce
-	 * @return
-	 * @throws AesException 
-	 */
-	public String getReplyMsg(MsgReceive msg, boolean isEncode, String timestamp, String nonce) throws AesException {
-
-		String replyMsg = null;
-		if(msg == null) {
-			return replyMsg;
-		}
-		
-		if(msg.getMsgType().equals("text")) {
-			return this.getMsgReply(msg);
-		} else if(msg.getMsgType().equals("image")) {
-			//当上传的图片时处理代码
-			
-			
-		} else if(msg.getMsgType().equals("voice")) {
-			//当上传音频时处理代码
-			
-			
-		} else if(msg.getMsgType().equals("event")) {
-			//当触发事件时处理代码
-			MsgReceiveEvent event = (MsgReceiveEvent)msg;
-			if("subscribe".equals(event.getEvent())) { //订阅
-//				Student s = studentService.getStudentByOpenId(event.getFromUserName());
-//				s.setStatus(InfoCode.STUDENT_SUBSCRIBED);
-//				studentService.updateStudent(s);
-				return XmlUtil.getWelcomeReplyMsg(event.getFromUserName(), event.getToUserName());
-			} else if("unsubscribe".equals(event.getEvent())) { //取消订阅
-				return "unsubscribe";
-			} else {
-				return null;
-			}
-			
-		} else {
-			replyMsg = XmlUtil.getNullReplyText(msg.getFromUserName(), msg.getToUserName());
-		}
-		
-		if(isEncode) {
-			replyMsg = this.encodeReplyMsg(replyMsg, timestamp, nonce);
-		}
-		
-		return replyMsg;
-	}
+	
 	
 	/**
 	 * 明文模式下，微信请求合法性认证
@@ -110,7 +55,7 @@ public class MsgReplyFactory {
 	 * @param echostr
 	 * @return
 	 */
-	public boolean signature(String signature,String timestamp,String nonce,String echostr) {
+	public static boolean signature(String signature,String timestamp,String nonce,String echostr) {
 		if(signature == null ||
 			timestamp == null ||
 			nonce == null) {
@@ -127,7 +72,7 @@ public class MsgReplyFactory {
 		}
 	}
 	
-	public String getMsgReply(MsgReceive msg) {
+	public static String getMsgReply(MsgReceive msg) {
 		// TODO Auto-generated method stub
 		
 		String keyword = ((MsgReceiveText)msg).getContent();
