@@ -30,12 +30,16 @@ import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import com.welearn.handler.wechat.MsgReceiveFactory;
 import com.welearn.handler.wechat.MsgReplyFactory;
 import com.welearn.model.MsgReceive;
+import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.WechatConfig;
 
 @Controller
 @RequestMapping("/wechat/*")
 public class WechatController {
 
+	@Resource(name="wechatMsgService")
+	WechatMsgService wechatMsgService;
+	
 	//, method=RequestMethod.POST
 	@RequestMapping(name = "handler")
 	@ResponseBody
@@ -64,7 +68,7 @@ public class WechatController {
 				if (reply.signature(signature, timestamp, nonce, echostr)) {
 					MsgReceive msg = receive.getReceiveMsg(request, false,
 							null, null, null);
-					return reply.getReplyMsg(msg, false, null, null);
+					return wechatMsgService.getReplyMsg(msg, false, null, null);
 				} else {
 					return "invalid!";
 				}
@@ -75,7 +79,7 @@ public class WechatController {
 			String msgSignature = request.getParameter("msg_signature"); // 消息签名
 			MsgReceive msg = receive.getReceiveMsg(request, true, msgSignature,
 					timestamp, nonce);
-			return reply.getReplyMsg(msg, true, timestamp, nonce);
+			return wechatMsgService.getReplyMsg(msg, true, timestamp, nonce);
 		}
 		return null;
 

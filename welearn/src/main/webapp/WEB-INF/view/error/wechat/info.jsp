@@ -6,6 +6,8 @@
 <html>
 <head>
 <%@ include file="/public/section/home/header.jsp" %>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/jweixin-1.0.0.js"></script>
+
 <title>${title }</title>
 <style type="text/css">
     body {
@@ -30,7 +32,10 @@
 </div>
 <div class="info">
     <p>${info }</p>
-    <p>点击<a href="javascript:history.back();" style="color:#225FFF;">返回</a></p>
+    <p>
+    	<a href="javascript:history.back();" style="color:#225FFF;">返回</a>&nbsp;&nbsp;&nbsp;
+    	<a href="javascript:wx.closeWindow();" style="color:#225FFF;">关闭</a>
+    </p>
 </div>
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
