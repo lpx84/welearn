@@ -76,12 +76,13 @@
 	<!-- ===================== CourseService =========================== -->
 	<bean id="courseServiceBase" class="com.welearn.service.impl.CourseServiceImpl">
 		<property name="courseDao" ref="courseDao"></property>
-		<property name="teacherDao" ref="teacherDao"></property>
-		<property name="timeCourseDao" ref="timeCourseDao"></property>
 		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
 		<property name="courseHomeworkDao" ref="courseHomeworkDao"></property>
 		<property name="courseFeedbackDao" ref="courseFeedbackDao"></property>
-		<!-- <property name="courseReplyDao" ref="courseReplyDao"></property> -->
+		<property name="courseReplyDao" ref="courseReplyDao"></property>
+		<property name="studentDao" ref="studentDao"></property>
+		<property name="teacherDao" ref="teacherDao"></property>
+		<property name="timeCourseDao" ref="timeCourseDao"></property>
 	</bean>
 	<bean name="courseService" parent="transactionProxy">
 		<property name="target" ref="courseServiceBase"></property>

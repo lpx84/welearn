@@ -1,0 +1,63 @@
+
+.admin-foot p {
+    text-align:right;
+    margin: 5px 10px;
+}
+
+.admin-foot hr {
+    border: solid #E8E8E8 1px
+}
+
+.admin-foot {
+    padding: 10px 0;
+}
+
+.admin-foot p a {
+    color: #2381E9;
+}
+
+.admin-foot p a:hover {
+    text-decoration:underline;
+}
+
+
+.fixed-foot {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+a.btn {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#page-title h3 {
+    width: 100%;
+}
+
+.ui-dialog {
+    height: auto;
+    width: 40%;
+    top: 60px;
+    left: 30%;
+}
+
+.ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    background-color: #d0cbcb;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.min-height-200 {
+    min-height: 200px;
+}
+
+
+table.table tr:hover {
+    background-color: #d8d8d8;
+}
+
+.force-fixed {
+	position: fixed !important;
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>老师客户端</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/teacher-global.css">
+    
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+    
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+<script type="text/javascript" src="../js/teacher-global.js"></script>
+
+<style type="text/css">
+    .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 5px;
+    }
+    
+    .content-title,
+    .course-item>.item-content {
+        border-bottom: 1px solid #e7e7e7;
+    }
+</style>
+</head>
+<body>
+    <div id="page-wrapper">
+        <!-- nav-left -->
+		<div id="page-header" class="clearfix">
+           <div id="header-logo">
+               <a href="javascript:;" class="tooltip-button" data-placement="bottom" title="Close sidebar" id="close-sidebar">
+                   <i class="glyph-icon icon-caret-left"></i>
+               </a>
+               <a href="javascript:;" class="tooltip-button hidden" data-placement="bottom" title="Open sidebar" id="rm-close-sidebar">
+                   <i class="glyph-icon icon-caret-right"></i>
+               </a>
+               <a href="javascript:;" class="tooltip-button hidden" title="Navigation Menu" id="responsive-open-menu">
+                   <i class="glyph-icon icon-align-justify"></i>
+               </a>
+               <label class="app-title">微信教学平台教师端</label>
+           </div>
+           
+           <div class="user-profile dropdown">
+               <a href="javascript:;" title="" class="user-ico clearfix" data-toggle="dropdown">
+                   <img width="36" src="../assets/images/gravatar.jpg" alt="" />
+                   <span>刘铎</span>
+                   <i class="glyph-icon icon-chevron-down"></i>
+               </a>
+               <ul class="dropdown-menu float-right">
+                   <li>
+                       <a href="<%=request.getContextPath() %>/admin-detail.html" title="">
+                           <i class="glyph-icon icon-user mrg5R"></i>&nbsp;&nbsp;账户详情
+                       </a>
+                   </li>
+                   <li>
+                       <a href="<%=request.getContextPath() %>/admin/admin/modify-pwd" title="修改密码">
+                           <i class="glyph-icon icon-flag mrg5R"></i>&nbsp;&nbsp;修改密码
+                       </a>
+                   </li>
+                   <li class="divider"></li>
+                   <li>
+                       <a href="<%=request.getContextPath() %>/admin/admin/logout.act" title="">
+                           <i class="glyph-icon icon-signout font-size-13 mrg5R"></i>
+                           <span class="font-bold">注销</span>
+                       </a>
+                   </li>
+                   
+               </ul>
+           </div>
+       </div><!-- #page-header -->
+        <div class="container">
+            <div class="row pad20A">
+                
+                <div class="col-sm-6 col-md-2 col-lg-3 col-md-offset-1">
+                    <div class="content-box bg-white">
+                        <h3 class="content-box-header ui-state-default">
+                            <div class="glyph-icon icon-separator transparent">
+                                <i class="glyph-icon icon-user"></i>
+                            </div>
+                            <span class="pad0L">基本信息</span>
+                        </h3>
+                        <div class="content-box-wrapper">
+                            <div class="scrollable-content scrollable-small" style="height: 250px;">
+                                <div class="base-info">
+                                    <div class="display-inline">
+                                        <img class="avatar" src="../assets/images/gravatar.jpg">
+                                    </div>
+                                    <div class="display-inline">
+                                        <div class="mrg5T pad5L">
+                                            <span>刘铎，您好！</span>
+                                        </div>
+                                        <div class="mrg5T">
+                                            <span class="font-gray">级别：</span>
+                                            <span>副教授</span>
+                                        </div>
+                                        <div class="mrg5T mrg5B">
+                                            <span class="font-gray">邮箱：</span>
+                                            <span>duoliu@bjtu.edu.cn</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="desc-info">
+                                    <div>
+                                        <span class="font-gray">研究方向：</span>
+                                        <span>信息安全、算法设计与分析、应用密码学</span>
+                                    </div>                                  
+                                    <div>
+                                        <span class="font-gray">介绍：</span>
+                                        <span>"2009.7至今 软件学院讲师 2006.7至2009.6 清华大学计算机科学与技术系校内博士后 2001.9至2006.7 清华大学计算机科学与技术系直博生，并获工学博士学位 1997.9至2001.7 考入清华大学计算机科学与技术系，并获工学学士学位"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-box bg-white">
+                        <h3 class="content-box-header ui-state-default">
+                            <div class="glyph-icon icon-separator transparent">
+                                <i class="glyph-icon icon-bullhorn"></i>
+                            </div>
+                            <span class="pad0L">我的通知</span>
+                        </h3>
+                        <div class="content-box-wrapper">
+                            <div class="scrollable-content scrollable-small">
+                                <div class="scrollable-content scrollable-small">
+
+                                    <ul class="messages-box remove-border">
+                                        <li>
+                                            <div class="">
+                                                <div class="messages-title">
+                                                    <i class="glyph-icon icon-bookmark-empty"></i>
+                                                    <a href="course-home.html" title="Message title">关于期末考试的安排</a>
+                                                    <div class="messages-time">
+                                                        06/28
+                                                        <span class="glyph-icon icon-time"></span>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <div class="messages-title">
+                                                    <i class="glyph-icon icon-bookmark-empty"></i>
+                                                    <a href="course-home.html" title="Message title">软件学院党日活动</a>
+                                                    <div class="messages-time">
+                                                        06/23
+                                                        <span class="glyph-icon icon-time"></span>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </li>
+                                        
+                                        <li>
+                                            <div class="">
+                                                <div class="messages-title">
+                                                    <i class="glyph-icon icon-bookmark-empty"></i>
+                                                    <a href="course-home.html" title="Message title">软件学院工程教育认证报告</a>
+                                                    <div class="messages-time">
+                                                        06/02
+                                                        <span class="glyph-icon icon-time"></span>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <div class="messages-title">
+                                                    <i class="glyph-icon icon-bookmark-empty"></i>
+                                                    <a href="course-home.html" title="Message title">全体教职工业务学习</a>
+                                                    <div class="messages-time">
+                                                        05/27
+                                                        <span class="glyph-icon icon-time"></span>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-8">
+                    <div class="content-title pad10B">
+                        <span class="font-size-20">我的课程</span>
+                        <span class="font-gray float-right" style="margin-top: 8px;"><a href="course-home.html">更多&nbsp;<i class="glyph-icon icon-double-angle-right"></i></a></span>
+                    </div>
+                    <div class="course-list row pad10A">
+                        <a href="course-home.html" class="course-item col-md-6 col-lg-4 mrg10T">
+                            <div class="item-content pad5B">
+                                <div class="font-bold">信息安全理论与实践</div>
+                                <div>
+                                    <span class="font-gray">A0L251Q</span>
+                                    <span class="font-green float-right mrg10R"><i class="glyph-icon icon-caret-right"></i>&nbsp;专业必修课</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="course-home.html" class="course-item col-md-6 col-lg-4 mrg10T">
+                            <div class="item-content pad5B">
+                                <div class="font-bold">操作系统</div>
+                                <div>
+                                    <span class="font-gray">A0L240Q</span>
+                                    <span class="font-green float-right mrg10R"><i class="glyph-icon icon-caret-right"></i>&nbsp;专业必修课</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="course-home.html" class="course-item col-md-6 col-lg-4 mrg10T">
+                            <div class="item-content pad5B">
+                                <div class="font-bold">数据库应用系统综合实践-02</div>
+                                <div>
+                                    <span class="font-gray">A0S176Q</span>
+                                    <span class="font-green float-right mrg10R"><i class="glyph-icon icon-caret-right"></i>&nbsp;专业必修课</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="course-home.html" class="course-item col-md-6 col-lg-4 mrg10T">
+                            <div class="item-content pad5B">
+                                <div class="font-bold">离散数学</div>
+                                <div>
+                                    <span class="font-gray">A0L268Q</span>
+                                    <span class="font-green float-right mrg10R"><i class="glyph-icon icon-caret-right"></i>&nbsp;专业必修课</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="course-home.html" class="course-item col-md-6 col-lg-4 mrg10T">
+                            <div class="item-content pad5B">
+                                <div class="font-bold">数据结构</div>
+                                <div>
+                                    <span class="font-gray">A0L238Q</span>
+                                    <span class="font-green float-right mrg10R"><i class="glyph-icon icon-caret-right"></i>&nbsp;专业必修课</span>
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>    
+        
+    </div>
+</body>
+</html>

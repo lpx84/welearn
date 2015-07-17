@@ -1,18 +1,27 @@
 package com.welearn.controller.student;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.welearn.aop.Authentication;
 import com.welearn.model.Course;
+import com.welearn.model.CourseDiscuss;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
@@ -21,6 +30,7 @@ import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.JsonUtil;
+import com.welearn.util.StrUtil;
 import com.welearn.view.View;
 
 /**
@@ -231,7 +241,7 @@ public class ManageCourseController {
 			@RequestParam(value = "content") String content,
 			@RequestParam(value = "anonymous") boolean anonymous,
 			HttpSession session) {
-		View view;
+		View view = null;
 		String openid = (String) session.getAttribute("openid");
 		String studentName = studentService.getStudentByOpenId(openid)
 				.getTrueName();
@@ -253,7 +263,7 @@ public class ManageCourseController {
 			return view;
 		}
 	}
-	
+
 	/**
 	 * 课程反馈
 	 * 
@@ -263,22 +273,96 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-discuss")
 	@Authentication()
-	public View courseDiscuss(@RequestParam(value = "courseid") int courseid) {
-		View view;
+	public View courseDiscuss(@RequestParam(value = "courseid") int courseid,
+			HttpSession session) {
+		View view = null;
+		;
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
-		// 
-		
-		
-		
-		
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+
+		// 获取讨论信息的列表
+		ArrayList<CourseDiscuss> list = courseService.queryDiscussesBefore(
+				courseid, studentid, new Date());
+
+		session.setAttribute("courseid", courseid);
+		if (list.size() > 0) {
+			session.setAttribute("firstTime", list.get(list.size() - 1)
+					.getTime());// 最早的记录时间
+		} else {
+			session.setAttribute("firstTime", StrUtil.formatDate1(new Date()));// 最早的记录时间
+		}
+		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
+
 		view = new View("student", "manage-course", "course-discuss", "课程讨论");
 		view.addObject("courseName", courseName);
-		
+		view.addObject("list", list);
+        
 		return view;
 	}
-	
-	
-	
 
+	/**
+	 * ajax请求最新的对话信息
+	 * 
+	 * @param courseid
+	 * @param pageNo
+	 * @return
+	 */
+	@RequestMapping("refresh-course-discuss")
+	@Authentication()
+	@ResponseBody
+	public String refreshCourseDiscuss(HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		// 获取上次刷新的时间
+		String lastTime = (String) session.getAttribute("lastTime");
+
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//小写的mm表示的是分钟  
+		Date lastTimeDate = new Date();
+		try {
+			lastTimeDate = sdf.parse(lastTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} 
+
+		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
+		// 获取讨论信息的列表
+		ArrayList<CourseDiscuss> list = courseService.queryDiscussesAfter(
+				courseid, studentid, lastTimeDate);
+
+		// 把list用json格式封装
+		String jsonStr = JsonUtil.listToJSONString(list, null);
+        System.out.println(jsonStr);
+		return jsonStr;
+	}
+
+	/**
+	 * ajax请求最新的对话信息
+	 * 
+	 * @param courseid
+	 * @param pageNo
+	 * @return
+	 */
+	@RequestMapping("send-course-discuss-content")
+	@Authentication()
+	@ResponseBody
+	public String sendCourseDiscussContent(@RequestParam(value = "content") String content,HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+
+		Boolean result = courseService.addDiscussContent(courseid, studentid, content);
+		System.out.println(result);
+		return JsonUtil.objectToJSONString(result, null);
+	}
 }

@@ -9,14 +9,19 @@ import com.welearn.dao.CourseDao;
 import com.welearn.dao.CourseFeedbackDao;
 import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
+import com.welearn.dao.CourseReplyDao;
+import com.welearn.dao.StudentDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseFeedback;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.CourseReply;
+import com.welearn.entity.Student;
 import com.welearn.entity.Teacher;
 import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
+import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
@@ -31,6 +36,8 @@ public class CourseServiceImpl implements CourseService {
 	private CourseNotifyDao courseNotifyDao;
 	private CourseHomeworkDao courseHomeworkDao;
 	private CourseFeedbackDao courseFeedbackDao;
+	private CourseReplyDao courseReplyDao;
+	private StudentDao studentDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -51,9 +58,17 @@ public class CourseServiceImpl implements CourseService {
 	public void setCourseHomeworkDao(CourseHomeworkDao courseHomeworkDao) {
 		this.courseHomeworkDao = courseHomeworkDao;
 	}
-	
-	public void setCourseFeedbackDao(CourseFeedbackDao courseFeedbackDao){
+
+	public void setCourseFeedbackDao(CourseFeedbackDao courseFeedbackDao) {
 		this.courseFeedbackDao = courseFeedbackDao;
+	}
+
+	public void setCourseReplyDao(CourseReplyDao courseReplyDao) {
+		this.courseReplyDao = courseReplyDao;
+	}
+
+	public void setStudentDao(StudentDao studentDao) {
+		this.studentDao = studentDao;
 	}
 
 	public Course queryCourse(int courseid) {
@@ -222,45 +237,47 @@ public class CourseServiceImpl implements CourseService {
 		return map;
 	}
 
-	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotify(int courseId, int pageNo,
-			int pageItemNo) {
+	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotify(
+			int courseId, int pageNo, int pageItemNo) {
 		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao
 				.getCourseNotifyByCourseId(courseId, pageNo, pageItemNo);
 		ArrayList<com.welearn.model.CourseNotify> modelList = new ArrayList<com.welearn.model.CourseNotify>();
-		for(int i=0;i<list.size();i++){
+		for (int i = 0; i < list.size(); i++) {
 			com.welearn.model.CourseNotify courseModel = new com.welearn.model.CourseNotify();
-			if(list.get(i).getStatus() == 1){
+			if (list.get(i).getStatus() == 1) {
 				courseModel.setContent(list.get(i).getContent());
 				courseModel.setCourseId(list.get(i).getId());
-				courseModel.setCreate_time(StrUtil.formatDate(list.get(i).getCreate_time()));
+				courseModel.setCreate_time(StrUtil.formatDate(list.get(i)
+						.getCreate_time()));
 				courseModel.setTitle(list.get(i).getTitle());
 				modelList.add(courseModel);
 			}
-			
+
 		}
-		
-		
+
 		return modelList;
 	}
 
-	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomework(int courseId,
-			int pageNo, int pageItemNo) {
+	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomework(
+			int courseId, int pageNo, int pageItemNo) {
 		ArrayList<CourseHomework> list = (ArrayList<CourseHomework>) courseHomeworkDao
 				.getCourseHomeworkByCourseId(courseId, pageNo, pageItemNo);
 		ArrayList<com.welearn.model.CourseHomework> modelList = new ArrayList<com.welearn.model.CourseHomework>();
-		
-		for(int i =0;i<list.size();i++){
+
+		for (int i = 0; i < list.size(); i++) {
 			com.welearn.model.CourseHomework courseHomework = new com.welearn.model.CourseHomework();
-			if(list.get(i).getStatus() == 1){
+			if (list.get(i).getStatus() == 1) {
 				courseHomework.setContent(list.get(i).getContent());
 				courseHomework.setCourseId(list.get(i).getCourseId());
-				courseHomework.setCreate_time(StrUtil.formatDate(list.get(i).getCreate_time()));
-				courseHomework.setDeadline(StrUtil.formatDate(list.get(i).getDeadline()));
+				courseHomework.setCreate_time(StrUtil.formatDate(list.get(i)
+						.getCreate_time()));
+				courseHomework.setDeadline(StrUtil.formatDate(list.get(i)
+						.getDeadline()));
 				courseHomework.setTitle(list.get(i).getTitle());
 				modelList.add(courseHomework);
 			}
-		}		
-		
+		}
+
 		return modelList;
 	}
 
@@ -270,19 +287,116 @@ public class CourseServiceImpl implements CourseService {
 		courseFeedback.setContent(content);
 		courseFeedback.setCourseId(courseid);
 		courseFeedback.setTime(StrUtil.formatDate1(new Date()));
-		//如果用户选择非匿名，则设置用户的id
-		if(!anonymous){
+		// 如果用户选择非匿名，则设置用户的id
+		if (!anonymous) {
 			courseFeedback.setStudentName(studentName);
 		}
-		
-		
+
 		int returnMode = courseFeedbackDao.addCourseFeedback(courseFeedback);
-		
-	    if (returnMode >0) {
+
+		if (returnMode > 0) {
 			return true;
 		} else {
 			return false;
-		}		
+		}
+	}
+
+	public ArrayList<CourseDiscuss> queryDiscussesBefore(int courseid,
+			int studentid, Date date) {
+		ArrayList<CourseDiscuss> modelList = new ArrayList<CourseDiscuss>();
+		ArrayList<CourseReply> replyList = (ArrayList<CourseReply>) courseReplyDao
+				.getCourseReplyByTimeBefore(courseid, date, 7);
+		for (int i = 0; i < replyList.size(); i++) {
+			CourseDiscuss courseDiscuss = new CourseDiscuss();
+			CourseReply courseReply = replyList.get(i);
+
+			courseDiscuss.setMe(false);
+			if (courseReply.getType() == 1) {
+				// 是学生
+				Student student = studentDao.getStudent(courseReply
+						.getReplyId());
+				courseDiscuss.setAvatar(student.getAvatar());// 设置头像Url
+				courseDiscuss.setRelayorName(student.getTrueName());// 设置姓名
+				// 是学生本人
+				if (courseReply.getReplyId() == studentid) {
+					courseDiscuss.setMe(true);
+				}
+			} else {
+				// 是老师
+				Teacher teacher = teacherDao.getTeacher(courseReply
+						.getReplyId());
+				courseDiscuss.setAvatar(teacher.getAvatar());// 设置头像Url
+				courseDiscuss.setRelayorName(teacher.getTrueName());// 设置名字
+			}
+			courseDiscuss.setContent(courseReply.getContent());
+			courseDiscuss.setCourseId(courseReply.getCourseId());
+			courseDiscuss.setId(courseReply.getId());
+			courseDiscuss.setReplayorId(courseReply.getReplyId());
+			courseDiscuss.setTime(StrUtil.formatDate1(courseReply
+					.getReply_time()));
+			courseDiscuss.setType(courseReply.getType());
+
+			modelList.add(courseDiscuss);
+		}
+
+		return modelList;
+	}
+
+	public ArrayList<CourseDiscuss> queryDiscussesAfter(int courseid,
+			int studentid, Date date) {
+		ArrayList<CourseDiscuss> modelList = new ArrayList<CourseDiscuss>();
+		ArrayList<CourseReply> replyList = (ArrayList<CourseReply>) courseReplyDao
+				.getCourseReplyByTimeAfter(courseid, date);
+		for (int i = 0; i < replyList.size(); i++) {
+			CourseDiscuss courseDiscuss = new CourseDiscuss();
+			CourseReply courseReply = replyList.get(i);
+
+			courseDiscuss.setMe(false);
+			if (courseReply.getType() == 1) {
+				// 是学生
+				Student student = studentDao.getStudent(courseReply
+						.getReplyId());
+				courseDiscuss.setAvatar(student.getAvatar());// 设置头像Url
+				courseDiscuss.setRelayorName(student.getTrueName());// 设置姓名
+				// 是学生本人
+				if (courseReply.getReplyId() == studentid) {
+					courseDiscuss.setMe(true);
+				}
+			} else {
+				// 是老师
+				Teacher teacher = teacherDao.getTeacher(courseReply
+						.getReplyId());
+				courseDiscuss.setAvatar(teacher.getAvatar());// 设置头像Url
+				courseDiscuss.setRelayorName(teacher.getTrueName());// 设置名字
+			}
+			courseDiscuss.setContent(courseReply.getContent());
+			courseDiscuss.setCourseId(courseReply.getCourseId());
+			courseDiscuss.setId(courseReply.getId());
+			courseDiscuss.setReplayorId(courseReply.getReplyId());
+			courseDiscuss.setTime(StrUtil.formatDate1(courseReply
+					.getReply_time()));
+			courseDiscuss.setType(courseReply.getType());
+
+			modelList.add(courseDiscuss);
+		}
+
+		return modelList;
+	}
+
+	public boolean addDiscussContent(int courseid, int studentid, String content) {
+		CourseReply courseReply = new CourseReply();
+		courseReply.setContent(content);
+		courseReply.setCourseId(courseid);
+		courseReply.setReply_time(new Date());
+		courseReply.setReplyId(studentid);
+		courseReply.setType(1);
+		courseReply.setStatus(1);
+
+		int result = courseReplyDao.AddCourseReply(courseReply);
+		if (result > 0)
+			return true;
+		else
+			return false;
 	}
 
 }
