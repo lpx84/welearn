@@ -78,7 +78,7 @@ public class ManageCourseController {
 
 		// 如果没有查到，则显示没有 查到
 		if (semesterList.isEmpty()) {
-			view = new View("error", "wechat", "info", "未找到相应信息。");
+			view = new View("error", "wechat", "info", "没有您的选课信息。");
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
@@ -291,12 +291,12 @@ public class ManageCourseController {
 		}
 		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
 
-		//将list倒置
+		// 将list倒置
 		ArrayList<CourseDiscuss> list1 = new ArrayList<CourseDiscuss>();
-		for(int i=list.size()-1;i>=0;i--){
+		for (int i = list.size() - 1; i >= 0; i--) {
 			list1.add(list.get(i));
 		}
-		
+
 		view = new View("student", "manage-course", "course-discuss", "课程讨论");
 		view.addObject("courseName", courseName);
 		view.addObject("list", list1);
@@ -329,7 +329,7 @@ public class ManageCourseController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
 		// 获取讨论信息的列表
 		ArrayList<CourseDiscuss> list = courseService.queryDiscussesAfter(
@@ -362,7 +362,7 @@ public class ManageCourseController {
 
 		Boolean result = courseService.addDiscussContent(courseid, studentid,
 				content);
-		
+
 		return JsonUtil.objectToJSONString(result, null);
 	}
 
@@ -391,13 +391,14 @@ public class ManageCourseController {
 		ArrayList<CourseDiscuss> list = courseService.queryDiscussesBefore(
 				courseid, studentid, firstTimeDate);
 		if (list.size() > 0)
-			session.setAttribute("firstTime",list.get(list.size()-1).getTime());// 最早的记录时间
+			session.setAttribute("firstTime", list.get(list.size() - 1)
+					.getTime());// 最早的记录时间
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
 		return jsonStr;
 	}
-	
+
 	/**
 	 * 签到记录查询
 	 * 
@@ -408,26 +409,28 @@ public class ManageCourseController {
 	public View eCardDetail() {
 		// 查询余额
 		View view = new View("student", "manage-course", "attend-list", "签到记录");
-		
+
 		return view;
 	}
-	
+
 	/**
 	 * 课程测试主页面
 	 * 
-	 * @param code
+	 * @param courseid
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-test")
-	public View courseTest() {
+	public View courseTest(@RequestParam(value = "courseid") int courseid,
+			HttpSession session) {
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test", "课程小测");
-		
+
 		return view;
 	}
-	
+
 	/**
-	 *测试进行中
+	 * 测试进行中
 	 * 
 	 * @param code
 	 * @return
@@ -435,8 +438,9 @@ public class ManageCourseController {
 	@RequestMapping("course-testing")
 	public View courseTesting() {
 		// 查询余额
-		View view = new View("student", "manage-course", "course-testing", "课程评测");
-		
+		View view = new View("student", "manage-course", "course-testing",
+				"课程评测");
+
 		return view;
 	}
 
@@ -449,11 +453,12 @@ public class ManageCourseController {
 	@RequestMapping("course-test-result")
 	public View courseTestResult() {
 		// 查询余额
-		View view = new View("student", "manage-course", "course-test-result", "测评结果");
-		
+		View view = new View("student", "manage-course", "course-test-result",
+				"测评结果");
+
 		return view;
 	}
-	
+
 	/**
 	 * 课程测试结果详情
 	 * 
@@ -463,8 +468,9 @@ public class ManageCourseController {
 	@RequestMapping("course-test-detail")
 	public View courseTestDetail() {
 		// 查询余额
-		View view = new View("student", "manage-course", "course-test-detail", "测评详情");
-		
+		View view = new View("student", "manage-course", "course-test-detail",
+				"测评详情");
+
 		return view;
 	}
 }

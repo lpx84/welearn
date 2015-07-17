@@ -47,4 +47,6 @@ public class CourseExamDao extends SuperDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
+	
+	
 }

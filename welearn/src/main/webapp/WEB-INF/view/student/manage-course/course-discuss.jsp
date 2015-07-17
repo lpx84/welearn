@@ -105,7 +105,9 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
+var count =0;
 	function refreshData() {
+		count++;
 		//用ajax获取页面信息
 		$.ajax({
 			url : $("#appName").val()
@@ -120,14 +122,17 @@
 			}
 			//complete : completeHandler
 		});
-		setTimeout(refreshData, 3000);
+		//setTimeout(refreshData, 3000);
 	}
 	
-	refreshData();
-/* 	function refresh(){
+	
+    function refresh(){
+    	
+    	console.log(count);
+    	refreshData();
 		setTimeout(refresh, 3000);
 	}
-	refresh(); */
+	refresh(); 
 
 	function joinData(res) {     	        
 		var html = new Array(
