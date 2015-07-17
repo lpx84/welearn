@@ -12,6 +12,7 @@ import com.welearn.dao.StudentDao;
 import com.welearn.entity.SchoolCalender;
 import com.welearn.entity.Student;
 import com.welearn.handler.mis.MisHandler;
+import com.welearn.model.Ecard;
 import com.welearn.model.LostThing;
 import com.welearn.model.NetFlow;
 import com.welearn.service.intef.MisService;
@@ -104,6 +105,17 @@ public class MisServiceImpl implements MisService {
 		}
 
 		return netFlow;
+	}
+	
+	public Ecard getEcard(String openid){
+		
+		
+		
+		
+		
+		
+		
+		return null;		
 	}
 
 }

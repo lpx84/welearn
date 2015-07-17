@@ -337,7 +337,7 @@ public class ManageCourseController {
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
-		
+		System.out.println(jsonStr);
 		return jsonStr;
 	}
 
@@ -397,5 +397,74 @@ public class ManageCourseController {
 		String jsonStr = JsonUtil.listToJSONString(list, null);
 		return jsonStr;
 	}
+	
+	/**
+	 * 签到记录查询
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("attend-list")
+	public View eCardDetail() {
+		// 查询余额
+		View view = new View("student", "manage-course", "attend-list", "签到记录");
+		
+		return view;
+	}
+	
+	/**
+	 * 课程测试主页面
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-test")
+	public View courseTest() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-test", "课程小测");
+		
+		return view;
+	}
+	
+	/**
+	 *测试进行中
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-testing")
+	public View courseTesting() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-testing", "课程评测");
+		
+		return view;
+	}
 
+	/**
+	 * 课程测试结果
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-test-result")
+	public View courseTestResult() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-test-result", "测评结果");
+		
+		return view;
+	}
+	
+	/**
+	 * 课程测试结果详情
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("course-test-detail")
+	public View courseTestDetail() {
+		// 查询余额
+		View view = new View("student", "manage-course", "course-test-detail", "测评详情");
+		
+		return view;
+	}
 }

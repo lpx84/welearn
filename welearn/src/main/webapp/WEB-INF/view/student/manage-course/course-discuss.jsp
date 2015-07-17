@@ -120,10 +120,14 @@
 			}
 			//complete : completeHandler
 		});
-		//setTimeout(refreshData, 3000);
+		setTimeout(refreshData, 3000);
 	}
-    
-	//refreshData();
+	
+	refreshData();
+/* 	function refresh(){
+		setTimeout(refresh, 3000);
+	}
+	refresh(); */
 
 	function joinData(res) {     	        
 		var html = new Array(
@@ -194,7 +198,6 @@
 					}else{
 						preJoinData(res);
 						$(".btn-more").html("查看更多聊天记录");	
-						console.log(res);
 					}			
 				}
 			}
