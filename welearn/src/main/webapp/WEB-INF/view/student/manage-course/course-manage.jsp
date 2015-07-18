@@ -63,7 +63,7 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
+    	<div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fmanage%2Fcourse%2Fcourse-list&response_type=code&scope=snsapi_base&state=123#wechat_redirect';">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
         <label class="title">${course.getName() }</label>

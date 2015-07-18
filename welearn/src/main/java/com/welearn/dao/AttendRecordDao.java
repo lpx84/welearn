@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.welearn.entity.AttendRecord;
+import com.welearn.util.InfoCode;
 import com.welearn.util.TimeUtil;
 
 public class AttendRecordDao extends SuperDao {
@@ -153,15 +154,30 @@ public class AttendRecordDao extends SuperDao {
 		return true;
 	}
 	
+	public AttendRecord getAttendRecord(int studentId, int attendTaskId) {
+		hql = "from AttendRecord as a where a.studentid=? and a.attendTaskId=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setInteger(0, studentId);
+		query.setInteger(1, attendTaskId);
+		return (AttendRecord)query.uniqueResult();
+	}
+	
 	/**
-	 * 查询待签到记录
+	 * 查询等待签到记录
 	 * @param attendRecord
 	 * @return
 	 */
 	public AttendRecord getWaitingAttendRecord(int stuId) {
+		hql = "from AttendRecord as a where a.studentid=? and a.status=? order by a.logTime desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setInteger(0, stuId);
+		query.setInteger(1, InfoCode.ATTEND_PREPARE);
+		AttendRecord res = null;
+		List<AttendRecord> list = query.list();
+		if(list.size() > 0) { //找到该学生最近的一次签到任务
+			res = list.get(0);
+		}
+		return res;
 		
-		
-		
-		return null;
 	}
 }
