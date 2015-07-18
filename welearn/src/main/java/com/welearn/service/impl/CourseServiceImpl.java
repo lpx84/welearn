@@ -106,27 +106,112 @@ public class CourseServiceImpl implements CourseService {
 		CourseGrade grade;
 		ArrayList<CourseGrade> list = new ArrayList<CourseGrade>();
 
-		for (int i = 0; i < 5; i++) {
-			grade = new CourseGrade();
-			grade.setCredit("2学分");
-			grade.setGrade("A");
-			grade.setName("系统分析" + i);
-			grade.setSemester("2014-2015学年第二学期");
-			grade.setType("专业课");
-			list.add(grade);
-		}
+//		for (int i = 0; i < 5; i++) {
+//			grade = new CourseGrade();
+//			grade.setCredit("2学分");
+//			grade.setGrade("A");
+//			grade.setName("系统分析" + i);
+//			grade.setSemester("2014-2015学年第二学期");
+//			grade.setType("专业课");
+//			list.add(grade);
+//		}
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("A+");
+		grade.setName("软件工程专业研究方法论");
+		grade.setSemester("2014-2015学年第二学期");
+		grade.setType("专业限选课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("A+");
+		grade.setName("信息安全理论与实践");
+		grade.setSemester("2014-2015学年第二学期");
+		grade.setType("专业课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("1学分");
+		grade.setGrade("P");
+		grade.setName("前沿技术讲座");
+		grade.setSemester("2014-2015学年第二学期");
+		grade.setType("专业拓展课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("P");
+		grade.setName("高清人文电影鉴赏与研究");
+		grade.setSemester("2014-2015学年第二学期");
+		grade.setType("全校任选课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("P");
+		grade.setName("婚姻、家庭与继承法");
+		grade.setSemester("2014-2015学年第二学期");
+		grade.setType("全校任选课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("A");
+		grade.setName("移动应用开发技术");
+		grade.setSemester("2014-2015学年第二学期");
+		grade.setType("专业限选课");
+		list.add(grade);
+		
+		
 		map.put("2014-2015学年第二学期", list);
 
 		list = new ArrayList<CourseGrade>();
-		for (int i = 0; i < 5; i++) {
-			grade = new CourseGrade();
-			grade.setCredit("2学分");
-			grade.setGrade("A");
-			grade.setName("系统分析" + i);
-			grade.setSemester("2014-2015学年第一学期");
-			grade.setType("专业课");
-			list.add(grade);
-		}
+//		for (int i = 0; i < 5; i++) {
+//			grade = new CourseGrade();
+//			grade.setCredit("2学分");
+//			grade.setGrade("A");
+//			grade.setName("系统分析" + i);
+//			grade.setSemester("2014-2015学年第一学期");
+//			grade.setType("专业课");
+//			list.add(grade);
+//		}
+		
+		grade = new CourseGrade();
+		grade.setCredit("4学分");
+		grade.setGrade("A");
+		grade.setName("大型数据库应用");
+		grade.setSemester("2014-2015学年第一学期");
+		grade.setType("专业课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("A+");
+		grade.setName("Linux操作系统与网络编程");
+		grade.setSemester("2014-2015学年第一学期");
+		grade.setType("专业限选课");
+		list.add(grade);
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("A");
+		grade.setName("软件项目管理");
+		grade.setSemester("2014-2015学年第一学期");
+		grade.setType("专业课");
+		list.add(grade);
+		
+		
+		grade = new CourseGrade();
+		grade.setCredit("2学分");
+		grade.setGrade("A+");
+		grade.setName("Java EE架构与应用");
+		grade.setSemester("2014-2015学年第一学期");
+		grade.setType("专业限选课");
+		list.add(grade);
+		
+		
 		map.put("2014-2015学年第一学期", list);
 
 		return map;
@@ -136,30 +221,30 @@ public class CourseServiceImpl implements CourseService {
 		ArrayList<CETGrade> list = new ArrayList<CETGrade>();
 		CETGrade grade;
 		// 模拟生成用户的成绩
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 1; i++) {
 			grade = new CETGrade();
-			grade.setExamNo("1230112" + i);
-			grade.setListen("120");
-			grade.setName("李鹏翔" + i);
-			grade.setRead("123");
+			grade.setExamNo("12301124");
+			grade.setListen("180");
+			grade.setName("李鹏翔");
+			grade.setRead("223");
 			grade.setSchool("北京交通大学");
 			grade.setTime("2015-6-20");
-			grade.setTotal("530");
+			grade.setTotal("526");
 			grade.setType("英语六级");
 			grade.setWrite("123");
 			list.add(grade);
 		}
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 1; i++) {
 			grade = new CETGrade();
-			grade.setExamNo("1230113" + i);
+			grade.setExamNo("12301121");
 			grade.setListen("120");
-			grade.setName("金林荣" + i);
-			grade.setRead("123");
+			grade.setName("金林荣");
+			grade.setRead("203");
 			grade.setSchool("北京交通大学");
 			grade.setTime("2015-6-20");
-			grade.setTotal("530");
+			grade.setTotal("475");
 			grade.setType("英语四级");
-			grade.setWrite("123");
+			grade.setWrite("152");
 			list.add(grade);
 		}
 
