@@ -40,6 +40,13 @@ public class CourseOptionDao extends SuperDao {
 		return (CourseOption) query.uniqueResult();
 	}
 	
+	public List<CourseOption> getCourseOptionByProblemId(int problemId){
+		this.hql = "from CourseOption as a inner join fetch a.problemEntity where a.problemId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		List<CourseOption> result = query.list();
+		return result;
+	}
+	
 	public List<CourseOption> getCourseOptionByProblemId(int problemId, int pageNo, int pageItemNum){
 		this.hql = "from CourseOption as a inner join fetch a.problemEntity where a.problemId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
