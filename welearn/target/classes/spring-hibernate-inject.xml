@@ -36,6 +36,15 @@
 	<bean id="courseNotifyDao" class="com.welearn.dao.CourseNotifyDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="courseProblemDao" class="com.welearn.dao.CourseProblemDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="courseOptionDao" class="com.welearn.dao.CourseOptionDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="courseReplyDao" class="com.welearn.dao.CourseReplyDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<bean id="msgReplyIndexDao" class="com.welearn.dao.MsgReplyIndexDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -54,9 +63,7 @@
 	<bean id="timeCourseDao" class="com.welearn.dao.TimeCourseDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="courseReplyDao" class="com.welearn.dao.CourseReplyDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
+
 	
 	<!-- ===================== WechatMessage =========================== -->
 	<bean id="wechatMsgServiceBase" class="com.welearn.service.impl.WechatMsgServiceImpl">

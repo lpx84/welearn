@@ -10,6 +10,8 @@ import com.welearn.dao.CourseExamDao;
 import com.welearn.dao.CourseFeedbackDao;
 import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
+import com.welearn.dao.CourseOptionDao;
+import com.welearn.dao.CourseProblemDao;
 import com.welearn.dao.CourseReplyDao;
 import com.welearn.dao.StudentDao;
 import com.welearn.dao.TeacherDao;
@@ -25,6 +27,7 @@ import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.CourseProblem;
 import com.welearn.model.CourseTestResult;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
@@ -42,6 +45,8 @@ public class CourseServiceImpl implements CourseService {
 	private CourseReplyDao courseReplyDao;
 	private StudentDao studentDao;
 	private CourseExamDao courseExamDao;
+	private CourseProblemDao courseProblemDao;
+	private CourseOptionDao courseOptionDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -75,11 +80,18 @@ public class CourseServiceImpl implements CourseService {
 		this.studentDao = studentDao;
 	}
 
-	public void setCourseExamDao(CourseExamDao courseExamDao){
+	public void setCourseExamDao(CourseExamDao courseExamDao) {
 		this.courseExamDao = courseExamDao;
 	}
-	
-	
+
+	public void setCourseProblemDao(CourseProblemDao courseProblemDao) {
+		this.courseProblemDao = courseProblemDao;
+	}
+
+	public void setCourseOptionDao(CourseOptionDao courseOptionDao) {
+		this.courseOptionDao = courseOptionDao;
+	}
+
 	public Course queryCourse(int courseid) {
 
 		Course course = courseDao.getCourse(courseid);
@@ -256,8 +268,33 @@ public class CourseServiceImpl implements CourseService {
 			if (list.get(i).getStatus() == 1) {
 				courseModel.setContent(list.get(i).getContent());
 				courseModel.setCourseId(list.get(i).getId());
+				courseModel.setCourseName(list.get(i).getCourseEntity()
+						.getName());
 				courseModel.setCreate_time(TimeUtil.formatDate(list.get(i)
 						.getCreate_time()));
+				courseModel.setTitle(list.get(i).getTitle());
+				modelList.add(courseModel);
+			}
+
+		}
+
+		return modelList;
+	}
+
+	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotifyNew(
+			int studentid, int pageNo, int pageItemNo) {
+		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao
+				.getCourseNotifysByStudentId(studentid, pageNo, pageItemNo);
+		ArrayList<com.welearn.model.CourseNotify> modelList = new ArrayList<com.welearn.model.CourseNotify>();
+		for (int i = 0; i < list.size(); i++) {
+			com.welearn.model.CourseNotify courseModel = new com.welearn.model.CourseNotify();
+			if (list.get(i).getStatus() == 1) {
+				courseModel.setContent(list.get(i).getContent());
+				courseModel.setCourseId(list.get(i).getId());
+				courseModel.setCreate_time(TimeUtil.formatDate(list.get(i)
+						.getCreate_time()));
+				courseModel.setCourseName(list.get(i).getCourseEntity()
+						.getName());
 				courseModel.setTitle(list.get(i).getTitle());
 				modelList.add(courseModel);
 			}
@@ -408,21 +445,32 @@ public class CourseServiceImpl implements CourseService {
 			return false;
 	}
 
-	public ArrayList<CourseTestResult> queryCourseExamResult(int courseid, int studentid, int pageNo) {
-		ArrayList<CourseExam> list = (ArrayList<CourseExam>) courseExamDao.getCourseExamByCourseIdandStudentId(courseid, studentid, pageNo, 3);
+	public ArrayList<CourseTestResult> queryCourseExamResult(int courseid,
+			int studentid, int pageNo) {
+		ArrayList<CourseExam> list = (ArrayList<CourseExam>) courseExamDao
+				.getCourseExamByCourseIdandStudentId(courseid, studentid,
+						pageNo, 3);
 		ArrayList<CourseTestResult> modelList = new ArrayList<CourseTestResult>();
-		
-		//转化格式
-		for(int i=0;i<list.size();i++){
+
+		// 转化格式
+		for (int i = 0; i < list.size(); i++) {
 			CourseTestResult result = new CourseTestResult();
 			result.setScore(String.valueOf(list.get(i).getScore()));
-			result.setSpendTime(TimeUtil.transSpendTime(list.get(i).getSpendTime()));
+			result.setSpendTime(TimeUtil.transSpendTime(list.get(i)
+					.getSpendTime()));
 			result.setTime(TimeUtil.formatDate2(list.get(i).getFinishTime()));
-			result.setResult(list.get(i).getAnswer());			
+			result.setResult(list.get(i).getAnswer());
 			modelList.add(result);
 		}
-				
+
 		return modelList;
+	}
+
+	public ArrayList<CourseProblem> generateCourseProblems(int courseid,
+			int problemNum) {
+		ArrayList<CourseProblem> modelList = new ArrayList<CourseProblem>();
+
+		return null;
 	}
 
 }
