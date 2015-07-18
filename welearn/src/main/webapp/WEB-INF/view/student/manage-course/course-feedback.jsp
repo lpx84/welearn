@@ -20,7 +20,7 @@
     	<div class="glyph-icon icon-separator transparent back-btn">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
-        <label class="title">课程反馈</label>
+        <label class="title">${courseName }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>
