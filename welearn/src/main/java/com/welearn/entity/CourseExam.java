@@ -1,5 +1,7 @@
 package com.welearn.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +30,7 @@ public class CourseExam {
 	private Integer spendTime;
 	
 	@Column(name="finish_time", columnDefinition="datetime", nullable=false)
-	private Integer finishId;
+	private Date finishTime;
 	
 	@Column(name="score", columnDefinition="varchar(100)", nullable=false)
 	private Integer score;
@@ -83,12 +85,12 @@ public class CourseExam {
 		this.spendTime = spendTime;
 	}
 
-	public Integer getFinishId() {
-		return finishId;
+	public Date getFinishTime() {
+		return finishTime;
 	}
 
-	public void setFinishId(Integer finishId) {
-		this.finishId = finishId;
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
 	}
 
 	public Integer getScore() {
@@ -135,7 +137,7 @@ public class CourseExam {
 	public String toString() {
 		return "CourseExam [id=" + id + ", studentId=" + studentId
 				+ ", courseId=" + courseId + ", spendTime=" + spendTime
-				+ ", finishId=" + finishId + ", score=" + score + ", status="
+				+ ", finishTime=" + finishTime + ", score=" + score + ", status="
 				+ status + ", answer=" + answer + ", studentEntity="
 				+ studentEntity + ", courseEntity=" + courseEntity + "]";
 	}
