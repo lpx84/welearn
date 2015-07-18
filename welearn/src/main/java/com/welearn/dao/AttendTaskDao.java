@@ -46,8 +46,8 @@ public class AttendTaskDao extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List<AttendTask> getAttendTasksByCourse(int courseId, int pageNo, int pageItemNum) {
-		this.hql = "FROM AttendTask AS u inner join fetch u.courseEntity WHERE u.courseId=?";
+	public List<AttendTask> getAttendTasksByCourseId(int courseId, int pageNo, int pageItemNum) {
+		this.hql = "FROM AttendTask AS u inner join fetch u.courseEntity WHERE u.courseId=? order by u.startTime desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, courseId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
