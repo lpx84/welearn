@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.welearn.dao.CourseDao;
+import com.welearn.dao.CourseExamDao;
 import com.welearn.dao.CourseFeedbackDao;
 import com.welearn.dao.CourseHomeworkDao;
 import com.welearn.dao.CourseNotifyDao;
@@ -13,6 +14,7 @@ import com.welearn.dao.CourseReplyDao;
 import com.welearn.dao.StudentDao;
 import com.welearn.dao.TeacherDao;
 import com.welearn.entity.Course;
+import com.welearn.entity.CourseExam;
 import com.welearn.entity.CourseFeedback;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
@@ -23,10 +25,11 @@ import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.CourseTestResult;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
-import com.welearn.util.StrUtil;
+import com.welearn.util.TimeUtil;
 import com.welearn.dao.TimeCourseDao;
 
 public class CourseServiceImpl implements CourseService {
@@ -38,6 +41,7 @@ public class CourseServiceImpl implements CourseService {
 	private CourseFeedbackDao courseFeedbackDao;
 	private CourseReplyDao courseReplyDao;
 	private StudentDao studentDao;
+	private CourseExamDao courseExamDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
@@ -71,6 +75,11 @@ public class CourseServiceImpl implements CourseService {
 		this.studentDao = studentDao;
 	}
 
+	public void setCourseExamDao(CourseExamDao courseExamDao){
+		this.courseExamDao = courseExamDao;
+	}
+	
+	
 	public Course queryCourse(int courseid) {
 
 		Course course = courseDao.getCourse(courseid);
@@ -247,7 +256,7 @@ public class CourseServiceImpl implements CourseService {
 			if (list.get(i).getStatus() == 1) {
 				courseModel.setContent(list.get(i).getContent());
 				courseModel.setCourseId(list.get(i).getId());
-				courseModel.setCreate_time(StrUtil.formatDate(list.get(i)
+				courseModel.setCreate_time(TimeUtil.formatDate(list.get(i)
 						.getCreate_time()));
 				courseModel.setTitle(list.get(i).getTitle());
 				modelList.add(courseModel);
@@ -269,9 +278,9 @@ public class CourseServiceImpl implements CourseService {
 			if (list.get(i).getStatus() == 1) {
 				courseHomework.setContent(list.get(i).getContent());
 				courseHomework.setCourseId(list.get(i).getCourseId());
-				courseHomework.setCreate_time(StrUtil.formatDate(list.get(i)
+				courseHomework.setCreate_time(TimeUtil.formatDate(list.get(i)
 						.getCreate_time()));
-				courseHomework.setDeadline(StrUtil.formatDate(list.get(i)
+				courseHomework.setDeadline(TimeUtil.formatDate(list.get(i)
 						.getDeadline()));
 				courseHomework.setTitle(list.get(i).getTitle());
 				modelList.add(courseHomework);
@@ -286,7 +295,7 @@ public class CourseServiceImpl implements CourseService {
 		CourseFeedback courseFeedback = new CourseFeedback();
 		courseFeedback.setContent(content);
 		courseFeedback.setCourseId(courseid);
-		courseFeedback.setTime(StrUtil.formatDate1(new Date()));
+		courseFeedback.setTime(TimeUtil.formatDate1(new Date()));
 		// 如果用户选择非匿名，则设置用户的id
 		if (!anonymous) {
 			courseFeedback.setStudentName(studentName);
@@ -332,7 +341,7 @@ public class CourseServiceImpl implements CourseService {
 			courseDiscuss.setCourseId(courseReply.getCourseId());
 			courseDiscuss.setId(courseReply.getId());
 			courseDiscuss.setReplayorId(courseReply.getReplyId());
-			courseDiscuss.setTime(StrUtil.formatDate1(courseReply
+			courseDiscuss.setTime(TimeUtil.formatDate1(courseReply
 					.getReply_time()));
 			courseDiscuss.setType(courseReply.getType());
 
@@ -373,7 +382,7 @@ public class CourseServiceImpl implements CourseService {
 			courseDiscuss.setCourseId(courseReply.getCourseId());
 			courseDiscuss.setId(courseReply.getId());
 			courseDiscuss.setReplayorId(courseReply.getReplyId());
-			courseDiscuss.setTime(StrUtil.formatDate1(courseReply
+			courseDiscuss.setTime(TimeUtil.formatDate1(courseReply
 					.getReply_time()));
 			courseDiscuss.setType(courseReply.getType());
 
@@ -397,6 +406,23 @@ public class CourseServiceImpl implements CourseService {
 			return true;
 		else
 			return false;
+	}
+
+	public ArrayList<CourseTestResult> queryCourseExamResult(int courseid, int studentid, int pageNo) {
+		ArrayList<CourseExam> list = (ArrayList<CourseExam>) courseExamDao.getCourseExamByCourseIdandStudentId(courseid, studentid, pageNo, 3);
+		ArrayList<CourseTestResult> modelList = new ArrayList<CourseTestResult>();
+		
+		//转化格式
+		for(int i=0;i<list.size();i++){
+			CourseTestResult result = new CourseTestResult();
+			result.setScore(String.valueOf(list.get(i).getScore()));
+			result.setSpendTime(TimeUtil.transSpendTime(list.get(i).getSpendTime()));
+			result.setTime(TimeUtil.formatDate2(list.get(i).getFinishTime()));
+			result.setResult(list.get(i).getAnswer());			
+			modelList.add(result);
+		}
+				
+		return modelList;
 	}
 
 }

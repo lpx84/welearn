@@ -127,5 +127,55 @@ public class TimeUtil {
 		return offset > 120*60000; //超时时限为2个小时
 	}
 	
-
+	/**
+	 * 把date类型转换成yyyy-MM-dd HH:mm格式
+	 * @param date
+	 * @return
+	 */
+	public static String formatDate(Date date) {
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		return myFormat.format(date );
+	}
+	
+	/**
+	 * 把date类型转换成yyyy-MM-dd HH:mm:ss格式
+	 * @param date
+	 * @return
+	 */
+	public static String formatDate1(Date date){
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return myFormat.format(date );
+	}
+	
+	/**
+	 * 把date类型转换成MM-dd HH:mm格式
+	 * @param date
+	 * @return
+	 */
+	public static String formatDate2(Date date){
+		SimpleDateFormat myFormat = new SimpleDateFormat("MM-dd HH:mm");
+		return myFormat.format(date );
+	}
+	/**
+	 * 将Int型的所花时间转化为时分秒形式
+	 * @param time
+	 * @return
+	 */
+	public static String transSpendTime(int time){
+		int hour;
+		int minite;
+		int second;
+		hour = time /3600;
+		minite = (time - hour*3600)/60;
+		second = time % 60;
+		
+		String string="";
+		if(hour>0)
+			string = string+hour+"时";
+		if(minite>0)
+			string = string+minite+"分";
+		string = string+second+"秒";
+		
+		return string;
+	}
 }
