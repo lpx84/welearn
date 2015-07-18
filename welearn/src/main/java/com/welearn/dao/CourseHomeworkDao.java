@@ -157,8 +157,8 @@ public class CourseHomeworkDao extends SuperDao {
 		this.hql = "select a from CourseHomework as a inner join fetch a.courseEntity where a.courseId IN (:courseList) order by create_time desc";
 		Query query2 = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query2.setParameterList("courseList", coursesId);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
+		query2.setFirstResult((pageNo - 1) * pageItemNum);
+		query2.setMaxResults(pageItemNum);
 		List<CourseHomework> result = query2.list();
 	
 		return result;
