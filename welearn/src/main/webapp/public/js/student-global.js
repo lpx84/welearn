@@ -22,4 +22,9 @@ $(document).ready(function(){
 	if (($(document.body).height() + 10) < $(window).height()) {
 	    $(".btn-more").addClass("fixed-bottom");
 	};
+	
+	$(".back-btn").click(function() {
+        history.back();
+    });
 });
+

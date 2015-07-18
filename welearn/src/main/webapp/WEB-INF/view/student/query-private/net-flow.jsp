@@ -32,7 +32,8 @@
 </style>
 </head>
 <body>
-  <h3 class="content-box-header bg-gray">
+<div class="content-box " style="border:none;">
+    <h3 class="content-box-header bg-gray text-center">
         <p class="pad0L title">本月流量</p>
     </h3>
     <div class="content">

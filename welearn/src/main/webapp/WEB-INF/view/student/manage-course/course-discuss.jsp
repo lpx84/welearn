@@ -55,7 +55,10 @@
 </head>
 <body>
 <div class="content-box bg-white">
-    <h3 class="title-span content-box-header ui-state-default">
+    <h3 class="title-span content-box-header ui-state-default text-center">
+    	<div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
         <label class="pad0L">${courseName}</label>
     </h3>
     <div class="content-box-wrapper" id="chat-div" style="padding-top: 50px;">

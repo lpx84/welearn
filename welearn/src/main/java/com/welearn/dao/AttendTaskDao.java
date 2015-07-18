@@ -35,7 +35,7 @@ public class AttendTaskDao extends SuperDao {
 	public AttendTask getAttendTaskById(int id){
 		this.hql = "FROM AttendTask AS u inner join fetch u.courseEntity WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setMaxResults(id);
+		query.setInteger(0, id);
 		return (AttendTask) query.uniqueResult();
 	}
 	
@@ -153,7 +153,7 @@ public class AttendTaskDao extends SuperDao {
 	
 	public List getNowAttendTasks(Date time) {
 		
-		hql = "from AttendTask as a inner join a.courseEntity as c where a.startTime <= ? and a.endTime <= ?";
+		hql = "from AttendTask as a inner join fetch a.courseEntity as c where a.startTime <= ? and a.endTime >= ?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setDate(0, time);
 		query.setDate(1, time);

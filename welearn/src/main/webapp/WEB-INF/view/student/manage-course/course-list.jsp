@@ -41,8 +41,8 @@
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <p class="pad0L title">我的课程</p>
+    <h3 class="content-box-header bg-gray text-center">
+        <label class="pad0L title">我的课程</label>
     </h3>
     <div class="profile-box content-box">
         <div class="nav-list">

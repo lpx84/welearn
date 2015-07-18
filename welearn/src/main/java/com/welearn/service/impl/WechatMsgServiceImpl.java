@@ -1,8 +1,19 @@
 package com.welearn.service.impl;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import net.sf.json.JSONObject;
 
@@ -21,10 +32,12 @@ import com.welearn.handler.tuling.TulingHandler;
 import com.welearn.handler.wechat.MsgReplyFactory;
 import com.welearn.model.MsgReceive;
 import com.welearn.model.MsgReceiveEvent;
+import com.welearn.model.MsgReceivePicture;
 import com.welearn.model.MsgReceiveText;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.HttpUtil;
 import com.welearn.util.InfoCode;
+import com.welearn.util.MyHttpClient;
 import com.welearn.util.NumberUtil;
 import com.welearn.util.WechatConfig;
 import com.welearn.util.XmlUtil;
@@ -102,25 +115,25 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 */
 	public String getOpenIdByCode(String code) {
 		 // 获取用户access_token的url
-//		 String get_access_token_url =
-//		 "https://api.weixin.qq.com/sns/oauth2/access_token?"
-//		 + "appid=" + WechatConfig.appId
-//		 + "&secret=" + WechatConfig.appsecret
-//		 + "&code=" + code
-//		 + "&grant_type=authorization_code";
-//		 //向微信发送请求，获取openid
-//		 String json = HttpUtil.getUrl(get_access_token_url);
-//		 System.out.println(json);
-//		 JSONObject jsonObject = JSONObject.fromObject(json);
-//		 String openid = "illegal";
-//		 try {
-//		 openid = jsonObject.getString("openid");
-//		 } catch (Exception e) {
-//		 System.err.println(e.toString());
-//		 }
-//	
-//		 return openid;
-         return code;
+		 String get_access_token_url =
+		 "https://api.weixin.qq.com/sns/oauth2/access_token?"
+		 + "appid=" + WechatConfig.appId
+		 + "&secret=" + WechatConfig.appsecret
+		 + "&code=" + code
+		 + "&grant_type=authorization_code";
+		 //向微信发送请求，获取openid
+		 String json = HttpUtil.getUrl(get_access_token_url);
+		 System.out.println(json);
+		 JSONObject jsonObject = JSONObject.fromObject(json);
+		 String openid = "illegal";
+		 try {
+		 openid = jsonObject.getString("openid");
+		 } catch (Exception e) {
+		 System.err.println(e.toString());
+		 }
+	
+		 return openid;
+//         return code;
 	}
 	
 	
@@ -135,7 +148,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 */
 	public String getReplyMsg(MsgReceive msg, boolean isEncode, String timestamp, String nonce) throws AesException {
 
-		String replyMsg = null;
+		String replyMsg = XmlUtil.getNullReplyText(msg.getFromUserName(), msg.getToUserName());;
 		if(msg == null) {
 			return replyMsg;
 		}
@@ -169,8 +182,45 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			
 		} else if(msg.getMsgType().equals("image")) {
 			//当上传的图片时处理代码
+			MsgReceivePicture pic = (MsgReceivePicture)msg;
+			String picUrl = pic.getPicUrl();
+			String filePath = "D:/Program Files/Apache Software Foundation/Tomcat 8.0/webapps";
+			HttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet(picUrl);
+			String content = "";
+			HttpEntity entity = null;
+			
+			Student s = studentDao.getStudentByOpenID(msg.getFromUserName());
+			String fileName = "/datafile/file/img/attend/"+s.getStudentNo()+"_"+new Date().toString()+".jpg";
+			filePath += fileName;
+			
+			try {
+				HttpResponse response = client.execute(get);
+				entity = response.getEntity();
+				InputStream is = entity.getContent();
+	            OutputStream os = new FileOutputStream(filePath);
+	            IOUtils.copy(is, os);
+	            IOUtils.closeQuietly(os);
+	            IOUtils.closeQuietly(is);
+	            content = "恭喜，本次签到成功，你可以在课程管理->签到记录中查看历史签到！";
+	            //把filename存入数据库
+	            //attendRecordDao.get
+	            
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				content = e.getMessage();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				content = e.getMessage();
+			}
 			
 			
+			
+			
+			MsgReplyText text = new MsgReplyText(content,0);
+			return text.getReplyXML(msg.getFromUserName(), msg.getToUserName());
 		} else if(msg.getMsgType().equals("voice")) {
 			//当上传音频时处理代码
 			
@@ -193,7 +243,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 					List<StudentCourse> scList = studentCourseDao.getStudentCourseByStudentId(student.getId());
 					
 					List<AttendTask> attendList = attendTaskDao.getNowAttendTasks(new Date());
-					String content = "请回复课程前面的数字，";
+					String content = "你当前有以下签到任务，请回复课程前面的数字确认：";
 					boolean hasTask = false;
 					for(AttendTask a : attendList) {
 						for(StudentCourse sc : scList) {

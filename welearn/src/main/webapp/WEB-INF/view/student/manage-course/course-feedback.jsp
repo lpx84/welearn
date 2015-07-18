@@ -16,8 +16,11 @@
 </head>
 <body>
 <div class="content-box" style="border: none;">
-    <h3 class="content-box-header bg-gray">
-        <span class="title">课程反馈</span>
+    <h3 class="content-box-header bg-gray text-center">
+    	<div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <label class="title">课程反馈</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>

@@ -152,4 +152,16 @@ public class AttendRecordDao extends SuperDao {
 		//update的返回值为空，这里怎么判断是否成功
 		return true;
 	}
+	
+	/**
+	 * 查询待签到记录
+	 * @param attendRecord
+	 * @return
+	 */
+	public AttendRecord getWaitingAttendRecord(int stuId) {
+		
+		
+		
+		return null;
+	}
 }
