@@ -20,6 +20,7 @@ import com.welearn.entity.CourseExam;
 import com.welearn.entity.CourseFeedback;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.CourseOption;
 import com.welearn.entity.CourseReply;
 import com.welearn.entity.Student;
 import com.welearn.entity.Teacher;
@@ -489,11 +490,30 @@ public class CourseServiceImpl implements CourseService {
 		return modelList;
 	}
 
-	public ArrayList<CourseProblem> generateCourseProblems(int courseid,
-			int problemNum) {
+	public ArrayList<CourseProblem> generateCourseProblems(int courseid) {
 		ArrayList<CourseProblem> modelList = new ArrayList<CourseProblem>();
-
-		return null;
+		ArrayList<com.welearn.entity.CourseProblem> list = (ArrayList<com.welearn.entity.CourseProblem>) courseProblemDao.getCourseProblemByCourseId(courseid);
+		int size = list.size();
+		int randomNum = (int) Math.random()*size;
+		
+		for(int i=0;i<10;i++){
+			int num = (randomNum+i)%size;
+			com.welearn.entity.CourseProblem problem = list.get(num);
+			CourseProblem courseProblem = new CourseProblem();
+			courseProblem.setAnswer(problem.getAnswer());
+			courseProblem.setComment(problem.getComment());
+			courseProblem.setContent(problem.getContent());
+			courseProblem.setCourseId(problem.getCourseId());
+			courseProblem.setId(problem.getId());
+			courseProblem.setScore(problem.getScore());
+			courseProblem.setStatus(problem.getStatus());
+			
+			ArrayList<CourseOption> optionList = courseOptionDao.getCourseOptionByProblemId(problem.getId());
+			courseProblem.setOptions(optionList);
+			modelList.add(courseProblem);			
+		}
+		
+		return modelList;
 	}
 
 

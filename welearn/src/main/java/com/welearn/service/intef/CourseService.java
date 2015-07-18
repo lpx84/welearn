@@ -183,6 +183,5 @@ public interface CourseService {
 	 *            生成的问题数量
 	 * @return
 	 */
-	public ArrayList<CourseProblem> generateCourseProblems(int courseid,
-			int problemNum);
+	public ArrayList<CourseProblem> generateCourseProblems(int courseid);
 }
