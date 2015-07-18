@@ -49,18 +49,34 @@
     	<div class="glyph-icon icon-separator transparent back-btn">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
-        <label class="pad0L title">我的签到记录</label>
+        <label class="pad0L title">${courseName}——签到记录</label>
     </h3>
     <div class="content">
+    <c:forEach var="item" items="${list }">
         <div class="rcd">
-            <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
+            <img class="img-avatar inline-block" src="${item.getPicUrl() }">
             <div class="inline-block">
-                <div class="font-bold">第四次签到</div>
-                <div><span class="font-gray ">签到于</span> 07-12 9:00:34</div>
+                <div class="font-bold">${item.getContent() }</div>
+                <div><span class="font-gray ">签到于</span> ${item.getTime() }</div>
             </div>
-            <div class="status inline-block font-green"><i class="fa fa-check-circle"></i>&nbsp;成功</div>
+            <c:if test="${item.getState() ==  0}">
+                <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;未签到</div>
+            </c:if>              
+            <c:if test="${item.getState() == 1 }">
+                <div class="status inline-block font-red"><i class="fa fa-clock-o"></i>&nbsp;等待签到</div>
+            </c:if>
+            <c:if test="${item.getState() ==  2}">
+                <div class="status inline-block font-red"><i class="fa fa-clock-o"></i>&nbsp;审核中</div>
+            </c:if>
+            <c:if test="${item.getState() ==  3}">
+                <div class="status inline-block font-green"><i class="fa fa-check-circle"></i>&nbsp;成功</div>
+            </c:if>            
+            <c:if test="${item.getState() == 4 }">
+                <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;照片审核未通过</div>
+            </c:if>                   
         </div>
-        <div class="rcd">
+    </c:forEach> 
+<!--         <div class="rcd">
             <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
             <div class="inline-block">
                 <div class="font-bold">第三次签到</div>
@@ -82,14 +98,14 @@
                 <div class="font-bold">第一次签到</div>
             </div>
             <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;未签到</div>
-        </div>
+        </div> -->
     </div>
     
-    <!-- 当前页号，下一次请求在此基础上加1 -->
+<!--     当前页号，下一次请求在此基础上加1
     <input id="pageNo" type="hidden" value="1">
     <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
         <span class="button-content">查看更多</span>
-    </a>
+    </a> -->
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">

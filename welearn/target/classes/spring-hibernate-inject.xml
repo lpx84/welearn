@@ -129,6 +129,14 @@
 		<property name="target" ref="teacherServiceBase"></property>
 	</bean>
 	
+	<!-- ===================== AttendService =========================== -->
+	<bean id="attendServiceBase" class="com.welearn.service.impl.AttendServiceImpl">
+		<property name="attendTaskDao" ref="attendTaskDao"></property>
+		<property name="attendRecordDao" ref="attendRecordDao"></property>	
+	</bean>
+	<bean name="attendService" parent="transactionProxy">
+		<property name="target" ref="attendServiceBase"></property>
+	</bean>
 
 </beans>
 
