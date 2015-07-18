@@ -212,7 +212,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		            
 		            //把filename存入数据库
 		            record.setPicUrl(fileName);
-		            record.setPicUrl(picUrl);
+		            record.setStatus(InfoCode.ATTEND_VERIFY);
 		            record.setLogTime(now);
 		            attendRecordDao.updateAttendRecord(record);
 		            

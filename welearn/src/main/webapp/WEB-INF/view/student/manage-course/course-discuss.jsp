@@ -62,7 +62,7 @@
         <label class="pad0L">${courseName}</label>
     </h3>
     <div class="content-box-wrapper" id="chat-div" style="padding-top: 50px;">
-        <div class="scrollable-content">
+        <div class=""  style="width: 100%;">
             <a href="javascript:prefetchData();" class="btn btn-more medium float-none ui-state-default mrg10B">
                 <span class="button-content">更多聊天记录</span>
             </a>
@@ -70,10 +70,11 @@
             	<c:forEach var="item" items="${list }">
             	<li <c:if test = "${!item.isMe() }">class="float-left" </c:if>>            	    
                     <div class="chat-author">
-                        <img width="36" src="${item.getAvatar() }" alt="" />
+                        <img width="36" height="36" src="${item.getAvatar() }" alt="" />
                     </div>
                     <div <c:if test = "${!item.isMe() }">class="popover right no-shadow" </c:if>
-                         <c:if test = "${item.isMe() }">class="popover left no-shadow" </c:if>>
+                         <c:if test = "${item.isMe() }">class="popover left no-shadow" </c:if>
+						 >
                         <div class="arrow"></div>
                         <div class="popover-content">
                             <div class="info">
@@ -90,8 +91,8 @@
 
         </div>
     </div>
-    <div class="button-pane reply-span pad10A">
-        <div class="form-row pad0B">
+    <div class="button-pane reply-span pad10A" style="width: 100%;">
+        <div class="form-row pad0B mrg10R">
             <div class="form-input col-lg-12">
                 <div class="input-append-wrapper input-append-right">
                     <a href="javascript:sendData();" class="btn input-append primary-bg">
@@ -140,7 +141,7 @@ var count =0;
 	function joinData(res) {     	        
 		var html = new Array(
 				"<li class='float-left'>",
-				"<div class='chat-author'><img width='36' src='",
+				"<div class='chat-author'><img width='36' height='36' src='",
 				"avatar",
 				"'  /></div>",
 				"<div class='popover right no-shadow'>",
@@ -217,7 +218,7 @@ var count =0;
 	function preJoinData(res) {       
 		var html = new Array(
 				"<li class='float-left'>",
-				"<div class='chat-author'><img width='36' src='",
+				"<div class='chat-author'><img width='36'  height='36' src='",
 				"avatar",
 				"'  /></div>",
 				"<div class='popover right no-shadow'>",
