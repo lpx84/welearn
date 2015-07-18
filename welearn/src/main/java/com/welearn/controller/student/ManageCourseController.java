@@ -128,7 +128,12 @@ public class ManageCourseController {
 		// 用课程服务类查询具体的课程通知
 		ArrayList<com.welearn.model.CourseNotify> list = courseService
 				.queryCourseNotify(courseid, 1, 10);
-
+		// 判断是否有最新通知
+		if (list.isEmpty()) {
+			view = new View("error", "wechat", "info", "没有通知信息。");
+			view.addObject("info", "没有通知信息。");
+			return view;
+		}
 		view = new View("student", "manage-course", "course-notify", "课程公告");
 		view.addObject("courseName", courseName);
 		view.addObject("courseid", courseid);
@@ -160,6 +165,68 @@ public class ManageCourseController {
 	}
 
 	/**
+	 * 获取最新的通知信息
+	 * 
+	 * @param code
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("course-notify-new")
+	public View getCourseNotifyNew(@RequestParam(value = "code") String code,
+			HttpSession session) {
+		View view;
+		// 创建微信服务类根据code获取 openId
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {
+			return view;
+		}
+		// 获取该学生有的学期和他各学期选的课程
+		int studentId = studentService.getStudentByOpenId(openid).getId();
+
+		ArrayList<com.welearn.model.CourseNotify> list = courseService
+				.queryCourseNotifyNew(studentId, 1, 10);
+		studentService.setSession(session, openid);
+		// 判断是否有最新通知
+		if (list.isEmpty()) {
+			view = new View("error", "wechat", "info", "没有最新通知。");
+			view.addObject("info", "没有最新通知。");
+			return view;
+		}
+		view = new View("student", "manage-course", "course-notify-new", "课程通知");
+
+		view.addObject("list", list);
+		return view;
+	}
+
+	/**
+	 * ajax请求更多的课程通知
+	 * 
+	 * @param courseid
+	 * @param pageNo
+	 * @return
+	 */
+	@RequestMapping("more-course-notify-new")
+	@Authentication()
+	@ResponseBody
+	public String moreCourseNotifyNew(
+			@RequestParam(value = "pageNo") int pageNo, HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		// 用课程服务类查询具体的课程通知
+		ArrayList<com.welearn.model.CourseNotify> list = courseService
+				.queryCourseNotifyNew(studentid, pageNo, 10);
+		// 把list用json格式封装
+		String jsonStr = JsonUtil.listToJSONString(list, null);
+
+		return jsonStr;
+	}
+
+	/**
 	 * 进入某一门课的课程公共页面，为了防止爬取数据，这里需要验证微信登录
 	 * 
 	 * @param courseid
@@ -175,7 +242,12 @@ public class ManageCourseController {
 		// 用课程服务类查询具体的课程作业
 		ArrayList<com.welearn.model.CourseHomework> list = courseService
 				.queryCourseHomework(courseid, 1, 10);
-
+		// 判断是否有最新通知
+		if (list.isEmpty()) {
+			view = new View("error", "wechat", "info", "没有作业信息。");
+			view.addObject("info", "没有作业信息。");
+			return view;
+		}
 		view = new View("student", "manage-course", "course-homework", "课程作业");
 		view.addObject("courseName", courseName);
 		view.addObject("courseid", courseid);
@@ -200,6 +272,73 @@ public class ManageCourseController {
 		// 用课程服务类查询具体的课程作业
 		ArrayList<com.welearn.model.CourseHomework> list = courseService
 				.queryCourseHomework(courseid, pageNo, 10);
+
+		// 把list用json格式封装
+		String jsonStr = JsonUtil.listToJSONString(list, null);
+
+		return jsonStr;
+	}
+
+	/**
+	 * 获取最新的通知信息
+	 * 
+	 * @param code
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("course-homework-new")
+	public View getCourseHomeworkNew(@RequestParam(value = "code") String code,
+			HttpSession session) {
+		View view;
+		// 创建微信服务类根据code获取 openId
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {
+			return view;
+		}
+		// 获取该学生有的学期和他各学期选的课程
+		int studentId = studentService.getStudentByOpenId(openid).getId();
+		// 设置session
+		studentService.setSession(session, openid);
+
+		// 用课程服务类查询具体的课程作业
+		ArrayList<com.welearn.model.CourseHomework> list = courseService
+				.queryCourseHomeworkNew(studentId, 1, 10);
+		// 判断是否有最新通知
+		if (list.isEmpty()) {
+			view = new View("error", "wechat", "info", "没有作业信息。");
+			view.addObject("info", "没有作业信息。");
+			return view;
+		}
+		view = new View("student", "manage-course", "course-homework-new",
+				"最新作业");
+
+		view.addObject("list", list);
+		return view;
+	}
+
+	/**
+	 * ajax获取更多作业 信息
+	 * 
+	 * @param pageNo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("more-course-homework-new")
+	@Authentication()
+	@ResponseBody
+	public String moreCourseHomeworkNew(
+			@RequestParam(value = "pageNo") int pageNo, HttpSession session) {
+		// 用课程服务类查询具体的课程作业
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+
+		ArrayList<com.welearn.model.CourseHomework> list = courseService
+				.queryCourseHomeworkNew(studentid, pageNo, 10);
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
@@ -468,6 +607,7 @@ public class ManageCourseController {
 
 	/**
 	 * 测试进行中
+	 * 
 	 * @param courseid
 	 * @param session
 	 * @return

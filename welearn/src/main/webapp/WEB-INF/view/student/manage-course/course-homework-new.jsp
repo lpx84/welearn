@@ -8,6 +8,7 @@
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
 <style type="text/css">
+   
     .btn-more .button-content {
         font-size: 1.3em;
         line-height: 2em;
@@ -25,7 +26,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 72%;
     }
     
     .content-box {
@@ -67,7 +67,7 @@
     
     .i-toggle {
         position: absolute;
-        top: 15px;
+        top: 25px;
         right: 0px;
     }
     
@@ -77,8 +77,13 @@
         padding: 10px 5px;
         background: #fafafa;
     }
-   
-    .btn-more {
+    
+    .rows .course {
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
+    
+   .btn-more {
    		display: block;
    		width: 100%;
    }
@@ -87,33 +92,30 @@
    		position: absolute;
    		width: 100%;
    		text-align: center;
-   }
+   }   
 </style>
 </head>
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <label class="title">${courseName }</label>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
+        
+        <title class="title">最新作业</title>
     </h3>
     <div class="content">
     <c:forEach var="item" items="${list }"> 
         <div class="rcd">
             <div class="rows rows1">
                 <div class="inline-block">
-                    <!-- font-red表示消息未读 已读消息设为font-gray -->
-                    <div class="rows rows11 name"><i class="glyph-icon font-red fa-bullhorn"></i>&nbsp;${item.getTitle() }</div>
+                    <div class="rows rows11 name"><i class="glyph-icon font-gray fa-file-text-o"></i>&nbsp;${item.getTitle() }</div>
+                    <div class="rows rows11 course">
+                        <span class="font-gray">课程：</span>
+                        <span class="label bg-blue"> ${item.getCourseName() }</span>
+                    </div>
                     <div class="rows rows12">
                         <span class="time ">
                             <span class="lab">发布：</span>
                             <span class="label bg-gray">${item.getCreate_time() }</span>
                         </span>
-                        <p></p>
                         <span class="time ">
                             <span class="lab">截止：</span>
                             <span class="label bg-green">${item.getDeadline() }</span>
@@ -125,13 +127,16 @@
                 </div>
             </div>
             <div class="row rows rows2 text" style="display: none;">
-                ${item.getContent() }
+                 ${item.getContent() }
             </div>
         </div>
-        </c:forEach>
+    </c:forEach>
+        
     </div>
     
-    <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
+    <!-- 当前页号，下一次请求在此基础上加1 -->
+    <input id="pageNo" type="hidden" value="1">
+    <a href="javascript:fetchData();" class="btn btn-more medium display-block float-none ui-state-default">
         <span class="button-content">查看更多</span>
     </a>
 </div>
@@ -168,7 +173,6 @@ if (($(document.body).height() + 10) < $(window).height()) {
 };
 
 var pageno=1;
-var courseid= ${courseid };
 function fetchData() {
 	//记录当前页数
 	pageno++;
@@ -176,10 +180,9 @@ function fetchData() {
 	
 	$.ajax({
 		
-		url: $("#appName").val()+"/student/manage/course/more-course-notify",
+		url: $("#appName").val()+"/student/manage/course/more-course-notify-new",
 		type: "POST",
 		data: {
-			courseid:courseid,
 			pageNo: pageno,
 		},
 		timeout: 5000,
@@ -203,10 +206,12 @@ function fetchData() {
 }
 
 function joinData(res) {              
-	var html = new Array(
+	var html = new Array(			
 		"<div class='rcd'><div class='rows rows1'><div class='inline-block'><div class='rows rows11 name'><i class='glyph-icon font-red fa-bullhorn'></i>&nbsp;",
 		"title",
-		"</div><div class='rows rows12'><span class='time '><span class='lab'><i class='fa fa-clock-o'></i>&nbsp;</span><span>",
+		"</div><div class='rows rows11 course'><span class='font-gray'>课程：</span><span class='label bg-blue'>",
+		"courseName",
+		"</span></div><div class='rows rows12'><span class='time '><span class='lab'>发布：</span><span class='label bg-gray'>",
 		"time",
 		" </span></span><span class='time'><span class='lab'>截止：</span><span class='label bg-green'>",
 		"deadline",
@@ -216,12 +221,16 @@ function joinData(res) {
 	);
 	for(var i=0; i<res.length; ++i) {
 		html[1]=res[i].title;
-		html[3]=res[i].create_time;
-		html[5]=res[i].deadline;
-		html[7]=res[i].content;
+		html[3]=res[i].courseName;
+		html[5]=res[i].create_time;
+		html[7]=res[i].deadline;
+		html[9]=res[i].content;
 		$(".content").append(html.join(''));
 	}
 }
+
+
+
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import com.welearn.entity.Course;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.CourseProblem;
 import com.welearn.model.CourseTestResult;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
@@ -65,12 +66,23 @@ public interface CourseService {
 
 	/**
 	 * 根据课程id查找课程通知
-	 * 
 	 * @param courseId
+	 * @param pageNo
+	 * @param pageItemNo
 	 * @return
 	 */
 	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotify(
 			int courseId, int pageNo, int pageItemNo);
+
+    /**
+     * 根据学生id查找最新课程通知
+     * @param studentid
+     * @param pageNo
+     * @param pageItemNo
+     * @return
+     */
+	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotifyNew(
+			int studentid, int pageNo, int pageItemNo);
 
 	/**
 	 * 根据课程id查找课程作业
@@ -81,6 +93,16 @@ public interface CourseService {
 	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomework(
 			int courseId, int pageNo, int pageItemNo);
 
+	/**
+	 * 根据学生id查找其作业通知
+	 * @param studentid
+	 * @param pageNo
+	 * @param pageItemNo
+	 * @return
+	 */
+	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomeworkNew(
+			int studentid, int pageNo, int pageItemNo);
+	
 	/**
 	 * 根据学生的id获取该学生这学期上的课程
 	 * 
@@ -97,52 +119,70 @@ public interface CourseService {
 	 */
 	public Map<String, ArrayList<Course>> querySemesterCourseByStudentId(
 			int studentId);
-	
+
 	/**
 	 * 添加课程反馈
+	 * 
 	 * @param courseid
 	 * @param content
 	 * @param anonymous
 	 * @param studentid
 	 * @return
 	 */
-	public boolean addFeedback(int courseid,String content,boolean anonymous,String studentName);
-	
+	public boolean addFeedback(int courseid, String content, boolean anonymous,
+			String studentName);
+
 	/**
 	 * 查找在一个时间之前的聊天记录
+	 * 
 	 * @param courseid
 	 * @param studentid
 	 * @param date
 	 * @return
 	 */
-	public ArrayList<CourseDiscuss> queryDiscussesBefore(int courseid,int studentid,Date date);
-	
+	public ArrayList<CourseDiscuss> queryDiscussesBefore(int courseid,
+			int studentid, Date date);
+
 	/**
 	 * 查找在一个时间之后的聊天记录
+	 * 
 	 * @param courseid
 	 * @param studentid
 	 * @param date
 	 * @return
 	 */
-	public ArrayList<CourseDiscuss> queryDiscussesAfter(int courseid,int studentid,Date date);
-	
+	public ArrayList<CourseDiscuss> queryDiscussesAfter(int courseid,
+			int studentid, Date date);
+
 	/**
 	 * 发送一条消息
+	 * 
 	 * @param courseid
 	 * @param studentid
 	 * @param content
 	 * @return
 	 */
-	public boolean addDiscussContent(int courseid,int studentid,String content);
-	
+	public boolean addDiscussContent(int courseid, int studentid, String content);
+
 	/**
 	 * 查找数据库中的答题记录
+	 * 
 	 * @param courseid
 	 * @param studentid
 	 * @param pageNo
 	 * @return
 	 */
-	public ArrayList<CourseTestResult> queryCourseExamResult(int courseid,int studentid,int pageNo);
-	
-	
+	public ArrayList<CourseTestResult> queryCourseExamResult(int courseid,
+			int studentid, int pageNo);
+
+	/**
+	 * 生成评测的问题
+	 * 
+	 * @param courseid
+	 * @param problemNum
+	 *            生成的问题数量
+	 * @return
+	 */
+	public ArrayList<CourseProblem> generateCourseProblems(int courseid,
+			int problemNum);
 }

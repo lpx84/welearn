@@ -1,11 +1,14 @@
 package com.welearn.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 
+import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.StudentCourse;
 import com.welearn.util.TimeUtil;
 
 public class CourseNotifyDao extends SuperDao {
@@ -84,6 +87,31 @@ public class CourseNotifyDao extends SuperDao {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, TimeUtil.timeFormat(createTime));
 		List<CourseNotify> result = query.list();
+		return result;
+	}
+	
+	public List<CourseNotify> getCourseNotifysByStudentId(int studentId, int pageNo, int pageItemNum) {
+		
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity "
+				+ "WHERE a.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(
+				this.hql);
+		query.setInteger(0, studentId);
+
+		ArrayList<Integer> coursesId = new ArrayList<Integer>();
+		List<StudentCourse> courses = query.list();
+		for (int i = 0; i < courses.size(); i++) {
+			coursesId.add(i, courses.get(i).getCourseId());
+		}
+
+		this.hql = "select a from CourseNotify as a inner join fetch a.courseEntity where a.courseId IN (:courseList) order by create_time desc";
+		Query query2 = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query2.setParameterList("courseList", coursesId);
+		query2.setFirstResult((pageNo - 1) * pageItemNum);
+		query2.setMaxResults(pageItemNum);
+		List<CourseNotify> result = query2.list();
+	
 		return result;
 	}
 	
