@@ -37,7 +37,7 @@
                 {
                     "type": "view", 
                     "name": "最新公告", 
-                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fquery%2Fpersonal%2Flost-thing&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fmanage%2Fcourse%2Fcourse-homework-new&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                 }, 
                 {
                     "type": "view", 

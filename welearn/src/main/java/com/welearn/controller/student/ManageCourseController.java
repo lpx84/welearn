@@ -356,9 +356,11 @@ public class ManageCourseController {
 	@RequestMapping("course-feedback")
 	@Authentication()
 	public View courseFeedback(@RequestParam(value = "courseid") int courseid) {
-		View view;
-		view = new View("student", "manage-course", "course-feedback", "课程反馈");
+		// 课程名
+		String courseName = courseService.queryCourse(courseid).getName();
+		View view = new View("student", "manage-course", "course-feedback", "课程反馈");
 		view.addObject("courseid", courseid);
+		view.addObject("courseName", courseName);
 		return view;
 	}
 
