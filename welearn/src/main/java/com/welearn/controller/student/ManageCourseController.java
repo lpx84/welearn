@@ -428,17 +428,21 @@ public class ManageCourseController {
 			HttpSession session) {
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
 		// 获取studentid
 		int studentid = studentService.getStudentByOpenId(openid).getId();
-		ArrayList<CourseTestResult> list = courseService.queryCourseExamResult(courseid, studentid, 1);
-			
+		ArrayList<CourseTestResult> list = courseService.queryCourseExamResult(
+				courseid, studentid, 1);
+
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test", "课程小测");
-		view.addObject("list",list);
-		view.addObject("courseid",courseid);
+		view.addObject("list", list);
+		view.addObject("courseid", courseid);
+		view.addObject("courseName", courseName);
 		return view;
 	}
-	
+
 	/**
 	 * 课程测试，ajax请求
 	 * 
@@ -449,25 +453,36 @@ public class ManageCourseController {
 	@RequestMapping("more-course-test")
 	@Authentication()
 	@ResponseBody
-	public String moreCourseTest(@RequestParam(value = "courseid") int courseid,@RequestParam(value = "pageNo") int pageNo,
-			HttpSession session) {
+	public String moreCourseTest(
+			@RequestParam(value = "courseid") int courseid,
+			@RequestParam(value = "pageNo") int pageNo, HttpSession session) {
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
 		// 获取studentid
 		int studentid = studentService.getStudentByOpenId(openid).getId();
-		ArrayList<CourseTestResult> list = courseService.queryCourseExamResult(courseid, studentid, pageNo);
-        String jsonStr = JsonUtil.listToJSONString(list, null);
+		ArrayList<CourseTestResult> list = courseService.queryCourseExamResult(
+				courseid, studentid, pageNo);
+		String jsonStr = JsonUtil.listToJSONString(list, null);
 		return jsonStr;
 	}
 
 	/**
 	 * 测试进行中
-	 * 
-	 * @param code
+	 * @param courseid
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-testing")
-	public View courseTesting() {
+	@Authentication()
+	public View courseTesting(@RequestParam(value = "courseid") int courseid,
+			HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+
 		// 查询余额
 		View view = new View("student", "manage-course", "course-testing",
 				"课程评测");
@@ -482,6 +497,7 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-test-result")
+	@Authentication()
 	public View courseTestResult() {
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test-result",
@@ -497,6 +513,7 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-test-detail")
+	@Authentication()
 	public View courseTestDetail() {
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test-detail",

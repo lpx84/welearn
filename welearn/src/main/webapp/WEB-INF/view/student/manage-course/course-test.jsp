@@ -88,7 +88,7 @@
     	<div class="glyph-icon icon-separator transparent back-btn">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
-        <label class="title">软件工程专业研究方法论与创新教育</label>
+        <label class="title">${courseName }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>
