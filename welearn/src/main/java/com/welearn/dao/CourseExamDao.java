@@ -48,5 +48,15 @@ public class CourseExamDao extends SuperDao {
 		return query.list();
 	}
 	
+	public List<CourseExam> getCourseExamByCourseIdandStudentId(int courseId,int studentId, int pageNo, int pageItemNum){
+		this.hql = "FROM CourseExam AS u join fetch u.studentEntity inner join fetch u.courseEntity WHERE u.courseId=? AND u.studentId=? order by u.finishId desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseId);
+		query.setInteger(1, studentId);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
+	}
+	
 	
 }
