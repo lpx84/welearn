@@ -36,9 +36,6 @@ import com.welearn.util.WechatConfig;
 
 public class MsgReceiveFactory {
 
-	@Resource(name = "wechatConfig")
-	WechatConfig wechatConfig;
-
 //	public String decodeReceiveMsg(String receiveMsg, String timestamp,
 //			String nonce) throws ParserConfigurationException, SAXException,
 //			IOException, AesException {
