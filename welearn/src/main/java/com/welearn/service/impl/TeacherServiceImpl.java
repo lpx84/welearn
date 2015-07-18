@@ -162,12 +162,8 @@ public class TeacherServiceImpl implements TeacherService {
 	//测试
 	public void test() {
 		// TODO Auto-generated method stub
-		List<CourseReply> list = courseReplyDao.getCourseReplyByTimeBefore(1, new Date(),10);
+		courseNotifyDao.getCourseNotifysByStudentId(1, 1, 1);
 		
-		for(int i=0;i<list.size();i++){
-			System.out.println("-----------------");
-			System.out.println(list.get(i).toString());
-		}
 		
 	}
 
