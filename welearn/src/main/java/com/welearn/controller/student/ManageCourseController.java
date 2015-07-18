@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.model.AttendRecord;
 import com.welearn.model.Course;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseTestResult;
 import com.welearn.model.Semester;
+import com.welearn.service.intef.AttendService;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.MisService;
@@ -50,7 +52,8 @@ public class ManageCourseController {
 	MisService misService;
 	@Resource(name = "teacherService")
 	TeacherService teacherService;
-
+	@Resource(name = "attendService")
+	AttendService attendService;
 	/**
 	 * 查看我的课程
 	 * 
@@ -541,17 +544,26 @@ public class ManageCourseController {
 		return jsonStr;
 	}
 
-	/**
-	 * 签到记录查询
-	 * 
-	 * @param code
-	 * @return
-	 */
+    /**
+     * 签到记录
+     * @param courseid
+     * @param session
+     * @return
+     */
 	@RequestMapping("attend-list")
 	@Authentication()
-	public View eCardDetail() {
-		// 查询余额
+	public View eCardDetail(@RequestParam(value = "courseid") int courseid, HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		ArrayList<AttendRecord> list = attendService.getAttendRecords(courseid, studentid);
+		
 		View view = new View("student", "manage-course", "attend-list", "签到记录");
+		view.addObject("list", list);
+		view.addObject("courseName", courseName);
 
 		return view;
 	}
