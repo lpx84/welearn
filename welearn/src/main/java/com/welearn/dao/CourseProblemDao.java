@@ -68,6 +68,14 @@ public class CourseProblemDao extends SuperDao {
 		return result;
 	}
 	
+	public List<CourseProblem> getCourseProblemByCourseId(int courseid){
+		this.hql = "from CourseProblem as a inner join fetch a.courseEntity where a.courseId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseid);
+		List<CourseProblem> result = query.list();
+		return result;
+	}
+	
 	public List<CourseProblem> getCourseProblemByCourseId(int courseid, int pageNo, int pageItemNum){
 		this.hql = "from CourseProblem as a inner join fetch a.courseEntity where a.courseId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
