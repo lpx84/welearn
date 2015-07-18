@@ -36,6 +36,9 @@ public class CourseExam {
 	@Column(name="status", columnDefinition="tinyint", nullable=false)
 	private Integer status;
 	
+	@Column(name="answer", columnDefinition="text")
+	private String answer;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="student_id",insertable=false,updatable=false)
 	private Student studentEntity;
@@ -120,13 +123,22 @@ public class CourseExam {
 		this.courseEntity = courseEntity;
 	}
 
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseExam [id=" + id + ", studentId=" + studentId
 				+ ", courseId=" + courseId + ", spendTime=" + spendTime
 				+ ", finishId=" + finishId + ", score=" + score + ", status="
-				+ status + ", studentEntity=" + studentEntity
-				+ ", courseEntity=" + courseEntity + "]";
+				+ status + ", answer=" + answer + ", studentEntity="
+				+ studentEntity + ", courseEntity=" + courseEntity + "]";
 	}
+
 	
 }
