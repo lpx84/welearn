@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.welearn.aop.Authentication;
 import com.welearn.model.Course;
 import com.welearn.model.CourseDiscuss;
+import com.welearn.model.CourseTestResult;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
@@ -25,7 +26,7 @@ import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.JsonUtil;
-import com.welearn.util.StrUtil;
+import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
 
 /**
@@ -287,9 +288,9 @@ public class ManageCourseController {
 			session.setAttribute("firstTime", list.get(list.size() - 1)
 					.getTime());// 最早的记录时间
 		} else {
-			session.setAttribute("firstTime", StrUtil.formatDate1(new Date()));// 最早的记录时间
+			session.setAttribute("firstTime", TimeUtil.formatDate1(new Date()));// 最早的记录时间
 		}
-		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
+		session.setAttribute("lastTime", TimeUtil.formatDate1(new Date()));// 最新的记录时间
 
 		// 将list倒置
 		ArrayList<CourseDiscuss> list1 = new ArrayList<CourseDiscuss>();
@@ -330,7 +331,7 @@ public class ManageCourseController {
 			e.printStackTrace();
 		}
 
-		session.setAttribute("lastTime", StrUtil.formatDate1(new Date()));// 最新的记录时间
+		session.setAttribute("lastTime", TimeUtil.formatDate1(new Date()));// 最新的记录时间
 		// 获取讨论信息的列表
 		ArrayList<CourseDiscuss> list = courseService.queryDiscussesAfter(
 				courseid, studentid, lastTimeDate);
@@ -406,6 +407,7 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("attend-list")
+	@Authentication()
 	public View eCardDetail() {
 		// 查询余额
 		View view = new View("student", "manage-course", "attend-list", "签到记录");
@@ -421,22 +423,66 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-test")
+	@Authentication()
 	public View courseTest(@RequestParam(value = "courseid") int courseid,
 			HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		ArrayList<CourseTestResult> list = courseService.queryCourseExamResult(
+				courseid, studentid, 1);
+
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test", "课程小测");
-
+		view.addObject("list", list);
+		view.addObject("courseid", courseid);
+		view.addObject("courseName", courseName);
 		return view;
 	}
 
 	/**
-	 * 测试进行中
+	 * 课程测试，ajax请求
 	 * 
-	 * @param code
+	 * @param courseid
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("more-course-test")
+	@Authentication()
+	@ResponseBody
+	public String moreCourseTest(
+			@RequestParam(value = "courseid") int courseid,
+			@RequestParam(value = "pageNo") int pageNo, HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+		ArrayList<CourseTestResult> list = courseService.queryCourseExamResult(
+				courseid, studentid, pageNo);
+		String jsonStr = JsonUtil.listToJSONString(list, null);
+		return jsonStr;
+	}
+
+	/**
+	 * 测试进行中
+	 * @param courseid
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-testing")
-	public View courseTesting() {
+	@Authentication()
+	public View courseTesting(@RequestParam(value = "courseid") int courseid,
+			HttpSession session) {
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+
 		// 查询余额
 		View view = new View("student", "manage-course", "course-testing",
 				"课程评测");
@@ -451,6 +497,7 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-test-result")
+	@Authentication()
 	public View courseTestResult() {
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test-result",
@@ -466,6 +513,7 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-test-detail")
+	@Authentication()
 	public View courseTestDetail() {
 		// 查询余额
 		View view = new View("student", "manage-course", "course-test-detail",
