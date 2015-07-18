@@ -11,6 +11,7 @@ public class CourseNotify {
 	private String title;
 	private String content;
 	private Integer courseId;
+	private String courseName;
 	private String create_time;
 	private Integer status;
 	public Integer getId() {
@@ -48,6 +49,12 @@ public class CourseNotify {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 	
 	

@@ -124,6 +124,7 @@ public class CourseDao extends SuperDao {
 		return query.list();
 	}
 
+
 	@SuppressWarnings("unchecked")
 	public List<Course> getCoursesByName(String name, int pageNo,
 			int pageItemNum) {
