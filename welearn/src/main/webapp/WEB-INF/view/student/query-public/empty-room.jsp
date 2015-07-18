@@ -119,7 +119,7 @@
                     <c:when test="${'有课' == room }">
                     	<td class="room-cell room-inclass">${room }</td>
                     </c:when>
-                    <c:when test="${'借用' == room }">
+                    <c:when test="${'借用' == room ||'借用 (多)' == room }">
                     	<td class="room-cell room-borrow">${room }</td>
                     </c:when>
                     <c:otherwise>
