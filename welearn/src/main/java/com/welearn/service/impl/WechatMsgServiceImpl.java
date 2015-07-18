@@ -114,26 +114,26 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 * 根据code获取用户的openid，如果code不存在或者非法，则返回illegal
 	 */
 	public String getOpenIdByCode(String code) {
-//		 // 获取用户access_token的url
-//		 String get_access_token_url =
-//		 "https://api.weixin.qq.com/sns/oauth2/access_token?"
-//		 + "appid=" + WechatConfig.appId
-//		 + "&secret=" + WechatConfig.appsecret
-//		 + "&code=" + code
-//		 + "&grant_type=authorization_code";
-//		 //向微信发送请求，获取openid
-//		 String json = HttpUtil.getUrl(get_access_token_url);
-//		 System.out.println(json);
-//		 JSONObject jsonObject = JSONObject.fromObject(json);
-//		 String openid = "illegal";
-//		 try {
-//		 openid = jsonObject.getString("openid");
-//		 } catch (Exception e) {
-//		 System.err.println(e.toString());
-//		 }
-//	
-//		 return openid;
-         return code;
+		 // 获取用户access_token的url
+		 String get_access_token_url =
+		 "https://api.weixin.qq.com/sns/oauth2/access_token?"
+		 + "appid=" + WechatConfig.appId
+		 + "&secret=" + WechatConfig.appsecret
+		 + "&code=" + code
+		 + "&grant_type=authorization_code";
+		 //向微信发送请求，获取openid
+		 String json = HttpUtil.getUrl(get_access_token_url);
+		 System.out.println(json);
+		 JSONObject jsonObject = JSONObject.fromObject(json);
+		 String openid = "illegal";
+		 try {
+		 openid = jsonObject.getString("openid");
+		 } catch (Exception e) {
+		 System.err.println(e.toString());
+		 }
+	
+		 return openid;
+//         return code;
 	}
 	
 	
@@ -305,7 +305,8 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			if(null == task) {
 				content = "你选择的签到任务不存在！";
 			} else if(null != (tempAttend = attendRecordDao.getAttendRecord(s.getId(), attendTaskId))) {
-				if(InfoCode.ATTEND_PREPARE == tempAttend.getStatus()) {
+				if(InfoCode.ATTEND_PREPARE == tempAttend.getStatus() ||
+						InfoCode.ATTEND_NOT == tempAttend.getStatus()) {
 					Date now = new Date();
 					if(now.after(task.getStartTime()) && now.before(task.getEndTime())) {
 						content = "确认成功，请上传签到图片！";
@@ -313,7 +314,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 						content = "本次签到时限已过。你不能再签到了！";
 					}
 				} else {
-					content = "你已经完成本次的签到任务！";
+					content = "你已经签过到了，不能重复签到！";
 				}
 				
 			} else {
