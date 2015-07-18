@@ -88,7 +88,7 @@
     	<div class="glyph-icon icon-separator transparent back-btn">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
-        <label class="title">软件工程专业研究方法论与创新教育</label>
+        <label class="title">${courseName }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>
@@ -111,7 +111,14 @@
         </div>
         <p class="lab font-gray pad5A">历史测评</p>
         <div class="item-list">
+        <c:forEach var="item" items="${list }">
             <div class="rcd">
+                <span><i class="fa fa-clock-o font-purple"></i> ${item.getTime() }</span>
+                <span class="font-size-14"><span class="font-gray ">用时 </span>${item.getSpendTime() }<span class="font-gray"></span></span>
+                <span class="score float-right font-green font-bold mrg10R">${item.getScore() }</span>
+            </div>
+        </c:forEach>
+<!--             <div class="rcd">
                 <span><i class="fa fa-clock-o font-purple"></i> 07-14 10:34</span>
                 <span class="font-size-14"><span class="font-gray ">用时 </span>12<span class="font-gray"> 分钟</span></span>
                 <span class="score float-right font-green font-bold mrg10R">80</span>
@@ -120,12 +127,7 @@
                 <span><i class="fa fa-clock-o font-purple"></i> 07-14 10:34</span>
                 <span class="font-size-14"><span class="font-gray ">用时 </span>12<span class="font-gray"> 分钟</span></span>
                 <span class="score float-right font-green font-bold mrg10R">80</span>
-            </div>
-            <div class="rcd">
-                <span><i class="fa fa-clock-o font-purple"></i> 07-14 10:34</span>
-                <span class="font-size-14"><span class="font-gray ">用时 </span>12<span class="font-gray"> 分钟</span></span>
-                <span class="score float-right font-green font-bold mrg10R">80</span>
-            </div>
+            </div> -->
         </div>
     </div>
     
@@ -138,7 +140,58 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
+var pageno=1;
+var courseid= ${courseid };
+function fetchData() {
+	//记录当前页数
+	pageno++;
+	//用ajax获取页面信息
+	
+	$.ajax({
+		
+		url: $("#appName").val()+"/student/manage/course/more-course-test",
+		type: "POST",
+		data: {
+			courseid:courseid,
+			pageNo: pageno,
+		},
+		timeout: 5000,
+		dataType: "JSON",
+		success: function(res) {
+			if(res.code == 100) {
+				alert(res.msg);
+			} else {
+				if(res.length<1){
+					$(".btn-more").removeAttr("href");
+					$(".btn-more").html("没有更多了");		
+				}else{
+					joinData(res);
+					$(".btn-more").html("查看更多");	
+				}	
+			}
+		},
+		complete: completeHandler
+	});
+	$(".btn-more").html("获取中...");
+}
 
+function joinData(res) {         
+   	var html = new Array(
+		"<div class='rcd'><span><i class='fa fa-clock-o font-purple'></i>",
+		"time",
+		"</span><span class='font-size-14'><span class='font-gray '>用时 </span>",
+		"spendTime",
+		"<span class='font-gray'> </span></span><span class='score float-right font-green font-bold mrg10R'>",
+		"score",
+		"</span></div>"
+	);
+	for(var i=0; i<res.length; ++i) {
+		html[1]=res[i].time;
+		html[3]=res[i].spendTime;
+		html[5]=res[i].score;
+		$(".content").append(html.join(''));
+	}
+}
 </script>
 </body>
 </html>

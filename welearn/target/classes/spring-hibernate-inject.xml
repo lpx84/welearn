@@ -27,6 +27,9 @@
 	<bean id="courseFeedbackDao" class="com.welearn.dao.CourseFeedbackDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="courseExamDao" class="com.welearn.dao.CourseExamDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<bean id="courseHomeworkDao" class="com.welearn.dao.CourseHomeworkDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -82,6 +85,7 @@
 	<!-- ===================== CourseService =========================== -->
 	<bean id="courseServiceBase" class="com.welearn.service.impl.CourseServiceImpl">
 		<property name="courseDao" ref="courseDao"></property>
+		<property name="courseExamDao" ref="courseExamDao"></property>
 		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
 		<property name="courseHomeworkDao" ref="courseHomeworkDao"></property>
 		<property name="courseFeedbackDao" ref="courseFeedbackDao"></property>

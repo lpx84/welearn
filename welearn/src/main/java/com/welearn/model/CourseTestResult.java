@@ -10,6 +10,7 @@ public class CourseTestResult {
 	private String time;
 	private String spendTime;
 	private String score;
+	private String result;
 
 	public String getTime() {
 		return time;
@@ -33,6 +34,14 @@ public class CourseTestResult {
 
 	public void setScore(String score) {
 		this.score = score;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 }

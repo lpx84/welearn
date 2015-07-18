@@ -8,6 +8,7 @@ import com.welearn.entity.Course;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.CourseTestResult;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
 
@@ -134,6 +135,14 @@ public interface CourseService {
 	 */
 	public boolean addDiscussContent(int courseid,int studentid,String content);
 	
+	/**
+	 * 查找数据库中的答题记录
+	 * @param courseid
+	 * @param studentid
+	 * @param pageNo
+	 * @return
+	 */
+	public ArrayList<CourseTestResult> queryCourseExamResult(int courseid,int studentid,int pageNo);
 	
 	
 }
