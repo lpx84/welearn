@@ -107,7 +107,7 @@
             <div class="rows rows1">
                 <div class="inline-block">
                     <!-- font-red表示消息未读 已读消息设为font-gray -->
-                    <div class="rows rows11 name"><i class="glyph-icon font-red fa-bullhorn"></i>&nbsp;第一次作业</div>
+                    <div class="rows rows11 name"><i class="glyph-icon font-red fa-bullhorn"></i>&nbsp;${item.getTitle() }</div>
                     <div class="rows rows12">
                         <span class="time ">
                             <span class="lab">发布：</span>

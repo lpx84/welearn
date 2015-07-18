@@ -11,6 +11,7 @@ public class CourseHomework {
 	private Integer courseId;
 	private String create_time;
 	private String deadline;
+	private String courseName;
 
 	public String getTitle() {
 		return title;
@@ -51,5 +52,14 @@ public class CourseHomework {
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+	
 
 }

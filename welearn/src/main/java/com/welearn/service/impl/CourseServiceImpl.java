@@ -327,6 +327,29 @@ public class CourseServiceImpl implements CourseService {
 		return modelList;
 	}
 
+	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomeworkNew(
+			int studentid, int pageNo, int pageItemNo) {
+		ArrayList<CourseHomework> list = (ArrayList<CourseHomework>) courseHomeworkDao.getCourseHomeworksByStudentId(studentid, pageNo, pageItemNo);
+		ArrayList<com.welearn.model.CourseHomework> modelList = new ArrayList<com.welearn.model.CourseHomework>();
+
+		for (int i = 0; i < list.size(); i++) {
+			com.welearn.model.CourseHomework courseHomework = new com.welearn.model.CourseHomework();
+			if (list.get(i).getStatus() == 1) {
+				courseHomework.setContent(list.get(i).getContent());
+				courseHomework.setCourseId(list.get(i).getCourseId());
+				courseHomework.setCourseName(list.get(i).getCourseEntity().getName());
+				courseHomework.setCreate_time(TimeUtil.formatDate(list.get(i)
+						.getCreate_time()));
+				courseHomework.setDeadline(TimeUtil.formatDate(list.get(i)
+						.getDeadline()));
+				courseHomework.setTitle(list.get(i).getTitle());
+				modelList.add(courseHomework);
+			}
+		}
+
+		return modelList;
+	}
+	
 	public boolean addFeedback(int courseid, String content, boolean anonymous,
 			String studentName) {
 		CourseFeedback courseFeedback = new CourseFeedback();
@@ -472,5 +495,7 @@ public class CourseServiceImpl implements CourseService {
 
 		return null;
 	}
+
+
 
 }

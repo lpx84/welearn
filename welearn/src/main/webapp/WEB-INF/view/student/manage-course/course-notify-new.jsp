@@ -83,6 +83,17 @@
         font-size: 0.8em;
         margin-bottom: 5px;
     }   
+   
+    .btn-more {
+   		display: block;
+   		width: 100%;
+   }
+   
+   .btn-more span {
+   		position: absolute;
+   		width: 100%;
+   		text-align: center;
+   }
 </style>
 </head>
 <body>

@@ -94,6 +94,16 @@ public interface CourseService {
 			int courseId, int pageNo, int pageItemNo);
 
 	/**
+	 * 根据学生id查找其作业通知
+	 * @param studentid
+	 * @param pageNo
+	 * @param pageItemNo
+	 * @return
+	 */
+	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomeworkNew(
+			int studentid, int pageNo, int pageItemNo);
+	
+	/**
 	 * 根据学生的id获取该学生这学期上的课程
 	 * 
 	 * @param studentId

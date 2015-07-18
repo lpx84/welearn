@@ -26,7 +26,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 72%;
     }
     
     .content-box {
@@ -68,7 +67,7 @@
     
     .i-toggle {
         position: absolute;
-        top: 15px;
+        top: 25px;
         right: 0px;
     }
     
@@ -78,34 +77,48 @@
         padding: 10px 5px;
         background: #fafafa;
     }
-       
+    
+    .rows .course {
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
+    
+   .btn-more {
+   		display: block;
+   		width: 100%;
+   }
+   
+   .btn-more span {
+   		position: absolute;
+   		width: 100%;
+   		text-align: center;
+   }   
 </style>
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <span class="title">软件工程专业研究方法论与创新教育</span>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
+    <h3 class="content-box-header bg-gray text-center">
+        
+        <title class="title">最新作业</title>
     </h3>
     <div class="content">
+    <c:forEach var="item" items="${list }"> 
         <div class="rcd">
             <div class="rows rows1">
                 <div class="inline-block">
-                    <!-- font-red表示消息未读 已读消息设为font-gray -->
-                    <div class="rows rows11 name"><i class="glyph-icon font-red fa-bullhorn"></i>&nbsp;第一次作业</div>
+                    <div class="rows rows11 name"><i class="glyph-icon font-gray fa-file-text-o"></i>&nbsp;${item.getTitle() }</div>
+                    <div class="rows rows11 course">
+                        <span class="font-gray">课程：</span>
+                        <span class="label bg-blue"> ${item.getCourseName() }</span>
+                    </div>
                     <div class="rows rows12">
                         <span class="time ">
                             <span class="lab">发布：</span>
-                            <span class="label bg-gray">07-11 12:43</span>
+                            <span class="label bg-gray">${item.getCreate_time() }</span>
                         </span>
                         <span class="time ">
                             <span class="lab">截止：</span>
-                            <span class="label bg-green">07-15 00:00</span>
+                            <span class="label bg-green">${item.getDeadline() }</span>
                         </span>
                     </div>
                 </div>
@@ -114,32 +127,11 @@
                 </div>
             </div>
             <div class="row rows rows2 text" style="display: none;">
-                这是作业这是作业这是作业这是作业这是作业这是作业
+                 ${item.getContent() }
             </div>
         </div>
-        <div class="rcd">
-            <div class="rows rows1">
-                <div class="inline-block">
-                    <div class="rows rows11 name"><i class="glyph-icon font-gray fa-bullhorn"></i>&nbsp;第一次作业</div>
-                    <div class="rows rows12">
-                        <span class="time ">
-                            <span class="lab">发布：</span>
-                            <span class="label bg-gray">07-11 12:43</span>
-                        </span>
-                        <span class="time ">
-                            <span class="lab">截止：</span>
-                            <span class="label bg-green">07-15 00:00</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="inline-block i-toggle">
-                    <i class="fa fa-chevron-right"></i>
-                </div>
-            </div>
-            <div class="row rows rows2 text" style="display: none;">
-                这是作业这是作业这是作业这是作业这是作业这是作业
-            </div>
-        </div>
+    </c:forEach>
+        
     </div>
     
     <!-- 当前页号，下一次请求在此基础上加1 -->
@@ -179,6 +171,66 @@ $(".rows.rows1").click(function(){
 if (($(document.body).height() + 10) < $(window).height()) {
     $(".btn-more").addClass("fixed-bottom");
 };
+
+var pageno=1;
+function fetchData() {
+	//记录当前页数
+	pageno++;
+	//用ajax获取页面信息
+	
+	$.ajax({
+		
+		url: $("#appName").val()+"/student/manage/course/more-course-notify-new",
+		type: "POST",
+		data: {
+			pageNo: pageno,
+		},
+		timeout: 5000,
+		dataType: "JSON",
+		success: function(res) {
+			if(res.code == 100) {
+				alert(res.msg);
+			} else {
+				if(res.length<1){
+					$(".btn-more").removeAttr("href");
+					$(".btn-more").html("没有更多了");		
+				}else{
+					joinData(res);
+					$(".btn-more").html("查看更多");	
+				}	
+			}
+		},
+		complete: completeHandler
+	});
+	$(".btn-more").html("获取中...");
+}
+
+function joinData(res) {              
+	var html = new Array(			
+		"<div class='rcd'><div class='rows rows1'><div class='inline-block'><div class='rows rows11 name'><i class='glyph-icon font-red fa-bullhorn'></i>&nbsp;",
+		"title",
+		"</div><div class='rows rows11 course'><span class='font-gray'>课程：</span><span class='label bg-blue'>",
+		"courseName",
+		"</span></div><div class='rows rows12'><span class='time '><span class='lab'>发布：</span><span class='label bg-gray'>",
+		"time",
+		" </span></span><span class='time'><span class='lab'>截止：</span><span class='label bg-green'>",
+		"deadline",
+		"</span></span></div></div><div class='inline-block i-toggle'> <i class='fa fa-chevron-right'></i></div></div><div class='row rows rows2 text' style='display: none;'>",
+		"content",
+		"</div></div>"
+	);
+	for(var i=0; i<res.length; ++i) {
+		html[1]=res[i].title;
+		html[3]=res[i].courseName;
+		html[5]=res[i].create_time;
+		html[7]=res[i].deadline;
+		html[9]=res[i].content;
+		$(".content").append(html.join(''));
+	}
+}
+
+
+
 </script>
 </body>
 </html>
