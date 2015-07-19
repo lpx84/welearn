@@ -85,96 +85,56 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
+    	<div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='course-test'">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
-        <label class="title">软件工程专业研究方法论与创新教育</label>
+        <label class="title">${courseName }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>
     </h3>
     <div class="content">
+    
+    <c:forEach var="item" items="${list }">
         <div id="rcd34" class="rcd" data-id="34"> <!-- rcd32中32指的是problem的id号 -->
             <div class="problem-title mrg5B">
                 <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
-                <span class="problem-no">1</span>、
-                <span>北京交通大学是哪一年建立的？</span>
+                <span class="problem-no">${item.getDisplayNo() }</span>、
+                <span>${item.getContent() }</span>
             </div>
             <div class="problem-options">
-                <div class="option selected">
-                    <span class="code">A</span>
-                    <span class="text">1896</span>
+            
+            <c:forEach var="item1" items="${item.getOptions() }">
+               <c:if test="${item1.getCode().equals(item.getAnswer())}">
+                   <div class="option selected">
+                </c:if>
+                <c:if test="${!item1.getCode().equals(item.getAnswer())}">
+                   <div class="option">
+                </c:if>                    
+                    <span class="code">${item1.getCode() }</span>
+                    <span class="text">${item1.getContent() }</span>
                 </div>
-                <div class="option">
-                    <span class="code">B</span>
-                    <span class="text">1856</span>
-                </div>
-                <div class="option">
-                    <span class="code">C</span>
-                    <span class="text">1886</span>
-                </div>
-                <div class="option">
-                    <span class="code">D</span>
-                    <span class="text">1897</span>
-                </div>
+            </c:forEach>
+
             </div>
+            
             <div class="problem-answer">
                 <div class="mrg10T">
                     <span class="font-gray">正确答案：</span>
-                    <span class="font-green font-size-20">A</span>
+                    <span class="font-green font-size-20">${item.getAnswer() }</span>
                 </div>
                 <div class="mrg5T">
                     <span class="font-gray">你的答案：</span>
-                    <span class="font-blue font-size-20">C</span>
+                    <span class="font-blue font-size-20">${item.getWrongAnswer() }</span>
                 </div>
                 <div class="explain mrg10T">
                     <span class="font-gray">题解：</span>
-                    <span class="font-size-15">这道题你都不会？？？？？？？还是交大人么</span>
+                    <span class="font-size-15">${item.getComment() }</span>
                     
                 </div>
             </div>
-        </div>
-        
-        <div id="rcd35" class="rcd" data-id="35"> <!-- rcd32中32指的是problem的id号 -->
-            <div class="problem-title mrg5B">
-                <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
-                <span class="problem-no">2</span>、
-                <span>北京交通大学是哪一年建立的？</span>
-            </div>
-            <div class="problem-options">
-                <div class="option selected">
-                    <span class="code">A</span>
-                    <span class="text">1896</span>
-                </div>
-                <div class="option">
-                    <span class="code">B</span>
-                    <span class="text">1856</span>
-                </div>
-                <div class="option">
-                    <span class="code">C</span>
-                    <span class="text">1886</span>
-                </div>
-                <div class="option">
-                    <span class="code">D</span>
-                    <span class="text">1897</span>
-                </div>
-            </div>
-            <div class="problem-answer">
-                <div class="mrg10T">
-                    <span class="font-gray">正确答案：</span>
-                    <span class="font-green font-size-20">A</span>
-                </div>
-                <div class="mrg5T">
-                    <span class="font-gray">你的答案：</span>
-                    <span class="font-blue font-size-20">C</span>
-                </div>
-                <div class="explain mrg10T">
-                    <span class="font-gray">题解：</span>
-                    <span class="font-size-15">这道题你都不会？？？？？？？还是交大人么</span>
-                    
-                </div>
-            </div>
-        </div>
+        </div>        
+    </c:forEach>
         
     </div>
     

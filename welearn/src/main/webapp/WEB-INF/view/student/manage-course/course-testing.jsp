@@ -85,7 +85,7 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray">
-        <div class="glyph-icon icon-separator transparent back-btn">
+       <div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='course-test'">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
         <span class="title">${courseName }</span>
@@ -121,6 +121,10 @@
     <a href="javascript:submitAnswer();" class="btn btn-submit large display-block float-none bg-blue">
         <span class="button-span">提交答案</span>
     </a>
+    
+    <form id="answer-form" action="<%=request.getContextPath() %>/student/manage/course/course-test-result" type=post"">
+    	<input name="answer" id="answer" type="hidden">
+    </form>
 </div>
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
@@ -134,16 +138,14 @@ $(".problem-options .option").click(function(){
     $(this).addClass("selected");
     $(this).parent().parent().removeClass("unfinish");
     
-    //console.log($options);
+    
 });
 
 function submitAnswer() {
     var ans = "";
     var finished = true;
     var firstUnfinishId = 0;
-//    $(".rcd").each(function(i,node){
-//        
-//    });
+
     var $problems = $(".rcd");
     for(var i=0; i<$problems.length; ++i) {
         var $problem = jQuery($problems.get(i));
@@ -164,15 +166,22 @@ function submitAnswer() {
     
     if(finished) {
         //提交操作 答案格式： "id:answer;id:answer;id:answer;"
-        alert(ans);
+       // alert(ans);
         //location.href = "./course-test-result.html";
-        $.ajax({
-        	url: "./course-test-result.html",
+		/*
+		        ({
+        	url: $("#appName").val()+"/student/manage/course/course-test-result",
         	type: "post",
         	data: {
         		answer: ans
         	}
         });
+		*/
+        
+        $("#answer-form #answer").val(ans);
+        $("#answer-form").submit();
+        
+        
     } else {
         location = "#rcd"+firstUnfinishId;
         alert("您还有未完成的题目，请完成后提交！");

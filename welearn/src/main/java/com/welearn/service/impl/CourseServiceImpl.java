@@ -26,6 +26,7 @@ import com.welearn.entity.Student;
 import com.welearn.entity.Teacher;
 import com.welearn.entity.TimeCourse;
 import com.welearn.model.CETGrade;
+import com.welearn.model.CourseAnswer;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.CourseProblem;
@@ -33,6 +34,7 @@ import com.welearn.model.CourseTestResult;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.CourseService;
+import com.welearn.util.AlgorithmUtil;
 import com.welearn.util.TimeUtil;
 import com.welearn.dao.TimeCourseDao;
 
@@ -107,16 +109,16 @@ public class CourseServiceImpl implements CourseService {
 		CourseGrade grade;
 		ArrayList<CourseGrade> list = new ArrayList<CourseGrade>();
 
-//		for (int i = 0; i < 5; i++) {
-//			grade = new CourseGrade();
-//			grade.setCredit("2学分");
-//			grade.setGrade("A");
-//			grade.setName("系统分析" + i);
-//			grade.setSemester("2014-2015学年第二学期");
-//			grade.setType("专业课");
-//			list.add(grade);
-//		}
-		
+		// for (int i = 0; i < 5; i++) {
+		// grade = new CourseGrade();
+		// grade.setCredit("2学分");
+		// grade.setGrade("A");
+		// grade.setName("系统分析" + i);
+		// grade.setSemester("2014-2015学年第二学期");
+		// grade.setType("专业课");
+		// list.add(grade);
+		// }
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("A+");
@@ -124,7 +126,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第二学期");
 		grade.setType("专业限选课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("A+");
@@ -132,7 +134,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第二学期");
 		grade.setType("专业课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("1学分");
 		grade.setGrade("P");
@@ -140,7 +142,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第二学期");
 		grade.setType("专业拓展课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("P");
@@ -148,7 +150,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第二学期");
 		grade.setType("全校任选课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("P");
@@ -156,7 +158,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第二学期");
 		grade.setType("全校任选课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("A");
@@ -164,21 +166,20 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第二学期");
 		grade.setType("专业限选课");
 		list.add(grade);
-		
-		
+
 		map.put("2014-2015学年第二学期", list);
 
 		list = new ArrayList<CourseGrade>();
-//		for (int i = 0; i < 5; i++) {
-//			grade = new CourseGrade();
-//			grade.setCredit("2学分");
-//			grade.setGrade("A");
-//			grade.setName("系统分析" + i);
-//			grade.setSemester("2014-2015学年第一学期");
-//			grade.setType("专业课");
-//			list.add(grade);
-//		}
-		
+		// for (int i = 0; i < 5; i++) {
+		// grade = new CourseGrade();
+		// grade.setCredit("2学分");
+		// grade.setGrade("A");
+		// grade.setName("系统分析" + i);
+		// grade.setSemester("2014-2015学年第一学期");
+		// grade.setType("专业课");
+		// list.add(grade);
+		// }
+
 		grade = new CourseGrade();
 		grade.setCredit("4学分");
 		grade.setGrade("A");
@@ -186,7 +187,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第一学期");
 		grade.setType("专业课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("A+");
@@ -194,7 +195,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第一学期");
 		grade.setType("专业限选课");
 		list.add(grade);
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("A");
@@ -202,8 +203,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第一学期");
 		grade.setType("专业课");
 		list.add(grade);
-		
-		
+
 		grade = new CourseGrade();
 		grade.setCredit("2学分");
 		grade.setGrade("A+");
@@ -211,8 +211,7 @@ public class CourseServiceImpl implements CourseService {
 		grade.setSemester("2014-2015学年第一学期");
 		grade.setType("专业限选课");
 		list.add(grade);
-		
-		
+
 		map.put("2014-2015学年第一学期", list);
 
 		return map;
@@ -415,7 +414,8 @@ public class CourseServiceImpl implements CourseService {
 
 	public ArrayList<com.welearn.model.CourseHomework> queryCourseHomeworkNew(
 			int studentid, int pageNo, int pageItemNo) {
-		ArrayList<CourseHomework> list = (ArrayList<CourseHomework>) courseHomeworkDao.getCourseHomeworksByStudentId(studentid, pageNo, pageItemNo);
+		ArrayList<CourseHomework> list = (ArrayList<CourseHomework>) courseHomeworkDao
+				.getCourseHomeworksByStudentId(studentid, pageNo, pageItemNo);
 		ArrayList<com.welearn.model.CourseHomework> modelList = new ArrayList<com.welearn.model.CourseHomework>();
 
 		for (int i = 0; i < list.size(); i++) {
@@ -423,7 +423,8 @@ public class CourseServiceImpl implements CourseService {
 			if (list.get(i).getStatus() == 1) {
 				courseHomework.setContent(list.get(i).getContent());
 				courseHomework.setCourseId(list.get(i).getCourseId());
-				courseHomework.setCourseName(list.get(i).getCourseEntity().getName());
+				courseHomework.setCourseName(list.get(i).getCourseEntity()
+						.getName());
 				courseHomework.setCreate_time(TimeUtil.formatDate(list.get(i)
 						.getCreate_time()));
 				courseHomework.setDeadline(TimeUtil.formatDate(list.get(i)
@@ -435,7 +436,7 @@ public class CourseServiceImpl implements CourseService {
 
 		return modelList;
 	}
-	
+
 	public boolean addFeedback(int courseid, String content, boolean anonymous,
 			String studentName) {
 		CourseFeedback courseFeedback = new CourseFeedback();
@@ -577,13 +578,14 @@ public class CourseServiceImpl implements CourseService {
 
 	public ArrayList<CourseProblem> generateCourseProblems(int courseid) {
 		ArrayList<CourseProblem> modelList = new ArrayList<CourseProblem>();
-		
-		ArrayList<com.welearn.entity.CourseProblem> list = (ArrayList<com.welearn.entity.CourseProblem>) courseProblemDao.getCourseProblemByCourseId(courseid);
+
+		ArrayList<com.welearn.entity.CourseProblem> list = (ArrayList<com.welearn.entity.CourseProblem>) courseProblemDao
+				.getCourseProblemByCourseId(courseid);
 		int size = list.size();
-		int randomNum = (int) Math.random()*size;
-		
-		for(int i=0;i<10;i++){
-			int num = (randomNum+i)%size;
+		int randomNum = (int) Math.random() * size;
+
+		for (int i = 0; i < 10; i++) {
+			int num = (randomNum + i) % size;
 			com.welearn.entity.CourseProblem problem = list.get(num);
 			CourseProblem courseProblem = new CourseProblem();
 			courseProblem.setAnswer(problem.getAnswer());
@@ -593,15 +595,80 @@ public class CourseServiceImpl implements CourseService {
 			courseProblem.setId(problem.getId());
 			courseProblem.setScore(problem.getScore());
 			courseProblem.setStatus(problem.getStatus());
-			
-			ArrayList<CourseOption> optionList = (ArrayList<CourseOption>) courseOptionDao.getCourseOptionByProblemId(problem.getId());
+
+			ArrayList<CourseOption> optionList = (ArrayList<CourseOption>) courseOptionDao
+					.getCourseOptionByProblemId(problem.getId());
 			courseProblem.setOptions(optionList);
-			modelList.add(courseProblem);			
+			modelList.add(courseProblem);
 		}
-		
+
 		return modelList;
 	}
 
+	public boolean addCourseExamRecord(int courseid, int studentid,
+			int spendTime, Date finishTime, int score, String answer) {
+		CourseExam courseExam = new CourseExam();
+		courseExam.setCourseId(courseid);
+		courseExam.setStudentId(studentid);
+		courseExam.setSpendTime(spendTime);
+		courseExam.setFinishTime(finishTime);
+		courseExam.setScore(score);
+		courseExam.setAnswer(answer);
+		courseExam.setStatus(0);
 
+		int result = courseExamDao.addCourseExam(courseExam);
+		if (result > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public int getCourseScore(String answer) {
+		ArrayList<CourseAnswer> list = AlgorithmUtil.getCourseAnswers(answer);
+		int score = 0;
+		for (int i = 0; i < list.size(); i++) {
+			CourseAnswer ans = list.get(i);
+			com.welearn.entity.CourseProblem problem = courseProblemDao
+					.getCourseProblemById(ans.getProblemId());
+			// 如果答案正确
+			if (problem.getAnswer().equals(ans.getAnswer())) {
+				score = score + problem.getScore();
+			}
+		}
+
+		return score;
+	}
+
+	public ArrayList<CourseProblem> getWrongCourseProblems(String answer) {
+		// 存储问题的列表
+		ArrayList<CourseProblem> modelList = new ArrayList<CourseProblem>();
+		// 将字符串的answer转化为相应对象
+		ArrayList<CourseAnswer> list = AlgorithmUtil.getCourseAnswers(answer);
+		// 遍历每一个答案，把错误的答案列出来
+		for (int i = 0; i < list.size(); i++) {
+			CourseAnswer ans = list.get(i);
+			com.welearn.entity.CourseProblem problem = courseProblemDao
+					.getCourseProblemById(ans.getProblemId());
+			// 如果答案错误
+			if (!problem.getAnswer().equals(ans.getAnswer())) {
+				CourseProblem courseProblem = new CourseProblem();
+				courseProblem.setAnswer(problem.getAnswer());
+				courseProblem.setComment(problem.getComment());
+				courseProblem.setContent(problem.getContent());
+				courseProblem.setCourseId(problem.getCourseId());
+				courseProblem.setId(problem.getId());
+				courseProblem.setScore(problem.getScore());
+				courseProblem.setStatus(problem.getStatus());
+				courseProblem.setWrongAnswer(ans.getAnswer());// 错误的答案
+				courseProblem.setDisplayNo(Integer.valueOf(ans.getDisplayNo()));
+
+				ArrayList<CourseOption> optionList = (ArrayList<CourseOption>) courseOptionDao
+						.getCourseOptionByProblemId(problem.getId());
+				courseProblem.setOptions(optionList);
+				modelList.add(courseProblem);
+			}
+		}
+		return modelList;
+	}
 
 }
