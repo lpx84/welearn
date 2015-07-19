@@ -115,25 +115,25 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 */
 	public String getOpenIdByCode(String code) {
 		 // 获取用户access_token的url
-//		 String get_access_token_url =
-//		 "https://api.weixin.qq.com/sns/oauth2/access_token?"
-//		 + "appid=" + WechatConfig.appId
-//		 + "&secret=" + WechatConfig.appsecret
-//		 + "&code=" + code
-//		 + "&grant_type=authorization_code";
-//		 //向微信发送请求，获取openid
-//		 String json = HttpUtil.getUrl(get_access_token_url);
-//		 System.out.println(json);
-//		 JSONObject jsonObject = JSONObject.fromObject(json);
-//		 String openid = "illegal";
-//		 try {
-//		 openid = jsonObject.getString("openid");
-//		 } catch (Exception e) {
-//		 System.err.println(e.toString());
-//		 }
-//	
-//		 return openid;
-         return code;
+		 String get_access_token_url =
+		 "https://api.weixin.qq.com/sns/oauth2/access_token?"
+		 + "appid=" + WechatConfig.appId
+		 + "&secret=" + WechatConfig.appsecret
+		 + "&code=" + code
+		 + "&grant_type=authorization_code";
+		 //向微信发送请求，获取openid
+		 String json = HttpUtil.getUrl(get_access_token_url);
+		 System.out.println(json);
+		 JSONObject jsonObject = JSONObject.fromObject(json);
+		 String openid = "illegal";
+		 try {
+		 openid = jsonObject.getString("openid");
+		 } catch (Exception e) {
+		 System.err.println(e.toString());
+		 }
+	
+		 return openid;
+//         return code;
 	}
 	
 	
@@ -189,7 +189,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			if(null == record) {
 				content = "你没有签到任务，不能签到！";
 			} else if(now.before(task.getStartTime()) || now.after(task.getEndTime())) {
-				content = "签到时限已过，你不能再签到了！";
+				content = "本次签到时限已过，你不能再签到了！";
 			} else {
 				String picUrl = pic.getPicUrl();
 				String filePath = "D:/Program Files/Apache Software Foundation/Tomcat 8.0/webapps";
@@ -253,7 +253,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 				//List<StudentCourse> scList = studentCourseDao.getStudentCourseByStudentId(student.getId());
 				
 				//List<AttendTask> attendList = attendTaskDao.getNowAttendTasks(new Date());
-				List<AttendRecord> recordList = attendRecordDao.getAttendRecords(student.getId(), InfoCode.ATTEND_NOT, new Date());
+				List<AttendRecord> recordList = attendRecordDao.getAttendRecordsByStudentIdandTime(student.getId(), InfoCode.ATTEND_NOT, new Date());
 				String content = "你当前有以下签到任务，请回复课程前面的数字确认：";
 				boolean hasTask = false;
 //				for(AttendTask a : attendList) {
@@ -311,7 +311,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			if(null == s) {
 				//AttendRecord tempAttend = null;
 				//AttendTask task = attendTaskDao.getAttendTaskById(attendTaskId);
-				AttendRecord waitRecord = attendRecordDao.getAttendRecord(id);
+				AttendRecord waitRecord = attendRecordDao.getAttendRecordById(id);
 				
 				Date now = new Date();
 				if(null == waitRecord) {
@@ -332,13 +332,8 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 						
 						waitRecord.setLogTime(new Date());
 						waitRecord.setStatus(InfoCode.ATTEND_PREPARE);
-						
-						if(attendRecordDao.updateAttendRecord(waitRecord)) {
-							content = "确认成功，请上传签到图片！";
-						} else {
-							content = "出现错误，请重新发送该数字！";
-						}
-						
+						attendRecordDao.updateAttendRecord(waitRecord);
+						content = "确认成功，请上传签到图片！";
 					} else if(InfoCode.ATTEND_PREPARE == waitRecord.getStatus()) {
 						content = "你已经确认过了，请直接上传图片！";
 					} else if(InfoCode.ATTEND_VERIFY == waitRecord.getStatus()) {

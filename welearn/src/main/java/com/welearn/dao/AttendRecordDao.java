@@ -214,7 +214,7 @@ public class AttendRecordDao extends SuperDao {
 		return result;
 	}
 	
-	public AttendRecord getAttendRecordsById(int id) {
+	public AttendRecord getAttendRecordById(int id) {
 		hql = "from AttendRecord as a inner join fetch a.attendTaskEntity where a.id=?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setInteger(0, id);

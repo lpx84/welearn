@@ -96,13 +96,13 @@ public class TeacherController {
 		return null;
 	}
 	
-	@RequestMapping("test")
-	public String test(
-			) {
-		
-		teacherService.test();
-		
-		return null;
-	}
-	
+//	@RequestMapping("test")
+//	public String test(
+//			) {
+//		
+//		teacherService.test();
+//		
+//		return null;
+//	}
+//	
 }
