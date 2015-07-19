@@ -217,7 +217,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		            attendRecordDao.updateAttendRecord(record);
 		            
 		            
-		            content = "恭喜，本次签到成功，你可以在课程管理->签到记录中查看历史签到！";
+		            content = "图片上传成功，等待老师审核，你可以在课程管理->签到记录中查看签到状态！";
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();
@@ -250,19 +250,26 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			if("B_COURSE_ATTEND".equals(event.getEventKey())) { //点击的是签到按钮
 				String openId = event.getFromUserName();
 				Student student = studentDao.getStudentByOpenID(openId);
-				List<StudentCourse> scList = studentCourseDao.getStudentCourseByStudentId(student.getId());
+				//List<StudentCourse> scList = studentCourseDao.getStudentCourseByStudentId(student.getId());
 				
-				List<AttendTask> attendList = attendTaskDao.getNowAttendTasks(new Date());
+				//List<AttendTask> attendList = attendTaskDao.getNowAttendTasks(new Date());
+				List<AttendRecord> recordList = attendRecordDao.getAttendRecords(student.getId(), InfoCode.ATTEND_NOT, new Date());
 				String content = "你当前有以下签到任务，请回复课程前面的数字确认：";
 				boolean hasTask = false;
-				for(AttendTask a : attendList) {
-					for(StudentCourse sc : scList) {
-						if(sc.getCourseId().equals(a.getCourseId())) {
-							hasTask = true;
-							content +=  "\n" + a.getId() +": " + a.getCourseEntity().getName();
-							break;
-						}
-					}
+//				for(AttendTask a : attendList) {
+//					for(StudentCourse sc : scList) {
+//						if(sc.getCourseId().equals(a.getCourseId())) {
+//							hasTask = true;
+//							content +=  "\n" + a.getId() +": " + a.getCourseEntity().getName();
+//							break;
+//						}
+//					}
+//				}
+				
+				for(AttendRecord rcd : recordList) {
+					hasTask = true;
+					AttendTask a =  attendTaskDao.getAttendTaskById(rcd.getAttendTaskId());
+					content +=  "\n" + rcd.getId() +": " + a.getCourseEntity().getName();
 				}
 				if(!hasTask) {
 					content = "不要着急，你当前没有签到任务！";
@@ -297,40 +304,56 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	private String handleTextMsg(MsgReceive msg) {
 		String keyword = ((MsgReceiveText)msg).getContent();
 		if(NumberUtil.isInteger(keyword)) { //如果是数字，默认是签到操作
-			Integer attendTaskId = Integer.parseInt(keyword);
+			Integer id = Integer.parseInt(keyword);
 			Student s = studentDao.getStudentByOpenID(msg.getFromUserName());
 			String content = "null";
-			AttendRecord tempAttend = null;
-			AttendTask task = attendTaskDao.getAttendTaskById(attendTaskId);
-			if(null == task) {
-				content = "你选择的签到任务不存在！";
-			} else if(null != (tempAttend = attendRecordDao.getAttendRecord(s.getId(), attendTaskId))) {
-				if(InfoCode.ATTEND_PREPARE == tempAttend.getStatus() ||
-						InfoCode.ATTEND_NOT == tempAttend.getStatus()) {
-					Date now = new Date();
-					if(now.after(task.getStartTime()) && now.before(task.getEndTime())) {
-						content = "确认成功，请上传签到图片！";
+			
+			if(null == s) {
+				//AttendRecord tempAttend = null;
+				//AttendTask task = attendTaskDao.getAttendTaskById(attendTaskId);
+				AttendRecord waitRecord = attendRecordDao.getAttendRecord(id);
+				
+				Date now = new Date();
+				if(null == waitRecord) {
+					content = "你选择的签到任务不存在！";
+				} else if(now.before(waitRecord.getAttendTaskEntity().getStartTime()) ||
+						now.after(waitRecord.getAttendTaskEntity().getEndTime())) {
+					content = "本次签到时限已过。你不能再签到了！";
+				} else {
+					
+					if(InfoCode.ATTEND_NOT == waitRecord.getStatus()) {
+						
+//						AttendRecord r = new AttendRecord();
+//						r.setAttendTaskId(attendTaskId);
+//						r.setLogTime(new Date());
+//						r.setReferenceRes(0);
+//						r.setStatus(InfoCode.ATTEND_PREPARE);
+//						r.setStudentid(s.getId());
+						
+						waitRecord.setLogTime(new Date());
+						waitRecord.setStatus(InfoCode.ATTEND_PREPARE);
+						
+						if(attendRecordDao.updateAttendRecord(waitRecord)) {
+							content = "确认成功，请上传签到图片！";
+						} else {
+							content = "出现错误，请重新发送该数字！";
+						}
+						
+					} else if(InfoCode.ATTEND_PREPARE == waitRecord.getStatus()) {
+						content = "你已经确认过了，请直接上传图片！";
+					} else if(InfoCode.ATTEND_VERIFY == waitRecord.getStatus()) {
+						content = "你已经上传过图片了，请前往课程管理 -> 选择课程 -> 签到记录里查看记录！";
+					} else if(InfoCode.ATTEND_PASS == waitRecord.getStatus()) {
+						content = "你已经签过成功了，请前往课程管理 -> 选择课程 -> 签到记录里查看记录！";
 					} else {
-						content = "本次签到时限已过。你不能再签到了！";
+						content = "你已经签过到了，老师审核未通过！";
 					}
-				} else {
-					content = "你已经签过到了，不能重复签到！";
+					
 				}
-				
 			} else {
-				AttendRecord r = new AttendRecord();
-				r.setAttendTaskId(attendTaskId);
-				r.setLogTime(new Date());
-				r.setReferenceRes(0);
-				r.setStatus(InfoCode.ATTEND_PREPARE);
-				r.setStudentid(s.getId());
-				if(0 < attendRecordDao.addAttendRecord(r)) {
-					content = "确认成功，请上传签到图片！";
-				} else {
-					content = "出现错误，请重新发送该数字！";
-				}
-				
+				content = "您还没有绑定系统，请先绑定！";
 			}
+			
 			MsgReplyText text = new MsgReplyText(content,0);
 			return text.getReplyXML(msg.getFromUserName(), msg.getToUserName());
 		} else { //如果不是则转到图灵机器人
