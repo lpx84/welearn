@@ -105,7 +105,7 @@
                     </ol>
                 </p>
             </div>
-            <a href="course-testing" class="btn large display-block float-none primary-bg">
+            <a href="course-testing?courseid=${courseid }" class="btn large display-block float-none primary-bg">
                 <span class="button-content"><i class="fa fa-share"></i> 开始新测试</span>
             </a>
         </div>

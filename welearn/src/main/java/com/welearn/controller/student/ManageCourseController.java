@@ -18,6 +18,7 @@ import com.welearn.aop.Authentication;
 import com.welearn.model.AttendRecord;
 import com.welearn.model.Course;
 import com.welearn.model.CourseDiscuss;
+import com.welearn.model.CourseProblem;
 import com.welearn.model.CourseTestResult;
 import com.welearn.model.Semester;
 import com.welearn.service.intef.AttendService;
@@ -636,10 +637,25 @@ public class ManageCourseController {
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 获取studentid
 		int studentid = studentService.getStudentByOpenId(openid).getId();
-
-		// 查询余额
-		View view = new View("student", "manage-course", "course-testing",
+		
+		ArrayList<CourseProblem> list = courseService.generateCourseProblems(courseid);
+		
+		View view;
+        if(list.size()<10){
+			view = new View("error", "wechat", "info", "没有习题信息。");
+			view.addObject("info", "没有习题信息。");
+			return view;
+        }
+        
+		Date date = new Date();
+		//将开始做题的时间存入session
+		session.setAttribute("startTime", TimeUtil.formatDate(date));
+		//创建测试页面
+		view = new View("student", "manage-course", "course-testing",
 				"课程评测");
+		
+		view.addObject("list", list);
+		view.addObject("courseName", courseName);
 
 		return view;
 	}

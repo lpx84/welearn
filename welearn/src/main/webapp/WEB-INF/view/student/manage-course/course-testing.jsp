@@ -9,7 +9,7 @@
 <title>${title }</title>
 <style type="text/css">
    
- .btn-more .button-content {
+     .btn-more .button-content {
         font-size: 1.3em;
         line-height: 2em;
     }
@@ -79,90 +79,43 @@
     
     .btn-submit {
         margin: 10px 5px;
-    }   
+    }  
 </style>
 </head>
 <body>
 <div class="content-box">
-    <h3 class="content-box-header bg-gray text-center">
-        <label class="title">软件工程专业研究方法论与创新教育</label>
+    <h3 class="content-box-header bg-gray">
+        <div class="glyph-icon icon-separator transparent back-btn">
+            <i class="glyph-icon fa-chevron-left"></i>
+        </div>
+        <span class="title">${courseName }</span>
+        <div class="glyph-icon icon-separator transparent float-right">
+            <i class="glyph-icon"></i>
+        </div>
     </h3>
     <div class="content">
-        <div id="rcd34" class="rcd" data-id="34"> <!-- rcd32中32指的是problem的id号 -->
+    <%int count=0; %>
+        <c:forEach var="item" items="${list }">
+        <%count++; %>
+        <div id="rcd${item.getId() }" class="rcd" data-id="${item.getId() }"> <!-- rcd32中32指的是problem的id号 -->
             <div class="problem-title">
                 <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
-                <span class="problem-no">1</span>、
-                <span>北京交通大学是哪一年建立的？</span>
+                <span class="problem-no"><%=count %></span>、
+                <span>${item.getContent() }</span>
             </div>
             <div class="problem-options">
+            
+            <c:forEach var="item1" items="${item.getOptions() }">
                 <div class="option">
-                    <span class="code">A</span>
-                    <span class="text">1896</span>
+                    <span class="code">${item1.getCode() }</span>
+                    <span class="text">${item1.getContent() }</span>
                 </div>
-                <div class="option">
-                    <span class="code">B</span>
-                    <span class="text">1856</span>
-                </div>
-                <div class="option">
-                    <span class="code">C</span>
-                    <span class="text">1886</span>
-                </div>
-                <div class="option">
-                    <span class="code">D</span>
-                    <span class="text">1897</span>
-                </div>
+            </c:forEach>
+            
             </div>
         </div>
-        <div id="rcd35" class="rcd" data-id="35"> <!-- rcd32中32指的是problem的id号 -->
-            <div class="problem-title">
-                <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
-                <span class="problem-no">2</span>、
-                <span>北京交通大学是哪一年建立的？</span>
-            </div>
-            <div class="problem-options">
-                <div class="option">
-                    <span class="code">A</span>
-                    <span class="text">1896</span>
-                </div>
-                <div class="option">
-                    <span class="code">B</span>
-                    <span class="text">1856</span>
-                </div>
-                <div class="option">
-                    <span class="code">C</span>
-                    <span class="text">1886</span>
-                </div>
-                <div class="option">
-                    <span class="code">D</span>
-                    <span class="text">1897</span>
-                </div>
-            </div>
-        </div>
-        <div id="rcd32" class="rcd" data-id="32"> <!-- rcd32中32指的是problem的id号 -->
-            <div class="problem-title">
-                <!--这里的problem-no指的是题号，仅仅是从1自增的题号，不是problem真正的id-->
-                <span class="problem-no">3</span>、
-                <span>北京交通大学是哪一年建立的？</span>
-            </div>
-            <div class="problem-options">
-                <div class="option">
-                    <span class="code">A</span>
-                    <span class="text">1896</span>
-                </div>
-                <div class="option">
-                    <span class="code">B</span>
-                    <span class="text">1856</span>
-                </div>
-                <div class="option">
-                    <span class="code">C</span>
-                    <span class="text">1886</span>
-                </div>
-                <div class="option">
-                    <span class="code">D</span>
-                    <span class="text">1897</span>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
+
     </div>
     
     <a href="javascript:submitAnswer();" class="btn btn-submit large display-block float-none bg-blue">
@@ -196,19 +149,30 @@ function submitAnswer() {
         var $problem = jQuery($problems.get(i));
         var id = $problem.attr("data-id");
         var answer = getProblemSelected($problem);
+        var rcdDisplayNo = jQuery($problem.children(".problem-title")).children(".problem-no").html();
         if(answer == "null") {
+            
+            if(finished) {
+            	firstUnfinishId = id;
+            }
             finished = false;
-            firstUnfinishId = id;
             $("#rcd"+id).addClass("unfinish");
         } else {
-            ans += (id + ":" + answer + ";");
+            ans += (rcdDisplayNo + ":" + id + ":" + answer + ";");
         }
     }
     
     if(finished) {
         //提交操作 答案格式： "id:answer;id:answer;id:answer;"
         alert(ans);
-        location.href = "course-test-result";
+        //location.href = "./course-test-result.html";
+        $.ajax({
+        	url: "./course-test-result.html",
+        	type: "post",
+        	data: {
+        		answer: ans
+        	}
+        });
     } else {
         location = "#rcd"+firstUnfinishId;
         alert("您还有未完成的题目，请完成后提交！");

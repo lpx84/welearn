@@ -100,6 +100,8 @@
 		<property name="studentDao" ref="studentDao"></property>
 		<property name="teacherDao" ref="teacherDao"></property>
 		<property name="timeCourseDao" ref="timeCourseDao"></property>
+		<property name="courseProblemDao" ref="courseProblemDao"></property>
+		<property name="courseOptionDao" ref="courseOptionDao"></property>
 	</bean>
 	<bean name="courseService" parent="transactionProxy">
 		<property name="target" ref="courseServiceBase"></property>

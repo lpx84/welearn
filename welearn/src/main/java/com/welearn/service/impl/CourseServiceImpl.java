@@ -577,6 +577,7 @@ public class CourseServiceImpl implements CourseService {
 
 	public ArrayList<CourseProblem> generateCourseProblems(int courseid) {
 		ArrayList<CourseProblem> modelList = new ArrayList<CourseProblem>();
+		
 		ArrayList<com.welearn.entity.CourseProblem> list = (ArrayList<com.welearn.entity.CourseProblem>) courseProblemDao.getCourseProblemByCourseId(courseid);
 		int size = list.size();
 		int randomNum = (int) Math.random()*size;
@@ -593,7 +594,7 @@ public class CourseServiceImpl implements CourseService {
 			courseProblem.setScore(problem.getScore());
 			courseProblem.setStatus(problem.getStatus());
 			
-			ArrayList<CourseOption> optionList = courseOptionDao.getCourseOptionByProblemId(problem.getId());
+			ArrayList<CourseOption> optionList = (ArrayList<CourseOption>) courseOptionDao.getCourseOptionByProblemId(problem.getId());
 			courseProblem.setOptions(optionList);
 			modelList.add(courseProblem);			
 		}
