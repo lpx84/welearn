@@ -36,10 +36,10 @@ public class QueryPersonalController {
 	@Resource(name = "misService")
 	MisService misService;
 
-	/**
-	 * 查看当前课表
+	/**查看当前课表
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-schedule")
@@ -61,8 +61,7 @@ public class QueryPersonalController {
 		return new View("student", "query-private", "course-schedule", "我的课表");
 	}
 
-	/**
-	 * 根据周 查询当前课表
+	/**根据周 查询当前课表
 	 * 
 	 * @param weekNo
 	 * @return
@@ -93,10 +92,10 @@ public class QueryPersonalController {
 		return null;
 	}
 
-	/**
-	 * 查看考试安排
+	/**查看考试安排
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("exam-plan")
@@ -120,8 +119,7 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/**
-	 * 查看四六级考试成绩
+	/** 查看四六级考试成绩
 	 * 
 	 * @param code
 	 * @return
@@ -165,10 +163,10 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/**
-	 * 查看各个学期的课程成绩
+	/**查看各个学期的课程成绩
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-grade")
@@ -199,10 +197,10 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/**
-	 * 剩余流量查询
+	/**剩余流量查询
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("net-flow")
@@ -235,8 +233,8 @@ public class QueryPersonalController {
 
 	/**
 	 * 一卡通自助查询 返回一卡通的基本信息
-	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("ecard")
@@ -268,10 +266,8 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/**
-	 * 一卡通自助查询 返回一卡通的基本信息
+	/**一卡通自助查询 返回一卡通的基本信息
 	 * 
-	 * @param code
 	 * @return
 	 */
 	@RequestMapping("ecard-detail")
@@ -282,26 +278,5 @@ public class QueryPersonalController {
 
 		return view;
 	}
-
-	/*	*//**
-	 * 一卡通消费记录查询
-	 * 
-	 * @param startTime
-	 * @param endTime
-	 * @return
-	 */
-	/*
-	 * @RequestMapping("e-card/consume-detail")
-	 * 
-	 * @Authentication(role=InfoCode.ROLE_STUDENT)
-	 * 
-	 * @ResponseBody public String ecardConsumeDetail(
-	 * 
-	 * @RequestParam(value = "startTime") String startTime,
-	 * 
-	 * @RequestParam(value = "endTime") String endTime) {
-	 * 
-	 * return null; }
-	 */
 
 }

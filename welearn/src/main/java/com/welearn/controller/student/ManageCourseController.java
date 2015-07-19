@@ -61,6 +61,7 @@ public class ManageCourseController {
 	 * 查看我的课程
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-list")
@@ -122,8 +123,7 @@ public class ManageCourseController {
 	/**
 	 * 进入某一门课通知页面，为了防止爬取数据，这里需要验证微信登录
 	 * 
-	 * @param courseid
-	 *            课程id
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-notify")
@@ -154,8 +154,8 @@ public class ManageCourseController {
 	/**
 	 * ajax请求更多的课程通知
 	 * 
-	 * @param courseid
 	 * @param pageNo
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("more-course-notify")
@@ -214,8 +214,8 @@ public class ManageCourseController {
 	/**
 	 * ajax请求更多的课程通知
 	 * 
-	 * @param courseid
 	 * @param pageNo
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("more-course-notify-new")
@@ -239,8 +239,7 @@ public class ManageCourseController {
 	/**
 	 * 进入某一门课的课程公共页面，为了防止爬取数据，这里需要验证微信登录
 	 * 
-	 * @param courseid
-	 *            课程id
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-homework")
@@ -271,7 +270,7 @@ public class ManageCourseController {
 	/**
 	 * ajax请求更多的课程作业
 	 * 
-	 * @param courseid
+	 * @param session
 	 * @param pageNo
 	 * @return
 	 */
@@ -362,8 +361,7 @@ public class ManageCourseController {
 	/**
 	 * 课程反馈
 	 * 
-	 * @param courseid
-	 *            课程id
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-feedback")
@@ -383,8 +381,9 @@ public class ManageCourseController {
 	/**
 	 * 课程反馈
 	 * 
-	 * @param courseid
-	 *            课程id
+	 * @param content
+	 * @param anonymous
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-feedback.act")
@@ -421,8 +420,7 @@ public class ManageCourseController {
 	/**
 	 * 课程反馈
 	 * 
-	 * @param courseid
-	 *            课程id
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-discuss")
@@ -467,6 +465,7 @@ public class ManageCourseController {
 	/**
 	 * ajax请求最新的对话信息
 	 * 
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("refresh-course-discuss")
@@ -504,8 +503,8 @@ public class ManageCourseController {
 	/**
 	 * ajax请求最新的对话信息
 	 * 
-	 * @param courseid
-	 * @param pageNo
+	 * @param content
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("send-course-discuss-content")
@@ -526,6 +525,11 @@ public class ManageCourseController {
 		return JsonUtil.objectToJSONString(result, null);
 	}
 
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("more-course-discuss")
 	@Authentication()
 	@ResponseBody
@@ -562,7 +566,6 @@ public class ManageCourseController {
 	/**
 	 * 签到记录
 	 * 
-	 * @param courseid
 	 * @param session
 	 * @return
 	 */
@@ -590,7 +593,6 @@ public class ManageCourseController {
 	/**
 	 * 课程测试主页面
 	 * 
-	 * @param courseid
 	 * @param session
 	 * @return
 	 */
@@ -619,7 +621,7 @@ public class ManageCourseController {
 	/**
 	 * 课程测试，ajax请求
 	 * 
-	 * @param courseid
+	 * @param pageNo
 	 * @param session
 	 * @return
 	 */
@@ -643,10 +645,10 @@ public class ManageCourseController {
 	/**
 	 * 测试进行中
 	 * 
-	 * @param courseid
 	 * @param session
 	 * @return
 	 */
+
 	@RequestMapping("course-testing")
 	@Authentication()
 	public View courseTesting(HttpSession session) {

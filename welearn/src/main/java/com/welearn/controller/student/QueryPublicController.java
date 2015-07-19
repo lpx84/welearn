@@ -48,6 +48,7 @@ public class QueryPublicController {
 	 * 查询学校的空教室
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("empty-room")
@@ -86,6 +87,7 @@ public class QueryPublicController {
 	 * 查询校历
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("school-schedule")
@@ -118,6 +120,7 @@ public class QueryPublicController {
 	 * 全校课程，为了防止被爬数据，需要进行微信登录检查
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("school-course")
@@ -143,10 +146,8 @@ public class QueryPublicController {
 	 * 某一门课的详情,为了防止爬取数据，这里需要验证微信登录
 	 * 
 	 * @param courseid
-	 *            课程id
 	 * @return
 	 */
-
 	@RequestMapping("school-course-detail")
 	@Authentication()
 	public View schoolCourseDetail(
@@ -218,6 +219,7 @@ public class QueryPublicController {
 	 * 失物招领查询
 	 * 
 	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("lost-thing")
@@ -261,16 +263,16 @@ public class QueryPublicController {
 
 		// 获取当月流量
 		ArrayList<LostThing> list = misService.queryLostThings(pageno);
-		int i=0;
-		while(i<list.size()){
-			if(list.get(i).getThing().equals("")){
+		int i = 0;
+		while (i < list.size()) {
+			if (list.get(i).getThing().equals("")) {
 				list.remove(i);
-			}else{
+			} else {
 				i++;
-			}			
+			}
 		}
 		String jsonString = JsonUtil.listToJSONString(list, null);
-		
+
 		return jsonString;
 	}
 }

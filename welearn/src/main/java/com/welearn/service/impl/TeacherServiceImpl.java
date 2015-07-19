@@ -1,6 +1,5 @@
 package com.welearn.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import com.welearn.dao.AttendRecordDao;
@@ -17,11 +16,8 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
-import com.welearn.entity.CourseReply;
-import com.welearn.entity.Student;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
-import com.welearn.model.Semester;
 import com.welearn.service.intef.TeacherService;
 
 public class TeacherServiceImpl implements TeacherService {
