@@ -121,6 +121,7 @@
 		<property name="courseDao" ref="courseDao"></property>
 		<property name="courseNotifyDao" ref="courseNotifyDao"></property>
 		<property name="attendTaskDao" ref="attendTaskDao"></property>
+		<property name="attendRecordDao" ref="attendRecordDao"></property>
 		<property name="studentDao" ref="studentDao"></property>
 		<property name="studentCourseDao" ref="studentCourseDao"></property>
 		<property name="courseReplyDao" ref="courseReplyDao"></property>

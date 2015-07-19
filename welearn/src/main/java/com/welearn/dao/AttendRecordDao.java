@@ -1,11 +1,13 @@
 package com.welearn.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 
 import com.welearn.entity.AttendRecord;
+import com.welearn.entity.AttendTask;
 import com.welearn.util.InfoCode;
 import com.welearn.util.TimeUtil;
 
@@ -179,5 +181,46 @@ public class AttendRecordDao extends SuperDao {
 		}
 		return res;
 		
+	}
+	
+	public List<AttendRecord> getAttendRecordsByStudentIdandTime(int studentId, int status, Date time){
+		this.hql = "from AttendTask as a where a.startTime < :time and a.endTime > :timee";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("time", time);
+		query.setParameter("timee", time);
+		List<AttendTask> attendTasks = query.list();
+		List<Integer> attendTaskIds = new ArrayList<Integer>();
+		/*System.out.println("++++++++++++++++++"+attendTasks.size());
+		for(int i=0;i<attendTasks.size();i++){
+			attendTaskIds.add(i, attendTasks.get(i).getId());
+			System.out.println(attendTasks.get(i).getId());
+		}*/
+		
+		this.hql = "from AttendRecord AS b inner join fetch b.attendTaskEntity"
+				+ " where b.studentid = :studentid and b.status = :statuss and b.attendTaskId IN (:attendtasklist)";
+		Query query2 = sessionFactory.getCurrentSession().createQuery(hql);
+		query2.setParameter("studentid", studentId);
+		query2.setParameter("statuss", status);
+		// and b.status = :statuss
+		query2.setParameterList("attendtasklist", attendTaskIds);
+		//and b.attendTaskId IN (:attendtasklist)
+		
+		List<AttendRecord> result = query2.list();
+		/*System.out.println("-----------111111111111-----------"+result.size());
+		for(int i=0;i<result.size();i++){
+			System.out.println(result.get(i).toString());
+		}*/
+		
+		return result;
+	}
+	
+	public AttendRecord getAttendRecordsById(int id) {
+		hql = "from AttendRecord as a inner join fetch a.attendTaskEntity where a.id=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setInteger(0, id);
+		AttendRecord result = (AttendRecord) query.uniqueResult();
+		//System.out.println(result.toString());
+		
+		return result;
 	}
 }

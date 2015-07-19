@@ -142,6 +142,14 @@ public class AttendRecord {
 		this.studentid = studentid;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "AttendRecord [id=" + id + ", attendTaskId=" + attendTaskId
+				+ ", studentid=" + studentid + ", picUrl=" + picUrl
+				+ ", similarity=" + similarity + ", referenceRes="
+				+ referenceRes + ", logTime=" + logTime + ", status=" + status
+				+ ", attendTaskEntity=" + attendTaskEntity + ", studentEntity="
+				+ studentEntity + "]";
+	}
+
 }
