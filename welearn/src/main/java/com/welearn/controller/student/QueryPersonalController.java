@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.welearn.aop.Authentication;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
+import com.welearn.model.Ecard;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.NetFlow;
 import com.welearn.service.intef.CourseService;
@@ -34,7 +35,7 @@ public class QueryPersonalController {
 	CourseService courseService;
 	@Resource(name = "misService")
 	MisService misService;
-	
+
 	/**
 	 * 查看当前课表
 	 * 
@@ -42,8 +43,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-schedule")
-	public View CourseScheduleQuery(
-			@RequestParam("code") String code,
+	public View CourseScheduleQuery(@RequestParam("code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
@@ -54,11 +54,11 @@ public class QueryPersonalController {
 			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
 		}
-		
+
 		studentService.setSession(session, openid);
-		
+
 		// 默认当前周试图
-		return new View("student","query-private","course-schedule","我的课表");
+		return new View("student", "query-private", "course-schedule", "我的课表");
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-schedule-week")
-	@Authentication(role=InfoCode.ROLE_STUDENT)
+	@Authentication(role = InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo") Integer weekNo) {
 
@@ -85,7 +85,7 @@ public class QueryPersonalController {
 	 * @return json格式的字符串
 	 */
 	@RequestMapping("course-schedule-weekday")
-	@Authentication(role=InfoCode.ROLE_STUDENT)
+	@Authentication(role = InfoCode.ROLE_STUDENT)
 	@ResponseBody
 	public String schoolCourseQuery(@RequestParam("weekNo") Integer weekNo,
 			@RequestParam("weekday") Integer weekday) {
@@ -100,7 +100,8 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("exam-plan")
-	public View examPlan(@RequestParam(value = "code") String code,HttpSession session) {
+	public View examPlan(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -111,7 +112,7 @@ public class QueryPersonalController {
 			return view;
 		}
 
-		studentService.setSession(session, openid); 
+		studentService.setSession(session, openid);
 		// 获取考试安排
 		ArrayList<ExamPlan> list = courseService.queryExamPlan(openid);
 		view = new View("student", "query-private", "exam-plan", "考试安排");
@@ -171,7 +172,8 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-grade")
-	public View courseGrade(@RequestParam(value = "code") String code,HttpSession session) {
+	public View courseGrade(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -189,8 +191,8 @@ public class QueryPersonalController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
-		
-		studentService.setSession(session, openid); 
+
+		studentService.setSession(session, openid);
 		// 返回课程成绩
 		view = new View("student", "query-private", "grade-course", "课程成绩");
 		view.addObject("gradeMap", map);
@@ -204,7 +206,8 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("net-flow")
-	public View netFlowDetail(@RequestParam(value = "code") String code,HttpSession session) {
+	public View netFlowDetail(@RequestParam(value = "code") String code,
+			HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -222,14 +225,14 @@ public class QueryPersonalController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
-        
-		studentService.setSession(session, openid); 
+
+		studentService.setSession(session, openid);
 		// 生成当月流量显示页面并显示
 		view = new View("student", "query-private", "net-flow", "本月流量");
 		view.addObject("netFlow", netFlow);
 		return view;
 	}
-	
+
 	/**
 	 * 一卡通自助查询 返回一卡通的基本信息
 	 * 
@@ -237,13 +240,34 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("ecard")
-	public View eCard(@RequestParam(value = "code") String code) {
-		// 查询余额
-		View view = new View("student", "query-private", "ecard", "一卡通查询");
-		
+	public View eCard(@RequestParam(value = "code") String code,
+			HttpSession session) {
+		View view = null;
+		// 创建微信服务类根据code获取 openId
+		String openid = wechatMsgService.getOpenIdByCode(code);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+		if (view != null) {
+			return view;
+		}
+		// 获取当月流量
+		NetFlow netFlow = misService.getNetFlow(openid);
+		// 表示获取当月流量出错，则返回至错误页面
+		if (netFlow == null) {
+			view = new View("error", "wechat", "info", "未找到相应信息。");
+			view.addObject("info", "未找到相应信息。");
+			return view;
+		}
+      
+		studentService.setSession(session, openid);
+		//从misService中取出一卡通信息
+        Ecard ecard = misService.getEcard(openid);
+		view = new View("student", "query-private", "ecard", "一卡通查询");
+        view.addObject("ecard", ecard);
 		return view;
 	}
-	
+
 	/**
 	 * 一卡通自助查询 返回一卡通的基本信息
 	 * 
@@ -253,26 +277,31 @@ public class QueryPersonalController {
 	@RequestMapping("ecard-detail")
 	public View eCardDetail() {
 		// 查询余额
-		View view = new View("student", "query-private", "ecard-detail", "一卡通查询");
-		
+		View view = new View("student", "query-private", "ecard-detail",
+				"一卡通查询");
+
 		return view;
 	}
 
-/*	*//**
+	/*	*//**
 	 * 一卡通消费记录查询
 	 * 
 	 * @param startTime
 	 * @param endTime
 	 * @return
-	 *//*
-	@RequestMapping("e-card/consume-detail")
-	@Authentication(role=InfoCode.ROLE_STUDENT)
-	@ResponseBody
-	public String ecardConsumeDetail(
-			@RequestParam(value = "startTime") String startTime,
-			@RequestParam(value = "endTime") String endTime) {
-
-		return null;
-	}*/
+	 */
+	/*
+	 * @RequestMapping("e-card/consume-detail")
+	 * 
+	 * @Authentication(role=InfoCode.ROLE_STUDENT)
+	 * 
+	 * @ResponseBody public String ecardConsumeDetail(
+	 * 
+	 * @RequestParam(value = "startTime") String startTime,
+	 * 
+	 * @RequestParam(value = "endTime") String endTime) {
+	 * 
+	 * return null; }
+	 */
 
 }

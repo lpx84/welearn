@@ -3,6 +3,7 @@ package com.welearn.service.intef;
 import java.util.ArrayList;
 
 import com.welearn.entity.SchoolCalender;
+import com.welearn.model.Ecard;
 import com.welearn.model.LostThing;
 import com.welearn.model.NetFlow;
 /**
@@ -22,10 +23,20 @@ public interface MisService {
      * @return
      */
     public ArrayList<LostThing> queryLostThings(int pageno);
+    
 	/**
 	 * 根据用户的openid来获取用户的流量使用情况
 	 * @param openid
 	 * @return
 	 */
 	public NetFlow getNetFlow(String openid);
+	
+	/**
+	 * 根据openid获得学生的一卡通信息
+	 * @param studentid
+	 * @return
+	 */
+	public Ecard getEcard(String openid);
+	
+	
 }

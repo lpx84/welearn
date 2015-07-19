@@ -62,7 +62,7 @@
     
     .row {
         line-height: 3em;
-    }
+    }   
 </style>
 </head>
 <body>
@@ -80,23 +80,23 @@
         <div class="info">
             <div class="row">
                 <div class="col-xs-5 text-right">姓名：</div>
-                <div class="col-xs-4">李鹏翔</div>
+                <div class="col-xs-4">${ecard.getName() }</div>
             </div>
             <div class="row">
                 <div class="col-xs-5 text-right">卡状态：</div>
-                <div class="col-xs-6">正常卡</div>
+                <div class="col-xs-6">${ecard.getState() }</div>
             </div>
             <div class="row">
                 <div class="col-xs-5 text-right">专用钱包余额：</div>
-                <div class="col-xs-6"><span class="font-red font-size-20">0</span> 元</div>
+                <div class="col-xs-6"><span class="font-red font-size-20">${ecard.getSpecialWallet() }</span> 元</div>
             </div>
             <div class="row">
                 <div class="col-xs-5 text-right">主钱包余额：</div>
-                <div class="col-xs-6"><span class="font-red font-size-20">55.34</span> 元</div>
+                <div class="col-xs-6"><span class="font-red font-size-20">${ecard.getWallet() }</span> 元</div>
             </div>
             <div class="row">
                 <div class="col-xs-5 text-right">补助余额：</div>
-                <div class="col-xs-6"><span class="font-red font-size-20">0</span> 元</div>
+                <div class="col-xs-6"><span class="font-red font-size-20">${ecard.getAllowance() }</span> 元</div>
             </div>
         </div>
         
