@@ -42,7 +42,9 @@ public class CourseProblem {
 	 * 答案选项的ID
 	 */
 
-	private Integer answer;
+	private String answer;
+	
+	private String wrongAnswer;
 
 	/**
 	 * 选项
@@ -103,11 +105,11 @@ public class CourseProblem {
 		this.courseId = courseId;
 	}
 
-	public Integer getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(Integer answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 
@@ -127,4 +129,12 @@ public class CourseProblem {
 		this.options = options;
 	}
 
+	public String getWrongAnswer() {
+		return wrongAnswer;
+	}
+
+	public void setWrongAnswer(String wrongAnswer) {
+		this.wrongAnswer = wrongAnswer;
+	}
+	
 }

@@ -42,7 +42,9 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-schedule")
-	public View CourseScheduleQuery(@RequestParam("code") String code) {
+	public View CourseScheduleQuery(
+			@RequestParam("code") String code,
+			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
 		String openid = wechatMsgService.getOpenIdByCode(code);
@@ -52,9 +54,11 @@ public class QueryPersonalController {
 			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
 			return view;
 		}
-
+		
+		studentService.setSession(session, openid);
+		
 		// 默认当前周试图
-		return null;
+		return new View("student","query-private","course-schedule","我的课表");
 	}
 
 	/**

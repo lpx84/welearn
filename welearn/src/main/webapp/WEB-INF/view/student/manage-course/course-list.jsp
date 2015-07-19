@@ -55,7 +55,7 @@
                     <a href="javascript:;" class="grade-toggle" title=""  data-id="<%=count%>">                    
                         <i class="glyph-icon font-purple icon-time"></i>
                         ${item.toString() }
-                        <i class="glyph-icon icon-chevron-down float-right"></i>
+                        <i class="glyph-icon icon-chevron-right float-right"></i>
                     </a>
                     <ul class="ul-inner" style="display: none;">
                     

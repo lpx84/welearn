@@ -76,7 +76,7 @@
             </c:if>                   
         </div>
     </c:forEach> 
-<!--         <div class="rcd">
+<!--        <div class="rcd">
             <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
             <div class="inline-block">
                 <div class="font-bold">第三次签到</div>

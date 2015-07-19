@@ -52,8 +52,8 @@ public class CourseProblem {
 	/**
 	 * 答案选项的ID
 	 */
-	@Column(name="answer", columnDefinition="int")
-	private Integer answer;
+	@Column(name="answer", columnDefinition="varchar(11)")
+	private String answer;
 	
 	/**
 	 * 状态；0 已被删除  1存在
@@ -129,13 +129,7 @@ public class CourseProblem {
 		this.courseId = courseId;
 	}
 
-	public Integer getAnswerId() {
-		return answer;
-	}
 
-	public void setAnswerId(Integer answer) {
-		this.answer = answer;
-	}
 
 	public Integer getStatus() {
 		return status;
@@ -153,12 +147,14 @@ public class CourseProblem {
 		this.courseEntity = courseEntity;
 	}
 
-	public Integer getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(Integer answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
+
 
 }
