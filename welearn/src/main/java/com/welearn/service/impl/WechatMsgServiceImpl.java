@@ -239,9 +239,6 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		//当触发事件时处理代码
 		MsgReceiveEvent event = (MsgReceiveEvent)msg;
 		if("subscribe".equals(event.getEvent())) { //订阅
-//			Student s = studentService.getStudentByOpenId(event.getFromUserName());
-//			s.setStatus(InfoCode.STUDENT_SUBSCRIBED);
-//			studentService.updateStudent(s);
 			return XmlUtil.getWelcomeReplyMsg(event.getFromUserName(), event.getToUserName());
 		} else if("unsubscribe".equals(event.getEvent())) { //取消订阅
 			return "unsubscribe";
@@ -250,29 +247,23 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			if("B_COURSE_ATTEND".equals(event.getEventKey())) { //点击的是签到按钮
 				String openId = event.getFromUserName();
 				Student student = studentDao.getStudentByOpenID(openId);
-				//List<StudentCourse> scList = studentCourseDao.getStudentCourseByStudentId(student.getId());
 				
-				//List<AttendTask> attendList = attendTaskDao.getNowAttendTasks(new Date());
-				List<AttendRecord> recordList = attendRecordDao.getAttendRecordsByStudentIdandTime(student.getId(), InfoCode.ATTEND_NOT, new Date());
 				String content = "你当前有以下签到任务，请回复课程前面的数字确认：";
-				boolean hasTask = false;
-//				for(AttendTask a : attendList) {
-//					for(StudentCourse sc : scList) {
-//						if(sc.getCourseId().equals(a.getCourseId())) {
-//							hasTask = true;
-//							content +=  "\n" + a.getId() +": " + a.getCourseEntity().getName();
-//							break;
-//						}
-//					}
-//				}
-				
-				for(AttendRecord rcd : recordList) {
-					hasTask = true;
-					AttendTask a =  attendTaskDao.getAttendTaskById(rcd.getAttendTaskId());
-					content +=  "\n" + rcd.getId() +": " + a.getCourseEntity().getName();
-				}
-				if(!hasTask) {
-					content = "不要着急，你当前没有签到任务！";
+				if(null != student) {
+					List<AttendRecord> recordList = attendRecordDao.getAttendRecordsByStudentIdandTime(student.getId(), InfoCode.ATTEND_NOT, new Date());
+					
+					boolean hasTask = false;
+					
+					for(AttendRecord rcd : recordList) {
+						hasTask = true;
+						AttendTask a =  attendTaskDao.getAttendTaskById(rcd.getAttendTaskId());
+						content +=  "\n" + rcd.getId() +": " + a.getCourseEntity().getName();
+					}
+					if(!hasTask) {
+						content = "不要着急，你当前没有签到任务！";
+					}
+				} else {
+					content = "您还没有绑定系统，请先绑定！";
 				}
 				MsgReplyText text = new MsgReplyText(content,0);
 				return text.getReplyXML(event.getFromUserName(), event.getToUserName());
@@ -308,7 +299,7 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 			Student s = studentDao.getStudentByOpenID(msg.getFromUserName());
 			String content = "null";
 			
-			if(null == s) {
+			if(null != s) {
 				//AttendRecord tempAttend = null;
 				//AttendTask task = attendTaskDao.getAttendTaskById(attendTaskId);
 				AttendRecord waitRecord = attendRecordDao.getAttendRecordById(id);
@@ -354,6 +345,12 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 		} else { //如果不是则转到图灵机器人
 			return MsgReplyFactory.getMsgReply(msg);
 		}
+	}
+	
+	public List test() {
+		
+		
+		return attendRecordDao.getAttendRecordsByStudentIdandTime(3, 0, new Date());
 	}
 	
 }

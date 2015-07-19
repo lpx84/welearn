@@ -1,5 +1,7 @@
 package com.welearn.controller.student;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.aop.Authentication;
+import com.welearn.entity.AttendRecord;
 import com.welearn.entity.Student;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
@@ -64,12 +67,15 @@ public class StudentController {
 	}
 	
 	@RequestMapping("test")
-	@Authentication()
+	//@Authentication()
 	@ResponseBody
-	public View test() {
+	public String test() {
 //		Student s = studentService.getStudentByStudentNo("12301124");
 //		return s.getTrueName();
-		return new View("teacher","teacher","course-home","sample");
+//		return new View("teacher","teacher","course-home","sample");
+		//List<AttendRecord> r = wechatMsgService.test();
+		
+		return "ok: ";
 	}
 	
 }

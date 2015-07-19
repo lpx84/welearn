@@ -1,5 +1,7 @@
 package com.welearn.service.intef;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.qq.weixin.mp.aes.AesException;
@@ -23,4 +25,6 @@ public interface WechatMsgService {
 	 */
 	public String getOpenIdByCode(String code);
 	
+	
+	public List test();
 }

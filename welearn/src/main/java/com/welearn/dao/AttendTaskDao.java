@@ -153,8 +153,8 @@ public class AttendTaskDao extends SuperDao {
 		
 		hql = "from AttendTask as a inner join fetch a.courseEntity as c where a.startTime <= ? and a.endTime >= ?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setDate(0, time);
-		query.setDate(1, time);
+		query.setTimestamp(0, time);
+		query.setTimestamp(1, time);
 		return query.list();
 	}
 	
