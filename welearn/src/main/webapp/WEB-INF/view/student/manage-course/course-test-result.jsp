@@ -9,7 +9,7 @@
 <title>${title }</title>
 <style type="text/css">
    
-   .btn-more {
+    .btn-more {
         width: 100%;
         padding: 5px 0;
     }
@@ -46,16 +46,16 @@
         box-shadow: 1px 5px 5px #D2D2D2;
         margin-top: 30% !important;
         border: solid 1px #D2D2D2;
-    } 
+    }   
 </style>
 </head>
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
+        <div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='course-test'">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
-        <label class="title">软件工程专业研究方法论与创新教育</label>
+        <label class="title">${courseName }</label>
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>
@@ -64,7 +64,7 @@
         <div class="panel mrg10A pad10A">
             <div class="mrg10A">
                 <span class="lab font-gray">您的得分：</span>
-                <span class="font-size-20 font-red">80</span>
+                <span class="font-size-20 font-red">${score }</span>
             </div>
             <div class="mrg10A">
                 <span class="lab font-gray">系统评价：</span>

@@ -8,6 +8,7 @@
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
 <style type="text/css">
+   
     .btn-more {
         margin-top: 5px;
         width: 100%;
@@ -82,8 +83,8 @@
         padding: 5px;
         margin: 2px 0;
         border: 1px solid #e7e7e7;
-    }   
-   
+    }
+       
 </style>
 </head>
 <body>
@@ -103,7 +104,7 @@
             <div class="row mrg10T">
                 <div class="col-xs-1">从 </div>
                 <div class="col-xs-9">
-                    <input class="time start-time" type="text" value="20150723">
+                    <input class="time start-time" type="text" value="20150701">
                 </div>
             </div>
             <div class="row mrg5T">
@@ -211,10 +212,9 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
-
-	function queryData() {
-		$(".ecard-list").show();
-	}
+function queryData() {
+    $(".ecard-list").show();
+}
 </script>
 </body>
 </html>

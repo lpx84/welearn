@@ -43,6 +43,8 @@ public class CourseProblem {
 	 */
 
 	private String answer;
+	
+	private String wrongAnswer;
 
 	/**
 	 * 选项
@@ -127,4 +129,12 @@ public class CourseProblem {
 		this.options = options;
 	}
 
+	public String getWrongAnswer() {
+		return wrongAnswer;
+	}
+
+	public void setWrongAnswer(String wrongAnswer) {
+		this.wrongAnswer = wrongAnswer;
+	}
+	
 }

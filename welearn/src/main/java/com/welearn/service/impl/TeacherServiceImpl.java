@@ -3,6 +3,7 @@ package com.welearn.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.welearn.dao.AttendRecordDao;
 import com.welearn.dao.AttendTaskDao;
 import com.welearn.dao.CourseDao;
 import com.welearn.dao.CourseHomeworkDao;
@@ -33,9 +34,14 @@ public class TeacherServiceImpl implements TeacherService {
 	StudentDao studentDao;
 	StudentCourseDao studentCourseDao;
 	CourseReplyDao courseReplyDao;
+	AttendRecordDao attendRecordDao;
 
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
+	}
+
+	public void setAttendRecordDao(AttendRecordDao attendRecordDao) {
+		this.attendRecordDao = attendRecordDao;
 	}
 
 	public void setTeacherDao(TeacherDao teacherDao) {
@@ -162,8 +168,8 @@ public class TeacherServiceImpl implements TeacherService {
 	//测试
 	public void test() {
 		// TODO Auto-generated method stub
-		courseNotifyDao.getCourseNotifysByStudentId(1, 1, 1);
 		
+		attendRecordDao.getAttendRecordsById(2);
 		
 	}
 

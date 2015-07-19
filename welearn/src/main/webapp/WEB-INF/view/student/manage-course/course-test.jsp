@@ -85,7 +85,7 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
+    	<div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='course-manage?courseid=${courseid }'">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
         <label class="title">${courseName }</label>

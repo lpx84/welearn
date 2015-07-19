@@ -184,4 +184,30 @@ public interface CourseService {
 	 * @return
 	 */
 	public ArrayList<CourseProblem> generateCourseProblems(int courseid);
+	
+	/**
+	 * 插入一条
+	 * @param courseid
+	 * @param studentid
+	 * @param spendTime
+	 * @param finishTime
+	 * @param score
+	 * @param answer
+	 * @return
+	 */
+	public boolean addCourseExamRecord(int courseid,int studentid,int spendTime,Date finishTime,int score,String answer);
+	
+	/**
+	 * 获取课程成绩
+	 * @param answer
+	 * @return
+	 */
+	public int getCourseScore(String answer);
+	
+	/**
+	 * 获得打错的题目信息
+	 * @param answer
+	 * @return
+	 */
+	public ArrayList<CourseProblem> getWrongCourseProblems(String answer);
 }

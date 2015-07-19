@@ -28,6 +28,7 @@ import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
+import com.welearn.util.AlgorithmUtil;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
@@ -55,6 +56,7 @@ public class ManageCourseController {
 	TeacherService teacherService;
 	@Resource(name = "attendService")
 	AttendService attendService;
+
 	/**
 	 * 查看我的课程
 	 * 
@@ -100,17 +102,18 @@ public class ManageCourseController {
 	 * 进入某一门课的课程管理页面，为了防止爬取数据，这里需要验证微信登录
 	 * 
 	 * @param courseid
-	 *            课程id
+	 * @param session
 	 * @return
 	 */
-
 	@RequestMapping("course-manage")
 	@Authentication()
-	public View courseManage(@RequestParam(value = "courseid") int courseid) {
+	public View courseManage(@RequestParam(value = "courseid") int courseid,
+			HttpSession session) {
 		View view;
 		// 用课程服务类查询具体的课程信息
 		Course course = courseService.queryCourseModleByCourseId(courseid);
-
+		// 将courseid存入session
+		session.setAttribute("courseid", courseid);
 		view = new View("student", "manage-course", "course-manage", "我的课程");
 		view.addObject("course", course);
 		return view;
@@ -125,8 +128,10 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-notify")
 	@Authentication()
-	public View courseNotify(@RequestParam(value = "courseid") int courseid) {
-		View view;
+	public View courseNotify(HttpSession session) {
+		View view = null;
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 用课程服务类查询具体的课程通知
@@ -156,9 +161,10 @@ public class ManageCourseController {
 	@RequestMapping("more-course-notify")
 	@Authentication()
 	@ResponseBody
-	public String moreCourseNotify(
-			@RequestParam(value = "courseid") int courseid,
-			@RequestParam(value = "pageNo") int pageNo) {
+	public String moreCourseNotify(@RequestParam(value = "pageNo") int pageNo,
+			HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 用课程服务类查询具体的课程通知
 		ArrayList<com.welearn.model.CourseNotify> list = courseService
 				.queryCourseNotify(courseid, pageNo, 10);
@@ -239,8 +245,10 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-homework")
 	@Authentication()
-	public View courseHomework(@RequestParam(value = "courseid") int courseid) {
+	public View courseHomework(HttpSession session) {
 		View view;
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 用课程服务类查询具体的课程作业
@@ -270,9 +278,10 @@ public class ManageCourseController {
 	@RequestMapping("more-course-homework")
 	@Authentication()
 	@ResponseBody
-	public String moreCourseHomework(
-			@RequestParam(value = "courseid") int courseid,
+	public String moreCourseHomework(HttpSession session,
 			@RequestParam(value = "pageNo") int pageNo) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 用课程服务类查询具体的课程作业
 		ArrayList<com.welearn.model.CourseHomework> list = courseService
 				.queryCourseHomework(courseid, pageNo, 10);
@@ -359,10 +368,13 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-feedback")
 	@Authentication()
-	public View courseFeedback(@RequestParam(value = "courseid") int courseid) {
+	public View courseFeedback(HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
-		View view = new View("student", "manage-course", "course-feedback", "课程反馈");
+		View view = new View("student", "manage-course", "course-feedback",
+				"课程反馈");
 		view.addObject("courseid", courseid);
 		view.addObject("courseName", courseName);
 		return view;
@@ -378,10 +390,11 @@ public class ManageCourseController {
 	@RequestMapping("course-feedback.act")
 	@Authentication()
 	public View courseFeedbackAct(
-			@RequestParam(value = "courseid") int courseid,
 			@RequestParam(value = "content") String content,
 			@RequestParam(value = "anonymous") boolean anonymous,
 			HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		View view = null;
 		String openid = (String) session.getAttribute("openid");
 		String studentName = studentService.getStudentByOpenId(openid)
@@ -414,8 +427,9 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-discuss")
 	@Authentication()
-	public View courseDiscuss(@RequestParam(value = "courseid") int courseid,
-			HttpSession session) {
+	public View courseDiscuss(HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		View view = null;
 		// 课程名
 		String courseName = courseService.queryCourse(courseid).getName();
@@ -545,23 +559,27 @@ public class ManageCourseController {
 		return jsonStr;
 	}
 
-    /**
-     * 签到记录
-     * @param courseid
-     * @param session
-     * @return
-     */
+	/**
+	 * 签到记录
+	 * 
+	 * @param courseid
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("attend-list")
 	@Authentication()
-	public View eCardDetail(@RequestParam(value = "courseid") int courseid, HttpSession session) {
+	public View eCardDetail(HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
 		// 获取courseName
 		String courseName = courseService.queryCourse(courseid).getName();
 		// 获取studentid
 		int studentid = studentService.getStudentByOpenId(openid).getId();
-		ArrayList<AttendRecord> list = attendService.getAttendRecords(courseid, studentid);
-		
+		ArrayList<AttendRecord> list = attendService.getAttendRecords(courseid,
+				studentid);
+
 		View view = new View("student", "manage-course", "attend-list", "签到记录");
 		view.addObject("list", list);
 		view.addObject("courseName", courseName);
@@ -578,8 +596,9 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-test")
 	@Authentication()
-	public View courseTest(@RequestParam(value = "courseid") int courseid,
-			HttpSession session) {
+	public View courseTest(HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
 		// 获取courseName
@@ -607,9 +626,10 @@ public class ManageCourseController {
 	@RequestMapping("more-course-test")
 	@Authentication()
 	@ResponseBody
-	public String moreCourseTest(
-			@RequestParam(value = "courseid") int courseid,
-			@RequestParam(value = "pageNo") int pageNo, HttpSession session) {
+	public String moreCourseTest(@RequestParam(value = "pageNo") int pageNo,
+			HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
 		// 获取studentid
@@ -629,31 +649,28 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-testing")
 	@Authentication()
-	public View courseTesting(@RequestParam(value = "courseid") int courseid,
-			HttpSession session) {
-		// 从session中获取openid
-		String openid = (String) session.getAttribute("openid");
+	public View courseTesting(HttpSession session) {
+		// 从session中获得courseid
+		int courseid = (Integer) session.getAttribute("courseid");
 		// 获取courseName
 		String courseName = courseService.queryCourse(courseid).getName();
-		// 获取studentid
-		int studentid = studentService.getStudentByOpenId(openid).getId();
-		
-		ArrayList<CourseProblem> list = courseService.generateCourseProblems(courseid);
-		
+
+		ArrayList<CourseProblem> list = courseService
+				.generateCourseProblems(courseid);
+
 		View view;
-        if(list.size()<10){
+		if (list.size() < 10) {
 			view = new View("error", "wechat", "info", "没有习题信息。");
 			view.addObject("info", "没有习题信息。");
 			return view;
-        }
-        
+		}
+
 		Date date = new Date();
-		//将开始做题的时间存入session
-		session.setAttribute("startTime", TimeUtil.formatDate(date));
-		//创建测试页面
-		view = new View("student", "manage-course", "course-testing",
-				"课程评测");
-		
+		// 将开始做题的时间存入session
+		session.setAttribute("startTime", TimeUtil.formatDate1(date));
+		session.setAttribute("courseid", courseid);
+		// 创建测试页面
+		view = new View("student", "manage-course", "course-testing", "课程评测");
 		view.addObject("list", list);
 		view.addObject("courseName", courseName);
 
@@ -663,15 +680,54 @@ public class ManageCourseController {
 	/**
 	 * 课程测试结果
 	 * 
-	 * @param code
+	 * @param answer
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-test-result")
 	@Authentication()
-	public View courseTestResult() {
-		// 查询余额
-		View view = new View("student", "manage-course", "course-test-result",
+	public View courseTestResult(@RequestParam(value = "answer") String answer,
+			HttpSession session) {
+		// 获取courseid
+		int courseid = (Integer) session.getAttribute("courseid");
+		// 从session中获取openid
+		String openid = (String) session.getAttribute("openid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 获取studentid
+		int studentid = studentService.getStudentByOpenId(openid).getId();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 小写的mm表示的是分钟
+		Date startTime = new Date();
+		try {
+			startTime = sdf.parse((String) session.getAttribute("startTime"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		// 获取答题结束的时间
+		Date endTime = new Date();
+		// 获得分数
+		int score = courseService.getCourseScore(answer);
+		// 获得答题所用的时间
+		int spendTime = AlgorithmUtil.getSpendTime(startTime, endTime);
+		// 将答题记录插入
+		View view = null;
+		if (!courseService.addCourseExamRecord(courseid, studentid, spendTime,
+				endTime, score, answer)) {
+			// 插入失败
+			view = new View("error", "wechat", "info", "数据库存储错误。");
+			view.addObject("info", "数据库存储错误。");
+			return view;
+		}
+
+		// 将答案放入session
+		session.setAttribute("answer", answer);
+
+		// 查看评测结果
+		view = new View("student", "manage-course", "course-test-result",
 				"测评结果");
+		view.addObject("courseName", courseName);
+		view.addObject("score", score);
 
 		return view;
 	}
@@ -679,15 +735,34 @@ public class ManageCourseController {
 	/**
 	 * 课程测试结果详情
 	 * 
-	 * @param code
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("course-test-detail")
 	@Authentication()
-	public View courseTestDetail() {
-		// 查询余额
-		View view = new View("student", "manage-course", "course-test-detail",
+	public View courseTestDetail(HttpSession session) {
+		// 获取courseid
+		int courseid = (Integer) session.getAttribute("courseid");
+		// 获取courseName
+		String courseName = courseService.queryCourse(courseid).getName();
+		// 获得answer
+		String answer = (String) session.getAttribute("answer");
+
+		ArrayList<CourseProblem> list = courseService
+				.getWrongCourseProblems(answer);
+
+		View view = null;
+		// 没有错误信息
+		if (list.size() == 0) {
+			view = new View("error", "wechat", "info", "您全答对了，没有错题。");
+			view.addObject("info", "您全答对了，没有错题。");
+			return view;
+		}
+
+		view = new View("student", "manage-course", "course-test-detail",
 				"测评详情");
+		view.addObject("courseName", courseName);
+		view.addObject("list", list);
 
 		return view;
 	}

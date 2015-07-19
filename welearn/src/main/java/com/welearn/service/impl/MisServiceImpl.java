@@ -113,13 +113,15 @@ public class MisServiceImpl implements MisService {
 	
 	public Ecard getEcard(String openid){
 		
+		//此处为模拟生成
+		Ecard ecard = new Ecard();
+		ecard.setAllowance("0");
+        ecard.setName("李鹏翔");
+        ecard.setState("正常卡");
+        ecard.setSpecialWallet("0");
+        ecard.setWallet("10.00");
 		
-		
-		
-		
-		
-		
-		return null;		
+		return ecard;		
 	}
 
 }
