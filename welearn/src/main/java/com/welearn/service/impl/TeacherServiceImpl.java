@@ -165,12 +165,4 @@ public class TeacherServiceImpl implements TeacherService {
 		return courseNotifyDao.updateCourseNotify(courseNotify);
 	}
 
-	//测试
-	public void test() {
-		// TODO Auto-generated method stub
-		
-		attendRecordDao.getAttendRecordsById(2);
-		
-	}
-
 }

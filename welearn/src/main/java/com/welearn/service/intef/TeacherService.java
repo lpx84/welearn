@@ -56,6 +56,6 @@ public interface TeacherService {
 	public boolean updateCourseNotify(CourseNotify courseNotify);
 	
 	//测试
-	public void test();
+	//public void test();
 
 }
