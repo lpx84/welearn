@@ -187,10 +187,11 @@ function fetchData() {
 		success: function(res) {
 			if(res.code == 100) {
 				alert(res.msg);
+				$(".btn-more").html("查看更多");
 			} else {
 				if(res.length<1){
 					$(".btn-more").removeAttr("href");
-					$(".btn-more").html("没有更多了");		
+					$(".btn-more").hide();		
 				}else{
 					joinData(res);
 					$(".btn-more").html("查看更多");	

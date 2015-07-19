@@ -22,7 +22,7 @@ public class JsonUtil {
 	 * @param filterAttrs 实体中需要过滤的属性
 	 * @return
 	 */
-	public static String listToJSONString(List list, String[] filterAttrs) {
+	public static String listToJSONString(List<?> list, String[] filterAttrs) {
 		JsonConfig config = new JsonConfig();
 		config.setIgnoreDefaultExcludes(false);
 		config.setExcludes(filterAttrs);

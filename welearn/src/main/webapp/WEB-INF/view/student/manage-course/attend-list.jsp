@@ -76,36 +76,8 @@
             </c:if>                   
         </div>
     </c:forEach> 
-<!--        <div class="rcd">
-            <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
-            <div class="inline-block">
-                <div class="font-bold">第三次签到</div>
-                <div><span class="font-gray ">签到于</span> 07-12 9:00:34</div>
-            </div>
-            <div class="status inline-block font-green"><i class="fa fa-check-circle"></i>&nbsp;成功</div>
-        </div>
-        <div class="rcd">
-            <img class="img-avatar inline-block" src="../img/attend-test-0031.jpg">
-            <div class="inline-block">
-                <div class="font-bold">第二次签到</div>
-                <div><span class="font-gray ">签到于</span> 07-12 9:00:34</div>
-            </div>
-            <div class="status inline-block font-red"><i class="fa fa-clock-o"></i>&nbsp;审核中</div>
-        </div>
-        <div class="rcd">
-            <img class="img-avatar inline-block" src="../img/attend-dafault.png">
-            <div class="inline-block">
-                <div class="font-bold">第一次签到</div>
-            </div>
-            <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;未签到</div>
-        </div> -->
     </div>
     
-<!--     当前页号，下一次请求在此基础上加1
-    <input id="pageNo" type="hidden" value="1">
-    <a href="javascript:fetchData();" class="btn medium display-block float-none ui-state-default">
-        <span class="button-content">查看更多</span>
-    </a> -->
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
