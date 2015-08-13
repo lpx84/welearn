@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.welearn.aop.Authentication;
 import com.welearn.entity.SchoolCalender;
@@ -25,6 +26,7 @@ import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
+import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.View;
 
 @Controller
@@ -52,11 +54,11 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("empty-room")
-	public View queryEmptyRoom(@RequestParam(value = "code") String code,
+	public ModelAndView queryEmptyRoom(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		if (view != null) {
@@ -91,11 +93,11 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-schedule")
-	public View schoolSchedule(@RequestParam(value = "code") String code,
+	public ModelAndView schoolSchedule(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		if (view != null) {
@@ -124,11 +126,11 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("school-course")
-	public View schoolCourse(@RequestParam(value = "code") String code,
+	public ModelAndView schoolCourse(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		if (view != null) {
@@ -150,7 +152,7 @@ public class QueryPublicController {
 	 */
 	@RequestMapping("school-course-detail")
 	@Authentication()
-	public View schoolCourseDetail(
+	public ModelAndView schoolCourseDetail(
 			@RequestParam(value = "courseid") int courseid) {
 		View view;
 		// 用课程服务类查询具体的课程信息
@@ -177,7 +179,7 @@ public class QueryPublicController {
 	 */
 	@RequestMapping("school-course-query")
 	@Authentication()
-	public View schoolCourseQuery(@RequestParam("keyword") String keyword) {
+	public ModelAndView schoolCourseQuery(@RequestParam("keyword") String keyword) {
 		View view;
 		ArrayList<com.welearn.entity.Course> list = courseService
 				.queryCoursesByKeyword(keyword, 1);
@@ -223,11 +225,11 @@ public class QueryPublicController {
 	 * @return
 	 */
 	@RequestMapping("lost-thing")
-	public View lostThingDetail(@RequestParam(value = "code") String code,
+	public ModelAndView lostThingDetail(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录

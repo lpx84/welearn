@@ -32,6 +32,7 @@ import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.AlgorithmUtil;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
+import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.View;
 
 /**
@@ -66,11 +67,11 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-list")
-	public View getCourseList(@RequestParam(value = "code") String code,
+	public ModelAndView getCourseList(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -129,7 +130,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-notify")
 	@Authentication()
-	public View courseNotify(HttpSession session) {
+	public ModelAndView courseNotify(HttpSession session) {
 		View view = null;
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
@@ -183,11 +184,11 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-notify-new")
-	public View getCourseNotifyNew(@RequestParam(value = "code") String code,
+	public ModelAndView getCourseNotifyNew(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -245,7 +246,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-homework")
 	@Authentication()
-	public View courseHomework(HttpSession session) {
+	public ModelAndView courseHomework(HttpSession session) {
 		View view;
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
@@ -300,11 +301,11 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-homework-new")
-	public View getCourseHomeworkNew(@RequestParam(value = "code") String code,
+	public ModelAndView getCourseHomeworkNew(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code);
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -367,7 +368,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-feedback")
 	@Authentication()
-	public View courseFeedback(HttpSession session) {
+	public ModelAndView courseFeedback(HttpSession session) {
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 课程名
@@ -389,7 +390,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-feedback.act")
 	@Authentication()
-	public View courseFeedbackAct(
+	public ModelAndView courseFeedbackAct(
 			@RequestParam(value = "content") String content,
 			@RequestParam(value = "anonymous") boolean anonymous,
 			HttpSession session) {
@@ -426,7 +427,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-discuss")
 	@Authentication()
-	public View courseDiscuss(HttpSession session) {
+	public ModelAndView courseDiscuss(HttpSession session) {
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		View view = null;
@@ -572,7 +573,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("attend-list")
 	@Authentication()
-	public View eCardDetail(HttpSession session) {
+	public ModelAndView eCardDetail(HttpSession session) {
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 从session中获取openid
@@ -599,7 +600,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-test")
 	@Authentication()
-	public View courseTest(HttpSession session) {
+	public ModelAndView courseTest(HttpSession session) {
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 从session中获取openid
@@ -652,7 +653,7 @@ public class ManageCourseController {
 
 	@RequestMapping("course-testing")
 	@Authentication()
-	public View courseTesting(HttpSession session) {
+	public ModelAndView courseTesting(HttpSession session) {
 		// 从session中获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 获取courseName
@@ -689,7 +690,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-test-result")
 	@Authentication()
-	public View courseTestResult(@RequestParam(value = "answer") String answer,
+	public ModelAndView courseTestResult(@RequestParam(value = "answer") String answer,
 			HttpSession session) {
 		// 获取courseid
 		int courseid = (Integer) session.getAttribute("courseid");
@@ -743,7 +744,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-test-detail")
 	@Authentication()
-	public View courseTestDetail(HttpSession session) {
+	public ModelAndView courseTestDetail(HttpSession session) {
 		// 获取courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 获取courseName

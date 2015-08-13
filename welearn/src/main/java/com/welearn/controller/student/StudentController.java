@@ -1,7 +1,5 @@
 package com.welearn.controller.student;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -9,12 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.welearn.aop.Authentication;
-import com.welearn.entity.AttendRecord;
 import com.welearn.entity.Student;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
+import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.InfoView;
 import com.welearn.view.View;
 
@@ -29,7 +26,7 @@ public class StudentController {
 
 	@RequestMapping("bind")
 	public View bind(@RequestParam(value = "code") String code) {
-		String openId = wechatMsgService.getOpenIdByCode(code);
+		String openId = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		View v = new View("student","account","bind","绑定学号");
 		v.addObject("openId",openId);
 		return v;

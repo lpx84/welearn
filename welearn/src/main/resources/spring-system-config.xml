@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:context="http://www.springframework.org/schema/context"
-		xmlns:mvc="http://www.springframework.org/schema/mvc"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 							http://www.springframework.org/schema/context 
 							http://www.springframework.org/schema/context/spring-context-3.0.xsd
 							http://www.springframework.org/schema/mvc
-							http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"> 
+							http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <bean id="constantsConfig" class="com.welearn.util.ConstantsConfig">
-        <property name="defaultPageTitle" value="WeLean微信教学平台" />
-        <property name="defaultPageItemNum" value="10" />
-        <property name="schoolShortName" value="bjtu" />
-        <property name="hostName" value="http://bdxst.bjtu.edu.cn" />
-    </bean>
-    
-    <bean id="wechatConfig" class="com.welearn.util.WechatConfig">
-        <property name="email" value="lipx84@126.com" />
-        <property name="pwd" value="mpMiXiang" />
-        <property name="appId" value="wx80c237b3b2300b0a" />
-        <property name="encodingAesKey" value="f6351ec373b59401007017cf88e92b52" />
-        <property name="token" value="bjtujwc" />
-        <property name="appsecret" value="f6351ec373b59401007017cf88e92b52" />
-    </bean>
-    
-    <bean id="faceppConfig" class="com.welearn.util.FacePPConfig">
-        <property name="apiKey" value="35e2b87e7d34655c76687a04a8d5158c" />
-        <property name="apiSecret" value="X2x-OPIlEcEq1dpi7ovR25mEYh8jfwsF" />
-    </bean>
-    
-    <bean id="tulingConfig" class="com.welearn.util.TulingConfig">
-        <property name="key" value="747a805e16a214668ab3fdd6f0dcb1cf" />
-    </bean>
+	<bean id="constantsConfig" class="com.welearn.util.ConstantsConfig">
+		<property name="defaultPageTitle" value="WeLean微信教学平台" />
+		<property name="defaultPageItemNum" value="10" />
+		<property name="schoolShortName" value="bjtu" />
+		<property name="hostName" value="http://bdxst.bjtu.edu.cn" />
+	</bean>
+
+	<bean id="wechatConfig" class="com.welearn.util.WechatConfig">
+		<property name="email" value="lipx84@126.com" />
+		<property name="pwd" value="mpMiXiang" />
+		<property name="appId" value="wx80c237b3b2300b0a" />
+		<property name="encodingAesKey" value="f6351ec373b59401007017cf88e92b52" />
+		<property name="token" value="bjtujwc" />
+		<property name="appsecret" value="f6351ec373b59401007017cf88e92b52" />
+	</bean>
+
+	<bean id="teacherConfig" class="com.welearn.util.TeacherConfig">
+		<property name="email" value="lipx84@126.com" />
+		<property name="pwd" value="mpMiXiang" />
+		<property name="appId" value="wx80c237b3b2300b0a" />
+		<property name="encodingAesKey" value="f6351ec373b59401007017cf88e92b52" />
+		<property name="token" value="bjtujwc" />
+		<property name="appsecret" value="f6351ec373b59401007017cf88e92b52" />
+	</bean>
+
+	<bean id="faceppConfig" class="com.welearn.util.FacePPConfig">
+		<property name="apiKey" value="35e2b87e7d34655c76687a04a8d5158c" />
+		<property name="apiSecret" value="X2x-OPIlEcEq1dpi7ovR25mEYh8jfwsF" />
+	</bean>
+
+	<bean id="tulingConfig" class="com.welearn.util.TulingConfig">
+		<property name="key" value="747a805e16a214668ab3fdd6f0dcb1cf" />
+	</bean>
 </beans>

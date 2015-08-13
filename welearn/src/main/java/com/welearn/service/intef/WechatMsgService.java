@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.qq.weixin.mp.aes.AesException;
 import com.welearn.model.MsgReceive;
+import com.welearn.util.WechatTypeEnum;
 
 public interface WechatMsgService {
 
@@ -23,7 +24,7 @@ public interface WechatMsgService {
 	 * @param code
 	 * @return
 	 */
-	public String getOpenIdByCode(String code);
+	public String getOpenIdByCode(String code, WechatTypeEnum type);
 	
 	
 	public List test();
