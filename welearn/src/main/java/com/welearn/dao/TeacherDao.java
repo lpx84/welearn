@@ -98,4 +98,18 @@ public class TeacherDao  extends SuperDao {
 		
 	}
 	
+	/**
+	 * 通过openID查找老师
+	 * @param openId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Teacher getTeacherByOpenid(int openId) {
+		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.openId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, openId);
+		return (Teacher)query.uniqueResult();
+		
+	}
+	
 }

@@ -22,6 +22,7 @@ import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseProblem;
 import com.welearn.model.CourseTestResult;
 import com.welearn.model.Semester;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.AttendService;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
@@ -32,7 +33,6 @@ import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.AlgorithmUtil;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
-import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.View;
 
 /**

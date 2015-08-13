@@ -30,10 +30,10 @@ import com.welearn.model.MsgReceive;
 import com.welearn.model.MsgReceiveEvent;
 import com.welearn.model.MsgReceivePicture;
 import com.welearn.model.MsgReceiveText;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
 import com.welearn.util.NumberUtil;
-import com.welearn.util.WechatTypeEnum;
 import com.welearn.util.XmlUtil;
 
 public class WechatMsgServiceImpl implements WechatMsgService {

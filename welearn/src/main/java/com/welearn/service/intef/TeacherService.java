@@ -2,6 +2,8 @@ package com.welearn.service.intef;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.welearn.entity.AttendRecord;
 import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
@@ -10,6 +12,7 @@ import com.welearn.entity.CourseNotify;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.entity.Student;
+import com.welearn.view.View;
 
 public interface TeacherService {
 	
@@ -55,7 +58,25 @@ public interface TeacherService {
 	
 	public boolean updateCourseNotify(CourseNotify courseNotify);
 	
-	//测试
-	//public void test();
+    /**
+     * 根据openid来判断是否已经绑定
+     * @param openid
+     * @return
+     */
+    public boolean checkBindByOpenId(String openid);
+	
+    /**
+     * 根据用户的openid验证用户是否登录，返回相应的界面，若界面为空，则返回null
+     * @param openid
+     * @return
+     */
+	public View checkUser(String openid);
+	
+	/**
+	 * 设置session
+	 * @param session
+	 * @param openid
+	 */
+	public void setSession(HttpSession session,String openid);
 
 }

@@ -30,7 +30,7 @@ public class Teacher {
 	@Column(name="pwd", columnDefinition="varchar(50)", nullable=false)
 	private String pwd;
 	
-	@Column(name="open_id", columnDefinition="varchar(50)")
+	@Column(name="open_id", columnDefinition="varchar(50)", unique=true)
 	private String openId;
 	
 	@Column(name="fake_id", columnDefinition="varchar(50)")
