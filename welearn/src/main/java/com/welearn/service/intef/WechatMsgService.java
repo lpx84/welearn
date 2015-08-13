@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.qq.weixin.mp.aes.AesException;
 import com.welearn.model.MsgReceive;
-import com.welearn.util.WechatTypeEnum;
+import com.welearn.model.WechatTypeEnum;
 
 public interface WechatMsgService {
 

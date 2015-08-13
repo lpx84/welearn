@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.entity.Student;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
-import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.InfoView;
 import com.welearn.view.View;
 

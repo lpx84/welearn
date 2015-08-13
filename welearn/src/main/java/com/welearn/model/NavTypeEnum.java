@@ -1,4 +1,4 @@
-package com.welearn.util;
+package com.welearn.model;
 
 public enum NavTypeEnum {
     NOTIFY,COURSE,PERSONAL;
