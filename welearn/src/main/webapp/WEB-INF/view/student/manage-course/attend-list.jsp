@@ -62,7 +62,7 @@
             <c:if test="${item.getState() ==  0}">
                 <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;未签到</div>
             </c:if>              
-            <c:if test="${item.getState() == 1 }">
+            <c:if test="${item.getState() ==  1}">
                 <div class="status inline-block font-red"><i class="fa fa-clock-o"></i>&nbsp;等待签到</div>
             </c:if>
             <c:if test="${item.getState() ==  2}">
