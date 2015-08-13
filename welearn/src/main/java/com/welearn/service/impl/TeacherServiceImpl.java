@@ -18,6 +18,7 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.Student;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
@@ -163,12 +164,29 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public boolean checkBindByOpenId(String openid) {
-		// TODO Auto-generated method stub
-		return false;
+		Student student = studentDao.getStudentByOpenID(openid);
+		// 学生不存在，或者查出来的学号为空,则返回false,否则返回true
+		if (student == null) {
+			return false;
+		}
+		return true;
 	}
 
 	public View checkUser(String openid) {
-		// TODO Auto-generated method stub
+		// 如果用户的openid非法，则跳转至错误显示页面
+		if (openid.equals("illegal")) {
+			View view = new View("error", "wechat", "info", "Code无效，请用公告平台访问。");
+			view.addObject("info", "Code无效，请在公共平台访问。");
+			return view;
+		}
+		// 用户没有绑定账户，则跳转至绑定页面
+		if (!checkBindByOpenId(openid)) {
+			View view = new View("student", "account", "bind", "绑定用户账户");
+			view.addObject("openid", openid);
+			return view;
+		}		
+		
+		// 用户已经登录，返回null
 		return null;
 	}
 
