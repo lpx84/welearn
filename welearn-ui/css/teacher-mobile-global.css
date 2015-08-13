@@ -1,0 +1,76 @@
+.main {
+    font-family: "Microsoft YaHei";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #fff;
+    padding-bottom: 40px;
+}
+
+.header {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 2.5em;
+    background-color: #A7DEFF;
+}
+
+.span-head,
+.item {
+    border-bottom: solid 1px #B9B6B6;
+}
+
+.span-head {
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+
+.item {
+    line-height: 1.8em;
+    background-color: #F7F7F7;
+}
+
+.item .float-right {
+    margin-top: 13px;
+    margin-right: 5px;
+}
+
+.item .comment .label {
+    margin-left: 5px;
+}
+
+.btn .button-content {
+    width: 100%;
+}
+
+.btn-more {
+    width: 100%;
+    text-align: center;
+}
+
+.nav-footer {
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    background-color: #efefef;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-footer .icon {
+    font-size: 1.4em;
+}
+
+.nav-footer .text {
+    -webkit-text-size-adjust:none;
+    font-size: 0.5em;
+}
+
+.nav-item {
+    color: #bebebe;
+}
+
+.nav-item.selected {
+    color: #484747;
+}

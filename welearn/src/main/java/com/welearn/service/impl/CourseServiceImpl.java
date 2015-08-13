@@ -304,8 +304,10 @@ public class CourseServiceImpl implements CourseService {
 			courseModel.setName(course.getName());
 			courseModel.setSchool(course.getAcademyEntity().getName());
 			courseModel.setTeacher(teacher.getTrueName());
-			courseModel.setTime(timeCourse.getClassTime());
-			courseModel.setPlace(timeCourse.getClassroom());
+			if(timeCourse != null) {
+				courseModel.setTime(timeCourse.getClassTime());
+				courseModel.setPlace(timeCourse.getClassroom());
+			}
 			courseModel.setCredit(course.getCredit());
 			courseModel.setCourseNo(course.getCourseNo());
 			courseModel.setId(courseid);

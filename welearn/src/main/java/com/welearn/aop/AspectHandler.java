@@ -94,7 +94,9 @@ public class AspectHandler {
             Class returnType = method.getReturnType();//得到方法返回值类型  
             if(returnType == String.class) { //如果返回值为String
                 return JsonUtil.getJsonLoginTimeOut();
-            } else if(returnType == View.class || returnType == InfoView.class) {
+            } else if(returnType == View.class 
+            		|| returnType == ModelAndView.class
+            		|| returnType == InfoView.class) {
             	return view;
             } else {  //当使用Ajax的时候 可能会出现这种情况  
             	throw new Exception("错误的返回类型，此注解适用的方法返回值需为View或者是String！");

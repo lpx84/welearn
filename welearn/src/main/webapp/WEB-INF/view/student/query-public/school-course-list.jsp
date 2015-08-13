@@ -41,14 +41,13 @@
         <div class="scrollable-content">
 
             <ul class="notifications-box">
-            <c:forEach var="item" items="${list }">            
+            <c:forEach var="item" items="${list }">
                 <li onclick="javascript:location.href='school-course-detail?courseid=${item.getId() }';">
                     <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
                     <span class="notification-text">${item.getName() }</span>
                     <div class="notification-time">${item.getAcademyEntity().getName() }</div>
                 </li>
             </c:forEach>
-
                 
             </ul>
 

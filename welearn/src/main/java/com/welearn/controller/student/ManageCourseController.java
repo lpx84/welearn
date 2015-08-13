@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.welearn.aop.Authentication;
 import com.welearn.model.AttendRecord;
@@ -108,7 +109,7 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-manage")
 	@Authentication()
-	public View courseManage(@RequestParam(value = "courseid") int courseid,
+	public ModelAndView courseManage(@RequestParam(value = "courseid") int courseid,
 			HttpSession session) {
 		View view;
 		// 用课程服务类查询具体的课程信息

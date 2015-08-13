@@ -8,27 +8,45 @@
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
 <style type="text/css">
-       .tips-span {
+    .tips-span {
         padding: 10px;
     }
     
     .tips-span span {
         margin-top: 5px;
-    }   
+    }
+    
+    .img img {
+        width: 100%;
+    }
+    
+    .none-border {
+    	border: none !important;
+    }
+    
+    .span-head {
+    	
+    }
 </style>
 </head>
 <body>
-<div class="content-box bg-white">
-    <div class="button-pane button-pane-top pad10A">
-        <div class="form-row pad0B">
-            <div class="form-input col-md-12">
-                <div class="form-input-icon">
-                <form id="search-course" action="<%=request.getContextPath() %>/student/query/public/school-course-query" method="POST">
-                    <i class="glyph-icon fa-search"></i>
-                    <input type="text" placeholder="输入查询课程" class="radius-all-100" name="keyword" id="keyword" onkeydown="javascript:enterSearch();"/>
-                    <input type="submit" style="display:none;">
-                </form>
-                </div>
+<div class="content-box bg-white none-border">
+	<div class="img" style="display:none;">
+        <img src="<%=request.getContextPath() %>/public/img/index.jpg">
+    </div>
+    <div class="button-pane button-pane-top pad10A text-center">
+        <p>我要蹭课</p>
+    </div>
+    
+    <div class="form-row pad0B mrg5A">
+        <div class="form-input col-md-12">
+            <div class="form-input-icon">
+            <form id="search-course" action="<%=request.getContextPath() %>/student/query/public/school-course-query" method="POST">
+                
+                <input type="text" placeholder="输入查询课程" class="radius-all-100" name="keyword" id="keyword" onkeydown="javascript:enterSearch();"/>
+                <i class="glyph-icon fa-search"></i>
+                <input type="submit" style="display:none;">
+            </form>
             </div>
         </div>
     </div>
@@ -57,6 +75,34 @@
         <a href="<%=request.getContextPath() %>/student/query/public/school-course-query?keyword=经济管理学院">
             <span class="label bg-gray">经济管理学院</span>
         </a>
+    </div>
+    <div class="history-span">
+    	<div class="span-head font-size-18 pad10T pad10B mrg5A">搜索历史</div>
+    	<div class="span-content">
+    		<ul class="notifications-box">
+    			<li onclick="javascript:location.href='school-course-detail?courseid=16';">
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
+                    <span class="notification-text">软件体系结构</span>
+                    <div class="notification-time">
+                    	<span class="glyph-icon icon-time"></span>&nbsp;&nbsp;昨天
+                    </div>
+                </li>
+                <li onclick="javascript:location.href='school-course-detail?courseid=16';">
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
+                    <span class="notification-text">操作系统</span>
+                    <div class="notification-time">
+                    	<span class="glyph-icon icon-time"></span>&nbsp;&nbsp;2天前
+                    </div>
+                </li>
+                <li onclick="javascript:location.href='school-course-detail?courseid=16';">
+                    <span class="btn bg-green icon-notification glyph-icon fa-book"></span>
+                    <span class="notification-text">无线通信</span>
+                    <div class="notification-time">
+                    	<span class="glyph-icon icon-time"></span>&nbsp;&nbsp;2天前
+                    </div>
+                </li>
+    		</ul>
+    	</div>
     </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>

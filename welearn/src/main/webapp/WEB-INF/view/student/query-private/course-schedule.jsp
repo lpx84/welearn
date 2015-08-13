@@ -7,7 +7,12 @@
 <head>
 <%@ include file="/public/section/home/header.jsp" %>
 <title>${title }</title>
+<% String path = request.getContextPath(); %>
 <style type="text/css">
+	body {
+		background: url('/welearn/public/img/bg01.jpg');
+	}
+	
    .fixed {
         position: absolute;
     }
@@ -47,7 +52,6 @@
     }
     
     .has-course {
-        background-color: #CCFFCC;
     }
    
 </style>
@@ -83,7 +87,7 @@
             <tr>
                 <td class="course-no">2</td>
                <td class="has-course">信息安全理论与实践_01 刘铎</td>
-               <td class="has-course">软件体系结构_01 冀振燕</td>
+               <td class="has-course" onclick="javascript: location.href='<%=path %>/student/query/public/school-course-detail?courseid=16'">软件体系结构_01 冀振燕</td>
                <td></td>
                <td class="has-course">软件工程综合实践_03 张红延</td>
                <td></td>
@@ -148,6 +152,34 @@
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
 
+$(document).ready(function(){
+	color();
+});
+
+function color() {
+	var list = new Array(
+			"#FF6C00",
+			"#FC3F4D",
+			"#34CFBE",
+			"#FC717B",
+			"#FFA500");
+	var index = list.length - 1;
+	var dom = $(".has-course");
+	for(var d=0; d<dom.length; ++d) {
+		index = getNextIndex(index,list);
+		$(dom[d]).css("background-color",list[index]);
+	}
+	
+}
+
+function getNextIndex(index, list) {
+	if(index >= list.length - 1) {
+		index=0;
+	} else {
+		++index;
+	}
+	return index;
+}
 </script>
 </body>
 </html>
