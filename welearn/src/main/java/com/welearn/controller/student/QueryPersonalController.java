@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.welearn.aop.Authentication;
 import com.welearn.model.CETGrade;
@@ -44,7 +45,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-schedule")
-	public View CourseScheduleQuery(@RequestParam("code") String code,
+	public ModelAndView CourseScheduleQuery(@RequestParam("code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
@@ -100,7 +101,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("exam-plan")
-	public View examPlan(@RequestParam(value = "code") String code,
+	public ModelAndView examPlan(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
@@ -126,7 +127,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("cet-grade")
-	public View cetGrade(@RequestParam(value = "code") String code) {
+	public ModelAndView cetGrade(@RequestParam(value = "code") String code) {
 		View view;
 		// 创建微信服务类根据code获取 openId
 		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
@@ -171,7 +172,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("course-grade")
-	public View courseGrade(@RequestParam(value = "code") String code,
+	public ModelAndView courseGrade(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
@@ -205,7 +206,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("net-flow")
-	public View netFlowDetail(@RequestParam(value = "code") String code,
+	public ModelAndView netFlowDetail(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
@@ -239,7 +240,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("ecard")
-	public View eCard(@RequestParam(value = "code") String code,
+	public ModelAndView eCard(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
@@ -272,7 +273,7 @@ public class QueryPersonalController {
 	 * @return
 	 */
 	@RequestMapping("ecard-detail")
-	public View eCardDetail() {
+	public ModelAndView eCardDetail() {
 		// 查询余额
 		View view = new View("student", "query-private", "ecard-detail",
 				"一卡通查询");
