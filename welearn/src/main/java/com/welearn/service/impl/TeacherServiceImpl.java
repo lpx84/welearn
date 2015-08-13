@@ -2,6 +2,8 @@ package com.welearn.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.welearn.dao.AttendRecordDao;
 import com.welearn.dao.AttendTaskDao;
 import com.welearn.dao.CourseDao;
@@ -19,6 +21,7 @@ import com.welearn.entity.CourseNotify;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
+import com.welearn.view.View;
 
 public class TeacherServiceImpl implements TeacherService {
 
@@ -71,9 +74,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public Teacher getTeacherById(int id) {
-		// TODO Auto-generated method stub
-		//teacherDao.getTeacher(id);
-		return teacherDao.getTeacher(1);
+		return teacherDao.getTeacher(id);
 	}
 	
 	//课程作业部分
@@ -159,6 +160,21 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public boolean updateCourseNotify(CourseNotify courseNotify) {
 		return courseNotifyDao.updateCourseNotify(courseNotify);
+	}
+
+	public boolean checkBindByOpenId(String openid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public View checkUser(String openid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setSession(HttpSession session, String openid) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

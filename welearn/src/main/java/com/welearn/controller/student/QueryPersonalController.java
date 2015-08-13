@@ -18,12 +18,12 @@ import com.welearn.model.CourseGrade;
 import com.welearn.model.Ecard;
 import com.welearn.model.ExamPlan;
 import com.welearn.model.NetFlow;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.MisService;
 import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
-import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.View;
 
 @Controller

@@ -18,6 +18,7 @@ import com.welearn.entity.SchoolCalender;
 import com.welearn.model.Building;
 import com.welearn.model.EmptyRoom;
 import com.welearn.model.LostThing;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.EmptyRoomService;
 import com.welearn.service.intef.MisService;
@@ -26,7 +27,6 @@ import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
-import com.welearn.util.WechatTypeEnum;
 import com.welearn.view.View;
 
 @Controller
