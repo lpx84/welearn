@@ -42,6 +42,8 @@ public class TimeCourseDao extends SuperDao {
 		return (TimeCourse) query.uniqueResult();
 	}
 	
+
+	
 	@SuppressWarnings("unchecked")
 	public List<TimeCourse> getTimeCourseByCourseId(int courseId){
 		this.hql = "FROM TimeCourse AS u"
