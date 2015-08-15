@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import com.welearn.dao.StudentDao;
 import com.welearn.entity.Student;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.StudentService;
 import com.welearn.view.View;
 
@@ -35,9 +36,10 @@ public class StudentServiceImpl implements StudentService {
 		if (!checkBindByOpenId(openid)) {
 			View view = new View("student", "account", "bind", "绑定用户账户");
 			view.addObject("openid", openid);
+			view.addObject("type", WechatTypeEnum.STUDENT);
 			return view;
-		}		
-		
+		}
+
 		// 用户已经登录，返回null
 		return null;
 	}
@@ -53,15 +55,14 @@ public class StudentServiceImpl implements StudentService {
 	public Student getStudentByStudentNo(String studentNo) {
 		return studentDao.getStudentByStudentNo(studentNo);
 	}
-	
-	public void setSession(HttpSession session,String openid){
+
+	public void setSession(HttpSession session, String openid) {
 		Student student = studentDao.getStudentByOpenID(openid);
-		session.setAttribute("sid",student.getId());
+		session.setAttribute("sid", student.getId());
 		session.setAttribute("sno", student.getStudentNo());
 		session.setAttribute("sname", student.getTrueName());
 		session.setAttribute("openid", openid);
 		session.setAttribute("avatar", student.getAvatar());
 	}
 
-	
 }

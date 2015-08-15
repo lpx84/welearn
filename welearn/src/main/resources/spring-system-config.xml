@@ -28,10 +28,10 @@
 	<bean id="teacherConfig" class="com.welearn.util.TeacherConfig">
 		<property name="email" value="lipx84@126.com" />
 		<property name="pwd" value="mpMiXiang" />
-		<property name="appId" value="wx80c237b3b2300b0a" />
+		<property name="appId" value="wxe333e2c2ed054409" />
 		<property name="encodingAesKey" value="f6351ec373b59401007017cf88e92b52" />
 		<property name="token" value="bjtujwc" />
-		<property name="appsecret" value="f6351ec373b59401007017cf88e92b52" />
+		<property name="appsecret" value="61c33cd07cdaf9c086db40da89734f81" />
 	</bean>
 
 	<bean id="faceppConfig" class="com.welearn.util.FacePPConfig">

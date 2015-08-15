@@ -11,7 +11,6 @@ import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
-import com.welearn.entity.Student;
 import com.welearn.view.View;
 
 public interface TeacherService {
@@ -79,4 +78,17 @@ public interface TeacherService {
 	 */
 	public void setSession(HttpSession session,String openid);
 
+	/**
+	 * 根据教师NO获取教师信息
+	 * @param teacherNo
+	 * @return
+	 */
+	public Teacher getTeacherByTeacherNo(String teacherNo);
+	
+	/**
+	 * 更新teacher信息
+	 * @param teacher
+	 * @return
+	 */
+	public boolean updateTeacher(Teacher teacher);
 }
