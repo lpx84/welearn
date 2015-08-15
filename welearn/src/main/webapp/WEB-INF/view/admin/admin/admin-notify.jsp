@@ -804,7 +804,7 @@
                 <div id="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="admin_index.html" title="Dashboard">
+                            <a href="admin-index" title="Dashboard">
                                 <i class="glyph-icon icon-dashboard"></i>
                                 后台首页
                             </a>

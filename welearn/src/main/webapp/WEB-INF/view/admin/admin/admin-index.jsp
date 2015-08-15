@@ -803,7 +803,7 @@
                 <div id="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="admin_index.html" title="Dashboard">
+                            <a href="admin-index" title="Dashboard">
                                 <i class="glyph-icon icon-dashboard"></i>
                                 后台首页
                             </a>
@@ -897,7 +897,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="admin_tongzhi.html" title="Sliders">
+                                    <a href="admin-notify" title="Sliders">
                                         <i class="glyph-icon icon-chevron-right"></i>
                                         通知与消息
                                     </a>
