@@ -131,7 +131,7 @@
     .match-item {
         margin-left: 10px;
         display: inline-block;
-        width: 40%;
+        width: 45%;
     }
     
     .footer-item.statistics {
@@ -231,10 +231,10 @@
                     <i class="glyph-icon icon-stop" style="color: #2381e9;"></i> 等待审核 <span class="label m2"></span>
                 </span>
                 <span class="match-item">
-                    <i class="glyph-icon icon-stop" style="color: #ff7a00;"></i> 审核通过 <span class="label m3"></span>
+                    <i class="glyph-icon icon-stop" style="color: #ff7a00;"></i> 审核未通过 <span class="label m3"></span>
                 </span>
                 <span class="match-item">
-                    <i class="glyph-icon icon-stop" style="color: #00c322;"></i> 审核未通过 <span class="label m4"></span>
+                    <i class="glyph-icon icon-stop" style="color: #00c322;"></i> 审核通过 <span class="label m4"></span>
                 </span>
             </div>
         </div>
@@ -246,16 +246,15 @@
         var num = 60;
         var rate = [1, 2, 2, 0, 55];
         for(var i in rate) {
-            console.log(rate[i]);
-            var temp = rate[i]/num;
-            $('.label.m'+i).html(rate[i] + "人 " + temp.toFixed(4)*100 + "%");
+            var tt = new Number((rate[i]/num*100).toString()).toFixed(2);
+            $('.label.m'+i).html(rate[i] + "人 " + tt + "%");
         }
         
         $(".attend-statistics").sparkline(rate, {
             type: "pie",
             width: "300",
             height: "300",
-            sliceColors: ["#D5D5D6", "#ffb673", "#2381e9","#ff7a00", "#00c322"],
+            sliceColors: ["#D5D5D6", "#ffb673", "#2381e9", "#ff7a00", "#00c322"],
             offset: 0,
             borderWidth: 0,
             borderColor: "#000000"
