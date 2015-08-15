@@ -110,4 +110,17 @@ public class TeacherDao  extends SuperDao {
 		
 	}
 	
+	/**
+	 * 通过teacherNo即老师的工号查询教师信息
+	 * @param teacherNo
+	 * @return
+	 */
+	public Teacher getTeacherByTeacherNo(String teacherNo) {
+		this.hql = "FROM Teacher AS u inner join fetch u.academyEntity WHERE u.teacherNo=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, teacherNo);
+		return (Teacher)query.uniqueResult();
+		
+	}
+	
 }

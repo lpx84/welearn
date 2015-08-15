@@ -24,7 +24,7 @@ public class XmlUtil {
 		MsgReplyNews news = new MsgReplyNews();
 		List<MsgNewsItem> items = new ArrayList<MsgNewsItem>();
 		MsgNewsItem item = new MsgNewsItem();
-		String desc = "欢迎关注北京交通大学微信教学平台，请绑定学号以获得更好的服务！\n";
+		String desc = "欢迎关注北京交通大学微信教学平台，请绑定学号(工号)以获得更好的服务！\n";
 		desc += "你还可以直接回复：\"北京回上海\"来查询火车或者\"北京飞上海\"来查询航班信息，甚至可以回复\"鱼香肉丝\"来查询菜谱……\n"
 				+ "还有更多功能等你来发现！";
 		item.setDescription(desc);

@@ -197,4 +197,13 @@ public class TeacherServiceImpl implements TeacherService {
 		session.setAttribute("avatar", teacher.getAvatar());
 	}
 
+	//获取教师信息
+	public Teacher getTeacherByTeacherNo(String teacherNo) {		
+		return teacherDao.getTeacherByTeacherNo(teacherNo);
+	}
+
+	public boolean updateTeacher(Teacher teacher) {
+		return teacherDao.updateTeacher(teacher);
+	}
+
 }

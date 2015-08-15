@@ -60,6 +60,9 @@ public class Teacher {
 	@Column(name="email", columnDefinition="varchar(255)")
 	private String email;
 	
+	@Column(name="teacher_no", columnDefinition="varchar(20)", unique=true)
+	private String teacherNo;
+	
 	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
 	private Integer status;
 	
