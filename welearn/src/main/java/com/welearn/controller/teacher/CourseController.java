@@ -12,6 +12,7 @@ import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
+import com.welearn.util.InfoCode;
 import com.welearn.view.View;
 
 @Controller
@@ -39,9 +40,10 @@ public class CourseController {
 
 		teacherService.setSession(session, openid);
 		
-		
-        
+		//返回教师页面的课程页面
+        view = new View("teacher", "manage", "course-index", "课程首页");
+        view.addObject("type",InfoCode.COURSE);
 		// 默认当前周试图
-		return new View("teacher", "manage", "course-index", "课程首页");
+		return view;
 	}
 }

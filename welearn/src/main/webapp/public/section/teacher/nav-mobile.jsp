@@ -3,19 +3,34 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="nav-footer footer">
 	<div class="row">
-		<div class="col-xs-4 nav-item">
+        <c:if test="${type ==  InfoCode.NOTIFY}">
+            <div class="col-xs-4 nav-item selected">
+        </c:if> 	
+        <c:if test="${type !=  InfoCode.NOTIFY}">
+            <div class="col-xs-4 nav-item">
+        </c:if> 
 			<div class="icon">
 				<i class="glyph-icon fa-bell"></i>
-			</div>
+			</div>			
 			<div class="text">通知</div>
 		</div>
-		<div class="col-xs-4 nav-item selected">
+        <c:if test="${type ==  InfoCode.COURSE}">
+            <div class="col-xs-4 nav-item selected">
+        </c:if> 	
+        <c:if test="${type != InfoCode.COURSE}">
+            <div class="col-xs-4 nav-item">
+        </c:if> 
 			<div class="icon">
 				<i class="glyph-icon fa-book"></i>
 			</div>
 			<div class="text">课程</div>
 		</div>
-		<div class="col-xs-4 nav-item">
+        <c:if test="${type ==  InfoCode.PERSONAL}">
+            <div class="col-xs-4 nav-item selected">
+        </c:if> 	
+        <c:if test="${type != InfoCode.PERSONAL}">
+            <div class="col-xs-4 nav-item">
+        </c:if> 
 			<div class="icon">
 				<i class="glyph-icon fa-user"></i>
 			</div>

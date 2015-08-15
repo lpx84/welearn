@@ -54,4 +54,13 @@ public class InfoCode {
 	/***********签到记录状态：审核未通过*********/
 	public static final Integer ATTEND_NOT_PASS = -1;
 	
+	
+	
+	/***************教师页面导航页面:通知页面****************/
+	public static final Integer NOTIFY = 1;
+	/***************教师页面导航页面:通知页面****************/
+	public static final Integer COURSE = 2;
+	/***************教师页面导航页面:通知页面****************/
+	public static final Integer PERSONAL = 3;
+	
 }
