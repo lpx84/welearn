@@ -42,6 +42,6 @@ public class CourseController {
 		
         
 		// 默认当前周试图
-		return new View("teacher", "manage", "course-index", "首页");
+		return new View("teacher", "manage", "course-index", "课程首页");
 	}
 }

@@ -20,7 +20,7 @@
         <p>教师首页</p>
     </div>
     <div class="img">
-        <img src="../img/teacher-index.jpg">
+        <img src="<%=request.getContextPath() %>/public/img/teacher-index.jpg">
     </div>
     <div class="search form-row pad0B mrg5A">
         <div class="form-input">
@@ -100,22 +100,7 @@
             <span class="button-content">已显示全部</span>
         </a>
     </div>
-    <div class="nav-footer footer">
-        <div class="row">
-            <div class="col-xs-4 nav-item">
-                <div class="icon"><i class="glyph-icon fa-bell"></i></div>
-                <div class="text">通知</div>
-            </div>
-            <div class="col-xs-4 nav-item selected">
-                <div class="icon"><i class="glyph-icon fa-book"></i></div>
-                <div class="text">课程</div>
-            </div>
-            <div class="col-xs-4 nav-item">
-                <div class="icon"><i class="glyph-icon fa-user"></i></div>
-                <div class="text">个人</div>
-            </div>
-        </div>
-    </div>
+
 </div>
 </body>
 <%@ include file="/public/section/public.jsp" %>

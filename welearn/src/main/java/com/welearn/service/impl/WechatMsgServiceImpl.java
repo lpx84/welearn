@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,8 +34,11 @@ import com.welearn.model.MsgReceivePicture;
 import com.welearn.model.MsgReceiveText;
 import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.WechatMsgService;
+import com.welearn.util.HttpUtil;
 import com.welearn.util.InfoCode;
 import com.welearn.util.NumberUtil;
+import com.welearn.util.TeacherConfig;
+import com.welearn.util.WechatConfig;
 import com.welearn.util.XmlUtil;
 
 public class WechatMsgServiceImpl implements WechatMsgService {
@@ -101,46 +106,45 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 * 根据code获取用户的openid，如果code不存在或者非法，则返回illegal
 	 */
 	public String getOpenIdByCode(String code, WechatTypeEnum type) {
-		// String appId = "";
-		// String appSecret = "";
-		// // 判断用户的类型
-		// switch (type) {
-		// case TEACHER:
-		// appId = TeacherConfig.appId;
-		// appSecret = TeacherConfig.appsecret;
-		// break;
-		// case STUDENT:
-		// appId = WechatConfig.appId;
-		// appSecret = WechatConfig.appsecret;
-		// break;
-		// default:
-		// appId = WechatConfig.appId;
-		// appSecret = WechatConfig.appsecret;
-		// break;
-		// }
-		//
-		// // 获取用户access_token的url
-		// String get_access_token_url =
-		// "https://api.weixin.qq.com/sns/oauth2/access_token?"
-		// + "appid="
-		// + appId
-		// + "&secret="
-		// + appSecret
-		// + "&code="
-		// + code
-		// + "&grant_type=authorization_code";
-		// // 向微信发送请求，获取openid
-		// String json = HttpUtil.getUrl(get_access_token_url);
-		// System.out.println(json);
-		// JSONObject jsonObject = JSONObject.fromObject(json);
-		// String openid = "illegal";
-		// try {
-		// openid = jsonObject.getString("openid");
-		// } catch (Exception e) {
-		// System.err.println(e.toString());
-		// }
-		//
-		// return openid;
+//		String appId = "";
+//		String appSecret = "";
+//		// 判断用户的类型
+//		switch (type) {
+//		case TEACHER:
+//			appId = TeacherConfig.appId;
+//			appSecret = TeacherConfig.appsecret;
+//			break;
+//		case STUDENT:
+//			appId = WechatConfig.appId;
+//			appSecret = WechatConfig.appsecret;
+//			break;
+//		default:
+//			appId = WechatConfig.appId;
+//			appSecret = WechatConfig.appsecret;
+//			break;
+//		}
+//
+//		// 获取用户access_token的url
+//		String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
+//				+ "appid="
+//				+ appId
+//				+ "&secret="
+//				+ appSecret
+//				+ "&code="
+//				+ code
+//				+ "&grant_type=authorization_code";
+//		// 向微信发送请求，获取openid
+//		String json = HttpUtil.getUrl(get_access_token_url);
+//		System.out.println(json);
+//		JSONObject jsonObject = JSONObject.fromObject(json);
+//		String openid = "illegal";
+//		try {
+//			openid = jsonObject.getString("openid");
+//		} catch (Exception e) {
+//			System.err.println(e.toString());
+//		}
+//
+//		return openid;
 		return code;
 	}
 
