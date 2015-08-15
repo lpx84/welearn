@@ -10,9 +10,16 @@
 
 .header {
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.5em;
     line-height: 2.5em;
     background-color: #A7DEFF;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+}
+
+.main>div:nth-child(2) {
+    margin-top: 48px;
 }
 
 .span-head,
@@ -52,7 +59,7 @@
 .nav-footer {
     position: fixed;
     bottom: 0;
-    padding: 10px;
+    padding: 5px;
     background-color: #efefef;
     width: 100%;
     text-align: center;
@@ -73,4 +80,8 @@
 
 .nav-item.selected {
     color: #484747;
+}
+
+.btn-back {
+    margin-left: 10px;
 }

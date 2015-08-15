@@ -1,5 +1,7 @@
 package com.welearn.util;
 
+import java.util.Date;
+
 /**
  * 跟教师端微信交互的配置变量
  * 
@@ -18,6 +20,10 @@ public class TeacherConfig {
 	public static String token;
 
 	public static String appsecret;
+	
+	public static Date expiryTime = null;
+	
+	public static String accessToken = null;
 
 	public void setEmail(String _email) {
 		email = _email;
