@@ -1,5 +1,7 @@
 package com.welearn.util;
 
+import java.util.Date;
+
 import com.welearn.model.WechatTypeEnum;
 
 import net.sf.json.JSONObject;
@@ -31,15 +33,12 @@ public class NotifyUtil {
     }
 	
 	private boolean pushMessage(WechatTypeEnum platform, JSONObject json) {
-		String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + getAccessToken(platform);
+		String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + TokenUtil.getAccessToken(platform);
 		String responseContext = new HttpClientWrap().postResponseNative(url, json.toString());
         JSONObject responseJson = JSONObject.fromObject(responseContext);
 		return responseJson.getLong("errcode") == 0;
 	}
 	
 	
-	public String getAccessToken(WechatTypeEnum platform) {
-		
-		return "FbjiQXJzaukfvDjONsd7POOlW7h3W-h0nXVZdFkLp8NkdEZ6GxnMWa9e9DN2w44w0Uk4RP2vVECfrk0d2y9J6tYGRfkkS9ZlR2fmh-Po4cY";
-	}
+	
 }
