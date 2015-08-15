@@ -17,7 +17,7 @@
 <body>
 <div class="content-box">
     <h3 class="content-box-header bg-gray">
-        <p class="pad0L title">绑定学号</p>
+        <p class="pad0L title">绑定学号（工号）</p>
     </h3>
     <form id="student-bind" action="<%=request.getContextPath()%>/student/account/bind.act" class="col-md-3 center-margin form-vertical mrg25T" method="POST">
 
@@ -25,10 +25,11 @@
             
             <div class="content-box-wrapper pad20A pad0B">
             	<input type="hidden" name="openId" value="${openId }">
+            	<input type="hidden" name="type" value="${type }">
             	<input type="hidden" name="pwd" id="pwd" value="">
                 <div class="form-row">
                     <div class="form-label col-md-2">
-                        <label for="login_email">学号:
+                        <label for="login_email">学号（工号）:
                             <span class="required">*</span>
                         </label>
                     </div>

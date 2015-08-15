@@ -27,19 +27,21 @@ public class CourseController {
 	@RequestMapping("course-index")
 	public ModelAndView CourseScheduleQuery(@RequestParam("code") String code,
 			HttpSession session) {
-//		View view;
-//		// 创建微信服务类根据code获取openid
-//		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.TEACHER);
-//		// 检验用户是否登录
-//		view = studentService.checkUser(openid);
-//		if (view != null) {
-//			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
-//			return view;
-//		}
-//
-//		studentService.setSession(session, openid);
+		View view;
+		// 创建微信服务类根据code获取openid
+		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.TEACHER);
+		// 检验用户是否登录
+		view = teacherService.checkUser(openid);
+		if (view != null) {
+			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+			return view;
+		}
 
+		teacherService.setSession(session, openid);
+		
+		
+        
 		// 默认当前周试图
-		return new View("student", "query-private", "course-schedule", "我的课表");
+		return new View("teacher", "manage", "course-index", "首页");
 	}
 }

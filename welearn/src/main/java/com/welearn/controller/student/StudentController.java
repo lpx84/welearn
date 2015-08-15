@@ -29,6 +29,7 @@ public class StudentController {
 		String openId = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
 		View v = new View("student","account","bind","绑定学号");
 		v.addObject("openId",openId);
+		v.addObject("type",WechatTypeEnum.STUDENT);
 		return v;
 	}
 	
@@ -36,6 +37,7 @@ public class StudentController {
 	public InfoView bindAction(
 			@RequestParam("studentNo")String studentNo,
 			@RequestParam("pwd")String pwd,
+			@RequestParam("type")WechatTypeEnum type,
 			@RequestParam("openId")String openId) {
 		if( null == studentNo ||
 			null == pwd ||
@@ -47,6 +49,8 @@ public class StudentController {
 		} else if(studentNo.length() != 8) {
 			return new InfoView("学号必须为8位！");
 		} else {
+			
+			
 			Student s = studentService.getStudentByStudentNo(studentNo);
 			if(null == s) {
 				return new InfoView("学号不存在！");

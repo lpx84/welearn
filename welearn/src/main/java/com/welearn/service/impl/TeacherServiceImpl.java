@@ -18,7 +18,6 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
-import com.welearn.entity.Student;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
@@ -47,21 +46,19 @@ public class TeacherServiceImpl implements TeacherService {
 	public void setTeacherDao(TeacherDao teacherDao) {
 		this.teacherDao = teacherDao;
 	}
-	
-	
+
 	public void setCourseHomeworkDao(CourseHomeworkDao courseHomeworkDao) {
 		this.courseHomeworkDao = courseHomeworkDao;
 	}
-	
 
 	public void setCourseNotifyDao(CourseNotifyDao courseNotifyDao) {
 		this.courseNotifyDao = courseNotifyDao;
 	}
-	
+
 	public void setAttendTaskDao(AttendTaskDao attendTaskDao) {
 		this.attendTaskDao = attendTaskDao;
 	}
-	
+
 	public void setStudentDao(StudentDao studentDao) {
 		this.studentDao = studentDao;
 	}
@@ -69,7 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
 	public void setStudentCourseDao(StudentCourseDao studentCourseDao) {
 		this.studentCourseDao = studentCourseDao;
 	}
-	
+
 	public void setCourseReplyDao(CourseReplyDao courseReplyDao) {
 		this.courseReplyDao = courseReplyDao;
 	}
@@ -77,12 +74,12 @@ public class TeacherServiceImpl implements TeacherService {
 	public Teacher getTeacherById(int id) {
 		return teacherDao.getTeacher(id);
 	}
-	
-	//课程作业部分
+
+	// 课程作业部分
 	public boolean publishCourseHomework(CourseHomework homework) {
 		int result = courseHomeworkDao.addCourseHomework(homework);
-		//System.out.println("result:"+result);
-		return result>0;
+		// System.out.println("result:"+result);
+		return result > 0;
 	}
 
 	public CourseHomework getHomeworkByTitle(String title) {
@@ -97,14 +94,14 @@ public class TeacherServiceImpl implements TeacherService {
 		return courseHomeworkDao.updateCourseHomework(homework);
 	}
 
-	//课程管理
+	// 课程管理
 	public Course getCourseById(int id) {
-		//courseDao.getCourse(id);
+		// courseDao.getCourse(id);
 		return courseDao.getCourse(id);
 	}
 
 	public List<Course> getCourseList(int teacherId) {
-		//List<Course> list = courseDao.getCoursesByTeacher(teacherId);
+		// List<Course> list = courseDao.getCoursesByTeacher(teacherId);
 		return courseDao.getCoursesByTeacher(teacherId);
 	}
 
@@ -112,50 +109,51 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
-	//学生管理
+	// 学生管理
 	public List<StudentCourse> getStudentList() {
 		List<StudentCourse> list = studentCourseDao.getStudentCourse();
 		return list;
 	}
 
 	public List<StudentCourse> getStudentListByCourseId(int courseId) {
-		List<StudentCourse> list = studentCourseDao.getStudentCourseByCourseId(courseId);
+		List<StudentCourse> list = studentCourseDao
+				.getStudentCourseByCourseId(courseId);
 		return list;
 	}
 
-	//签到任务
+	// 签到任务
 	public List<AttendTask> getAttendTaskByCourseId(int id) {
 		return null;
 	}
 
 	public AttendTask getAttendTaskById(int id) {
-		//attendTaskDao.getAttendTaskById(id);
+		// attendTaskDao.getAttendTaskById(id);
 		return attendTaskDao.getAttendTaskById(id);
 	}
 
 	public boolean publishAttendTask(AttendTask attendTask) {
-		//attendTaskDao.addAttendTask(attendTask);
-		return attendTaskDao.addAttendTask(attendTask)>0;
+		// attendTaskDao.addAttendTask(attendTask);
+		return attendTaskDao.addAttendTask(attendTask) > 0;
 	}
 
 	public boolean updateAttendTask(AttendTask attendTask) {
-		//attendTaskDao.updateAttendTask(attendTask);
+		// attendTaskDao.updateAttendTask(attendTask);
 		return attendTaskDao.updateAttendTask(attendTask);
 	}
-	
-	//签到记录
+
+	// 签到记录
 	public AttendRecord getAttendRecordByAttendTaskId(int id) {
 		return null;
 	}
 
-	//课程通知
+	// 课程通知
 	public boolean publisCourseNotify(CourseNotify courseNotify) {
-		//courseNotifyDao.addCourseNotify(courseNotify);
-		return courseNotifyDao.addCourseNotify(courseNotify)>0;
+		// courseNotifyDao.addCourseNotify(courseNotify);
+		return courseNotifyDao.addCourseNotify(courseNotify) > 0;
 	}
 
 	public CourseNotify getCourseNotifyById(int id) {
-		//courseNotifyDao.getCourseNotifyById(id);
+		// courseNotifyDao.getCourseNotifyById(id);
 		return courseNotifyDao.getCourseNotifyById(id);
 	}
 
@@ -164,9 +162,9 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public boolean checkBindByOpenId(String openid) {
-		Student student = studentDao.getStudentByOpenID(openid);
+		Teacher teacher = teacherDao.getTeacherByOpenid(openid);
 		// 学生不存在，或者查出来的学号为空,则返回false,否则返回true
-		if (student == null) {
+		if (teacher == null) {
 			return false;
 		}
 		return true;
@@ -184,15 +182,19 @@ public class TeacherServiceImpl implements TeacherService {
 			View view = new View("student", "account", "bind", "绑定用户账户");
 			view.addObject("openid", openid);
 			return view;
-		}		
-		
+		}
+
 		// 用户已经登录，返回null
 		return null;
 	}
 
+	//set session
 	public void setSession(HttpSession session, String openid) {
-		// TODO Auto-generated method stub
-		
+		Teacher teacher = teacherDao.getTeacherByOpenid(openid);
+		session.setAttribute("tid", teacher.getId());
+		session.setAttribute("tname", teacher.getTrueName());
+		session.setAttribute("openid", openid);
+		session.setAttribute("avatar", teacher.getAvatar());
 	}
 
 }
