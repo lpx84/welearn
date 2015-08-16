@@ -204,22 +204,6 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherDao.updateTeacher(teacher);
 	}
 
-	public int getStudentNumInCourse(int courseId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getAttendStudentNum(int taskId, int type) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public ArrayList<AttendTask> getAttendTasks(int courseId, int num,
-			int pageNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ArrayList<com.welearn.model.AttendTask> getAttendTasks(int courseId) {
 		ArrayList<com.welearn.model.AttendTask> tasks = new ArrayList<com.welearn.model.AttendTask>();
 
@@ -240,6 +224,28 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 
 		return tasks;
+	}
+
+	public ArrayList<com.welearn.model.AttendRecord> getAttendRecords(
+			int taskId, int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int[] getAttendStateNum(int taskId) {
+		int[] num = new int[5];
+		num[0] = (int) ((long) attendRecordDao.getCountByTastIdANDStatus(
+				taskId, InfoCode.ATTEND_NOT));
+		num[1] = (int) ((long) attendRecordDao.getCountByTastIdANDStatus(
+				taskId, InfoCode.ATTEND_PREPARE));
+		num[2] = (int) ((long) attendRecordDao.getCountByTastIdANDStatus(
+				taskId, InfoCode.ATTEND_VERIFY));
+		num[3] = (int) ((long) attendRecordDao.getCountByTastIdANDStatus(
+				taskId, InfoCode.ATTEND_NOT_PASS));
+		num[4] = (int) ((long) attendRecordDao.getCountByTastIdANDStatus(
+				taskId, InfoCode.ATTEND_PASS));
+
+		return num;
 	}
 
 	public void test() {
