@@ -11,6 +11,8 @@ public class AttendRecord {
 	private String content;
 	private String time;
 	private int state;
+	private int id;
+	private String stuInfo;
 
 	public String getPicUrl() {
 		return picUrl;

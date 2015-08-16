@@ -52,6 +52,12 @@ public class CourseController {
 		return view;
 	}
 
+	/**
+	 * 一门课程的管理页面
+	 * @param courseid
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("course-manage")
 	public ModelAndView CourseManage(@RequestParam("courseid") int courseid,
 			HttpSession session) {
@@ -67,6 +73,11 @@ public class CourseController {
 		return view;
 	}
 
+	/**
+	 * 显示签到任务列表
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("attend-list")
 	public ModelAndView AttendList(HttpSession session) {
 		View view;
@@ -78,13 +89,12 @@ public class CourseController {
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "attend-list", "签到任务列表");
 		view.addObject("list", tasks);
-		// Course course = courseService.queryCourseModleByCourseId(courseid);
-		// view.addObject("courseName",course.getName());
 
 		// 默认当前周试图
 		return view;
 	}
 
+	
 	@RequestMapping("attend-detail")
 	public ModelAndView AttendDetail(HttpSession session) {
 		View view;
@@ -96,4 +106,6 @@ public class CourseController {
 		// 默认当前周试图
 		return view;
 	}
+	
+	
 }
