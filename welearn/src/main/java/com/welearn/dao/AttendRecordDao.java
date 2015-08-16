@@ -230,4 +230,16 @@ public class AttendRecordDao extends SuperDao {
 		
 		return result;
 	}
+	
+	public Long getCountByTastIdANDStatus(int attendTaskId, int status) {
+		hql = "select count(*) from AttendRecord as a where a.attendTaskId=? and a.status=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setInteger(0, attendTaskId);
+		query.setInteger(1, status);
+		List count = query.list();
+		Long result = (Long) count.get(0);
+		//System.out.println(result.toString());
+		
+		return result;
+	}
 }

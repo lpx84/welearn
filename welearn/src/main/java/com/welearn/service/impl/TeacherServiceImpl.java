@@ -1,5 +1,6 @@
 package com.welearn.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -121,10 +122,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return list;
 	}
 
-	// 签到任务
-	public List<AttendTask> getAttendTaskByCourseId(int id) {
-		return null;
-	}
+
 
 	public AttendTask getAttendTaskById(int id) {
 		// attendTaskDao.getAttendTaskById(id);
@@ -204,6 +202,45 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public boolean updateTeacher(Teacher teacher) {
 		return teacherDao.updateTeacher(teacher);
+	}
+
+	public int getStudentNumInCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getAttendStudentNum(int taskId, int type) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<AttendTask> getAttendTasks(int courseId, int num,
+			int pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<com.welearn.model.AttendTask> getAttendTasks(int courseId) {
+		// TODO Auto-generated method stub
+		ArrayList<com.welearn.model.AttendTask> tasks = new ArrayList<com.welearn.model.AttendTask>();
+		
+		com.welearn.model.AttendTask task = new com.welearn.model.AttendTask();
+		
+		task.setAttendId(1);
+		task.setAttendNum(59);
+		task.setContent("第一次签到");
+		task.setEndTime("8-12");
+		task.setStartTime("8-11");
+		task.setStuNum(60);
+		
+		tasks.add(task);
+		return tasks;
+	}
+	
+	public void test(){
+		Long test = attendRecordDao.getCountByTastIdANDStatus(5, 2);
+		System.out.println("====================test:"+test);
+		System.out.println("==================================");
 	}
 
 }

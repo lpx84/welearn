@@ -1,5 +1,7 @@
 package com.welearn.controller.teacher;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.welearn.entity.TimeCourse;
+import com.welearn.model.AttendTask;
 import com.welearn.model.Course;
 import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.CourseService;
@@ -20,19 +22,20 @@ import com.welearn.view.View;
 @Controller
 @RequestMapping("teacher/course/*")
 public class CourseController {
-	@Resource(name="teacherService")
+	@Resource(name = "teacherService")
 	TeacherService teacherService;
 	@Resource(name = "wechatMsgService")
 	WechatMsgService wechatMsgService;
 	@Resource(name = "courseService")
 	CourseService courseService;
-	
+
 	@RequestMapping("course-index")
 	public ModelAndView CourseIndex(@RequestParam("code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.TEACHER);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.TEACHER);
 		// 检验用户是否登录
 		view = teacherService.checkUser(openid);
 		if (view != null) {
@@ -41,48 +44,55 @@ public class CourseController {
 		}
 
 		teacherService.setSession(session, openid);
-		
-		//返回教师页面的课程页面
-        view = new View("teacher", "manage", "course-index", "课程首页");
-        view.addObject("type",InfoCode.COURSE);
+
+		// 返回教师页面的课程页面
+		view = new View("teacher", "manage", "course-index", "课程首页");
+		view.addObject("type", InfoCode.COURSE);
 		// 默认当前周试图
 		return view;
 	}
-	
+
 	@RequestMapping("course-manage")
 	public ModelAndView CourseManage(@RequestParam("courseid") int courseid,
 			HttpSession session) {
 		View view;
 
 		session.setAttribute("courseid", courseid);
-		//Course course = courseService.queryCourseModleByCourseId(courseid);
-		//返回教师页面的课程页面
-        view = new View("teacher", "manage", "course-manage", "课程首页");
-       // view.addObject("courseName",course.getName());
+		Course course = courseService.queryCourseModleByCourseId(courseid);
+		// 返回教师页面的课程页面
+		view = new View("teacher", "manage", "course-manage", "课程首页");
+		view.addObject("type", InfoCode.COURSE);
+		view.addObject("courseName",course.getName());
 		// 默认当前周试图
 		return view;
 	}
-	
+
 	@RequestMapping("attend-list")
 	public ModelAndView AttendList(HttpSession session) {
 		View view;
+		// 从session中获取课程id
+		int courseId = (Integer) session.getAttribute("courseid");
+        //获取这门课的courseId
+		ArrayList<AttendTask> tasks = teacherService.getAttendTasks(courseId);
 
-		//Course course = courseService.queryCourseModleByCourseId(courseid);
-		//返回教师页面的课程页面
-        view = new View("teacher", "manage", "attend-list", "签到任务列表");
-       // view.addObject("courseName",course.getName());
+		// 返回教师页面的课程页面
+		view = new View("teacher", "manage", "attend-list", "签到任务列表");
+		view.addObject("list", tasks);
+		// Course course = courseService.queryCourseModleByCourseId(courseid);
+		// view.addObject("courseName",course.getName());
+
 		// 默认当前周试图
 		return view;
 	}
-	
+
 	@RequestMapping("attend-detail")
 	public ModelAndView AttendDetail(HttpSession session) {
 		View view;
 
-		//Course course = courseService.queryCourseModleByCourseId(courseid);
-		//返回教师页面的课程页面
-        view = new View("teacher", "manage", "attend-detail", "签到任务列表");
-       // view.addObject("courseName",course.getName());
+		// Course course = courseService.queryCourseModleByCourseId(courseid);
+		// 返回教师页面的课程页面
+		view = new View("teacher", "manage", "attend-detail", "签到任务列表");
+		// view.addObject("courseName",course.getName());
 		// 默认当前周试图
 		return view;
 	}

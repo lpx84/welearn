@@ -31,6 +31,7 @@
         <p>签到任务列表</p>
     </div>
     <div class="course-list">
+    <c:forEach var="item" items="${list }">
         <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
             <i class="btn bg-blue glyph-icon icon-picture"></i>
             <div class="display-inline">
@@ -49,7 +50,8 @@
                 <i class="glyph-icon icon-chevron-right"></i>
             </div>
         </div>
-        <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
+    </c:forEach>
+      <!--   <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
             <i class="btn bg-blue glyph-icon icon-picture"></i>
             <div class="display-inline">
                 <div class="name">
@@ -121,7 +123,7 @@
                 <i class="glyph-icon icon-chevron-right"></i>
             </div>
         </div>        
-    </div>
+    </div> -->
     <div class="span-more">
         <a href="javascript:void(0);" class="btn btn-more medium ui-state-default">
             <span class="button-content">已显示全部</span>

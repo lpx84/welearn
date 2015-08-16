@@ -12,12 +12,6 @@
         text-align: center;
     }
     
-    .header {
-        font-size: 1.2em;
-        line-height: 2.5em;
-        background-color: #A7DEFF;
-    }
-    
     .img img {
         width: 100%;
     }
@@ -35,7 +29,7 @@
     .menu-item p {
         font-size: 0.8em;
         margin-top: 5px;
-    }   
+    }
    
 </style>
 </head>
@@ -68,7 +62,7 @@
             </div>
         </div>
         <div class="menu-item col-xs-4 col-sm-3 col-md-3 col-lg-3">
-            <div class="item-inner">
+            <div class="item-inner" onclick="javascript: location.href='attend-list'">
                 <i class="fa fa-camera" style="color:#EFA0A0;"></i>
                 <p>签到管理</p>
             </div>
@@ -86,7 +80,22 @@
             </div>
         </div>
     </div>
-    
+    <div class="nav-footer footer">
+        <div class="row">
+            <div class="col-xs-4 nav-item">
+                <div class="icon"><i class="glyph-icon fa-bell"></i></div>
+                <div class="text">通知</div>
+            </div>
+            <div class="col-xs-4 nav-item selected">
+                <div class="icon"><i class="glyph-icon fa-book"></i></div>
+                <div class="text">课程</div>
+            </div>
+            <div class="col-xs-4 nav-item">
+                <div class="icon"><i class="glyph-icon fa-user"></i></div>
+                <div class="text">个人</div>
+            </div>
+        </div>
+    </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/teacher/nav-mobile.jsp" %>
