@@ -295,7 +295,8 @@ public class CourseServiceImpl implements CourseService {
 		Course course = courseDao.getCourse(courseid);
 		Teacher teacher = teacherDao.getTeacher(Integer.valueOf(course
 				.getTeacherId()));
-		ArrayList<TimeCourse> timeCourse = (ArrayList<TimeCourse>) timeCourseDao.getTimeCourseByCourseId(courseid);
+		ArrayList<TimeCourse> timeCourse = (ArrayList<TimeCourse>) timeCourseDao
+				.getTimeCourseByCourseId(courseid);
 
 		try {
 			// 设置相应的信息
@@ -304,17 +305,16 @@ public class CourseServiceImpl implements CourseService {
 			courseModel.setName(course.getName());
 			courseModel.setSchool(course.getAcademyEntity().getName());
 			courseModel.setTeacher(teacher.getTrueName());
-			if(timeCourse != null) {
-				String time = "";
-				String place = "";
-				for(int i=0;i<timeCourse.size();i++){
-					time = time +timeCourse.get(i).getClassTime()+" ";
-					place = place+timeCourse.get(i).getClassroom()+" ";
+			String time = "";
+			String place = "";
+			if (!timeCourse.isEmpty()) {
+				for (int i = 0; i < timeCourse.size(); i++) {
+					time = time + timeCourse.get(i).getClassTime() + " ";
+					place = place + timeCourse.get(i).getClassroom() + " ";
 				}
-				
-				courseModel.setTime(time);
-				courseModel.setPlace(place);
 			}
+			courseModel.setTime(time);
+			courseModel.setPlace(place);
 			courseModel.setCredit(course.getCredit());
 			courseModel.setCourseNo(course.getCourseNo());
 			courseModel.setId(courseid);

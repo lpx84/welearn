@@ -20,7 +20,7 @@
         <p>教师首页</p>
     </div>
     <div class="img">
-        <img src="../img/teacher-index.jpg">
+        <img src="<%=request.getContextPath() %>/public/img/teacher-index.jpg">
     </div>
     <div class="search form-row pad0B mrg5A">
         <div class="form-input">
@@ -38,7 +38,35 @@
         <i class="glyph-icon icon-double-angle-right"></i>&nbsp;我的课程
     </div>
     <div class="course-list">
-        <div class="item pad5A" onclick="javascript: location.href='course-index.html';">
+        <div class="item pad5A" onclick="javascript: location.href='course-manage?courseid=1';">
+            <div class="display-inline">
+                <div class="name">【A0L265Q】软件工程专业研究方法论与创新教育</div>
+                <div class="comment pad5L">
+                    <span class="font-gray">
+                        <i class="glyph-icon icon-time"></i>&nbsp;2014~2015第二学期
+                    </span>
+                    <span class="label bg-green">专业限选课</span>
+                </div>
+            </div>
+            <div class="display-inline float-right">
+                <i class="glyph-icon icon-chevron-right"></i>
+            </div>
+        </div>
+        <div class="item pad5A" onclick="javascript: location.href='course-manage?courseid=2';">
+            <div class="display-inline">
+                <div class="name">【A0S179Q】软件工程综合实践</div>
+                <div class="comment pad5L">
+                    <span class="font-gray">
+                        <i class="glyph-icon icon-time"></i>&nbsp;2014~2015第二学期
+                    </span>
+                    <span class="label bg-green">专业必修课</span>
+                </div>
+            </div>
+            <div class="display-inline float-right">
+                <i class="glyph-icon icon-chevron-right"></i>
+            </div>
+        </div>
+       <!--  <div class="item pad5A">
             <div class="display-inline">
                 <div class="name">【4A210Q】操作系统</div>
                 <div class="comment pad5L">
@@ -66,56 +94,13 @@
                 <i class="glyph-icon icon-chevron-right"></i>
             </div>
         </div>
-        <div class="item pad5A">
-            <div class="display-inline">
-                <div class="name">【4A210Q】操作系统</div>
-                <div class="comment pad5L">
-                    <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>&nbsp;2014~2015第二学期
-                    </span>
-                    <span class="label bg-green">专业限选课</span>
-                </div>
-            </div>
-            <div class="display-inline float-right">
-                <i class="glyph-icon icon-chevron-right"></i>
-            </div>
-        </div>
-        <div class="item pad5A">
-            <div class="display-inline">
-                <div class="name">【4A210Q】操作系统</div>
-                <div class="comment pad5L">
-                    <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>&nbsp;2014~2015第二学期
-                    </span>
-                    <span class="label bg-green">专业限选课</span>
-                </div>
-            </div>
-            <div class="display-inline float-right">
-                <i class="glyph-icon icon-chevron-right"></i>
-            </div>
-        </div>
-    </div>
+    </div> -->
     <div class="span-more">
         <a href="javascript:void(0);" class="btn btn-more medium ui-state-default">
             <span class="button-content">已显示全部</span>
         </a>
     </div>
-    <div class="nav-footer footer">
-        <div class="row">
-            <div class="col-xs-4 nav-item">
-                <div class="icon"><i class="glyph-icon fa-bell"></i></div>
-                <div class="text">通知</div>
-            </div>
-            <div class="col-xs-4 nav-item selected">
-                <div class="icon"><i class="glyph-icon fa-book"></i></div>
-                <div class="text">课程</div>
-            </div>
-            <div class="col-xs-4 nav-item">
-                <div class="icon"><i class="glyph-icon fa-user"></i></div>
-                <div class="text">个人</div>
-            </div>
-        </div>
-    </div>
+
 </div>
 </body>
 <%@ include file="/public/section/public.jsp" %>

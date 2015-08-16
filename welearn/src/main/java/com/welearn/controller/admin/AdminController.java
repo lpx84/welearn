@@ -1,17 +1,33 @@
 package com.welearn.controller.admin;
 
-import javax.annotation.Resource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.welearn.service.intef.CourseService;
-import com.welearn.service.intef.StudentService;
-import com.welearn.service.intef.TeacherService;
-
+import com.welearn.view.View;
+/**
+ * 管理员类
+ * 
+ * @author SikentKim
+ *
+ */
+@Controller
+@RequestMapping("public/*")
 public class AdminController {
-	@Resource(name = "studentService")
-	StudentService studentService;
-	@Resource(name = "courseService")
-	CourseService courseService;
-	@Resource(name="teacherService")
-	TeacherService teacherService;
+	@RequestMapping("admin-index")
+	public ModelAndView AdminIndex() {	
+		//返回教师页面的课程页面
+       View  view = new View("admin", "admin", "admin-index", "课程首页");
+		// 默认当前周试图
+		return view;
+	}
+
+	@RequestMapping("admin-notify")
+	public ModelAndView AdminNotify() {	
+		//返回教师页面的课程页面
+       View  view = new View("admin", "admin", "admin-notify", "课程首页");
+		// 默认当前周试图
+		return view;
+	}
 
 }

@@ -128,4 +128,18 @@ public class StudentCourseDao extends SuperDao{
 		query.setInteger(0, studentId);
 		return query.list();
 	}
+	
+	/**
+	 * 查询某课程选课学生数，返回Long类型的学生数量
+	 * @param courseId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Long getCountByCourseId(int courseId){
+		this.hql = "SELECT count(*) FROM StudentCourse AS u where u.courseId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseId);
+		List count = query.list();
+		return (Long)count.get(0);
+	}
 }
