@@ -55,7 +55,7 @@ public class CourseController {
 		View view;
 
 		session.setAttribute("courseid", courseid);
-		Course course = courseService.queryCourseModleByCourseId(courseid);
+		//Course course = courseService.queryCourseModleByCourseId(courseid);
 		//返回教师页面的课程页面
         view = new View("teacher", "manage", "course-manage", "课程首页");
        // view.addObject("courseName",course.getName());
@@ -63,4 +63,27 @@ public class CourseController {
 		return view;
 	}
 	
+	@RequestMapping("attend-list")
+	public ModelAndView AttendList(HttpSession session) {
+		View view;
+
+		//Course course = courseService.queryCourseModleByCourseId(courseid);
+		//返回教师页面的课程页面
+        view = new View("teacher", "manage", "attend-list", "签到任务列表");
+       // view.addObject("courseName",course.getName());
+		// 默认当前周试图
+		return view;
+	}
+	
+	@RequestMapping("attend-detail")
+	public ModelAndView AttendDetail(HttpSession session) {
+		View view;
+
+		//Course course = courseService.queryCourseModleByCourseId(courseid);
+		//返回教师页面的课程页面
+        view = new View("teacher", "manage", "attend-detail", "签到任务列表");
+       // view.addObject("courseName",course.getName());
+		// 默认当前周试图
+		return view;
+	}
 }
