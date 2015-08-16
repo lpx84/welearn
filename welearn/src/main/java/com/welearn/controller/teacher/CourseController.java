@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.welearn.entity.TimeCourse;
+import com.welearn.model.Course;
 import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.TeacherService;
@@ -26,7 +28,7 @@ public class CourseController {
 	CourseService courseService;
 	
 	@RequestMapping("course-index")
-	public ModelAndView CourseScheduleQuery(@RequestParam("code") String code,
+	public ModelAndView CourseIndex(@RequestParam("code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
@@ -46,4 +48,19 @@ public class CourseController {
 		// 默认当前周试图
 		return view;
 	}
+	
+	@RequestMapping("course-manage")
+	public ModelAndView CourseManage(@RequestParam("courseid") int courseid,
+			HttpSession session) {
+		View view;
+
+		session.setAttribute("courseid", courseid);
+		Course course = courseService.queryCourseModleByCourseId(courseid);
+		//返回教师页面的课程页面
+        view = new View("teacher", "manage", "course-manage", "课程首页");
+       // view.addObject("courseName",course.getName());
+		// 默认当前周试图
+		return view;
+	}
+	
 }

@@ -42,10 +42,10 @@
 <body>
 <div class="main">
     <div class="header">
-        <p>这里是课程名称</p>
+        <p>${courseName }</p>
     </div>
     <div class="img">
-        <img src="../img/teacher-index.jpg">
+        <img src="<%=request.getContextPath() %>/public/img/teacher-index.jpg">
     </div>
     <div class="search"></div>
     <div class="menu row">

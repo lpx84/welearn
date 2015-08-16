@@ -12,34 +12,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <!-- Favicons -->
-        <link id="layout-theme" rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%=request.getContextPath() %>/public/assets/images/icons/apple-touch-icon-144-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%=request.getContextPath() %>/public/assets/images/icons/apple-touch-icon-114-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%=request.getContextPath() %>/public/assets/images/icons/apple-touch-icon-72-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" href="<%=request.getContextPath() %>/public/assets/images/icons/apple-touch-icon-57-precomposed.png" />
-        <link rel="shortcut icon" href="<%=request.getContextPath() %>/public/assets/images/icons/favicon.png" />
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/icons/apple-touch-icon-144-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/icons/apple-touch-icon-114-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/icons/apple-touch-icon-72-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" href="assets/images/icons/apple-touch-icon-57-precomposed.png" />
+        <link rel="shortcut icon" href="assets/images/icons/favicon.png" />
 
         <!--[if lt IE 9]>
-          <script src="<%=request.getContextPath() %>/public/assets/js/minified/core/html5shiv.min.js"></script>
-          <script src="<%=request.getContextPath() %>/public/assets/js/minified/core/respond.min.js"></script>
+          <script src="assets/js/minified/core/html5shiv.min.js"></script>
+          <script src="assets/js/minified/core/respond.min.js"></script>
         <![endif]-->
 
         <!-- Fides Admin CSS Core -->
 
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/css/minified/aui-production.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/minified/aui-production.min.css" />
 
         <!-- Theme UI -->
 
-        <link id="layout-theme" rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+        <link id="layout-theme" rel="stylesheet" type="text/css" href="assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
 
         <!-- Fides Admin Responsive -->
 
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/common.min.css" />
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/themes/minified/fides/common.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/themes/minified/fides/responsive.min.css" />
 
         <!-- Fides Admin JS -->
 
-        <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/aui-production.min.js"></script>
+        <script type="text/javascript" src="assets/js/minified/aui-production.min.js"></script>
 
         <script>
             jQuery(window).load(
@@ -60,7 +60,7 @@
         
 
         <div id="loading" class="ui-front loader ui-widget-overlay bg-white opacity-100">
-            <img src="<%=request.getContextPath() %>/public/assets/images/loader-dark.gif" alt="" />
+            <img src="assets/images/loader-dark.gif" alt="" />
         </div>
 
         <div id="page-wrapper" class="demo-example">
@@ -264,7 +264,7 @@
                 </div>
                 <div class="user-profile dropdown">
                     <a href="javascript:;" title="" class="user-ico clearfix" data-toggle="dropdown">
-                        <img width="36" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                        <img width="36" src="assets/images/gravatar.jpg" alt="" />
                         <span>李鹏翔</span>
                         <i class="glyph-icon icon-chevron-down"></i>
                     </a>
@@ -496,7 +496,7 @@
                                 <ul class="no-border messages-box">
                                     <li>
                                         <div class="messages-img">
-                                            <img width="32" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                                            <img width="32" src="assets/images/gravatar.jpg" alt="" />
                                         </div>
                                         <div class="messages-content">
                                             <div class="messages-title">
@@ -514,7 +514,7 @@
                                     </li>
                                     <li>
                                         <div class="messages-img">
-                                            <img width="32" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                                            <img width="32" src="assets/images/gravatar.jpg" alt="" />
                                         </div>
                                         <div class="messages-content">
                                             <div class="messages-title">
@@ -532,7 +532,7 @@
                                     </li>
                                     <li>
                                         <div class="messages-img">
-                                            <img width="32" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                                            <img width="32" src="assets/images/gravatar.jpg" alt="" />
                                         </div>
                                         <div class="messages-content">
                                             <div class="messages-title">
@@ -549,7 +549,7 @@
                                     </li>
                                     <li>
                                         <div class="messages-img">
-                                            <img width="32" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                                            <img width="32" src="assets/images/gravatar.jpg" alt="" />
                                         </div>
                                         <div class="messages-content">
                                             <div class="messages-title">
@@ -567,7 +567,7 @@
                                     </li>
                                     <li>
                                         <div class="messages-img">
-                                            <img width="32" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                                            <img width="32" src="assets/images/gravatar.jpg" alt="" />
                                         </div>
                                         <div class="messages-content">
                                             <div class="messages-title">
@@ -585,7 +585,7 @@
                                     </li>
                                     <li>
                                         <div class="messages-img">
-                                            <img width="32" src="<%=request.getContextPath() %>/public/assets/images/gravatar.jpg" alt="" />
+                                            <img width="32" src="assets/images/gravatar.jpg" alt="" />
                                         </div>
                                         <div class="messages-content">
                                             <div class="messages-title">
@@ -803,7 +803,7 @@
                 <div id="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="admin-index" title="Dashboard">
+                            <a href="admin_index.html" title="Dashboard">
                                 <i class="glyph-icon icon-dashboard"></i>
                                 后台首页
                             </a>
@@ -897,7 +897,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="admin-notify" title="Sliders">
+                                    <a href="admin_tongzhi.html" title="Sliders">
                                         <i class="glyph-icon icon-chevron-right"></i>
                                         通知与消息
                                     </a>
@@ -1133,9 +1133,9 @@
 
     
 
-    <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/core/raphael.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/widgets/charts-morris.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/demo/charts-morris-demo.min.js"></script>
+    <script type="text/javascript" src="assets/js/minified/core/raphael.min.js"></script>
+    <script type="text/javascript" src="assets/js/minified/widgets/charts-morris.min.js"></script>
+    <script type="text/javascript" src="assets/js/minified/demo/charts-morris-demo.min.js"></script>
 
 
         <div class="row">
@@ -1215,5 +1215,6 @@
 
     </body>
 </html>
+
 
     

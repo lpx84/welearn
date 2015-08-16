@@ -1,16 +1,9 @@
 package com.welearn.controller.admin;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.welearn.aop.Authentication;
-import com.welearn.model.Course;
-import com.welearn.model.WechatTypeEnum;
-import com.welearn.util.InfoCode;
 import com.welearn.view.View;
 /**
  * 管理员类
@@ -19,7 +12,7 @@ import com.welearn.view.View;
  *
  */
 @Controller
-@RequestMapping("admin/*")
+@RequestMapping("public/*")
 public class AdminController {
 	@RequestMapping("admin-index")
 	public ModelAndView AdminIndex() {	

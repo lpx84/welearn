@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="nav-footer footer">
 	<div class="row">
-        <c:if test="${type ==  InfoCode.NOTIFY}">
+        <c:if test="${type ==  1}">
             <div class="col-xs-4 nav-item selected">
         </c:if> 	
-        <c:if test="${type !=  InfoCode.NOTIFY}">
+        <c:if test="${type !=  1}">
             <div class="col-xs-4 nav-item">
         </c:if> 
 			<div class="icon">
@@ -14,10 +14,10 @@
 			</div>			
 			<div class="text">通知</div>
 		</div>
-        <c:if test="${type ==  InfoCode.COURSE}">
+        <c:if test="${type ==  2}">
             <div class="col-xs-4 nav-item selected">
         </c:if> 	
-        <c:if test="${type != InfoCode.COURSE}">
+        <c:if test="${type != 2}">
             <div class="col-xs-4 nav-item">
         </c:if> 
 			<div class="icon">
@@ -25,10 +25,10 @@
 			</div>
 			<div class="text">课程</div>
 		</div>
-        <c:if test="${type ==  InfoCode.PERSONAL}">
+        <c:if test="${type ==  3}">
             <div class="col-xs-4 nav-item selected">
         </c:if> 	
-        <c:if test="${type != InfoCode.PERSONAL}">
+        <c:if test="${type != 3}">
             <div class="col-xs-4 nav-item">
         </c:if> 
 			<div class="icon">
