@@ -138,12 +138,13 @@
         margin: 10px;
     }
     
-    .status-pass,
-    .status-not-pass {
+    .status {
         width: 100% !important;
     }
     
-    .status-not-pass {
+    .status-not-pass,
+    .status-not-attend,
+    .status-prepare-attend {
        color: #fff;
        background-color: #ddd; 
     }
@@ -152,6 +153,9 @@
        color: #fff;
        background-color: #83ff99; 
     }
+    
+    
+    
 </style>
 </head>
 <body>
@@ -188,7 +192,7 @@
                         <span class="label bg-blue-alt name">12301124 李鹏翔</span>
                         <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
                         <div class="oper text-center">
-                            <div class="oper-item status status-pass">通过</div>
+                            <div class="oper-item status status-pass">已通过审核</div>
                         </div>
                     </div>
                 </div>
@@ -201,7 +205,7 @@
                         <span class="label bg-blue-alt name">12301124 李鹏翔</span>
                         <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
                         <div class="oper text-center">
-                            <div class="oper-item status status-not-pass">不通过</div>
+                            <div class="oper-item status status-not-pass">未通过审核</div>
                         </div>
                     </div>
                 </div>
@@ -214,13 +218,24 @@
                         <span class="label bg-blue-alt name">12301124 李鹏翔</span>
                         <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
                         <div class="oper text-center">
-                            <div class="oper-item not-pass">不通过</div>
-                            <div class="oper-item pass">通过</div>
+                            <div class="oper-item status status-not-attend">未签到</div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+            <div class="record-item display-inline">
+                <img src="../img/attend-test-0031.jpg">
+                <div class="descript">
+                    <span class="similarity float-right">89%</span>
+                    <div>
+                        <span class="label bg-blue-alt name">12301124 李鹏翔</span>
+                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
+                        <div class="oper text-center">
+                            <div class="oper-item status status-prepare-attend">准备上传图片</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="statistics content-item" style="display: none;margin-top: 100px;">
             <div class="attend-statistics margin-center"></div>
