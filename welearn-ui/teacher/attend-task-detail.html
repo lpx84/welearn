@@ -137,6 +137,21 @@
     .footer-item.statistics {
         margin: 10px;
     }
+    
+    .status-pass,
+    .status-not-pass {
+        width: 100% !important;
+    }
+    
+    .status-not-pass {
+       color: #fff;
+       background-color: #ddd; 
+    }
+    
+    .status-pass {
+       color: #fff;
+       background-color: #83ff99; 
+    }
 </style>
 </head>
 <body>
@@ -173,8 +188,7 @@
                         <span class="label bg-blue-alt name">12301124 李鹏翔</span>
                         <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
                         <div class="oper text-center">
-                            <div class="oper-item not-pass">不通过</div>
-                            <div class="oper-item pass">通过</div>
+                            <div class="oper-item status status-pass">通过</div>
                         </div>
                     </div>
                 </div>
@@ -187,8 +201,7 @@
                         <span class="label bg-blue-alt name">12301124 李鹏翔</span>
                         <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
                         <div class="oper text-center">
-                            <div class="oper-item not-pass">不通过</div>
-                            <div class="oper-item pass">通过</div>
+                            <div class="oper-item status status-not-pass">不通过</div>
                         </div>
                     </div>
                 </div>
