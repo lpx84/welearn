@@ -90,36 +90,28 @@ public interface TeacherService {
 	 * @return
 	 */
 	public boolean updateTeacher(Teacher teacher);
-	
-	/**
-	 * 获取某一节课的同学人数
-	 * @param courseId
-	 * @return
-	 */
-	public int getStudentNumInCourse(int courseId);
-	
-	/**
-	 * 获取签到的人数 
-	 * @param taskId
-	 * @return
-	 */
-	public int getAttendStudentNum(int taskId,int type);
-	
-   /**
-    * 获得一定数量的签到任务，分页
-    * @param courseId
-    * @param num
-    * @param pageNo
-    * @return
-    */
-	public ArrayList<AttendTask> getAttendTasks(int courseId,int num,int pageNo);
-	
+		
 	/**
 	 * 获取这门课的所有签到任务
 	 * @param courseId
 	 * @return
 	 */
 	public ArrayList<com.welearn.model.AttendTask> getAttendTasks(int courseId);
+	
+	/**
+	 * 获取该签到任务的具体签到记录
+	 * @param taskId
+	 * @param courseId
+	 * @return
+	 */
+	public ArrayList<com.welearn.model.AttendRecord> getAttendRecords(int taskId,int courseId);
+	
+	/**
+	 * 获取各个状态的数量
+	 * @param taskId
+	 * @return
+	 */
+	public int[] getAttendStateNum(int taskId);
 	
 	public void test();
 	

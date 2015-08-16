@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.welearn.model.AttendRecord;
 import com.welearn.model.AttendTask;
 import com.welearn.model.Course;
 import com.welearn.model.WechatTypeEnum;
@@ -48,12 +49,13 @@ public class CourseController {
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "course-index", "课程首页");
 		view.addObject("type", InfoCode.COURSE);
-		// 默认当前周试图
+
 		return view;
 	}
 
 	/**
 	 * 一门课程的管理页面
+	 * 
 	 * @param courseid
 	 * @param session
 	 * @return
@@ -68,13 +70,14 @@ public class CourseController {
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "course-manage", "课程首页");
 		view.addObject("type", InfoCode.COURSE);
-		view.addObject("courseName",course.getName());
-		// 默认当前周试图
+		view.addObject("courseName", course.getName());
+
 		return view;
 	}
 
 	/**
 	 * 显示签到任务列表
+	 * 
 	 * @param session
 	 * @return
 	 */
@@ -83,29 +86,29 @@ public class CourseController {
 		View view;
 		// 从session中获取课程id
 		int courseId = (Integer) session.getAttribute("courseid");
-        //获取这门课的courseId
+		// 获取这门课的courseId
 		ArrayList<AttendTask> tasks = teacherService.getAttendTasks(courseId);
 
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "attend-list", "签到任务列表");
 		view.addObject("list", tasks);
 
-		// 默认当前周试图
 		return view;
 	}
 
-	
 	@RequestMapping("attend-detail")
-	public ModelAndView AttendDetail(HttpSession session) {
+	public ModelAndView AttendDetail(HttpSession session,int taskId) {
 		View view;
-
-		// Course course = courseService.queryCourseModleByCourseId(courseid);
-		// 返回教师页面的课程页面
+		// 从session中获取课程id
+		int courseId = (Integer) session.getAttribute("courseid");
+		int[] num = teacherService.getAttendStateNum(taskId);
+		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId, courseId);
+		
 		view = new View("teacher", "manage", "attend-detail", "签到任务列表");
-		// view.addObject("courseName",course.getName());
-		// 默认当前周试图
+        view.addObject("num",num);
+		view.addObject("list",list);
+        
 		return view;
 	}
-	
-	
+
 }

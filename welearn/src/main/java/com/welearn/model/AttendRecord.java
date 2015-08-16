@@ -13,6 +13,7 @@ public class AttendRecord {
 	private int state;
 	private int id;
 	private String stuInfo;
+	private String openId;
 
 	public String getPicUrl() {
 		return picUrl;
@@ -44,6 +45,30 @@ public class AttendRecord {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getStuInfo() {
+		return stuInfo;
+	}
+
+	public void setStuInfo(String stuInfo) {
+		this.stuInfo = stuInfo;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 
 }
