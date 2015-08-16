@@ -46,6 +46,7 @@ public class AttendTaskDao extends SuperDao {
 	 * @param pageItemNum
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AttendTask> getAttendTasksByCourseId(int courseId) {
 		this.hql = "FROM AttendTask AS u inner join fetch u.courseEntity WHERE u.courseId=? order by u.startTime desc";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
