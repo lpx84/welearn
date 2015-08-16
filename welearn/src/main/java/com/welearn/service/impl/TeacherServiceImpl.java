@@ -22,6 +22,8 @@ import com.welearn.entity.CourseNotify;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
 import com.welearn.service.intef.TeacherService;
+import com.welearn.util.InfoCode;
+import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
 
 public class TeacherServiceImpl implements TeacherService {
@@ -122,8 +124,6 @@ public class TeacherServiceImpl implements TeacherService {
 		return list;
 	}
 
-
-
 	public AttendTask getAttendTaskById(int id) {
 		// attendTaskDao.getAttendTaskById(id);
 		return attendTaskDao.getAttendTaskById(id);
@@ -186,7 +186,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
-	//set session
+	// set session
 	public void setSession(HttpSession session, String openid) {
 		Teacher teacher = teacherDao.getTeacherByOpenid(openid);
 		session.setAttribute("tid", teacher.getId());
@@ -195,8 +195,8 @@ public class TeacherServiceImpl implements TeacherService {
 		session.setAttribute("avatar", teacher.getAvatar());
 	}
 
-	//获取教师信息
-	public Teacher getTeacherByTeacherNo(String teacherNo) {		
+	// 获取教师信息
+	public Teacher getTeacherByTeacherNo(String teacherNo) {
 		return teacherDao.getTeacherByTeacherNo(teacherNo);
 	}
 
@@ -221,25 +221,30 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public ArrayList<com.welearn.model.AttendTask> getAttendTasks(int courseId) {
-		// TODO Auto-generated method stub
 		ArrayList<com.welearn.model.AttendTask> tasks = new ArrayList<com.welearn.model.AttendTask>();
-		
-		com.welearn.model.AttendTask task = new com.welearn.model.AttendTask();
-		
-		task.setAttendId(1);
-		task.setAttendNum(59);
-		task.setContent("第一次签到");
-		task.setEndTime("8-12");
-		task.setStartTime("8-11");
-		task.setStuNum(60);
-		
-		tasks.add(task);
+
+		ArrayList<AttendTask> list = (ArrayList<AttendTask>) attendTaskDao
+				.getAttendTasksByCourseId(courseId);
+
+		for (int i = 0; i < list.size(); i++) {
+			AttendTask attendTask = list.get(i);
+			com.welearn.model.AttendTask task = new com.welearn.model.AttendTask();
+			task.setAttendId(attendTask.getId());
+			task.setAttendNum(attendRecordDao.getCountByTastIdANDStatus(
+					attendTask.getId(), InfoCode.ATTEND_PASS));
+			task.setContent(attendTask.getName());
+			task.setEndTime(TimeUtil.formatDate2(attendTask.getEndTime()));
+			task.setStartTime(TimeUtil.formatDate2(attendTask.getStartTime()));
+			task.setStuNum(studentCourseDao.getCountByCourseId(courseId));
+			tasks.add(task);
+		}
+
 		return tasks;
 	}
-	
-	public void test(){
+
+	public void test() {
 		Long test = attendRecordDao.getCountByTastIdANDStatus(5, 2);
-		System.out.println("====================test:"+test);
+		System.out.println("====================test:" + test);
 		System.out.println("==================================");
 	}
 

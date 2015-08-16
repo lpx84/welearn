@@ -32,16 +32,16 @@
     </div>
     <div class="course-list">
     <c:forEach var="item" items="${list }">
-        <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
+        <div class="item pad5A" onclick="javascript: location.href='attend-detail?attendId=${item.getAttendId() }';">
             <i class="btn bg-blue glyph-icon icon-picture"></i>
             <div class="display-inline">
                 <div class="name">
-                    <label>清明节前</label>
-                    <span class="label bg-purple mrg5L">56/60</span>
+                    <label>${item.getContent() }</label>
+                    <span class="label bg-purple mrg5L">${item.getAttendNum() }/${item.getStuNum() }</span>
                 </div>
                 <div class="comment pad5L">
                     <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>03-20 17:00&nbsp;~&nbsp;03-20 18:00
+                        <i class="glyph-icon icon-time"></i>${item.getStartTime() }&nbsp;~&nbsp;${item.getEndTime() }
                     </span>
                     
                 </div>

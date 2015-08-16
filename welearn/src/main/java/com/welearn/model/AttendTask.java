@@ -9,8 +9,8 @@ public class AttendTask {
 	private String content;
 	private String startTime;
 	private String endTime;
-	private int attendNum;
-	private int stuNum;
+	private Long attendNum;
+	private Long stuNum;
 
 	public int getAttendId() {
 		return attendId;
@@ -44,19 +44,19 @@ public class AttendTask {
 		this.endTime = endTime;
 	}
 
-	public int getAttendNum() {
+	public Long getAttendNum() {
 		return attendNum;
 	}
 
-	public void setAttendNum(int attendNum) {
+	public void setAttendNum(Long attendNum) {
 		this.attendNum = attendNum;
 	}
 
-	public int getStuNum() {
+	public Long getStuNum() {
 		return stuNum;
 	}
 
-	public void setStuNum(int stuNum) {
+	public void setStuNum(Long stuNum) {
 		this.stuNum = stuNum;
 	}
 
