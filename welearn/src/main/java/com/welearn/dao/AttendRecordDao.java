@@ -242,4 +242,20 @@ public class AttendRecordDao extends SuperDao {
 		
 		return result;
 	}
+	
+	public int updateRecordByTastidANDStatus(int attendTaskId, int status, Date logTime){
+		this.hql = "update AttendRecord as a set a.status=? where a.attendTaskId=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, status);
+		query.setInteger(1, attendTaskId);
+		int updatedEntities = query.executeUpdate();
+		
+		this.hql = "update AttendRecord as a set a.logTime=? where a.attendTaskId=?";
+		Query query2 = sessionFactory.getCurrentSession().createQuery(this.hql);
+		query2.setDate(0, logTime);
+		query2.setInteger(1, attendTaskId);
+		
+		updatedEntities = query2.executeUpdate();
+		return updatedEntities;
+	}
 }
