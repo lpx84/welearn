@@ -126,7 +126,7 @@ public interface CourseService {
 	 * @param studentId
 	 * @return
 	 */
-	public ArrayList<Course> queryCoursesByStudentId(int studentId);
+	public ArrayList<com.welearn.model.Course> queryCoursesByStudentId(int studentId);
 	
 	
 	/**

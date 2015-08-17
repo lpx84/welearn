@@ -352,11 +352,30 @@ public class CourseServiceImpl implements CourseService {
 		return map;
 	}
 
-	
-	public ArrayList<Course> queryCoursesByStudentId(int studentId) {
-		ArrayList<Course> courseList = (ArrayList<Course>) courseDao.getCoursesByStudentIdAndSemester(studentId, year, semester)
-		return courseList;
+	public ArrayList<com.welearn.model.Course> queryCoursesByStudentId(
+			int studentId) {
+		ArrayList<Course> courseList = (ArrayList<Course>) courseDao
+				.getCoursesByStudentId(studentId);
+		ArrayList<com.welearn.model.Course> list = new ArrayList<com.welearn.model.Course>();
+
+		for (int i = 0; i < courseList.size(); i++) {
+			com.welearn.model.Course course = new com.welearn.model.Course();
+			Course entity = courseList.get(i);
+
+			course.setCourseNo(entity.getCourseNo());
+			course.setName(entity.getName());
+			course.setSemester(new Semester(Integer.valueOf(entity.getYear()),
+					Integer.valueOf(entity.getSemester())).toString());
+			course.setType(entity.getCourseType());
+			course.setTeacher(teacherDao.getTeacher(
+					Integer.valueOf(entity.getTeacherId())).getTrueName());
+			course.setId(entity.getId());
+			list.add(course);
+		}
+
+		return list;
 	}
+
 	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotify(
 			int courseId, int pageNo, int pageItemNo) {
 		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao
@@ -684,7 +703,5 @@ public class CourseServiceImpl implements CourseService {
 		}
 		return modelList;
 	}
-
-
 
 }

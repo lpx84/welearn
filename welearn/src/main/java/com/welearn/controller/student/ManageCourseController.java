@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +19,6 @@ import com.welearn.model.Course;
 import com.welearn.model.CourseDiscuss;
 import com.welearn.model.CourseProblem;
 import com.welearn.model.CourseTestResult;
-import com.welearn.model.Semester;
 import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.AttendService;
 import com.welearn.service.intef.CourseService;
@@ -68,11 +65,12 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-list")
-	public ModelAndView getCourseList(@RequestParam(value = "code") String code,
+	public ModelAndView CourseList(@RequestParam(value = "code") String code,
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -82,23 +80,15 @@ public class ManageCourseController {
 
 		// 获取该学生有的学期和他各学期选的课程
 		int studentId = studentService.getStudentByOpenId(openid).getId();
-		ArrayList<Semester> semesterList = courseService
-				.querySemesterByStudentId(studentId);
-		Map<String, ArrayList<com.welearn.entity.Course>> map = courseService
-				.querySemesterCourseByStudentId(studentId);
+		ArrayList<Course> list = courseService
+				.queryCoursesByStudentId(studentId);
 
-		// 如果没有查到，则显示没有 查到
-		if (semesterList.isEmpty()) {
-			view = new View("error", "wechat", "info", "没有您的选课信息。");
-			view.addObject("info", "未找到相应信息。");
-			return view;
-		}
 		studentService.setSession(session, openid);
 		// 返回课程列表
 		view = new View("student", "manage-course", "course-index", "我的课程");
-		view.addObject("list", semesterList);
-		view.addObject("map", map);
-		view.addObject("type",InfoCode.STUDENT_COURSE);
+		view.addObject("list", list);
+
+		view.addObject("type", InfoCode.STUDENT_COURSE);
 
 		return view;
 	}
@@ -112,8 +102,8 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-manage")
 	@Authentication()
-	public ModelAndView courseManage(@RequestParam(value = "courseid") int courseid,
-			HttpSession session) {
+	public ModelAndView courseManage(
+			@RequestParam(value = "courseid") int courseid, HttpSession session) {
 		View view;
 		// 用课程服务类查询具体的课程信息
 		Course course = courseService.queryCourseModleByCourseId(courseid);
@@ -121,6 +111,7 @@ public class ManageCourseController {
 		session.setAttribute("courseid", courseid);
 		view = new View("student", "manage-course", "course-manage", "我的课程");
 		view.addObject("course", course);
+		view.addObject("type",InfoCode.STUDENT_COURSE);
 		return view;
 	}
 
@@ -186,11 +177,12 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-notify-new")
-	public ModelAndView getCourseNotifyNew(@RequestParam(value = "code") String code,
-			HttpSession session) {
+	public ModelAndView getCourseNotifyNew(
+			@RequestParam(value = "code") String code, HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -303,11 +295,12 @@ public class ManageCourseController {
 	 * @return
 	 */
 	@RequestMapping("course-homework-new")
-	public ModelAndView getCourseHomeworkNew(@RequestParam(value = "code") String code,
-			HttpSession session) {
+	public ModelAndView getCourseHomeworkNew(
+			@RequestParam(value = "code") String code, HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -692,8 +685,8 @@ public class ManageCourseController {
 	 */
 	@RequestMapping("course-test-result")
 	@Authentication()
-	public ModelAndView courseTestResult(@RequestParam(value = "answer") String answer,
-			HttpSession session) {
+	public ModelAndView courseTestResult(
+			@RequestParam(value = "answer") String answer, HttpSession session) {
 		// 获取courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 从session中获取openid

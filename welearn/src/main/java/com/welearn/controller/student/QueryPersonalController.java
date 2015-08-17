@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.welearn.aop.Authentication;
+import com.welearn.entity.Student;
 import com.welearn.model.CETGrade;
 import com.welearn.model.CourseGrade;
 import com.welearn.model.Ecard;
@@ -38,7 +39,8 @@ public class QueryPersonalController {
 	@Resource(name = "misService")
 	MisService misService;
 
-	/**查看当前课表
+	/**
+	 * 查看当前课表
 	 * 
 	 * @param code
 	 * @param session
@@ -49,7 +51,8 @@ public class QueryPersonalController {
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取openid
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		if (view != null) {
@@ -63,7 +66,38 @@ public class QueryPersonalController {
 		return new View("student", "query-private", "course-schedule", "我的课表");
 	}
 
-	/**根据周 查询当前课表
+	/**
+	 * 查看当前课表
+	 * 
+	 * @param code
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("personal-index")
+	public ModelAndView PersonalIndex(@RequestParam("code") String code,
+			HttpSession session) {
+		View view;
+		// 创建微信服务类根据code获取openid
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		if (view != null) {
+			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+			return view;
+		}
+
+		studentService.setSession(session, openid);
+		Student student = studentService.getStudentByOpenId(openid);
+		view = new View("student", "query-private", "personal-index", "个人中心");
+		view.addObject("type", InfoCode.STUDENT_PERSONAL);
+		view.addObject("student", student);
+		// 默认当前周试图
+		return view;
+	}
+
+	/**
+	 * 根据周 查询当前课表
 	 * 
 	 * @param weekNo
 	 * @return
@@ -94,7 +128,8 @@ public class QueryPersonalController {
 		return null;
 	}
 
-	/**查看考试安排
+	/**
+	 * 查看考试安排
 	 * 
 	 * @param code
 	 * @param session
@@ -105,7 +140,8 @@ public class QueryPersonalController {
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -121,7 +157,8 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/** 查看四六级考试成绩
+	/**
+	 * 查看四六级考试成绩
 	 * 
 	 * @param code
 	 * @return
@@ -130,7 +167,8 @@ public class QueryPersonalController {
 	public ModelAndView cetGrade(@RequestParam(value = "code") String code) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -165,7 +203,8 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/**查看各个学期的课程成绩
+	/**
+	 * 查看各个学期的课程成绩
 	 * 
 	 * @param code
 	 * @param session
@@ -176,7 +215,8 @@ public class QueryPersonalController {
 			HttpSession session) {
 		View view;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -199,18 +239,20 @@ public class QueryPersonalController {
 		return view;
 	}
 
-	/**剩余流量查询
+	/**
+	 * 剩余流量查询
 	 * 
 	 * @param code
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("net-flow")
-	public ModelAndView netFlowDetail(@RequestParam(value = "code") String code,
-			HttpSession session) {
+	public ModelAndView netFlowDetail(
+			@RequestParam(value = "code") String code, HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -235,6 +277,7 @@ public class QueryPersonalController {
 
 	/**
 	 * 一卡通自助查询 返回一卡通的基本信息
+	 * 
 	 * @param code
 	 * @param session
 	 * @return
@@ -244,7 +287,8 @@ public class QueryPersonalController {
 			HttpSession session) {
 		View view = null;
 		// 创建微信服务类根据code获取 openId
-		String openid = wechatMsgService.getOpenIdByCode(code,WechatTypeEnum.STUDENT);
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
 		// 检验用户是否登录
 		view = studentService.checkUser(openid);
 		// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
@@ -259,16 +303,17 @@ public class QueryPersonalController {
 			view.addObject("info", "未找到相应信息。");
 			return view;
 		}
-      
+
 		studentService.setSession(session, openid);
-		//从misService中取出一卡通信息
-        Ecard ecard = misService.getEcard(openid);
+		// 从misService中取出一卡通信息
+		Ecard ecard = misService.getEcard(openid);
 		view = new View("student", "query-private", "ecard", "一卡通查询");
-        view.addObject("ecard", ecard);
+		view.addObject("ecard", ecard);
 		return view;
 	}
 
-	/**一卡通自助查询 返回一卡通的基本信息
+	/**
+	 * 一卡通自助查询 返回一卡通的基本信息
 	 * 
 	 * @return
 	 */

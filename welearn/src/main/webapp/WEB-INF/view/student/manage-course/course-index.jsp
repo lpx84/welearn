@@ -39,15 +39,15 @@
     </div>
     <div class="course-list">
      <c:forEach var="item" items="${list }">
-        <div class="item pad5A" onclick="javascript: location.href='course-manage-alt.html';">
+        <div class="item pad5A" onclick="javascript: location.href='course-manage?courseid=${item.getId() }';">
             <div class="display-inline">
-                <div class="name">【4A210Q】操作系统</div>
+                <div class="name">【${item.getCourseNo() }】${item.getName() }</div>
                 <div class="comment pad5L">
                     <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>&nbsp;2014~2015第二学期
+                        <i class="glyph-icon icon-time"></i>&nbsp;${item.getSemester() }
                     </span>
-                    <span class="label bg-blue-alt">刘铎</span>
-                    <span class="label bg-green">专业限选课</span>
+                    <span class="label bg-blue-alt">${item.getTeacher() }</span>
+                    <span class="label bg-green">${item.getType() }</span>
                 </div>
             </div>
             <div class="display-inline float-right">

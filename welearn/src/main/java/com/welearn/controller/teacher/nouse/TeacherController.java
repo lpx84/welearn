@@ -1,4 +1,4 @@
-package com.welearn.controller.teacher;
+package com.welearn.controller.teacher.nouse;
 
 import java.util.Date;
 import java.util.List;

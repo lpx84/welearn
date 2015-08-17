@@ -38,7 +38,7 @@ public class Semester {
 		super();
 	}
 
-	public Semester(Integer year, Integer semesterNo) {
+	public Semester(int year, int semesterNo) {
 		super();
 		this.year = year;
 		this.semesterNo = semesterNo;
