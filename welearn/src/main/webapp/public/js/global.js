@@ -1,7 +1,8 @@
 
 $(document).ready(function() {
     
-    $(".back-btn").click(function() {
+    $(".back-btn, .btn-back").click(function() {
         history.back();
     });
+    
 });
