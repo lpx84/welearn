@@ -31,6 +31,7 @@ import com.welearn.service.intef.StudentService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.AlgorithmUtil;
+import com.welearn.util.InfoCode;
 import com.welearn.util.JsonUtil;
 import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
@@ -94,9 +95,10 @@ public class ManageCourseController {
 		}
 		studentService.setSession(session, openid);
 		// 返回课程列表
-		view = new View("student", "manage-course", "course-list", "我的课程");
+		view = new View("student", "manage-course", "course-index", "我的课程");
 		view.addObject("list", semesterList);
 		view.addObject("map", map);
+		view.addObject("type",InfoCode.STUDENT_COURSE);
 
 		return view;
 	}

@@ -121,6 +121,15 @@ public interface CourseService {
 			int studentId);
 
 	/**
+	 * 查询该同学上过的课程
+	 * 
+	 * @param studentId
+	 * @return
+	 */
+	public ArrayList<Course> queryCoursesByStudentId(int studentId);
+	
+	
+	/**
 	 * 添加课程反馈
 	 * 
 	 * @param courseid

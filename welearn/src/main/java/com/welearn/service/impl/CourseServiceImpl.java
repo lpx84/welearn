@@ -352,6 +352,11 @@ public class CourseServiceImpl implements CourseService {
 		return map;
 	}
 
+	
+	public ArrayList<Course> queryCoursesByStudentId(int studentId) {
+		ArrayList<Course> courseList = (ArrayList<Course>) courseDao.getCoursesByStudentIdAndSemester(studentId, year, semester)
+		return courseList;
+	}
 	public ArrayList<com.welearn.model.CourseNotify> queryCourseNotify(
 			int courseId, int pageNo, int pageItemNo) {
 		ArrayList<CourseNotify> list = (ArrayList<CourseNotify>) courseNotifyDao
@@ -679,5 +684,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 		return modelList;
 	}
+
+
 
 }

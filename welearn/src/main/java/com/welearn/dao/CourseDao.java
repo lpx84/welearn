@@ -1,6 +1,7 @@
 package com.welearn.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -295,6 +296,37 @@ public class CourseDao extends SuperDao {
 		return result;
 	}
 
+	
+	public List<Course> getCoursesByStudentId(int studentId) {
+
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity as a inner join fetch u.courseEntity "
+				+ "WHERE a.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(
+				this.hql);
+		query.setInteger(0, studentId);
+
+		ArrayList<Integer> coursesId = new ArrayList<Integer>();
+		List<StudentCourse> courses = query.list();
+		for (int i = 0; i < courses.size(); i++) {
+			coursesId.add(i, courses.get(i).getCourseId());
+		}
+
+		Set<Course> set = new HashSet<Course>();
+		for (int i = 0; i < coursesId.size(); i++) {
+			this.hql = "FROM Course AS u inner join fetch u.academyEntity WHERE u.id=?";
+			Query query2 = this.sessionFactory.getCurrentSession().createQuery(
+					this.hql);
+			query2.setInteger(0, coursesId.get(i));
+			List<Course> course = query2.list();
+			set.addAll(course);
+		}
+		List<Course> result = new ArrayList<Course>(set);
+		Collections.sort(result);
+		
+		return result;
+	}
+	
 	public List<Semester> getCourseTimeByStudentId(int studentId) {
 		this.hql = "select distinct year,semester from bjtu_course where id in "
 				+ "(select course_id from bjtu_student_course where student_id =?);";

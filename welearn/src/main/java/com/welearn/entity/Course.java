@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="bjtu_course")
-public class Course {
+public class Course implements Comparable<Course>{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -163,4 +163,17 @@ public class Course {
 				+ credit + ", courseType=" + courseType + ", academyEntity="
 				+ academyEntity + "]";
 	}
+
+	public int compareTo(Course o) {
+		// TODO Auto-generated method stub
+		
+		if (o == null)
+            return 1;
+        int value = Integer.parseInt(this.year) - Integer.parseInt(o.year);
+        if (value == 0)
+            value = Integer.parseInt(this.semester) - Integer.parseInt(o.semester);
+        return value;
+	}
+	
+	
 }

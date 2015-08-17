@@ -8,20 +8,19 @@
 <%@ include file="/public/section/teacher/header-mobile.jsp"%>
 <title>${title }</title>
 <style type="text/css">
-    .nav-footer {
-        font-size: 2em;
-    }
-    
-    .item .glyph-icon {
-        padding: 0 6px;
-        vertical-align: top;
-        margin-top: 10px;
-    }
-    
-    .name {
-        margin-left: 7px;
-    }
-    
+.nav-footer {
+	font-size: 2em;
+}
+
+.item .glyph-icon {
+	padding: 0 6px;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+.name {
+	margin-left: 7px;
+}
 </style>
 </head>
 <body>
@@ -51,79 +50,7 @@
 					</div>
 				</div>
 			</c:forEach>
-			<!--   <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
-            <i class="btn bg-blue glyph-icon icon-picture"></i>
-            <div class="display-inline">
-                <div class="name">
-                    <label>清明节前</label>
-                    <span class="label bg-purple mrg5L">56/60</span>
-                </div>
-                <div class="comment pad5L">
-                    <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>03-20 17:00&nbsp;~&nbsp;03-20 18:00
-                    </span>
-                    
-                </div>
-            </div>
-            <div class="display-inline float-right">
-                <i class="glyph-icon icon-chevron-right"></i>
-            </div>
-        </div>
-        <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
-            <i class="btn bg-blue glyph-icon icon-picture"></i>
-            <div class="display-inline">
-                <div class="name">
-                    <label>清明节前</label>
-                    <span class="label bg-purple mrg5L">56/60</span>
-                </div>
-                <div class="comment pad5L">
-                    <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>03-20 17:00&nbsp;~&nbsp;03-20 18:00
-                    </span>
-                    
-                </div>
-            </div>
-            <div class="display-inline float-right">
-                <i class="glyph-icon icon-chevron-right"></i>
-            </div>
-        </div>
-        <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
-            <i class="btn bg-blue glyph-icon icon-picture"></i>
-            <div class="display-inline">
-                <div class="name">
-                    <label>清明节前</label>
-                    <span class="label bg-purple mrg5L">56/60</span>
-                </div>
-                <div class="comment pad5L">
-                    <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>03-20 17:00&nbsp;~&nbsp;03-20 18:00
-                    </span>
-                    
-                </div>
-            </div>
-            <div class="display-inline float-right">
-                <i class="glyph-icon icon-chevron-right"></i>
-            </div>
-        </div>
-        <div class="item pad5A" onclick="javascript: location.href='attend-task-detail.html';">
-            <i class="btn bg-blue glyph-icon icon-picture"></i>
-            <div class="display-inline">
-                <div class="name">
-                    <label>清明节前</label>
-                    <span class="label bg-purple mrg5L">56/60</span>
-                </div>
-                <div class="comment pad5L">
-                    <span class="font-gray">
-                        <i class="glyph-icon icon-time"></i>03-20 17:00&nbsp;~&nbsp;03-20 18:00
-                    </span>
-                    
-                </div>
-            </div>
-            <div class="display-inline float-right">
-                <i class="glyph-icon icon-chevron-right"></i>
-            </div>
-        </div>        
-    </div> -->
+
 			<div class="span-more">
 				<a href="javascript:void(0);"
 					class="btn btn-more medium ui-state-default"> <span
@@ -136,8 +63,5 @@
 			</div>
 		</div>
 		<%@ include file="/public/section/public.jsp"%>
-		<script type="text/javascript">
-
-</script>
 </body>
 </html>
