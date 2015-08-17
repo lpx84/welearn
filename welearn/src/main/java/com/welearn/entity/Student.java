@@ -182,4 +182,15 @@ public class Student {
 		this.gatewayPwd = gatewayPwd;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", studentNo=" + studentNo + ", trueName="
+				+ trueName + ", pwd=" + pwd + ", misPwd=" + misPwd
+				+ ", gatewayPwd=" + gatewayPwd + ", openId=" + openId
+				+ ", fakeId=" + fakeId + ", gender=" + gender + ", avatar="
+				+ avatar + ", tel=" + tel + ", enrollYear=" + enrollYear
+				+ ", status=" + status + "]";
+	}
+	
+
 }

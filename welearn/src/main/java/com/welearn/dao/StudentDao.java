@@ -1,10 +1,16 @@
 package com.welearn.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 
+import com.welearn.entity.Course;
 import com.welearn.entity.Student;
+import com.welearn.entity.StudentCourse;
+import com.welearn.entity.Teacher;
 
 public class StudentDao extends SuperDao {
 
@@ -83,17 +89,33 @@ public class StudentDao extends SuperDao {
 		return true;
 	}
 	
-	/**
-	 * 在学生表里取出这个学生所有的课程信息，这里需要确认多对多的关系是否正确
-	 * @return
-	 */
-	public List getCourseList(int id) {
-//		hql = "from Student as s where s.id=?";
-//		Query q = sessionFactory.getCurrentSession().createQuery(hql);
-//		q.setInteger(0, id);
-//		Student s = (Student)q.uniqueResult();
-//		return s.getCourseList();
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<Student> getStudentsByCourseId(int courseId){
+		this.hql = "FROM StudentCourse AS u inner "
+				+ "join fetch u.studentEntity AS S inner join fetch u.courseEntity "
+				+ "WHERE u.courseId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, courseId);
+		
+		List<StudentCourse> students = query.list();
+		ArrayList<Integer> studentsId = new ArrayList<Integer>();
+		for (int i = 0; i < students.size(); i++) {
+			studentsId.add(i, students.get(i).getStudentId());
+		}
+
+		Set<Student> set = new HashSet<Student>();
+		for (int i = 0; i < studentsId.size(); i++) {
+			this.hql = "FROM Student AS u WHERE u.id=?";
+			Query query2 = this.sessionFactory.getCurrentSession().createQuery(
+					this.hql);
+			query2.setInteger(0, studentsId.get(i));
+			List<Student> student = query2.list();
+			set.addAll(student);
+		}
+		List<Student> result = new ArrayList<Student>(set);
+
+		
+		return result;
 	}
 	
 	
