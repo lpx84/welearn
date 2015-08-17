@@ -57,10 +57,17 @@ public class InfoCode {
 	
 	
 	/***************教师页面导航页面:通知页面****************/
-	public static final Integer NOTIFY = 1;
+	public static final Integer TEACHER_NOTIFY = 1;
 	/***************教师页面导航页面:通知页面****************/
-	public static final Integer COURSE = 2;
+	public static final Integer TEACHER_COURSE = 2;
 	/***************教师页面导航页面:通知页面****************/
-	public static final Integer PERSONAL = 3;
+	public static final Integer TEACHER_PERSONAL = 3;
+	
+	/***************学生页面导航页面:通知页面****************/
+	public static final Integer STUDENT_PUBLIC = 1;
+	/***************教师页面导航页面:通知页面****************/
+	public static final Integer STUDENT_COURSE = 2;
+	/***************教师页面导航页面:通知页面****************/
+	public static final Integer STUDENT_PERSONAL = 3;
 	
 }

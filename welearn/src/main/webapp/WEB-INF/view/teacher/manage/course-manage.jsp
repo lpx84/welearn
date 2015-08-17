@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="menu-item col-xs-4 col-sm-3 col-md-3 col-lg-3">
-            <div class="item-inner">
+            <div class="item-inner" onclick="javascript: location.href='test-manage'">
                 <i class="fa fa-lightbulb-o font-purple"></i>
                 <p>测评管理</p>
             </div>
