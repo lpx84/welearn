@@ -169,9 +169,9 @@ public class Course implements Comparable<Course>{
 		
 		if (o == null)
             return 1;
-        int value = Integer.parseInt(this.year) - Integer.parseInt(o.year);
+        int value = 0-(Integer.parseInt(this.year) - Integer.parseInt(o.year));
         if (value == 0)
-            value = Integer.parseInt(this.semester) - Integer.parseInt(o.semester);
+            value = 0-(Integer.parseInt(this.semester) - Integer.parseInt(o.semester));
         return value;
 	}
 	
