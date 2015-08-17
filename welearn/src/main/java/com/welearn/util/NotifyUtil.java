@@ -1,7 +1,5 @@
 package com.welearn.util;
 
-import java.util.Date;
-
 import com.welearn.model.WechatTypeEnum;
 
 import net.sf.json.JSONObject;

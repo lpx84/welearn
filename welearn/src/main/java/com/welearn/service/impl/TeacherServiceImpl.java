@@ -19,10 +19,13 @@ import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
 import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
+import com.welearn.entity.Student;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
+import com.welearn.model.WechatTypeEnum;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.util.InfoCode;
+import com.welearn.util.NotifyUtil;
 import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
 
@@ -228,8 +231,36 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public ArrayList<com.welearn.model.AttendRecord> getAttendRecords(
 			int taskId, int courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<com.welearn.model.AttendRecord> list = new ArrayList<com.welearn.model.AttendRecord>();
+		ArrayList<Student> students = (ArrayList<Student>) studentDao
+				.getStudentsByCourseId(courseId);
+		for (int i = 0; i < students.size(); i++) {
+			com.welearn.model.AttendRecord record = new com.welearn.model.AttendRecord();
+			// 添加签到记录
+			AttendRecord record2 = attendRecordDao.getAttendRecord(students
+					.get(i).getId(), taskId);
+			record.setId(record2.getId());
+			record.setOpenId(students.get(i).getOpenId());
+			String url = "";
+			if (record2.getPicUrl() == null || record2.getPicUrl().isEmpty())
+				url = "public/imgs/attend-dafault.png";
+			else {
+				url = record2.getPicUrl();
+			}
+
+			record.setPicUrl(url);
+			record.setState(record2.getStatus());
+			record.setStuInfo(students.get(i).getStudentNo() + " "
+					+ students.get(i).getTrueName());
+			record.setTime(TimeUtil.formatDate2(record2.getLogTime()));
+			record.setSimilarity(record2.getSimilarity());
+			record.setTaskId(record2.getAttendTaskId());
+
+			list.add(record);
+
+		}
+
+		return list;
 	}
 
 	public int[] getAttendStateNum(int taskId) {
@@ -252,6 +283,69 @@ public class TeacherServiceImpl implements TeacherService {
 		Long test = attendRecordDao.getCountByTastIdANDStatus(5, 2);
 		System.out.println("====================test:" + test);
 		System.out.println("==================================");
+	}
+
+	public boolean passAll(int taskId) {
+		AttendTask task = attendTaskDao.getAttendTaskById(taskId);
+		int courseId = task.getCourseId();
+
+		ArrayList<Student> students = (ArrayList<Student>) studentDao
+				.getStudentsByCourseId(courseId);
+		for (int i = 0; i < students.size(); i++) {
+			AttendRecord record2 = attendRecordDao.getAttendRecord(students
+					.get(i).getId(), taskId);
+			if (record2.getStatus() == InfoCode.ATTEND_VERIFY) {
+				record2.setStatus(InfoCode.ATTEND_PASS);
+				String openid = students.get(i).getOpenId();
+				boolean isOk = attendRecordDao.updateAttendRecord(record2);
+
+				if (isOk) {
+					NotifyUtil notifyUtil = new NotifyUtil();
+					String courseName = courseDao.getCourse(task.getCourseId())
+							.getName();
+					String message = "【签到结果通知】\n课程【" + courseName + "】的【"
+							+ task.getName() + "】签到结果是【通过】";
+					notifyUtil
+							.pushText(WechatTypeEnum.STUDENT, openid, message);
+				}
+			}
+
+		}
+		return true;
+	}
+
+	public boolean pass(int recordId, int passType) {
+		AttendRecord record = attendRecordDao.getAttendRecordById(recordId);
+
+		if (passType == 0) {
+			record.setStatus(InfoCode.ATTEND_NOT_PASS);
+		} else if (passType == 1) {
+			record.setStatus(InfoCode.ATTEND_PASS);
+		}
+
+		String openid = studentDao.getStudent(record.getStudentid())
+				.getOpenId();
+		// isOk用于表示是否更新成功
+		boolean isOk = attendRecordDao.updateAttendRecord(record);
+
+		if (isOk) {
+			NotifyUtil notifyUtil = new NotifyUtil();
+			int taskId = record.getAttendTaskId();
+			AttendTask task = attendTaskDao.getAttendTaskById(taskId);
+			String courseName = courseDao.getCourse(task.getCourseId())
+					.getName();
+			String message = "【签到结果通知】\n课程【" + courseName + "】的【"
+					+ task.getName() + "】签到结果是【";
+			if (passType == 0) {
+				message += "不通过";
+			} else if (passType == 1) {
+				message += "通过";
+			}
+			message += "】。";
+			notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message);
+		}
+
+		return isOk;
 	}
 
 }

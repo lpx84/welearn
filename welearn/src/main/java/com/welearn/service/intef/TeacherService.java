@@ -113,6 +113,21 @@ public interface TeacherService {
 	 */
 	public int[] getAttendStateNum(int taskId);
 	
+	/**
+	 * 一键通过
+	 * @param taskId
+	 * @return
+	 */
+	public boolean passAll(int taskId);
+	
+	/**
+	 * 通过类型，0表示不通过，1表示通过
+	 * @param recordId
+	 * @param passType
+	 * @return
+	 */
+    public boolean pass(int recordId,int passType);
+	
 	public void test();
 	
 }

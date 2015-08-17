@@ -71,7 +71,7 @@
             <c:if test="${item.getState() ==  3}">
                 <div class="status inline-block font-green"><i class="fa fa-check-circle"></i>&nbsp;成功</div>
             </c:if>            
-            <c:if test="${item.getState() == 4 }">
+            <c:if test="${item.getState() == -1 }">
                 <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;照片审核未通过</div>
             </c:if>                   
         </div>
