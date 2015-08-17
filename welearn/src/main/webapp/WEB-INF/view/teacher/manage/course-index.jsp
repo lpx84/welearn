@@ -10,7 +10,8 @@
 <style type="text/css">
     .img img {
         width: 100%;
-    }   
+    }
+     
    
 </style>
 </head>

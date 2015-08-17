@@ -8,19 +8,20 @@
 <%@ include file="/public/section/teacher/header-mobile.jsp"%>
 <title>${title }</title>
 <style type="text/css">
-.nav-footer {
-	font-size: 2em;
-}
-
-.item .glyph-icon {
-	padding: 0 6px;
-	vertical-align: top;
-	margin-top: 10px;
-}
-
-.name {
-	margin-left: 7px;
-}
+    .nav-footer {
+        font-size: 2em;
+    }
+    
+    .item .glyph-icon {
+        padding: 0 6px;
+        vertical-align: top;
+        margin-top: 10px;
+    }
+    
+    .name {
+        margin-left: 7px;
+    }
+    
 </style>
 </head>
 <body>
