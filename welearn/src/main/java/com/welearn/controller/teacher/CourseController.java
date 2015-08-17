@@ -48,7 +48,7 @@ public class CourseController {
 
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "course-index", "课程首页");
-		view.addObject("type", InfoCode.COURSE);
+		view.addObject("type", InfoCode.TEACHER_COURSE);
 
 		return view;
 	}
@@ -69,7 +69,7 @@ public class CourseController {
 		Course course = courseService.queryCourseModleByCourseId(courseid);
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "course-manage", "课程首页");
-		view.addObject("type", InfoCode.COURSE);
+		view.addObject("type", InfoCode.TEACHER_COURSE);
 		view.addObject("courseName", course.getName());
 
 		return view;
@@ -107,6 +107,24 @@ public class CourseController {
 		view = new View("teacher", "manage", "attend-detail", "签到任务列表");
         view.addObject("num",num);
 		view.addObject("list",list);
+        
+		return view;
+	}
+	
+	@RequestMapping("test-manage")
+	public ModelAndView TestManage(HttpSession session) {
+		View view;
+		// 从session中获取课程id
+		view = new View("teacher", "manage", "test-manage", "测评管理");
+        
+		return view;
+	}
+	
+	@RequestMapping("test-problem-add")
+	public ModelAndView TestProblemAdd(HttpSession session) {
+		View view;
+		// 从session中获取课程id
+		view = new View("teacher", "manage", "test-problem-add", "添加题目");
         
 		return view;
 	}
