@@ -49,21 +49,11 @@ a.btn {
             </div>
         </div>
         
-        <div class="content-item border-bottom">
-            <i class="glyph-icon icon-bell-alt float-left font-blue mrg10R"></i>
-            <i class="glyph-icon icon-angle-right float-right"></i>
-            <p>我的消息</p>
-        </div>
         
-        <div class="content-item border-bottom">
-            <i class="glyph-icon icon-info float-left font-blue mrg10R"></i>
-            <i class="glyph-icon icon-angle-right float-right"></i>
-            <p>基本信息</p>
-        </div>
         <div class="content-item border-bottom">
             <i class="glyph-icon icon-lock float-left font-blue mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
-            <p>修改密码</p>
+            <p>安全中心</p>
         </div>
         <div class="content-item mrg10B">
             <i class="glyph-icon icon-gear float-left font-blue mrg10R"></i>

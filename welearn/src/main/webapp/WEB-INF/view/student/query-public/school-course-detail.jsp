@@ -13,10 +13,18 @@
         width: auto !important;
         max-width: 75%;
     }
+    
+    ul.notifications-box {
+    	margin-top: 55px!important;
+    }
 </style>
 </head>
 <body>
-<div class="content-box bg-white">
+<div class="main bg-white">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${course.getName() }</p>
+    </div>
     <ul class="notifications-box">
         <li>
             <span class="float-left font-gray">课程名称</span>

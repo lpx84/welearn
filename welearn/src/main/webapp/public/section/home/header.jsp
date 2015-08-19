@@ -21,8 +21,11 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/common.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/themes/minified/fides/responsive.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+<!-- user css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/css/teacher-mobile-global.css" >
 
 <!-- JS -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/assets/js/minified/aui-production.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/js/student-global.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/global.js"></script>

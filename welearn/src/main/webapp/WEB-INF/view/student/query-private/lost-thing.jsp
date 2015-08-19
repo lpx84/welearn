@@ -56,10 +56,11 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <p class="pad0L title">失物招领布告栏</p>
-    </h3>
+<div class="main ">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>失误招领</p>
+    </div>
     <div class="content">
     <c:forEach var="item" items="${list }">
   
@@ -80,6 +81,7 @@
     <a href="javascript:fetchData();" class="btn btn-more medium float-none ui-state-default">
         <span class="button-content">查看更多</span>
     </a>
+</div>
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">

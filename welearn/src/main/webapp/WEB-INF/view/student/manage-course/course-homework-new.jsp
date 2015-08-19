@@ -34,6 +34,7 @@
     
     .content {
         font-size: 1.2em;
+        margin-top: 55px !important;
     }
     
     .inline-block {
@@ -96,11 +97,11 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray text-center">
-        
-        <title class="title">最新作业</title>
-    </h3>
+<div class="main">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>最新作业</p>
+    </div>
     <div class="content">
     <c:forEach var="item" items="${list }"> 
         <div class="rcd">

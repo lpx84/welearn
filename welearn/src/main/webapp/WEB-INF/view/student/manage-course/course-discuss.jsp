@@ -50,17 +50,17 @@
    		width: 100%;
    		text-align: center;
    }
-   
+   #chat-div.content-box-wrapper  {
+   		margin: 0 5px;
+   }
 </style>
 </head>
 <body>
-<div class="content-box bg-white">
-    <h3 class="title-span content-box-header ui-state-default text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <label class="pad0L">${courseName}</label>
-    </h3>
+<div class="main bg-white">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${courseName }</p>
+    </div>
     <div class="content-box-wrapper" id="chat-div" style="padding-top: 50px;">
         <div class=""  style="width: 100%;">
             <a href="javascript:prefetchData();" class="btn btn-more medium float-none ui-state-default mrg10B">

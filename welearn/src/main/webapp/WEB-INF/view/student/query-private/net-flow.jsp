@@ -32,10 +32,11 @@
 </style>
 </head>
 <body>
-<div class="content-box " style="border:none;">
-    <h3 class="content-box-header bg-gray text-center">
-        <p class="pad0L title">本月流量</p>
-    </h3>
+<div class="main ">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>本月流量</p>
+    </div>
     <div class="content">
         <div class="row">
             <div class="col-xs-4 col-sm-4">账户余额</div>

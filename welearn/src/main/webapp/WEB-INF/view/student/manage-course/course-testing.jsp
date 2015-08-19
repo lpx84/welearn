@@ -83,16 +83,11 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray">
-       <div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='course-test'">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <span class="title">${courseName }</span>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
-    </h3>
+<div class="main">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${courseName }</p>
+    </div>
     <div class="content">
     <%int count=0; %>
         <c:forEach var="item" items="${list }">

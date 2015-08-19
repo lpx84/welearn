@@ -49,7 +49,7 @@
     </div>
     
     <div class="content">
-        <div class="content-item mrg10B" onclick="location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fempty-room&response_type=code&scope=snsapi_base&state=123#wechat_redirect'">
+        <div class="content-item mrg10B mrg10T" onclick="location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fempty-room&response_type=code&scope=snsapi_base&state=123#wechat_redirect'">
             <i class="glyph-icon fa fa-building-o float-left font-blue mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>自习教室</p>
@@ -60,12 +60,12 @@
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>全校课程查询</p>
         </div>
-        <div class="content-item mrg10B" onclick="location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fschool-schedule&response_type=code&scope=snsapi_base&state=123#wechat_redirect'">
+        <div class="content-item mrg10B" style="margin-bottom: 40px;" onclick="location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpublic%2Fschool-schedule&response_type=code&scope=snsapi_base&state=123#wechat_redirect'">
             <i class="glyph-icon fa fa-calendar float-left font-blue mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>交大校历</p>
         </div>
-        <div class="content-item" style="margin-bottom: 40px;" onclick="location.href='query-public.html'">
+        <div class="content-item" style="display: none;" onclick="location.href='query-public.html'">
             <i class="glyph-icon fa fa-bell float-left font-blue mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>教务通知</p>

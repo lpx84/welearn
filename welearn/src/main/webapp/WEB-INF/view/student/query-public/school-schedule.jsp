@@ -79,7 +79,7 @@
 <body>
 
 <div class="query-div">
-    <select id="select" onchange="javascript:changeCalendar()">    
+    <select id="select" onchange="javascript:changeCalendar()" style="margin-right: 10px;">    
         <c:forEach var="item" items="${list }">
     	<option value="${item.getId() }">${item.getName() }</option>
     	</c:forEach>

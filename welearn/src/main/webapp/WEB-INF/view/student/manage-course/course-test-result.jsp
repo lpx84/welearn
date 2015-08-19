@@ -50,16 +50,11 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray text-center">
-        <div class="glyph-icon icon-separator transparent" onclick="javascript: location.href='course-test'">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <label class="title">${courseName }</label>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
-    </h3>
+<div class="main">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${courseName }</p>
+    </div>
     <div class="content">
         <div class="panel mrg10A pad10A">
             <div class="mrg10A">

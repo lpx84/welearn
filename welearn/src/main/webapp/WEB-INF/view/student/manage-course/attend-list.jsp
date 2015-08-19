@@ -9,12 +9,13 @@
 <title>${title }</title>
 <style type="text/css">
    
-       .title {
+    .title {
           text-align: center;
     }
     
     .content {
-        margin-bottom: 5px;   
+        margin-bottom: 5px;
+        margin-top: 55px!important;
     }
     
     .rcd {
@@ -44,13 +45,11 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <label class="pad0L title">${courseName}——签到记录</label>
-    </h3>
+<div class="main">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${courseName }</p>
+    </div>
     <div class="content">
     <c:forEach var="item" items="${list }">
         <div class="rcd">
@@ -77,7 +76,7 @@
         </div>
     </c:forEach> 
     </div>
-    
+</div>    
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">

@@ -23,7 +23,12 @@
 </style>
 </head>
 <body>
-<div class="content-box bg-white">
+<div class="main bg-white">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>课程列表</p>
+    </div>
+
     <div class="button-pane button-pane-top pad10A">
         <div class="form-row pad0B">
             <div class="form-input col-md-12">

@@ -25,7 +25,7 @@ public class AdminController {
 	@RequestMapping("admin-notify")
 	public ModelAndView AdminNotify() {	
 		//返回教师页面的课程页面
-       View  view = new View("admin", "admin", "admin-notify", "课程首页");
+       View  view = new View("admin", "admin", "admin-notify", "课程通知管理");
 		// 默认当前周试图
 		return view;
 	}

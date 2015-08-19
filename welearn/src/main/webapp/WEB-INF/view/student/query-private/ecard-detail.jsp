@@ -88,16 +88,11 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray">
-        <div class="glyph-icon icon-separator transparent">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <span class="title">一卡通查询</span>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
-    </h3>
+<div class="main ">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>一卡通查询</p>
+    </div>
     <div class="content">
         
         <div class="ecard-query">

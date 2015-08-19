@@ -30,15 +30,13 @@
 </style>
 </head>
 <body>
-<div class="content-box bg-white none-border">
-	<div class="img" style="display:none;">
-        <img src="<%=request.getContextPath() %>/public/img/index.jpg">
-    </div>
-    <div class="button-pane button-pane-top pad10A text-center">
+<div class="main bg-white none-border">
+    <div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
         <p>我要蹭课</p>
     </div>
     
-    <div class="form-row pad0B mrg5A">
+    <div class="form-row pad0B" style="margin-top: 55px;">
         <div class="form-input col-md-12">
             <div class="form-input-icon">
             <form id="search-course" action="<%=request.getContextPath() %>/student/query/public/school-course-query" method="POST">

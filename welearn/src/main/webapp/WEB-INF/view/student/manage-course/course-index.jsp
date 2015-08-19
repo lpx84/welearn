@@ -11,7 +11,7 @@
    
     .img img {
         width: 100%;
-    }   
+    }
 </style>
 </head>
 <body>

@@ -15,16 +15,11 @@
 </style>
 </head>
 <body>
-<div class="content-box" style="border: none;">
-    <h3 class="content-box-header bg-gray text-center">
-    	<div class="glyph-icon icon-separator transparent back-btn">
-            <i class="glyph-icon fa-chevron-left"></i>
-        </div>
-        <label class="title">${courseName }</label>
-        <div class="glyph-icon icon-separator transparent float-right">
-            <i class="glyph-icon"></i>
-        </div>
-    </h3>
+<div class="main">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${courseName }</p>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <form id="feedback-form"  class="content-box bg-white post-box" action="<%=request.getContextPath()%>/student/manage/course/course-feedback.act">
@@ -36,7 +31,7 @@
                         <label for="anonymous">匿名</label>
                     </div>
                     <button id="btn-submit" type="button" class="btn btn-post large bg-green" id="demo-form-valid" title="Validate!">
-                        <span class="button-content">提交</span>
+                        <span class="button-content" style="width: inherit;">提交</span>
                     </button>                  
                 </div>
             </form>

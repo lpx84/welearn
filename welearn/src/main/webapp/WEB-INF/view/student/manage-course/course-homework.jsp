@@ -30,10 +30,12 @@
     
     .content-box {
         border: none;
+        
     }
     
     .content {
         font-size: 1.2em;
+        margin-top: 55px !important;
     }
     
     .inline-block {
@@ -91,8 +93,13 @@
 </style>
 </head>
 <body>
-<div class="content-box">
-    <h3 class="content-box-header bg-gray text-center">
+<div class="main">
+	<div class="header">
+		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>${courseName }</p>
+    </div>
+<!--
+	<h3 class="content-box-header bg-gray text-center">
     	<div class="glyph-icon icon-separator transparent back-btn">
             <i class="glyph-icon fa-chevron-left"></i>
         </div>
@@ -100,7 +107,8 @@
         <div class="glyph-icon icon-separator transparent float-right">
             <i class="glyph-icon"></i>
         </div>
-    </h3>
+    </h3> 
+ -->
     <div class="content">
     <c:forEach var="item" items="${list }"> 
         <div class="rcd">
