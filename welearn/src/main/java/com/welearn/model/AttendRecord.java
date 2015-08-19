@@ -10,10 +10,28 @@ public class AttendRecord {
 	private String picUrl;
 	private String content;
 	private String time;
+	private int similarity;
 	private int state;
 	private int id;
+	private int taskId;
 	private String stuInfo;
 	private String openId;
+
+	public int getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
+	}
+
+	public int getSimilarity() {
+		return similarity;
+	}
+
+	public void setSimilarity(int similarity) {
+		this.similarity = similarity;
+	}
 
 	public String getPicUrl() {
 		return picUrl;

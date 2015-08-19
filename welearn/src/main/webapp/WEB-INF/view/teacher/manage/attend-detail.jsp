@@ -143,72 +143,39 @@
     </div>
     <div class="content">
         <div class="record content-item">
+        
+        <c:forEach var="item" items="${list }">
             <div class="record-item display-inline">
-                <img src="../img/attend-test-0031.jpg">
+                <img src="<%=request.getContextPath() %>/${item.getPicUrl() }">
                 <div class="descript">
-                    <span class="similarity float-right">89%</span>
+                    <c:if test="${item.getState() ==  -1 || item.getState() ==  3}">
+                        <span class="similarity float-right">${item.getSimilarity() }%</span>            	
+                   	</c:if>                    
                     <div>
-                        <span class="label bg-blue-alt name">12301124 李鹏翔</span>
-                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
-                        <div class="oper text-center">
-                            <div class="oper-item not-pass">不通过</div>
-                            <div class="oper-item pass">通过</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="record-item display-inline">
-                <img src="../img/attend-test-0031.jpg">
-                <div class="descript">
-                    <span class="similarity float-right">89%</span>
-                    <div>
-                        <span class="label bg-blue-alt name">12301124 李鹏翔</span>
-                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
-                        <div class="oper text-center">
-                            <div class="oper-item status status-pass">已通过审核</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="record-item display-inline">
-                <img src="../img/attend-test-0031.jpg">
-                <div class="descript">
-                    <span class="similarity float-right">89%</span>
-                    <div>
-                        <span class="label bg-blue-alt name">12301124 李鹏翔</span>
-                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
-                        <div class="oper text-center">
-                            <div class="oper-item status status-not-pass">未通过审核</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="record-item display-inline">
-                <img src="../img/attend-test-0031.jpg">
-                <div class="descript">
-                    <span class="similarity float-right">89%</span>
-                    <div>
-                        <span class="label bg-blue-alt name">12301124 李鹏翔</span>
-                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
-                        <div class="oper text-center">
+                        <span class="label bg-blue-alt name">${item.getStuInfo() }</span>
+                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> ${item.getTime() }</p>
+                         <div class="oper text-center">
+                        <c:if test="${item.getState() ==  0}">
                             <div class="oper-item status status-not-attend">未签到</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="record-item display-inline">
-                <img src="../img/attend-test-0031.jpg">
-                <div class="descript">
-                    <span class="similarity float-right">89%</span>
-                    <div>
-                        <span class="label bg-blue-alt name">12301124 李鹏翔</span>
-                        <p class="time"><i class="glyph-icon icon-time font-gray "></i> 07-11 12:54:32</p>
-                        <div class="oper text-center">
+            			</c:if>              
+            			<c:if test="${item.getState() ==  1}">
                             <div class="oper-item status status-prepare-attend">准备上传图片</div>
+          			    </c:if>
+           			    <c:if test="${item.getState() ==  2}">
+                            <div class="oper-item not-pass" onclick="location.href='attend-verify?recordId=${item.getId()}&passType=0&taskId=${item.getTaskId() }'">不通过</div>
+                            <div class="oper-item pass" onclick="location.href='attend-verify?recordId=${item.getId()}&passType=1&taskId=${item.getTaskId() }'">通过</div>            		    </c:if>
+            			<c:if test="${item.getState() ==  3}">
+                            <div class="oper-item status status-pass">已通过审核</div>
+          			    </c:if>            
+           			    <c:if test="${item.getState() == -1 }">
+                            <div class="oper-item status status-not-pass">未通过审核</div>
+            			</c:if>                                                     
                         </div>
                     </div>
                 </div>
             </div>
+        </c:forEach>               
+            
         </div>
         <div class="statistics content-item" style="display: none;margin-top: 100px;">
             <div class="attend-statistics margin-center"></div>
@@ -216,12 +183,11 @@
     </div>
     
     <div class="nav-footer footer">
-        <div class="record footer-item">
+        <div class="record footer-item"  onclick="location.href='attend-pass-all?taskId=${taskId }'">
             <div class="pass pass-all">一键通过</div>
         </div>
         <div class="statistics footer-item"  style="display: none;">
             <div class="display-inline">
-<!--                <span class="color-span"></span>-->
                 <span class="match-item">
                     <i class="glyph-icon icon-stop" style="color: #D5D5D6;"></i> 未签到 <span class="label m0"></span>
                 </span>
@@ -245,8 +211,8 @@
 <%@ include file="/public/section/teacher/nav-mobile.jsp" %>
 <script type="text/javascript">
 $(function(){
-    var num = 60;
-    var rate = [1, 2, 2, 0, 55];
+    var num = ${num};
+    var rate = ${rate};
     for(var i in rate) {
         var tt = new Number((rate[i]/num*100).toString()).toFixed(2);
         $('.label.m'+i).html(rate[i] + "人 " + tt + "%");
@@ -260,9 +226,7 @@ $(function(){
         offset: 0,
         borderWidth: 0,
         borderColor: "#000000"
-    });
-    
-    
+    });    
 });
 
 $(".sub-header>.header-item").click(function(){
