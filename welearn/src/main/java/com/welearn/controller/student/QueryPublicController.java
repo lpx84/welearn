@@ -136,6 +136,33 @@ public class QueryPublicController {
 		return view;
 	}
 
+	
+	
+	/**
+	 * 查询校历
+	 * 
+	 * @param code
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("school-notify")
+	public ModelAndView schoolNotify(
+			@RequestParam(value = "code") String code, HttpSession session) {
+		
+		View view = null;
+		// 创建微信服务类根据code获取openid
+		String openid = wechatMsgService.getOpenIdByCode(code,
+				WechatTypeEnum.STUDENT);
+		// 检验用户是否登录
+		view = studentService.checkUser(openid);
+		if (view != null) {
+			// 用户未登录或者未用微信登录，则跳转到登录界面或提示用户用微信登录
+			return view;
+		}
+		
+		return new View("student","public","school-notify","学校通知");
+	}
+	
 	/**
 	 * 全校课程，为了防止被爬数据，需要进行微信登录检查
 	 * 

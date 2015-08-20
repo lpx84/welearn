@@ -65,12 +65,12 @@
             <p>我的消息</p>
         </div>
         
-        <div class="content-item mrg10B">
+        <div class="content-item mrg10B" style="margin-bottom: 40px;">
             <i class="glyph-icon icon-info float-left font-blue mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>基本信息</p>
         </div>
-        <div class="content-item" style="margin-bottom: 40px;">
+        <div class="content-item" style="margin-bottom: 40px; display: none;">
             <i class="glyph-icon icon-lock float-left font-gray mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>修改密码</p>

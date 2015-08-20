@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>welearn教学管理系统教师端</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicons -->
+<!--<link rel="shortcut icon" href="img/bjtu_48X48.ico" />-->
+
+<!--[if lt IE 9]>
+  <script src="assets/js/minified/core/html5shiv.min.js"></script>
+  <script src="assets/js/minified/core/respond.min.js"></script>
+<![endif]-->
+
+<!-- Fides Admin CSS Core -->
+<link rel="stylesheet" type="text/css" href="../assets/css/minified/aui-production.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/color-schemes/dark-blue.min.css" />
+
+    
+<!-- Fides Admin Responsive -->
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/common.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/themes/minified/fides/responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="../assets/font-awesome-4.2.0/css/font-awesome.min.css" />
+<!-- datapicker -->
+<link rel="stylesheet" type="text/css" href="../bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    
+<link rel="stylesheet" type="text/css" href="../css/teacher-mobile-global.css" />  
+    
+<!-- Fides Admin JS -->
+<script type="text/javascript" src="../assets/js/minified/aui-production.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+
+<style type="text/css">
+    .main {
+        
+    }
+    
+    .img img {
+        width: 100%;
+    }
+    
+    .input-item {
+        background-color: #fff;
+        color: #000;
+        margin: auto 0;
+        padding: 10px;
+        font-size: 1.2em;
+        line-height: 2em;
+        border: none;
+    }
+    
+    input.submit {
+        margin: 20px 2%;
+        font-size: 1.5em;
+        line-height: 2em !important;
+        border: none;
+        width: 96%;
+        border-radius: 3px;
+    }
+    
+</style>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+        <p>发布签到任务</p>
+    </div>
+    <div class="content">
+        <form action="#" method="post">
+            <input id="name" class="input-item mrg10T " type="text" placeholder="签到名称">
+            <input id="start-time" class="input-item mrg10T " type="text" placeholder="开始时间" data-date-format="yyyy-mm-dd hh:ii" readonly>
+            <input id="end-time" class="input-item mrg10T " type="text" placeholder="结束时间" data-date-format="yyyy-mm-dd hh:ii" readonly>
+
+            <input type="submit" class="submit bg-blue" value="发布"></input>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="../bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+    $("#start-time").datetimepicker({
+        autoclose: true
+    });
+    $("#end-time").datetimepicker({
+        autoclose: true
+    });
+</script>
+</body>
+</html>
