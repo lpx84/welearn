@@ -1,6 +1,7 @@
 package com.welearn.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -133,8 +134,30 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public boolean publishAttendTask(AttendTask attendTask) {
-		// attendTaskDao.addAttendTask(attendTask);
-		return attendTaskDao.addAttendTask(attendTask) > 0;
+		int taskId = attendTaskDao.addAttendTask(attendTask);
+		String taskName = attendTask.getName();
+		int courseId = attendTask.getCourseId();
+		ArrayList<Student> students = (ArrayList<Student>) studentDao
+				.getStudentsByCourseId(courseId);
+
+		for (int i = 0; i < students.size(); i++) {
+			Student student = students.get(i);
+			// 往数据库中插入数据
+			AttendRecord record = new AttendRecord();
+			record.setAttendTaskId(taskId);
+			record.setStudentid(student.getId());
+			attendRecordDao.addAttendRecord(record);
+			// 进行通知
+			String openid = student.getOpenId();
+
+			NotifyUtil notifyUtil = new NotifyUtil();
+			String courseName = courseDao.getCourse(courseId).getName();
+			String message = "【签到通知】\n课程【" + courseName + "】新添加了签到任务【"
+					+ taskName + "】\n请在" + TimeUtil.formatDate2(attendTask.getStartTime()) +"——"+TimeUtil.formatDate2(attendTask.getEndTime())+"及时进行签到。";
+			notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message);
+		}
+
+		return true;
 	}
 
 	public boolean updateAttendTask(AttendTask attendTask) {
@@ -280,9 +303,14 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	public void test() {
-		Long test = attendRecordDao.getCountByTastIdANDStatus(5, 2);
-		System.out.println("====================test:" + test);
-		System.out.println("==================================");
+		AttendTask attendTask = new AttendTask();
+		attendTask.setName("test!!");
+		attendTask.setStartTime(new Date());
+		attendTask.setCourseId(1);
+		
+		int result = attendTaskDao.addAttendTask(attendTask);
+		System.out.println("==========================");
+		System.out.println(result);
 	}
 
 	public boolean passAll(int taskId) {

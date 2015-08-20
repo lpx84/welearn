@@ -1,6 +1,10 @@
 package com.welearn.controller.teacher;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -20,6 +24,7 @@ import com.welearn.service.intef.CourseService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.service.intef.WechatMsgService;
 import com.welearn.util.InfoCode;
+import com.welearn.util.TimeUtil;
 import com.welearn.view.View;
 
 @Controller
@@ -94,99 +99,172 @@ public class CourseController {
 		// 返回教师页面的课程页面
 		view = new View("teacher", "manage", "attend-list", "签到任务列表");
 		view.addObject("list", tasks);
-		
+
 		return view;
 	}
 
+	/**
+	 * 某一门课的签到详情
+	 * 
+	 * @param session
+	 * @param taskId
+	 * @return
+	 */
 	@RequestMapping("attend-detail")
-	public ModelAndView AttendDetail(HttpSession session,int taskId) {
+	public ModelAndView AttendDetail(HttpSession session, int taskId) {
 		View view;
 		// 从session中获取课程id
 		int courseId = (Integer) session.getAttribute("courseid");
 		int[] rate = teacherService.getAttendStateNum(taskId);
 		int num = 0;
-		for(int i=0;i<5;i++){
-			num+= rate[i];
+		for (int i = 0; i < 5; i++) {
+			num += rate[i];
 		}
-		
-		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId, courseId);
+
+		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId,
+				courseId);
 		view = new View("teacher", "manage", "attend-detail", "签到任务列表");
-        view.addObject("rate",JSONArray.fromObject(rate).toString());
-        view.addObject("num",num);
-		view.addObject("list",list);
-		view.addObject("taskId",taskId);
+		view.addObject("rate", JSONArray.fromObject(rate).toString());
+		view.addObject("num", num);
+		view.addObject("list", list);
+		view.addObject("taskId", taskId);
 		return view;
 	}
-	
-	
+
+	/**
+	 * 进行签到验证
+	 * 
+	 * @param session
+	 * @param recordId
+	 * @param passType
+	 * @param taskId
+	 * @return
+	 */
 	@RequestMapping("attend-verify")
-	public ModelAndView AttendVerify(HttpSession session,int recordId,int passType,int taskId) {
+	public ModelAndView AttendVerify(HttpSession session, int recordId,
+			int passType, int taskId) {
 		View view;
 		// 从session中获取课程id
 		int courseId = (Integer) session.getAttribute("courseid");
 		int[] rate = teacherService.getAttendStateNum(taskId);
 		int num = 0;
-		for(int i=0;i<5;i++){
-			num+= rate[i];
+		for (int i = 0; i < 5; i++) {
+			num += rate[i];
 		}
-		//通过某一个签到
+		// 通过某一个签到
 		teacherService.pass(recordId, passType);
-		
-		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId, courseId);
+
+		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId,
+				courseId);
 		view = new View("teacher", "manage", "attend-detail", "签到任务列表");
-        view.addObject("rate",JSONArray.fromObject(rate).toString());
-        view.addObject("num",num);
-		view.addObject("list",list);
-		view.addObject("taskId",taskId);
-        System.out.println(list.size());
+		view.addObject("rate", JSONArray.fromObject(rate).toString());
+		view.addObject("num", num);
+		view.addObject("list", list);
+		view.addObject("taskId", taskId);
+		System.out.println(list.size());
 		return view;
 	}
-	
-	
+
+	/**
+	 * 一键通过
+	 * 
+	 * @param session
+	 * @param taskId
+	 * @return
+	 */
 	@RequestMapping("attend-pass-all")
-	public ModelAndView AttendPassAll(HttpSession session,int taskId) {
+	public ModelAndView AttendPassAll(HttpSession session, int taskId) {
 		View view;
 		// 从session中获取课程id
 		int courseId = (Integer) session.getAttribute("courseid");
 		int[] rate = teacherService.getAttendStateNum(taskId);
 		int num = 0;
-		for(int i=0;i<5;i++){
-			num+= rate[i];
+		for (int i = 0; i < 5; i++) {
+			num += rate[i];
 		}
-		//通过某一个签到
+		// 通过某一个签到
 		teacherService.passAll(taskId);
-		
-		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId, courseId);
+
+		ArrayList<AttendRecord> list = teacherService.getAttendRecords(taskId,
+				courseId);
 		view = new View("teacher", "manage", "attend-detail", "签到任务列表");
-        view.addObject("rate",JSONArray.fromObject(rate).toString());
-        view.addObject("num",num);
-		view.addObject("list",list);
-		view.addObject("taskId",taskId);
+		view.addObject("rate", JSONArray.fromObject(rate).toString());
+		view.addObject("num", num);
+		view.addObject("list", list);
+		view.addObject("taskId", taskId);
 		return view;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * 一键通过操作
+	 * 
+	 * @param session
+	 * @param taskId
+	 * @return
+	 */
+	@RequestMapping("add-attend-task.act")
+	public ModelAndView AddAttendTaskAct(HttpSession session, String startTime,
+			String endTime, String name) {
+		View view;
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");//小写的mm表示的是分钟  
+		
+		// 从session中获取课程id
+		int courseId = (Integer) session.getAttribute("courseid");
+		com.welearn.entity.AttendTask task = new com.welearn.entity.AttendTask();
+		task.setCourseId(courseId);
+		try {
+			task.setEndTime(sdf.parse(startTime));
+			task.setStartTime(sdf.parse(endTime));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		task.setName(name);
+//		task.setAttendNum(1);
+//		task.setCreate_time(new Date());
+//		task.setStatus(1);
+		
+		// 添加任务
+		teacherService.publishAttendTask(task);
+
+		// 获取这门课的courseId
+		ArrayList<AttendTask> tasks = teacherService.getAttendTasks(courseId);
+
+		// 返回教师页面的课程页面
+		view = new View("teacher", "manage", "attend-list", "签到任务列表");
+		view.addObject("list", tasks);
+
+		return view;
+	}
+
+	/**
+	 * 一键通过
+	 * 
+	 * @param session
+	 * @param taskId
+	 * @return
+	 */
+	@RequestMapping("add-attend-task")
+	public ModelAndView AddAttendTask() {
+		View view = new View("teacher", "manage", "add-attend-task", "添加签到任务");
+
+		return view;
+	}
+
 	@RequestMapping("test-manage")
 	public ModelAndView TestManage(HttpSession session) {
 		View view;
 		// 从session中获取课程id
 		view = new View("teacher", "manage", "test-manage", "测评管理");
-        
+
 		return view;
 	}
-	
+
 	@RequestMapping("test-problem-add")
 	public ModelAndView TestProblemAdd(HttpSession session) {
 		View view;
 		// 从session中获取课程id
 		view = new View("teacher", "manage", "test-problem-add", "添加题目");
-        
+
 		return view;
 	}
 

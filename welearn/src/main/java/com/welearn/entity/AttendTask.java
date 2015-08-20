@@ -14,45 +14,50 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name="bjtu_attend_task")
+@DynamicInsert(true)
+@DynamicUpdate(true)
 public class AttendTask {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="name", columnDefinition="varchar(100)", nullable=false)
+	@Column(name="name", columnDefinition="varchar(100)" )
 	private String name; //签到任务名称
 	
-	@Column(name="attend_num", columnDefinition="int default 0", nullable=false)
+	@Column(name="attend_num", columnDefinition="int default 0")
 	private Integer attendNum; //签到人数
 	
 	/**
 	 * 所属课程的ID
 	 */
-	@Column(name="course_id", columnDefinition="int", nullable=false)
+	@Column(name="course_id", columnDefinition="int")
 	private Integer courseId;
 	
 	/**
 	 * 开始签到时间
 	 */
-	@Column(name="start_time", columnDefinition="datetime default now()", nullable=false)
+	@Column(name="start_time", columnDefinition="datetime default now()")
 	private Date startTime;
 	
 	/**
 	 * 截止签到时间
 	 */
-	@Column(name="end_time", columnDefinition="datetime default now()", nullable=false)
+	@Column(name="end_time", columnDefinition="datetime default now()")
 	private Date endTime;
 	
 	/**
 	 * 任务发布时间
 	 */
-	@Column(name="create_time", columnDefinition="datetime default now()", nullable=false)
+	@Column(name="create_time", columnDefinition="datetime default now()")
 	private Date create_time;
 	
-	@Column(name="status", columnDefinition="tinyint(1) default 1", nullable=false)
+	@Column(name="status", columnDefinition="tinyint(1) default 1")
 	private Integer status;
 	
 	

@@ -14,6 +14,12 @@ public class AttendTaskDao extends SuperDao {
 		return (Integer)this.sessionFactory.getCurrentSession().save(task);
 	}
 	
+	public Integer addAttendTask(String name, Date startTime, Date endTime) {
+		
+		
+		return null;
+	}
+	
 	public boolean delAttendTask(int id) {
 		this.hql = "DELETE FROM AttendTask AS u WHERE u.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);

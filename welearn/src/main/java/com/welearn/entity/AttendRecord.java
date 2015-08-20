@@ -12,18 +12,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name="bjtu_attend_record")
+@DynamicInsert(true)
+@DynamicUpdate(true)
 public class AttendRecord {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="attend_task_id", columnDefinition="int", nullable=false)
+	@Column(name="attend_task_id", columnDefinition="int")
 	private Integer attendTaskId;
 	
-	@Column(name="student_id", columnDefinition="int", nullable=false)
+	@Column(name="student_id", columnDefinition="int")
 	private Integer studentid;
 	
 	@Column(name="pic_url", columnDefinition="varchar(128)")
@@ -38,16 +43,16 @@ public class AttendRecord {
 	 *  1 代表不是同一个人；
 	 *  2 代表是同一个人；
 	 */
-	@Column(name="reference_res", columnDefinition="tinyint(1) default 0", nullable=false)
+	@Column(name="reference_res", columnDefinition="tinyint(1) default 0")
 	private Integer referenceRes;
 	
 	/**
 	 * 签到时间
 	 */
-	@Column(name="log_time", columnDefinition="datetime default now()", nullable=false)
+	@Column(name="log_time", columnDefinition="datetime default now()")
 	private Date logTime;
 	
-	@Column(name="status", columnDefinition="tinyint(1) default 1",nullable=false)
+	@Column(name="status", columnDefinition="tinyint(1) default 1")
 	private Integer status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

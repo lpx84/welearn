@@ -58,7 +58,7 @@
 				</a>
 			</div>
 
-			<div class="nav-footer footer">
+			<div class="nav-footer footer" onclick="location.href='add-attend-task'">
 				<i class="glyph-icon icon-plus-sign font-gray"></i>
 			</div>
 		</div>

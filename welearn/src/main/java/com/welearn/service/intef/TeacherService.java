@@ -39,7 +39,11 @@ public interface TeacherService {
 	
 	public List<StudentCourse> getStudentListByCourseId(int id);
 	
-	//签到任务
+	/**
+	 * 添加签到任务
+	 * @param attendTask
+	 * @return
+	 */
 	public boolean publishAttendTask(AttendTask attendTask);
 	
 	public AttendTask getAttendTaskById(int id);
