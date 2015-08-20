@@ -39,7 +39,7 @@
     .avatar-span>.info {
         vertical-align: top;
         margin-top: 15px;
-    }  
+    }
 </style>
 </head>
 <body>
