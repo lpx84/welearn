@@ -85,7 +85,7 @@
 <body>
 <div class="main">
 	<div class="header">
-		<i class="glyph-icon icon-chevron-left float-left btn-back"></i>
+		<i class="glyph-icon icon-chevron-left float-left" onclick="javascript: location.href='course-test'"></i>
         <p>${courseName }</p>
     </div>
     <div class="content">
