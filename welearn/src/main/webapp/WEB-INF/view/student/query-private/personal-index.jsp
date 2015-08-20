@@ -41,7 +41,7 @@ a.btn {
     <div class="content">
         <div class="avatar-span content-item mrg20B">
             <i class="glyph-icon icon-angle-right float-right" style="margin-top: 40px;"></i>
-            <img class="avatar" src="<%=request.getContextPath() %>/public/img/attend-test-0031.jpg">
+            <img class="avatar" src="/datafile/file/img/avatar/12301124.jpg">
             <div class="info display-inline">
                 <div><span class="font-gray">学号：</span> ${student.getStudentNo() }</div>
                 <div><span class="font-gray">姓名：</span> ${student.getTrueName() }</div>
