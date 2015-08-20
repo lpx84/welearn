@@ -61,7 +61,7 @@ a.btn {
             <p>提醒设置</p>
         </div>
         
-        <div class="content-item border-bottom" onclick="location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpersonal%2course-schedule&response_type=code&scope=snsapi_base&state=123#wechat_redirect'">
+        <div class="content-item border-bottom" onclick="location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c237b3b2300b0a&redirect_uri=http%3A%2F%2Fbdxst.bjtu.edu.cn%2Fwelearn%2Fstudent%2Fquery%2Fpersonal%2Fcourse-schedule&response_type=code&scope=snsapi_base&state=123#wechat_redirect'">
             <i class="glyph-icon fa fa-calendar float-left font-blue mrg10R"></i>
             <i class="glyph-icon icon-angle-right float-right"></i>
             <p>我的课表</p>
