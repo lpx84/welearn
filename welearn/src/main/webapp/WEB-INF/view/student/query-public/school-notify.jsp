@@ -54,6 +54,7 @@
 <body>
 <div class="main">
     <div class="header">
+        <i class="glyph-icon icon-chevron-left float-left btn-back"></i>
         <p>学校动态</p>
     </div>
     <div class="sub-header">
@@ -204,7 +205,6 @@
     </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>
-<%@ include file="/public/section/teacher/nav-mobile.jsp" %>
 <script type="text/javascript">
 $(".sub-header>.header-item").click(function(){
     $(".sub-header>.header-item").removeClass("selected");

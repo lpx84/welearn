@@ -208,7 +208,6 @@
     </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>
-<%@ include file="/public/section/teacher/nav-mobile.jsp" %>
 <script type="text/javascript">
 $(function(){
     var num = ${num};
