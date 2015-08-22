@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.tools.javac.util.Log;
 import com.welearn.aop.Authentication;
 import com.welearn.model.AttendRecord;
 import com.welearn.model.Course;
@@ -445,7 +447,7 @@ public class ManageCourseController {
 			session.setAttribute("firstTime", TimeUtil.formatDate1(new Date()));// 最早的记录时间
 		}
 		session.setAttribute("lastTime", TimeUtil.formatDate1(new Date()));// 最新的记录时间
-
+        
 		// 将list倒置
 		ArrayList<CourseDiscuss> list1 = new ArrayList<CourseDiscuss>();
 		for (int i = list.size() - 1; i >= 0; i--) {
@@ -469,27 +471,33 @@ public class ManageCourseController {
 	@Authentication()
 	@ResponseBody
 	public String refreshCourseDiscuss(HttpSession session) {
+		ArrayList<CourseDiscuss> list = new ArrayList<CourseDiscuss>();
 		// 从session中获取openid
 		String openid = (String) session.getAttribute("openid");
 		// 获得courseid
 		int courseid = (Integer) session.getAttribute("courseid");
 		// 获取studentid
 		int studentid = studentService.getStudentByOpenId(openid).getId();
-		// 获取上次刷新的时间
-		String lastTime = (String) session.getAttribute("lastTime");
+		
+		synchronized (session) {	
+			// 获取上次刷新的时间
+			String lastTime = (String) session.getAttribute("lastTime");
+			session.setAttribute("lastTime", TimeUtil.formatDate1(new Date()));// 最新的记录时间
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 小写的mm表示的是分钟
-		Date lastTimeDate = new Date();
-		try {
-			lastTimeDate = sdf.parse(lastTime);
-		} catch (ParseException e) {
-			e.printStackTrace();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 小写的mm表示的是分钟
+			Date lastTimeDate = new Date();
+			try {
+				lastTimeDate = sdf.parse(lastTime);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			
+			// 获取讨论信息的列表
+			list = courseService.queryDiscussesAfter(
+					courseid, studentid, lastTimeDate);
 		}
 
-		session.setAttribute("lastTime", TimeUtil.formatDate1(new Date()));// 最新的记录时间
-		// 获取讨论信息的列表
-		ArrayList<CourseDiscuss> list = courseService.queryDiscussesAfter(
-				courseid, studentid, lastTimeDate);
 
 		// 把list用json格式封装
 		String jsonStr = JsonUtil.listToJSONString(list, null);
