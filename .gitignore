@@ -9,3 +9,4 @@
 /welearn/target
 /welearn/.settings
 /welearn/src/test
+welearn/src/main/java/com/welearn/service/impl/WechatMsgServiceImpl.java
