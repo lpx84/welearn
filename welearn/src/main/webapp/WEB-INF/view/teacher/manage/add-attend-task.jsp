@@ -6,6 +6,8 @@
 <html>
 <head>
 <%@ include file="/public/section/teacher/header-mobile.jsp" %>
+<!-- datapicker -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/public/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <title>${title }</title>
 <style type="text/css">
     .main {
@@ -54,12 +56,15 @@
     </div>
 </div>
 <%@ include file="/public/section/public.jsp" %>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/public/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript">
 $("#startTime").datetimepicker({
+	language: 'zh-CN',
     autoclose: true
 });
 $("#endTime").datetimepicker({
+	language: 'zh-CN',
     autoclose: true
 });
 </script>
