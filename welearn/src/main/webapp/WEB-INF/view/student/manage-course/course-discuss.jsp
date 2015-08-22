@@ -220,7 +220,8 @@
 				"<div class='arrow'></div><div class='popover-content'><div class='info'><span>",
 				"name",
 				"</span><span class='float-right'><i class='glyph-icon icon-time'></i>",
-				"time", "</span></div>", "content", "</div></div></li>");
+				"time", "</span></div>", 
+				"content", "</div></div></li>");
 		for (var i = 0; i < res.length; i++) {
 			arr.push(res[i].id);
 			if (res[i].me) {
