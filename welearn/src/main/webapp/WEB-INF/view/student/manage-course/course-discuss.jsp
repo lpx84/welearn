@@ -109,9 +109,8 @@
 <%@ include file="/public/section/public.jsp" %>
 <%@ include file="/public/section/home/footer.jsp" %>
 <script type="text/javascript">
-var count =0;
+	var arr = [];
 	function refreshData() {
-		count++;
 		//用ajax获取页面信息
 		$.ajax({
 			url : $("#appName").val()
@@ -124,21 +123,17 @@ var count =0;
 					joinData(res);
 				}
 			}
-			//complete : completeHandler
+		//complete : completeHandler
 		});
-		//setTimeout(refreshData, 3000);
 	}
-	
-	
-    function refresh(){
-    	
-    	console.log(count);
-    	refreshData();
-		setTimeout(refresh, 3000);
-	}
-	refresh(); 
 
-	function joinData(res) {     	        
+	function refresh() {
+		refreshData();
+		setTimeout(refresh, 1000);
+	}
+	refresh();
+
+	function joinData(res) {
 		var html = new Array(
 				"<li class='float-left'>",
 				"<div class='chat-author'><img width='36' height='36' src='",
@@ -148,25 +143,28 @@ var count =0;
 				"<div class='arrow'></div><div class='popover-content'><div class='info'><span>",
 				"name",
 				"</span><span class='float-right'><i class='glyph-icon icon-time'></i>",
-				"time",
-				"</span></div>",
-				"content",
-				"</div></div></li>"		
-		);
-		for (var i = res.length-1; i>=0;i--) {
-			if(res[i].me == true){
-				html[0] = "<li>";
-				html[4] = "<div class='popover left no-shadow'>";
+				"time", "</span></div>", "content", "</div></div></li>");
+
+		for (var i = res.length - 1; i >= 0; i--) {
+			if (arr.indexOf(res[i].id) < 0) {
+				arr.push(res[i].id);
+				console.log(res[i].id);
+				if (res[i].me == true) {
+					html[0] = "<li>";
+					html[4] = "<div class='popover left no-shadow'>";
+				}
+				html[2] = res[i].avatar;
+				html[6] = res[i].relayorName;
+				html[8] = res[i].time;
+				html[10] = res[i].content;
+				$(".chat-box").append(html.join(''));		
+				//将页面滑到底部
+				document.getElementsByTagName('body')[0].scrollTop=document.getElementsByTagName('body')[0].scrollHeight;
 			}
-			html[2] = res[i].avatar;			
-			html[6] = res[i].relayorName;			
-			html[8] = res[i].time;
-			html[10] = res[i].content;
-			$(".chat-box").append(html.join(''));
 		}
-	}
-	
-	function sendData() {		
+			}
+
+	function sendData() {
 		//用ajax获取页面信息
 		$.ajax({
 			url : $("#appName").val()
@@ -177,21 +175,18 @@ var count =0;
 			},
 			timeout : 5000,
 			dataType : "JSON",
-			success : function(res) {				
+			success : function(res) {
 				if (res.code == 100) {
 					alert(res.msg);
 				} else {
-					refreshData();
-					$("#content").val("");	
-/* 					var div = document.getElementById("chat-div");
-					div.scrollTop = div.scrollHeight; */				
+					$("#content").val("");
 				}
 			},
 			complete : completeHandler
 		});
 	}
-	
- 	function prefetchData() {
+
+	function prefetchData() {
 		//用ajax获取页面信息
 		$.ajax({
 			url : $("#appName").val()
@@ -201,21 +196,21 @@ var count =0;
 			dataType : "JSON",
 			success : function(res) {
 				if (res.code != 100) {
-					if(res.length<1){
+					if (res.length < 1) {
 						$(".btn-more").removeAttr("href");
-						$(".btn-more").html("没有更多了");		
-					}else{
+						$(".btn-more").html("没有更多了");
+					} else {
 						preJoinData(res);
-						$(".btn-more").html("查看更多聊天记录");	
-					}			
+						$(".btn-more").html("查看更多聊天记录");
+					}
 				}
 			}
-			//complete : completeHandler
+		//complete : completeHandler
 		});
 		$(".btn-more").html("获取中...");
 	}
-	
-	function preJoinData(res) {       
+
+	function preJoinData(res) {
 		var html = new Array(
 				"<li class='float-left'>",
 				"<div class='chat-author'><img width='36'  height='36' src='",
@@ -225,26 +220,25 @@ var count =0;
 				"<div class='arrow'></div><div class='popover-content'><div class='info'><span>",
 				"name",
 				"</span><span class='float-right'><i class='glyph-icon icon-time'></i>",
-				"time",
-				"</span></div>",
-				"content",
-				"</div></div></li>"		
-		);
-		for (var i = 0; i<res.length;i++) {
-			if(res[i].me){				
+				"time", "</span></div>", "content", "</div></div></li>");
+		for (var i = 0; i < res.length; i++) {
+			arr.push(res[i].id);
+			if (res[i].me) {
 				html[0] = "<li>";
 				html[4] = "<div class='popover left no-shadow'>";
-			} else{
+			} else {
 				html[0] = "<li class='float-left'>";
 				html[4] = "<div class='popover right no-shadow'>";
 			}
-			html[2] = res[i].avatar;			
-			html[6] = res[i].relayorName;			
+			html[2] = res[i].avatar;
+			html[6] = res[i].relayorName;
 			html[8] = res[i].time;
 			html[10] = res[i].content;
 			$(".chat-box").prepend(html.join(''));
+			document.getElementsByTagName('body')[0].scrollTop=0;
 		}
-	} 
+		
+	}
 </script>
 </body>
 </html>
