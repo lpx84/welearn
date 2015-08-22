@@ -1,6 +1,8 @@
 package com.welearn.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.welearn.dao.AttendRecordDao;
 import com.welearn.dao.AttendTaskDao;
@@ -40,6 +42,11 @@ public class AttendServiceImpl implements AttendService {
 		}		
 		
 		return modelList;
+	}
+
+	public List getAttendRecordsByStudentIdandTime(int studentId, int status, Date time) {
+		// TODO Auto-generated method stub
+		return attendRecordDao.getAttendRecordsByStudentIdandTime(studentId, status, time);
 	}
 	
 	

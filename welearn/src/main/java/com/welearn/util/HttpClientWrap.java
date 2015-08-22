@@ -72,6 +72,9 @@ public class HttpClientWrap {
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("accept-language", "zh-CN,zh;q=0.8");
+            conn.setRequestProperty("accept-charset", "utf-8;q=0.7,*;q=0.7");
+            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
@@ -79,6 +82,9 @@ public class HttpClientWrap {
             out = new PrintWriter(conn.getOutputStream());
             // 发送请求参数
             out.print(param);
+            
+            System.out.println(param); //log
+            
             // flush输出流的缓冲
             out.flush();
             // 定义BufferedReader输入流来读取URL的响应

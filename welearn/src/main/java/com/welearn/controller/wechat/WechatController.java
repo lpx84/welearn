@@ -40,7 +40,7 @@ public class WechatController {
 	@Resource(name="wechatMsgService")
 	WechatMsgService wechatMsgService;
 	
-	//, method=RequestMethod.POST
+	
 	@RequestMapping(name = "handler")
 	@ResponseBody
 	public String signature(HttpServletRequest request) throws IOException,

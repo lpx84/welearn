@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welearn.entity.AttendTask;
 import com.welearn.entity.Course;
@@ -15,6 +16,7 @@ import com.welearn.entity.CourseHomework;
 import com.welearn.entity.CourseNotify;
 import com.welearn.entity.StudentCourse;
 import com.welearn.entity.Teacher;
+import com.welearn.service.intef.AttendService;
 import com.welearn.service.intef.TeacherService;
 import com.welearn.view.View;
 
@@ -24,6 +26,8 @@ public class TeacherController {
 
 	@Resource(name="teacherService")
 	TeacherService teacherService;
+	@Resource(name="attendService")
+	AttendService attendService;
 	
 	/**
 	 * 根据老师的id获取老师信息
@@ -97,12 +101,13 @@ public class TeacherController {
 	}
 	
 	@RequestMapping("test")
+	@ResponseBody
 	public String test(
 			) {
 		
-		teacherService.test();
-		
-		return null;
+		//teacherService.test();
+		List l = attendService.getAttendRecordsByStudentIdandTime(3, 0, new Date());
+		return new Integer(l.size()).toString();
 	}
 	
 }
