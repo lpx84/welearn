@@ -56,11 +56,13 @@
             <img class="img-avatar inline-block" src="${item.getPicUrl() }">
             <div class="inline-block">
                 <div class="font-bold">${item.getContent() }</div>
+                <c:if test="${item.getState() != 0  && item.getState() != 1 }">
                 <div><span class="font-gray ">签到于</span> ${item.getTime() }</div>
+                </c:if>
             </div>
             <c:if test="${item.getState() ==  0}">
                 <div class="status inline-block font-gray"><i class="fa fa-close"></i>&nbsp;未签到</div>
-            </c:if>              
+            </c:if>
             <c:if test="${item.getState() ==  1}">
                 <div class="status inline-block font-red"><i class="fa fa-clock-o"></i>&nbsp;等待签到</div>
             </c:if>

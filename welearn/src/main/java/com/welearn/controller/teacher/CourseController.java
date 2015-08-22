@@ -213,8 +213,8 @@ public class CourseController {
 		com.welearn.entity.AttendTask task = new com.welearn.entity.AttendTask();
 		task.setCourseId(courseId);
 		try {
-			task.setEndTime(sdf.parse(startTime));
-			task.setStartTime(sdf.parse(endTime));
+			task.setEndTime(sdf.parse(endTime));
+			task.setStartTime(sdf.parse(startTime));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

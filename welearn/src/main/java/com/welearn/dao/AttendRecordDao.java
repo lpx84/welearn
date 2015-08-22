@@ -184,40 +184,15 @@ public class AttendRecordDao extends SuperDao {
 	}
 	
 	public List getAttendRecordsByStudentIdandTime(int studentId, int status, Date time){
-//		this.hql = "from AttendTask as a where a.startTime < :time and a.endTime > :timee";
-//		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-//		query.setParameter("time", time);
-//		query.setParameter("timee", time);
-//		List<AttendTask> attendTasks = query.list();
-//		List<Integer> attendTaskIds = new ArrayList<Integer>();
-//		/*System.out.println("++++++++++++++++++"+attendTasks.size());
-//		for(int i=0;i<attendTasks.size();i++){
-//			attendTaskIds.add(i, attendTasks.get(i).getId());
-//			System.out.println(attendTasks.get(i).getId());
-//		}*/
-//		
-//		this.hql = "from AttendRecord AS b inner join fetch b.attendTaskEntity"
-//				+ " where b.studentid = :studentid and b.status = :statuss and b.attendTaskId IN (:attendtasklist)";
-//		Query query2 = sessionFactory.getCurrentSession().createQuery(hql);
-//		query2.setParameter("studentid", studentId);
-//		query2.setParameter("statuss", status);
-//		// and b.status = :statuss
-//		query2.setParameterList("attendtasklist", attendTaskIds);
-//		//and b.attendTaskId IN (:attendtasklist)
-//		
-//		List<AttendRecord> result = query2.list();
-//		/*System.out.println("-----------111111111111-----------"+result.size());
-//		for(int i=0;i<result.size();i++){
-//			System.out.println(result.get(i).toString());
-//		}*/
 		
 		hql = "from AttendRecord as r inner join fetch r.attendTaskEntity as t "
 				+ "where r.studentid=? and r.status=? and t.startTime <= ? and ? <= t.endTime";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setInteger(0, studentId);
 		query.setInteger(1, status);
-		query.setTimestamp(2, time);
-		query.setTimestamp(3, time);
+		query.setString(2, TimeUtil.formatDate(time));
+		query.setString(3, TimeUtil.formatDate(time));
+		//query.setTimestamp(3, time);
 		return query.list();
 	}
 	

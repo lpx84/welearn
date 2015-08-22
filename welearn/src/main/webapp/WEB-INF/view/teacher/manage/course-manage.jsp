@@ -10,6 +10,7 @@
 <style type="text/css">
     .main {
         text-align: center;
+        padding-bottom: 60px !important;
     }
     
     .img img {
@@ -59,8 +60,14 @@
             </div>
         </div>
         <div class="menu-item col-xs-4 col-sm-3 col-md-3 col-lg-3">
+            <div class="item-inner" onclick="javascript: location.href='student-list'">
+                <i class="fa fa-list-ul font-blue-alt"></i>
+                <p>学生名单</p>
+            </div>
+        </div>
+        <div class="menu-item col-xs-4 col-sm-3 col-md-3 col-lg-3">
             <div class="item-inner">
-                <i class="fa fa-star-half-o font-orange"></i>
+                <i class="fa fa-star-half-o " style="color: #F18E49;"></i>
                 <p>课程反馈</p>
             </div>
         </div>

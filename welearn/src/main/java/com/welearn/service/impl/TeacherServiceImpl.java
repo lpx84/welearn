@@ -152,9 +152,15 @@ public class TeacherServiceImpl implements TeacherService {
 
 			NotifyUtil notifyUtil = new NotifyUtil();
 			String courseName = courseDao.getCourse(courseId).getName();
-			String message = "【签到通知】\n课程【" + courseName + "】新添加了签到任务【"
-					+ taskName + "】\n请在" + TimeUtil.formatDate2(attendTask.getStartTime()) +"——"+TimeUtil.formatDate2(attendTask.getEndTime())+"及时进行签到。";
-			notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message);
+//			String message = "【签到通知】\n课程【" + courseName + "】新添加了签到任务【"
+//					+ taskName + "】\n请在" + TimeUtil.formatDate2(attendTask.getStartTime()) +"——"+TimeUtil.formatDate2(attendTask.getEndTime())+"及时进行签到。";
+			StringBuffer message = new StringBuffer("【签到通知】\n课程【");
+			message.append(courseName).append("】新添加了签到任务【")
+					.append(taskName).append("】\n请在")
+					.append(TimeUtil.formatDate2(attendTask.getStartTime())).append("~").append(TimeUtil.formatDate2(attendTask.getEndTime()))
+					.append("及时进行签到。");
+			System.out.println("发送微信通知：\n"+message);
+			notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message.toString());
 		}
 
 		return true;
@@ -331,10 +337,13 @@ public class TeacherServiceImpl implements TeacherService {
 					NotifyUtil notifyUtil = new NotifyUtil();
 					String courseName = courseDao.getCourse(task.getCourseId())
 							.getName();
-					String message = "【签到结果通知】\n课程【" + courseName + "】的【"
-							+ task.getName() + "】签到结果是【通过】";
-					notifyUtil
-							.pushText(WechatTypeEnum.STUDENT, openid, message);
+//					String message = "【签到结果通知】\n课程【" + courseName + "】的【"
+//							+ task.getName() + "】签到结果是【通过】";
+					StringBuffer message = new StringBuffer("【签到结果通知】\n课程【");
+					message.append(courseName).append("】的【")
+					.append(task.getName()).append("】签到结果是【通过】");
+					System.out.println("发送微信通知：\n"+message);
+					notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message.toString());
 				}
 			}
 

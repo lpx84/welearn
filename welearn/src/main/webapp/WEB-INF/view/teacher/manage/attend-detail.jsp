@@ -146,7 +146,7 @@
         
         <c:forEach var="item" items="${list }">
             <div class="record-item display-inline">
-                <img src="${item.getPicUrl() }">
+                <img src="${item.getPicUrl() }" style="height: 200px; margin-bottom: 10px;">
                 <div class="descript">
                     <c:if test="${item.getState() ==  -1 || item.getState() ==  3}">
                         <span class="similarity float-right">${item.getSimilarity() }%</span>            	

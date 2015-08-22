@@ -58,8 +58,8 @@
 				</a>
 			</div>
 
-			<div class="nav-footer footer bg-blue" onclick="location.href='add-attend-task'">
-				<i class="glyph-icon icon-plus-sign font-gray"></i> 添加签到任务
+			<div class="nav-footer footer bg-blue" style="background-color: #5bccf6; color: #fff;" onclick="location.href='add-attend-task'">
+				<i class="glyph-icon icon-plus-sign"></i> 添加签到任务
 			</div>
 		</div>
 		<%@ include file="/public/section/public.jsp"%>
