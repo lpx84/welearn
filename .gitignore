@@ -9,6 +9,7 @@
 /welearn/target
 /welearn/.settings
 /welearn/src/test
+<<<<<<< HEAD
 welearn/src/main/java/com/welearn/service/impl/WechatMsgServiceImpl.java
 target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.gitignore
 target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.project
@@ -20,3 +21,5 @@ target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resou
 target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.jsdt.ui.superType.container
 target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.jsdt.ui.superType.name
 target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.validation.prefs
+=======
+>>>>>>> 129650cb944659616b8b28fc449bd055ab988039
