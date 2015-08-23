@@ -10,3 +10,13 @@
 /welearn/.settings
 /welearn/src/test
 welearn/src/main/java/com/welearn/service/impl/WechatMsgServiceImpl.java
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.gitignore
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.project
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/.jsdtscope
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.jdt.core.prefs
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.m2e.core.prefs
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.common.component
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.common.project.facet.core.xml
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.jsdt.ui.superType.container
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.jsdt.ui.superType.name
+target/m2e-wtp/web-resources/META-INF/maven/com/welearn/target/m2e-wtp/web-resources/META-INF/maven/com/welearn/.settings/org.eclipse.wst.validation.prefs
