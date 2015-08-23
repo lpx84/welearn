@@ -41,7 +41,7 @@
     <div class="course-list">
         <div class="item pad5A" onclick="javascript: location.href='course-manage?courseid=1';">
             <div class="display-inline">
-                <div class="name">【A0L265Q】软件工程专业研究方法论与创新教育</div>
+                <div class="name">【A0L265Q】软件工程专业研究方法论</div>
                 <div class="comment pad5L">
                     <span class="font-gray">
                         <i class="glyph-icon icon-time"></i>&nbsp;2014~2015第二学期

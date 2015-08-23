@@ -106,46 +106,46 @@ public class WechatMsgServiceImpl implements WechatMsgService {
 	 * 根据code获取用户的openid，如果code不存在或者非法，则返回illegal
 	 */
 	public String getOpenIdByCode(String code, WechatTypeEnum type) {
-		String appId = "";
-		String appSecret = "";
-		// 判断用户的类型
-		switch (type) {
-		case TEACHER:
-			appId = TeacherConfig.appId;
-			appSecret = TeacherConfig.appsecret;
-			break;
-		case STUDENT:
-			appId = WechatConfig.appId;
-			appSecret = WechatConfig.appsecret;
-			break;
-		default:
-			appId = WechatConfig.appId;
-			appSecret = WechatConfig.appsecret;
-			break;
-		}
-
-		// 获取用户access_token的url
-		String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-				+ "appid="
-				+ appId
-				+ "&secret="
-				+ appSecret
-				+ "&code="
-				+ code
-				+ "&grant_type=authorization_code";
-		// 向微信发送请求，获取openid
-		String json = HttpUtil.getUrl(get_access_token_url);
-		System.out.println(json);
-		JSONObject jsonObject = JSONObject.fromObject(json);
-		String openid = "illegal";
-		try {
-			openid = jsonObject.getString("openid");
-		} catch (Exception e) {
-			System.err.println(e.toString());
-		}
-
-		return openid;
-//	   return code;
+//		String appId = "";
+//		String appSecret = "";
+//		// 判断用户的类型
+//		switch (type) {
+//		case TEACHER:
+//			appId = TeacherConfig.appId;
+//			appSecret = TeacherConfig.appsecret;
+//			break;
+//		case STUDENT:
+//			appId = WechatConfig.appId;
+//			appSecret = WechatConfig.appsecret;
+//			break;
+//		default:
+//			appId = WechatConfig.appId;
+//			appSecret = WechatConfig.appsecret;
+//			break;
+//		}
+//
+//		// 获取用户access_token的url
+//		String get_access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
+//				+ "appid="
+//				+ appId
+//				+ "&secret="
+//				+ appSecret
+//				+ "&code="
+//				+ code
+//				+ "&grant_type=authorization_code";
+//		// 向微信发送请求，获取openid
+//		String json = HttpUtil.getUrl(get_access_token_url);
+//		System.out.println(json);
+//		JSONObject jsonObject = JSONObject.fromObject(json);
+//		String openid = "illegal";
+//		try {
+//			openid = jsonObject.getString("openid");
+//		} catch (Exception e) {
+//			System.err.println(e.toString());
+//		}
+//
+//		return openid;
+	   return code;
 	}
 
 	/**

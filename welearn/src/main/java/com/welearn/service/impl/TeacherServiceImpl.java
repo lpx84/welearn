@@ -1,5 +1,6 @@
 package com.welearn.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -152,6 +153,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 			NotifyUtil notifyUtil = new NotifyUtil();
 			String courseName = courseDao.getCourse(courseId).getName();
+			
 //			String message = "【签到通知】\n课程【" + courseName + "】新添加了签到任务【"
 //					+ taskName + "】\n请在" + TimeUtil.formatDate2(attendTask.getStartTime()) +"——"+TimeUtil.formatDate2(attendTask.getEndTime())+"及时进行签到。";
 			StringBuffer message = new StringBuffer("【签到通知】\n课程【");
@@ -159,8 +161,14 @@ public class TeacherServiceImpl implements TeacherService {
 					.append(taskName).append("】\n请在")
 					.append(TimeUtil.formatDate2(attendTask.getStartTime())).append("~").append(TimeUtil.formatDate2(attendTask.getEndTime()))
 					.append("及时进行签到。");
+			try {
+				String message1=new String(message.toString().getBytes(),"UTF-8");
+				notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message1);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			System.out.println("发送微信通知：\n"+message);
-			notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message.toString());
+		
 		}
 
 		return true;
@@ -343,7 +351,13 @@ public class TeacherServiceImpl implements TeacherService {
 					message.append(courseName).append("】的【")
 					.append(task.getName()).append("】签到结果是【通过】");
 					System.out.println("发送微信通知：\n"+message);
-					notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message.toString());
+					try {
+						String message1=new String(message.toString().getBytes(),"UTF-8");
+						notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message1);
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+			//		notifyUtil.pushText(WechatTypeEnum.STUDENT, openid, message.toString());
 				}
 			}
 
